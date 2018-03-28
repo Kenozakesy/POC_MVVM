@@ -1,0 +1,15 @@
+c:\users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.exe.config
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\UI\Views\MainWindow.g.cs
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\App.g.cs
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example_MarkupCompile.cache
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example_MarkupCompile.lref
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.exe
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.pdb
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\UI\Views\MainWindow.baml
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.g.resources
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.Properties.Resources.resources
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.csproj.GenerateResource.Cache
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.exe
+C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.pdb
+C:\Users\stg-kwar\Documents\Visual Studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.exe.CodeAnalysisLog.xml
+C:\Users\stg-kwar\Documents\Visual Studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.exe.lastcodeanalysissucceeded

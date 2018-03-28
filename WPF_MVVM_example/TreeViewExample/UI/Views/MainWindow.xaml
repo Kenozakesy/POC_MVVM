@@ -1,0 +1,302 @@
+﻿<Window x:Class="TreeViewExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TreeViewExample.Business.UI_Models"
+        xmlns:this="clr-namespace:TreeViewExample.Business.Models"
+        mc:Ignorable="d"
+        Title="TreeviewExample" Height="800" Width="1200">
+    
+    <Window.Resources>
+        <Style x:Key="TreeViewItemStyle" TargetType="TreeViewItem">
+            <Setter Property="Margin" Value="12 0 0 0" />
+        </Style>
+        <Style x:Key="MyLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Style.Triggers>
+                <Trigger Property="MenuItem.IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="{Binding Path=Brush}"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem,AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
+                    <Setter Property="Background" Value="{Binding Path=Brush,  Converter={x:Static local:MyCloneConverter.Instance}}"/>
+                    
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                      Storyboard.TargetProperty="(Label.Background).(SolidColorBrush.Opacity)" 
+                                      From="0.2" To="1" Duration="0:0:0.8" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="MyLabelStyleProc" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="MenuItem.IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="{Binding Path=Brush}"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem,AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
+                    <Setter Property="Background" Value="{Binding Path=Brush, Converter={x:Static local:MyCloneConverter.Instance}}" />
+
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                      Storyboard.TargetProperty="(Label.Background).(SolidColorBrush.Opacity)" 
+                                      From="0.2" To="1" Duration="0:0:0.8" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HeaderStyle" TargetType="TreeViewItem">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="MenuItemStyle" TargetType="MenuItem">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Brush}" Value="Orange">
+                    <Setter Property = "Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="gray" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        <Style x:Key="GridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="IsHitTestVisible" Value="False"></Setter>
+        </Style>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=RouteList}" DataType="{x:Type this:ProcessCel}" >
+            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="8 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyleProc}">
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Create Route"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
+                    
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=SubRouteList}" DataType="{x:Type this:Route}">
+            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Create Subroute" Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Open drag/drop" Command="{Binding Tag.DataContext.OpenDragDropWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
+                    
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+        </HierarchicalDataTemplate>
+
+        <!--<HierarchicalDataTemplate ItemsSource="{Binding Path=UnitList}" DataType="{x:Type this:SubRoute}">
+            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Add bin"  Command="{Binding Tag.DataContext.AddbinCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
+                     
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+        </HierarchicalDataTemplate>-->
+
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=BinList}" DataType="{x:Type this:SubRoute}">
+            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                        <!--<MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>-->
+                        <MenuItem Header="Set bin"  Command="{Binding Tag.DataContext.AddbinCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
+
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+        </HierarchicalDataTemplate>
+
+        <DataTemplate DataType="{x:Type this:Unit}" >
+            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
+
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type this:Bin}" >
+            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.RemoveBinFromSubrouteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" Style="{StaticResource MenuItemStyle}"/>
+                        <MenuItem Header="Not Implemented" CommandParameter="{Binding}" />
+
+                    </ContextMenu>
+                </Label.ContextMenu>
+            </Label>
+        </DataTemplate>
+    </Window.Resources>
+       
+    <Grid>
+        <Grid.Resources >
+            <Style TargetType="Button" >
+                <Setter Property="Margin" Value="1" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" ></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Style="{StaticResource BorderStyle}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" >
+                <TabControl TabStripPlacement="Top" Width="1185" BorderBrush="Gainsboro">
+
+                    <TabItem Header="Menu" >
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                           
+
+                                <Button Grid.Row="0" Grid.Column="0" Margin="10">Maximize tree</Button>
+                                <Button Grid.Row="0" Grid.Column="1" Margin="10">Minimize tree</Button>
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Header="Database">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100" ></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100" ></ColumnDefinition>
+                                    <ColumnDefinition Width="100" ></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="100" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Button  Grid.Row="0" Grid.Column="0" Width="60" Height="30" HorizontalAlignment="Left">Refresh</Button>
+                                <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" MinWidth="90" Height="30" HorizontalAlignment="Left">Select Other Database</Button>
+                            </Grid>
+                        </StackPanel>
+                    </TabItem
+                             >
+                    <TabItem Header="Parameters" >
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Button  Grid.Row="0" Grid.Column="0" MinWidth="90" Height="30" HorizontalAlignment="Center">Load configuration</Button> 
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>
+                                                         
+                </TabControl>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource BorderStyle}">
+            <TreeView BorderThickness="0"> 
+                       
+                <TreeViewItem Header="Object tree" IsExpanded="True" FontSize="30" FontWeight="Bold" >
+                    <TreeViewItem Header="ProcessCells" IsExpanded="True" ItemsSource="{Binding Path=ProcessCelList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                                <MenuItem Header="Create ProcesCell" Command="{Binding Tag.DataContext.CreateProcesCelCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+
+                    <TreeViewItem Header="Routes" ItemsSource="{Binding Path=RouteList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    </TreeViewItem>
+
+                    <TreeViewItem Header="Bins" ItemsSource="{Binding Path=BinList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}">
+                    </TreeViewItem>
+                    
+                </TreeViewItem>
+            
+            </TreeView>
+        </Border>
+
+        <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="1" >
+            <StackPanel >
+                <ListView Margin="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                                <GridViewColumn.CellTemplate>
+                                    
+                                    <DataTemplate>
+                                        <TextBlock Text="binding goes here" TextAlignment="Right" />
+                                    </DataTemplate>
+                                    
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Value" Width="250" HeaderContainerStyle="{StaticResource GridViewColumnHeader}"/>
+                            <GridViewColumn Header="Original object" Width="180" HeaderContainerStyle="{StaticResource GridViewColumnHeader}"/>
+                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>
