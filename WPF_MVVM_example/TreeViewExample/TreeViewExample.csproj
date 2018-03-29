@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\UI_Models\Rectangle.cs" />
@@ -88,11 +89,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Business\Interfaces\IConfigObject.cs" />
-    <Compile Include="Business\Models\Bin.cs" />
-    <Compile Include="Business\Models\ProcessCel.cs" />
-    <Compile Include="Business\Models\Route.cs" />
-    <Compile Include="Business\Models\SubRoute.cs" />
-    <Compile Include="Business\Models\Unit.cs" />
+    <Compile Include="Business\Models\DiagramModels\Bin.cs" />
+    <Compile Include="Business\Models\DiagramModels\ProcessCel.cs" />
+    <Compile Include="Business\Models\DiagramModels\Route.cs" />
+    <Compile Include="Business\Models\DiagramModels\SubRoute.cs" />
+    <Compile Include="Business\Models\DiagramModels\Unit.cs" />
     <Compile Include="Business\Singletons\GlobalLists.cs" />
     <Compile Include="Business\Statics\OrderObservableList.cs" />
     <Compile Include="UI\Commands\RelayCommand.cs" />

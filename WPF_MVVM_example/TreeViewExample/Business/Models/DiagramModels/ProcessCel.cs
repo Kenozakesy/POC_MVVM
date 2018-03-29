@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.ViewModels;
 
@@ -134,6 +135,23 @@ namespace TreeViewExample.Business.Models
         public override string ToString()
         {
             return _Name;
+        }
+
+        public List<MainListViewModel> GenerateListViewList()
+        {
+            List<MainListViewModel> configList = new List<MainListViewModel>();
+            foreach (var prop in this.GetType().GetProperties())
+            {
+                if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
+                {
+                    continue;
+                }
+                string name = prop.Name;
+                string value = prop.GetValue(this, null).ToString();
+                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
+                configList.Add(mainListViewModel);
+            }
+            return configList;
         }
 
         #endregion

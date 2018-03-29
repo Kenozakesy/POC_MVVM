@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
+using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using WPF_MVVM_example.UI.Commands;
@@ -23,8 +24,7 @@ namespace TreeViewExample.UI.ViewModels
         private ObservableCollection<ProcessCel> _ProcessCelList = new ObservableCollection<ProcessCel>();
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
-        private string _tbName;
-
+        private ObservableCollection<MainListViewModel> _ListView = new ObservableCollection<MainListViewModel>();
 
         private ITreeView _TreeView;
         public MainWindowViewModel(ITreeView view) : base(view)
@@ -54,11 +54,10 @@ namespace TreeViewExample.UI.ViewModels
             get { return _BinList; }
             set { SetProperty(ref _BinList, value); }
         }
-
-        public string tbName
+        public ObservableCollection<MainListViewModel> ListView
         {
-            get { return _tbName;}
-            set { SetProperty(ref _tbName, value); }
+            get { return _ListView; }
+            set { SetProperty(ref _ListView, value); }
         }
 
         #endregion
@@ -93,7 +92,7 @@ namespace TreeViewExample.UI.ViewModels
                 BinList.Add(new Bin("Bin"));
             }
         }
-        private void DeleteClick(object obj)
+        private void DeleteClick(IConfigObject obj)
         {
             try
             {
@@ -122,7 +121,7 @@ namespace TreeViewExample.UI.ViewModels
             }
            
         }
-        private void ChangeColorClick(object obj)
+        private void ChangeColorClick(IConfigObject obj)
         {
             IConfigObject configObject = obj as IConfigObject;
             if (configObject != null)
@@ -130,7 +129,7 @@ namespace TreeViewExample.UI.ViewModels
                 configObject.ChangeColor();
             }
         }
-        private void CreateObjectClick(object obj)
+        private void CreateObjectClick(IConfigObject obj)
         {
             IConfigObject configObject = obj as IConfigObject;         
             if (configObject != null)
@@ -165,19 +164,30 @@ namespace TreeViewExample.UI.ViewModels
         {
             _TreeView.OpenDragDropWindow();
         }
+        private void ShowPropInList(IConfigObject obj)
+        {
+            ListView.Clear();
+            List<MainListViewModel> listView = obj.GenerateListViewList();
+            foreach (MainListViewModel ML in listView)
+            {
+                ListView.Add(ML);
+            }        
+        }
+
 
         #endregion
 
         #region commandlogic
         private void InitializeCommand()
         {    
-            DeleteClickCommand = new RelayCommandT1<object>(DeleteClick);
-            ChangeColorClickCommand = new RelayCommandT1<object>(ChangeColorClick);
-            CreateObjectClickCommand = new RelayCommandT1<object>(CreateObjectClick);
+            DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);
+            ChangeColorClickCommand = new RelayCommandT1<IConfigObject>(ChangeColorClick);
+            CreateObjectClickCommand = new RelayCommandT1<IConfigObject>(CreateObjectClick);
             AddbinCommand = new RelayCommandT1<SubRoute>(AddbinToSubroute);
             RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
             CreateProcesCelCommand = new RelayCommand(CreateProcesCel);
             OpenDragDropWindowCommand = new RelayCommandT1<Route>(OpenDragDropWindow);
+            ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
         }
 
         public ICommand DeleteClickCommand { get; set; }
@@ -187,6 +197,9 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand RemoveBinFromSubrouteCommand { get; set; }
         public ICommand CreateProcesCelCommand { get; set; }
         public ICommand OpenDragDropWindowCommand { get; set; }
+        public ICommand ShowPropInListCommand { get; set; }
+
+
 
         #endregion
 

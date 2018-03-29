@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
@@ -29,6 +31,7 @@ namespace TreeViewExample.Business.Models
         }
 
         #region Properties
+
         public string Name
         {
             get { return _Name; }
@@ -44,7 +47,6 @@ namespace TreeViewExample.Business.Models
             get { return _Number; }
             set { SetProperty(ref _Number, value); }
         }
-
         public SubRoute Subroute
         {
             get { return _Subroute; }
@@ -67,7 +69,6 @@ namespace TreeViewExample.Business.Models
             }
             Subroute = subroute;            
         }
-
         private void ValidateColor()
         {
             if (_Subroute == null)
@@ -95,6 +96,24 @@ namespace TreeViewExample.Business.Models
         {
             throw new NotImplementedException();
         }
+
+        public List<MainListViewModel> GenerateListViewList()
+        {
+            List<MainListViewModel> configList = new List<MainListViewModel>();
+            foreach (var prop in this.GetType().GetProperties())
+            {
+                if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
+                {
+                    continue;
+                }
+                string name = prop.Name;
+                string value = prop.GetValue(this, null).ToString();
+                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
+                configList.Add(mainListViewModel);
+            }
+            return configList;
+        }
+
         public int CompareTo(object obj)
         {
             Bin bin = obj as Bin;
