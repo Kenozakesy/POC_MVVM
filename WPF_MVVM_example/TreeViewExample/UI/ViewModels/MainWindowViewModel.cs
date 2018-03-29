@@ -25,6 +25,7 @@ namespace TreeViewExample.UI.ViewModels
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
         private ObservableCollection<MainListViewModel> _ListView = new ObservableCollection<MainListViewModel>();
+        private bool? _TreeWayChecked;
 
         private ITreeView _TreeView;
         public MainWindowViewModel(ITreeView view) : base(view)
@@ -58,6 +59,12 @@ namespace TreeViewExample.UI.ViewModels
         {
             get { return _ListView; }
             set { SetProperty(ref _ListView, value); }
+        }
+
+        public bool? TreeWayChecked
+        {
+            get { return _TreeWayChecked; }
+            set { SetProperty(ref _TreeWayChecked, value); }
         }
 
         #endregion

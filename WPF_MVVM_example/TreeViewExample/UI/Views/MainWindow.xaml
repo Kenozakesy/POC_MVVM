@@ -269,20 +269,35 @@
                     </TabItem
                              >
                     <TabItem Header="Parameters" >
-                        <StackPanel Orientation="Horizontal">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
 
-                                <Button  Grid.Row="0" Grid.Column="0" MinWidth="90" Height="30" HorizontalAlignment="Center">Load configuration</Button> 
-                            </Grid>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                                <ColumnDefinition Width="150"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" >
+                                <CheckBox Margin="7" IsThreeState="True" IsChecked="{Binding Path=TreeWayChecked}"></CheckBox>
+                                <TextBlock Margin="7">Three state</TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"  Grid.Column="0" Grid.Row="1">
+                                <CheckBox Margin="7"></CheckBox>
+                                <TextBlock Margin="7">Two state</TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2">
+                                <CheckBox Margin="7"></CheckBox>
+                                <TextBlock Margin="7">Test checkbox 3</TextBlock>
+                            </StackPanel>
+
+                        </Grid>
                     </TabItem>
                                                          
                 </TabControl>
