@@ -49,6 +49,12 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
+        public void OpenParameterSheetWindow()
+        {
+            ParameterSheetWindow window = new ParameterSheetWindow();
+            window.ShowDialog();
+        }
+
         public Bin OpenSelectBinWindow(ObservableCollection<Bin> binList)
         {
             SelectBinWindow window = new SelectBinWindow();

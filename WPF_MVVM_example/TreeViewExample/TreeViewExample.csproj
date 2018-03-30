@@ -62,16 +62,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\Models\DiagramModels\ConfigurationParameter.cs" />
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\UI_Models\Rectangle.cs" />
     <Compile Include="UI\Interfaces\IDragDropView.cs" />
+    <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
     <Compile Include="UI\Interfaces\ISelectBinView.cs" />
     <Compile Include="UI\ViewModels\DragDropWindowViewModel.cs" />
+    <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
     <Compile Include="UI\ViewModels\SelectBinWindowViewModel.cs" />
     <Compile Include="UI\Views\DragDropWindow.xaml.cs">
       <DependentUpon>DragDropWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\ParameterSheetWindow.xaml.cs">
+      <DependentUpon>ParameterSheetWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\SelectBinWindow.xaml.cs">
       <DependentUpon>SelectBinWindow.xaml</DependentUpon>
@@ -107,6 +113,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UI\Views\ParameterSheetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\SelectBinWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
