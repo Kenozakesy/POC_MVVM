@@ -16,6 +16,14 @@
             <Setter Property="BorderBrush" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0 0 0 1" />
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <!--<Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem Header="Delete"></MenuItem>
+                        <MenuItem Header="Highlight"></MenuItem>
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>-->
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsVisible}" Value="True">
                     <Setter Property="Visibility" Value="Visible"/>
@@ -94,17 +102,23 @@
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="1">
 
-            <ListView Margin="0" ItemsSource="{Binding Path=ConfigurationParameterList}" ItemContainerStyle="{StaticResource ListItemStyle}">
+            <ListView Margin="0" ItemsSource="{Binding Path=ConfigurationParameterList}" ItemContainerStyle="{StaticResource ListItemStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                               
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Highlight"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
 
-                <ListView.View>
-                        <GridView>
+                  <ListView.View>
+                        <GridView >
 
-                            <GridViewColumn Header="Name" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParName}"/>
+                            <GridViewColumn Header="Name" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParName}" />
                             <GridViewColumn Header="Description" Width="250" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Description}"/>
 
                             <GridViewColumn Header="BG" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
                                 <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
+                                    <DataTemplate >
                                         <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForBG}">
                                         </CheckBox>
                                     </DataTemplate>

@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.Interfaces;
+using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.ViewModels;
 
 namespace TreeViewExample.UI.ViewModels
@@ -81,6 +84,15 @@ namespace TreeViewExample.UI.ViewModels
 
 
         #region ItemHandlers
+        private void DeleteClick(ConfigurationParameter obj)
+        {
+            foreach (ConfigurationParameter CP in ConfigurationParameterList)
+            {
+                ConfigurationParameterList.Remove(CP);
+                break;
+            }
+        }
+
 
         #endregion
 
@@ -88,10 +100,10 @@ namespace TreeViewExample.UI.ViewModels
         #region commandlogic
         private void InitializeCommand()
         {
-            //DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);
+            DeleteClickCommand = new RelayCommandT1<ConfigurationParameter>(DeleteClick);
         }
-
-        //public ICommand DeleteClickCommand { get; set; }
+  
+        public ICommand DeleteClickCommand { get; set; }
 
         #endregion
 
