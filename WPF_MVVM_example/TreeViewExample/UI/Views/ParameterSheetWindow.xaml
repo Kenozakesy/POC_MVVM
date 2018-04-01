@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TreeViewExample.UI.Views"
+        xmlns:this="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
         mc:Ignorable="d"
         Title="ParameterSheetWindow" Height="800" Width="1400">
     <Window.Resources>
@@ -12,24 +13,48 @@
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Margin" Value="2" />
         </Style>
-        <Style x:Key="ListItemStyle" TargetType="{x:Type ListViewItem}" >
+        <Style x:Key="ListItemStyle" TargetType="{x:Type ListViewItem}">
             <Setter Property="BorderBrush" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0 0 0 1" />
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <!--<Setter Property="ContextMenu">
+
+            <Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}}"></Setter>
+            <Setter Property="ContextMenu">
                 <Setter.Value>
-                    <ContextMenu>
-                        <MenuItem Header="Delete"></MenuItem>
-                        <MenuItem Header="Highlight"></MenuItem>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteParameterCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
+                        <MenuItem  Command="{Binding Tag.DataContext.HighLightParameterCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }">
+                            <MenuItem.Style>
+                                    <Style TargetType="MenuItem">
+                                        <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsHighlighted}" Value="false">
+                                                <Setter Property="Header" Value="Highlight"/>
+                                            </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                                                <Setter Property="Header" Value="Remove Highlight"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </MenuItem.Style>
+                        </MenuItem>
+                            
                     </ContextMenu>
                 </Setter.Value>
-            </Setter>-->
+            </Setter>
+
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsVisible}" Value="True">
                     <Setter Property="Visibility" Value="Visible"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsVisible}" Value="False">
                     <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding IsHighlighted}" Value="True">
+                    <Setter Property="Background" Value="LightBlue"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsHighlighted}" Value="False">
+                    <Setter Property="Background" Value="White"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -41,6 +66,13 @@
         <Style x:Key="GridViewColumnHeaderSeparatorStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="180"></Setter>
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
         </Style>
 
 
@@ -94,7 +126,7 @@
                         <Image Width="30" Height="30" Margin="10" ></Image>
                     </Border>
 
-                    <TextBox Width="180" Height="30" BorderBrush="Black" BorderThickness="1" Text="{Binding Path=TextboxSearch, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Path=TextboxSearch, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 </StackPanel>
             </Grid>
         </Border>
@@ -102,247 +134,241 @@
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="1">
 
-            <ListView Margin="0" ItemsSource="{Binding Path=ConfigurationParameterList}" ItemContainerStyle="{StaticResource ListItemStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                               
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Highlight"/>
-                        </ContextMenu>
-                    </ListView.ContextMenu>
+            <ListView Margin="0" ItemsSource="{Binding Path=ConfigurationParameterList}" ItemContainerStyle="{StaticResource ListItemStyle}" >
 
-                  <ListView.View>
-                        <GridView >
+                <ListView.View>
+                    <GridView >
 
-                            <GridViewColumn Header="Name" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParName}" />
-                            <GridViewColumn Header="Description" Width="250" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Description}"/>
+                        <GridViewColumn Header="Name" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParName}" />
+                        <GridViewColumn Header="Description" Width="250" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Description}"/>
 
-                            <GridViewColumn Header="BG" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate >
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForBG}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="BG" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForBG}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="BL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForBL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="BL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForBL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="CL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForCL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="CL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForCL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="CS" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForCS}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="CS" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForCS}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="IL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForIL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="IL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForIL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="OL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForOL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="OL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForOL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="PL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForPL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="PL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForPL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="RL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForRL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="RL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForRL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="SL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForSL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="SL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForSL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="TL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForTL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="TL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForTL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="ZG" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForZG}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="ZG" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=UsedForZG}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="---" Width="50" HeaderContainerStyle="{StaticResource GridViewColumnHeaderSeparatorStyle}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>---</TextBlock>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="---" Width="50" HeaderContainerStyle="{StaticResource GridViewColumnHeaderSeparatorStyle}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>---</TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="SYP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPCA}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="SYP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPCA}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="PCA" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToSYP}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="PCA" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToSYP}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="ROP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToROP}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="ROP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToROP}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="ARP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToARP}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="ARP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToARP}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="NONE" Width="40" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToNONE}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="NONE" Width="40" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToNONE}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="PPP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPPP}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="PPP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPPP}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="PSR" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPSR}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="PSR" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPSR}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="RLP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToRLP}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="RLP" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToRLP}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="SDL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToSDL}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="SDL" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToSDL}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="STA" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToSTA}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="STA" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToSTA}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                             
-                            <GridViewColumn Header="PPR" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPPR}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="PPR" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToPPR}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="BIN" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToBIN}">
-                                        </CheckBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="BIN" Width="30" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsThreeState="True" IsChecked="{Binding Path=MappedToBIN}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="Sequence number" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                    <TextBox Text="{Binding Path=SequenceNumber}" MinWidth="90" MaxWidth="100">
-                                        </TextBox>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="Sequence number" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                <TextBox Text="{Binding Path=SequenceNumber}" MinWidth="90" MaxWidth="100">
+                                    </TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
 
         </Border>
 

@@ -11,3 +11,17 @@ C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVV
 C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WpfMvvmExample.csproj.GenerateResource.Cache
 C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.exe
 C:\Users\stg-kwar\documents\visual studio 2015\Projects\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.pdb
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.exe.config
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.exe
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\bin\Debug\WPF_MVVM_example.pdb
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WpfMvvmExample.csprojResolveAssemblyReference.cache
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\UI\Views\MainWindow.g.cs
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\App.g.cs
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example_MarkupCompile.cache
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example_MarkupCompile.lref
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\UI\Views\MainWindow.baml
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.g.resources
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.Properties.Resources.resources
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WpfMvvmExample.csproj.GenerateResource.Cache
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.exe
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.pdb

@@ -69,9 +69,9 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
-        <Style x:Key="MenuItemStyle" TargetType="MenuItem">
+        <Style x:Key="MenuItemBinStyle" TargetType="MenuItem">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Brush}" Value="Orange">
+                <DataTrigger Binding="{Binding Path=Subroute}" Value="{x:Null}">
                     <Setter Property = "Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -193,7 +193,7 @@
 
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.RemoveBinFromSubrouteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" Style="{StaticResource MenuItemStyle}"/>
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.RemoveBinFromSubrouteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" Style="{StaticResource MenuItemBinStyle}"/>
                         <MenuItem Header="Not Implemented" CommandParameter="{Binding}" />
                     </ContextMenu>
                 </Label.ContextMenu>
@@ -206,6 +206,7 @@
 
             </Label>
         </DataTemplate>
+        
     </Window.Resources>
        
     <Grid>

@@ -84,12 +84,27 @@ namespace TreeViewExample.UI.ViewModels
 
 
         #region ItemHandlers
-        private void DeleteClick(ConfigurationParameter obj)
+        private void DeleteParameter(ConfigurationParameter obj)
         {
             foreach (ConfigurationParameter CP in ConfigurationParameterList)
             {
-                ConfigurationParameterList.Remove(CP);
-                break;
+                if(CP == obj)
+                {
+                    ConfigurationParameterList.Remove(CP);
+                    break;
+                }          
+            }
+        }
+
+        private void HighLightParameter(ConfigurationParameter obj)
+        {
+            if (obj.IsHighlighted)
+            {
+                obj.IsHighlighted = false;
+            }
+            else
+            {
+                obj.IsHighlighted = true;
             }
         }
 
@@ -100,10 +115,12 @@ namespace TreeViewExample.UI.ViewModels
         #region commandlogic
         private void InitializeCommand()
         {
-            DeleteClickCommand = new RelayCommandT1<ConfigurationParameter>(DeleteClick);
+            DeleteParameterCommand = new RelayCommandT1<ConfigurationParameter>(DeleteParameter);
+            HighLightParameterCommand = new RelayCommandT1<ConfigurationParameter>(HighLightParameter);
         }
   
-        public ICommand DeleteClickCommand { get; set; }
+        public ICommand DeleteParameterCommand { get; set; }
+        public ICommand HighLightParameterCommand { get; set; }
 
         #endregion
 

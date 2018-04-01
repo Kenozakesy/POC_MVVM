@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models.DiagramModels
@@ -11,6 +7,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
     {
         #region Fields
         private bool _IsVisible = true;
+        private bool _IsHighlighted = false;
 
         private string _ParName;
         private string _Description;
@@ -50,6 +47,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         public bool? _MappedToPPR;
         public bool? _MappedToBIN;
         public int _SequenceNumber;
+        
 
         #endregion
 
@@ -136,6 +134,11 @@ namespace TreeViewExample.Business.Models.DiagramModels
         {
             get { return _IsVisible; }
             set { SetProperty(ref _IsVisible, value); }
+        }
+        public bool IsHighlighted
+        {
+            get { return _IsHighlighted; }
+            set { SetProperty(ref _IsHighlighted, value); }
         }
         public string ParName
         {
