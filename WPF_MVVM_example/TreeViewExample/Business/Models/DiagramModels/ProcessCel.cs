@@ -19,6 +19,8 @@ namespace TreeViewExample.Business.Models
     {
         private string _Name;
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
+        private ObservableCollection<SubRoute> _SubrouteList = new ObservableCollection<SubRoute>();
+
         private Brush _Brush;
         private int _Number;
         private static Random ran = new Random();
@@ -46,6 +48,11 @@ namespace TreeViewExample.Business.Models
         {
             get { return _RouteList; }
             set { SetProperty(ref _RouteList, value); }
+        }
+        public ObservableCollection<SubRoute> SubrouteList
+        {
+            get { return _SubrouteList; }
+            set { SetProperty(ref _SubrouteList, value); }
         }
         public string Name
         {
