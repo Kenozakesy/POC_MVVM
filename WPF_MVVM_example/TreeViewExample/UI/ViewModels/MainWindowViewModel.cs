@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
+using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
@@ -25,6 +26,7 @@ namespace TreeViewExample.UI.ViewModels
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
         private ObservableCollection<MainListViewModel> _ListView = new ObservableCollection<MainListViewModel>();
+        private ObservableCollection<ConfigurationParameter> _ConfigurationParameterList = new ObservableCollection<ConfigurationParameter>();
 
         private ITreeView _TreeView;
         public MainWindowViewModel(ITreeView view) : base(view)
@@ -58,6 +60,11 @@ namespace TreeViewExample.UI.ViewModels
         {
             get { return _ListView; }
             set { SetProperty(ref _ListView, value); }
+        }
+        public ObservableCollection<ConfigurationParameter> ConfigurationParameterList
+        {
+            get { return _ConfigurationParameterList; }
+            set { SetProperty(ref _ConfigurationParameterList, value); }
         }
 
         #endregion
@@ -137,14 +144,14 @@ namespace TreeViewExample.UI.ViewModels
                 configObject.CreateChild();
             }
         }
-        private void AddbinToSubroute(SubRoute subroute)
+        private void AddbinToUnit(Unit unit)
         {
             Bin bin = _TreeView.OpenSelectBinWindow(BinList);
             if (bin == null)
             {
                 //do nothing
             }
-            else if (!subroute.AddBinToSubroute(bin))
+            else if (!unit.AddBinToSubroute(bin))
             {
                 _TreeView.ShowMessage("This bin is already added to this subroute");
             }
@@ -178,6 +185,10 @@ namespace TreeViewExample.UI.ViewModels
             _TreeView.OpenParameterSheetWindow();
             //After altering parameter configuration there has to be a check if all object are still valid or not. (if not turn red otherwise green)
         }
+        private void OpenCreateParameterWindow()
+        {
+            _TreeView.OpenCreateParameterWindow();
+        }
 
 
         #endregion
@@ -188,12 +199,13 @@ namespace TreeViewExample.UI.ViewModels
             DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);
             ChangeColorClickCommand = new RelayCommandT1<IConfigObject>(ChangeColorClick);
             CreateObjectClickCommand = new RelayCommandT1<IConfigObject>(CreateObjectClick);
-            AddbinCommand = new RelayCommandT1<SubRoute>(AddbinToSubroute);
+            AddbinCommand = new RelayCommandT1<Unit>(AddbinToUnit);
             RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
             CreateProcesCelCommand = new RelayCommand(CreateProcesCel);
             OpenDragDropWindowCommand = new RelayCommandT1<Route>(OpenDragDropWindow);
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
+            OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
         }
 
         public ICommand DeleteClickCommand { get; set; }
@@ -205,6 +217,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand OpenDragDropWindowCommand { get; set; }
         public ICommand ShowPropInListCommand { get; set; }
         public ICommand OpenParameterSheetWindowCommand { get; set; }
+        public ICommand OpenCreateParameterWindowCommand { get; set; }
 
 
 

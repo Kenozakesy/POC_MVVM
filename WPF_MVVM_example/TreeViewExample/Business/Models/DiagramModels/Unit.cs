@@ -10,6 +10,7 @@ using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Singletons;
+using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
@@ -21,6 +22,7 @@ namespace TreeViewExample.Business.Models
         private int _Number;
         private Brush _Brush;
         private static Random ran = new Random();
+        private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
 
         public Unit(string name, int number, SubRoute subroute)
         {
@@ -40,6 +42,8 @@ namespace TreeViewExample.Business.Models
             }
         }
 
+        #region Properties
+
         public string Name
         {
             get { return _Name; }
@@ -55,6 +59,13 @@ namespace TreeViewExample.Business.Models
             get { return _Number; }
             set { SetProperty(ref _Number, value); }
         }
+        public ObservableCollection<Bin> BinList
+        {
+            get { return _BinList; }
+            set { SetProperty(ref _BinList, value); }
+        }
+
+        #endregion
 
         #region Methods
 
@@ -72,7 +83,41 @@ namespace TreeViewExample.Business.Models
 
         public void Delete()
         {
+            List<Bin> removableBins = new List<Bin>();
+            foreach (Bin B in BinList)
+            {
+                removableBins.Add(B);
+            }
+            foreach (Bin B in removableBins)
+            {
+                B.SetSubroute();
+                BinList.Remove(B);
+            }
+
             this._Subroute.DeleteChild(this);
+        }
+
+        public bool AddBinToSubroute(Bin bin)
+        {
+            if (!_BinList.Contains(bin))
+            {
+                bin.SetSubroute(this);
+                OrderObservableList.AddSorted(BinList, bin);
+                return true;
+            }
+            return false;
+        }
+
+        public void DeleteBin(Bin bin)
+        {
+            foreach (Bin B in BinList)
+            {
+                if (B == bin)
+                {
+                    BinList.Remove(B);
+                    break;
+                }
+            }
         }
 
         public void DeleteChild(IConfigObject obj)

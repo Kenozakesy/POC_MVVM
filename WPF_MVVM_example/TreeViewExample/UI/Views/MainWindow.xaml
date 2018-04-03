@@ -71,7 +71,7 @@
         </Style>
         <Style x:Key="MenuItemBinStyle" TargetType="MenuItem">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=Subroute}" Value="{x:Null}">
+                <DataTrigger Binding="{Binding Path=Unit}" Value="{x:Null}">
                     <Setter Property = "Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -127,16 +127,15 @@
             </Label>
         </HierarchicalDataTemplate>
 
-        <!--<HierarchicalDataTemplate ItemsSource="{Binding Path=UnitList}" DataType="{x:Type this:SubRoute}">
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=BinList}" DataType="{x:Type this:Unit}">
             <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
-                        <MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Add bin"  Command="{Binding Tag.DataContext.AddbinCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
-                     
+                        <MenuItem Header="Set bin"  Command="{Binding Tag.DataContext.AddbinCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+
                     </ContextMenu>
                 </Label.ContextMenu>
         
@@ -146,15 +145,14 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Label>
-        </HierarchicalDataTemplate>-->
+        </HierarchicalDataTemplate>
 
-        <HierarchicalDataTemplate ItemsSource="{Binding Path=BinList}" DataType="{x:Type this:SubRoute}">
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=UnitList}" DataType="{x:Type this:SubRoute}">
             <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
-                        <!--<MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>-->
-                        <MenuItem Header="Set bin"  Command="{Binding Tag.DataContext.AddbinCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
 
@@ -168,25 +166,6 @@
                 </i:Interaction.Triggers>
             </Label>
         </HierarchicalDataTemplate>
-
-        <DataTemplate DataType="{x:Type this:Unit}" >
-            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
-                <Label.ContextMenu>
-                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-
-                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
-
-                    </ContextMenu>
-                </Label.ContextMenu>
-
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown" >
-                        <i:InvokeCommandAction Command="{Binding Tag.DataContext.ShowPropInListCommand, RelativeSource={RelativeSource AncestorType=Label}}" CommandParameter="{Binding }"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Label>
-        </DataTemplate>
 
         <DataTemplate DataType="{x:Type this:Bin}" >
             <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
@@ -292,7 +271,8 @@
         <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource BorderStyle}">
             <TreeView BorderThickness="0"> 
                        
-                <TreeViewItem Header="Object tree" IsExpanded="True" FontSize="30" FontWeight="Bold" >
+                <TreeViewItem Header="Configuration tree" IsExpanded="True" FontSize="30" FontWeight="Bold" >
+                    
                     <TreeViewItem Header="ProcessCells" IsExpanded="True" ItemsSource="{Binding Path=ProcessCelList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
@@ -308,7 +288,19 @@
 
                     <TreeViewItem Header="Bins" ItemsSource="{Binding Path=BinList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}">
                     </TreeViewItem>
-                    
+
+                    <Border BorderBrush="Gray" BorderThickness="0 0 0 2" Width="230" Height="2" HorizontalAlignment="Center" />
+
+                    <TreeViewItem Header="Customer Parameters" ItemsSource="{Binding Path=ConfigurationParameterList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                        <TreeViewItem.ContextMenu>
+                            <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                                <MenuItem Header="Create new parameter" Command="{Binding Tag.DataContext.OpenCreateParameterWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+
+                            </ContextMenu>
+                        </TreeViewItem.ContextMenu>
+                    </TreeViewItem>
+
                 </TreeViewItem>
             
             </TreeView>

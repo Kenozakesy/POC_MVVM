@@ -13,20 +13,20 @@ namespace TreeViewExample.Business.Models
 {
     public class Bin : ViewModelBase, IConfigObject
     {
-        private SubRoute _Subroute;
+        private Unit _Unit;
         private string _Name;
         private static int _StaticNumber = 1;
         private int _Number;
         private Brush _Brush;
     
-        public Bin(string name, SubRoute subroute = null)
+        public Bin(string name, Unit unit = null)
         {
             _Number = _StaticNumber;
             _StaticNumber++;
 
             _Name = name + " " + _Number;
 
-            _Subroute = subroute;
+            _Unit = unit;
             _Brush = Brushes.Orange;
         }
 
@@ -47,12 +47,12 @@ namespace TreeViewExample.Business.Models
             get { return _Number; }
             set { SetProperty(ref _Number, value); }
         }
-        public SubRoute Subroute
+        public Unit Unit
         {
-            get { return _Subroute; }
+            get { return _Unit; }
             private set
             {
-                SetProperty(ref _Subroute, value);
+                SetProperty(ref _Unit, value);
                 ValidateColor();
             }
         }
@@ -61,17 +61,17 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
-        public void SetSubroute(SubRoute subroute = null)
+        public void SetSubroute(Unit unit = null)
         {
-            if (this.Subroute != null)
+            if (this.Unit != null)
             {
-                this.Subroute.DeleteBin(this);
+                this.Unit.DeleteBin(this);
             }
-            Subroute = subroute;            
+            Unit = unit;            
         }
         private void ValidateColor()
         {
-            if (_Subroute == null)
+            if (_Unit == null)
             {
                 Brush = Brushes.Orange;
             }

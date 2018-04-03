@@ -143,3 +143,5 @@ C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\ob
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.g.resources
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.Properties.Resources.resources
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csproj.GenerateResource.Cache
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\CreateParameterWindow.g.cs
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\CreateParameterWindow.baml

@@ -10,5 +10,6 @@ namespace WPF_MVVM_example.UI.Interfaces
         void OpenDragDropWindow();
         Bin OpenSelectBinWindow(ObservableCollection<Bin> binList);
         void OpenParameterSheetWindow();
+        void OpenCreateParameterWindow();
     }
 }

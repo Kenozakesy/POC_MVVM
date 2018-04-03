@@ -43,6 +43,12 @@ namespace TreeViewExample
             }
         }
 
+        public void OpenCreateParameterWindow()
+        {
+            CreateParameterWindow window = new CreateParameterWindow();
+            window.ShowDialog();
+        }
+
         public void OpenDragDropWindow()
         {
             DragDropWindow window = new DragDropWindow();

@@ -15,7 +15,6 @@ namespace TreeViewExample.Business.Models
     public class SubRoute : ViewModelBase, IConfigObject
     {
         private ObservableCollection<Unit> _UnitList = new ObservableCollection<Unit>();
-        private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
 
         private Route _Route;
         private string _Name;
@@ -51,11 +50,6 @@ namespace TreeViewExample.Business.Models
         {
             get { return _UnitList; }
             set { SetProperty(ref _UnitList, value); }
-        }
-        public ObservableCollection<Bin> BinList
-        {
-            get { return _BinList; }
-            set { SetProperty(ref _BinList, value); }
         }
         public string Name
         {
@@ -108,18 +102,7 @@ namespace TreeViewExample.Business.Models
             {
                 U.Delete();
             }
-
-            List<Bin> removableBins = new List<Bin>();
-            foreach (Bin B in BinList)
-            {
-                removableBins.Add(B);              
-            }
-            foreach (Bin B in removableBins)
-            {
-                B.SetSubroute();
-                BinList.Remove(B);
-            }
-                      
+                    
             this._Route.DeleteChild(this);
         }
         public void DeleteChild(IConfigObject obj)
@@ -147,27 +130,7 @@ namespace TreeViewExample.Business.Models
             Unit unit = new Unit("Unit " + firstAvailable, firstAvailable, this);
             OrderObservableList.AddSorted(UnitList, unit);
         }
-        public bool AddBinToSubroute(Bin bin)
-        {
-            if (!_BinList.Contains(bin))
-            {
-                bin.SetSubroute(this);
-                OrderObservableList.AddSorted(BinList, bin);             
-                return true;
-            }
-            return false;
-        }
-        public void DeleteBin(Bin bin)
-        {
-            foreach (Bin B in BinList)
-            {
-                if (B == bin)
-                {
-                    BinList.Remove(B);
-                    break;
-                }
-            }
-        }
+
 
         public int CompareTo(object obj)
         {
