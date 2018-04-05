@@ -62,7 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Business\Models\DiagramModels\Parameters\ConfigurationParameter.cs" />
+    <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\BinParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ProcessCelParameter.cs" />
@@ -71,6 +71,11 @@
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\UI_Models\Rectangle.cs" />
+    <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
+    <Compile Include="Dal\DatabaseConnection\DatabaseConnection.cs" />
+    <Compile Include="Dal\Repository\Interfaces\IParameterDefinitionRepository.cs" />
+    <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
+    <Compile Include="Dal\UnitOfWork\Interfaces\IUnitOfWork.cs" />
     <Compile Include="UI\Interfaces\ICreateParameterView.cs" />
     <Compile Include="UI\Interfaces\IDragDropView.cs" />
     <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
@@ -164,7 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\Enums\" />
-    <Folder Include="Dal\" />
+    <Folder Include="Dal\UnitOfWork\UnitOfWorkClasses\" />
     <Folder Include="UI\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

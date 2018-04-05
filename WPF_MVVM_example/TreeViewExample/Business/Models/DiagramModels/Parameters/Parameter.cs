@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 {
-    class Parameter
+    public abstract class Parameter : ViewModelBase
     {
+       
     }
 }

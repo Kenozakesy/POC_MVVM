@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 {
-    class ProcessCelParameter
+    internal class ProcessCelParameter : Parameter
     {
     }
 }

@@ -3,7 +3,7 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models.DiagramModels
 {
-    public class ConfigurationParameter : ViewModelBase
+    public class ParameterDefinition : ViewModelBase
     {
         #region Fields
         private bool _IsVisible = true;
@@ -53,7 +53,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         #region Constructors
 
-        public ConfigurationParameter(string parName, string description, string value, string parValueUOM, bool displayToUser, 
+        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser, 
                          bool? usedForBG, bool? usedForBL, bool? usedForCL, bool? usedForCS, bool? usedForIL, bool? usedForOL, bool? usedForPL, bool? usedForRL, bool? usedForSL, bool? usedForTL, bool? usedForZG,
                          bool? mappedToSYP, bool? mappedToPCA, bool? mappedToROP, bool? mappedToARP, bool? mappedToNONE, bool? mappedToPPP, bool? mappedToPSR, bool? mappedToRLP, bool? mappedToSDL,
                          bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN, int sequencenumber)
@@ -91,7 +91,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _SequenceNumber = sequencenumber;     
         }
 
-        public ConfigurationParameter(string parName, string description, string value, string parValueUOM, bool displayToUser)
+        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser)
         {
             _ParName = parName;
             _Description = description;

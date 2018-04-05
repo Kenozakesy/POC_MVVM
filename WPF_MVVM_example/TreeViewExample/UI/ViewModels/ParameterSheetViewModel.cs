@@ -14,7 +14,7 @@ namespace TreeViewExample.UI.ViewModels
 {
     public class ParameterSheetViewModel : ViewModel, INotifyPropertyChanged
     {
-        private ObservableCollection<ConfigurationParameter> _ConfigurationParameterList = new ObservableCollection<ConfigurationParameter>();
+        private ObservableCollection<ParameterDefinition> _ConfigurationParameterList = new ObservableCollection<ParameterDefinition>();
         private string _TextboxSearch;
 
         private IParameterSheetView _ParameterSheetWindow;
@@ -27,7 +27,7 @@ namespace TreeViewExample.UI.ViewModels
         }
 
         #region Properties
-        public ObservableCollection<ConfigurationParameter> ConfigurationParameterList
+        public ObservableCollection<ParameterDefinition> ConfigurationParameterList
         {
             get { return _ConfigurationParameterList; }
             set { SetProperty(ref _ConfigurationParameterList, value); }
@@ -52,7 +52,7 @@ namespace TreeViewExample.UI.ViewModels
         {
             for (int i = 1; i <= 40; i++)
             {
-                ConfigurationParameter configParam = new ConfigurationParameter("Parameter" + i, "test parameter", i.ToString(), "KG", true);
+                ParameterDefinition configParam = new ParameterDefinition("Parameter" + i, "test parameter", i.ToString(), "KG", true);
                 ConfigurationParameterList.Add(configParam);
             }
         }
@@ -61,13 +61,13 @@ namespace TreeViewExample.UI.ViewModels
         {
             if (string.IsNullOrWhiteSpace(TextboxSearch))
             {
-                foreach (ConfigurationParameter CP in ConfigurationParameterList)
+                foreach (ParameterDefinition CP in ConfigurationParameterList)
                 {                  
                         CP.IsVisible = true;         
                 }
             }
 
-            foreach (ConfigurationParameter CP in ConfigurationParameterList)
+            foreach (ParameterDefinition CP in ConfigurationParameterList)
             {
                 if (CP.ParName.Contains(TextboxSearch))
                 {
@@ -84,9 +84,9 @@ namespace TreeViewExample.UI.ViewModels
 
 
         #region ItemHandlers
-        private void DeleteParameter(ConfigurationParameter obj)
+        private void DeleteParameter(ParameterDefinition obj)
         {
-            foreach (ConfigurationParameter CP in ConfigurationParameterList)
+            foreach (ParameterDefinition CP in ConfigurationParameterList)
             {
                 if(CP == obj)
                 {
@@ -96,7 +96,7 @@ namespace TreeViewExample.UI.ViewModels
             }
         }
 
-        private void HighLightParameter(ConfigurationParameter obj)
+        private void HighLightParameter(ParameterDefinition obj)
         {
             if (obj.IsHighlighted)
             {
@@ -115,8 +115,8 @@ namespace TreeViewExample.UI.ViewModels
         #region commandlogic
         private void InitializeCommand()
         {
-            DeleteParameterCommand = new RelayCommandT1<ConfigurationParameter>(DeleteParameter);
-            HighLightParameterCommand = new RelayCommandT1<ConfigurationParameter>(HighLightParameter);
+            DeleteParameterCommand = new RelayCommandT1<ParameterDefinition>(DeleteParameter);
+            HighLightParameterCommand = new RelayCommandT1<ParameterDefinition>(HighLightParameter);
         }
   
         public ICommand DeleteParameterCommand { get; set; }

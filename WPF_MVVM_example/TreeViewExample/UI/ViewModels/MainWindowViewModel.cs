@@ -26,7 +26,7 @@ namespace TreeViewExample.UI.ViewModels
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
         private ObservableCollection<MainListViewModel> _ListView = new ObservableCollection<MainListViewModel>();
-        private ObservableCollection<ConfigurationParameter> _ConfigurationParameterList = new ObservableCollection<ConfigurationParameter>();
+        private ObservableCollection<ParameterDefinition> _ConfigurationParameterList = new ObservableCollection<ParameterDefinition>();
 
         private ITreeView _TreeView;
         public MainWindowViewModel(ITreeView view) : base(view)
@@ -61,7 +61,7 @@ namespace TreeViewExample.UI.ViewModels
             get { return _ListView; }
             set { SetProperty(ref _ListView, value); }
         }
-        public ObservableCollection<ConfigurationParameter> ConfigurationParameterList
+        public ObservableCollection<ParameterDefinition> ConfigurationParameterList
         {
             get { return _ConfigurationParameterList; }
             set { SetProperty(ref _ConfigurationParameterList, value); }
@@ -144,7 +144,7 @@ namespace TreeViewExample.UI.ViewModels
                 configObject.CreateChild();
             }
         }
-        private void AddbinToUnit(Unit unit)
+        private void SetBinToUnit(Unit unit)
         {
             Bin bin = _TreeView.OpenSelectBinWindow(BinList);
             if (bin == null)
@@ -199,7 +199,7 @@ namespace TreeViewExample.UI.ViewModels
             DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);
             ChangeColorClickCommand = new RelayCommandT1<IConfigObject>(ChangeColorClick);
             CreateObjectClickCommand = new RelayCommandT1<IConfigObject>(CreateObjectClick);
-            AddbinCommand = new RelayCommandT1<Unit>(AddbinToUnit);
+            SetbinCommand = new RelayCommandT1<Unit>(SetBinToUnit);
             RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
             CreateProcesCelCommand = new RelayCommand(CreateProcesCel);
             OpenDragDropWindowCommand = new RelayCommandT1<Route>(OpenDragDropWindow);
@@ -211,7 +211,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand DeleteClickCommand { get; set; }
         public ICommand ChangeColorClickCommand { get; set; }
         public ICommand CreateObjectClickCommand { get; set; }
-        public ICommand AddbinCommand { get; set; }
+        public ICommand SetbinCommand { get; set; }
         public ICommand RemoveBinFromSubrouteCommand { get; set; }
         public ICommand CreateProcesCelCommand { get; set; }
         public ICommand OpenDragDropWindowCommand { get; set; }

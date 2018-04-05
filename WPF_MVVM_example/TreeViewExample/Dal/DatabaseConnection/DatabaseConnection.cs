@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TreeViewExample.Business.Models.DiagramModels.Parameters
+namespace TreeViewExample.Dal.DatabaseConnection
 {
-    internal class BinParameter : Parameter
+    public class DatabaseConnection
     {
+
     }
 }
