@@ -78,10 +78,12 @@
     <Compile Include="Dal\UnitOfWork\Interfaces\IUnitOfWork.cs" />
     <Compile Include="UI\Interfaces\ICreateParameterView.cs" />
     <Compile Include="UI\Interfaces\IDragDropView.cs" />
+    <Compile Include="UI\Interfaces\IEditSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
     <Compile Include="UI\Interfaces\ISelectBinView.cs" />
     <Compile Include="UI\ViewModels\CreateParameterViewModel.cs" />
     <Compile Include="UI\ViewModels\DragDropWindowViewModel.cs" />
+    <Compile Include="UI\ViewModels\EditSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
     <Compile Include="UI\ViewModels\SelectBinWindowViewModel.cs" />
     <Compile Include="UI\Views\CreateParameterWindow.xaml.cs">
@@ -89,6 +91,9 @@
     </Compile>
     <Compile Include="UI\Views\DragDropWindow.xaml.cs">
       <DependentUpon>DragDropWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\EditSubrouteWindow.xaml.cs">
+      <DependentUpon>EditSubrouteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\ParameterSheetWindow.xaml.cs">
       <DependentUpon>ParameterSheetWindow.xaml</DependentUpon>
@@ -101,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\DragDropWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\EditSubrouteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

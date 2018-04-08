@@ -55,6 +55,12 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
+        public void OpenEditSubrouteWindow()
+        {
+            EditSubrouteWindow window = new EditSubrouteWindow();
+            window.ShowDialog();
+        }
+
         public void OpenParameterSheetWindow()
         {
             ParameterSheetWindow window = new ParameterSheetWindow();

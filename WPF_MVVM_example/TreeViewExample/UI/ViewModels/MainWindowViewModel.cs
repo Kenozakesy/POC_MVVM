@@ -189,6 +189,10 @@ namespace TreeViewExample.UI.ViewModels
         {
             _TreeView.OpenCreateParameterWindow();
         }
+        private void OpenEditSubrouteWindow(ProcessCel processcel)
+        {
+            _TreeView.OpenEditSubrouteWindow();
+        }
 
 
         #endregion
@@ -206,6 +210,7 @@ namespace TreeViewExample.UI.ViewModels
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
+            OpenEditSubrouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenEditSubrouteWindow);
         }
 
         public ICommand DeleteClickCommand { get; set; }
@@ -218,6 +223,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand ShowPropInListCommand { get; set; }
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }
+        public ICommand OpenEditSubrouteWindowCommand { get; set; }
 
 
 
