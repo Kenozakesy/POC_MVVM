@@ -17,7 +17,9 @@
 		</Style>
 		
 		<Style x:Key="SubrouteListStyle" TargetType="ListViewItem">
-			<Style.Triggers>
+            <!--<Setter Property="AllowDrop" Value="DemiBold" />-->
+            <Style.Triggers>
+                
 				<!--<Trigger Property="Clicked" Value="True">
 					<Setter Property="FontWeight" Value="DemiBold" />
 				</Trigger>
@@ -56,11 +58,11 @@
 		</Border>
 
 		<Border Grid.Row="1" Style="{StaticResource BorderStyle}" >
-			<ListView ItemsSource="{Binding Path=SubRouteList}" ItemContainerStyle="{StaticResource SubrouteListStyle}" AllowDrop="True"
-				SelectionMode="None" 
+			<ListView ItemsSource="{Binding Path=SubRouteList}" ItemContainerStyle="{StaticResource SubrouteListStyle}" AllowDrop="True" SelectionMode="Single"
 				CanDragItems="True" 
 				CanReorderItems="True" 
 				ReorderMode="Enabled">
+                
 
 			</ListView>
 		</Border>
