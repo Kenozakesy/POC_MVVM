@@ -5,32 +5,20 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:TreeViewExample.UI.Views"
 		xmlns:this="clr-namespace:TreeViewExample.Business.Models"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:li="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions" 
 		mc:Ignorable="d"
 		Title="EditSubrouteWindow" Height="400" Width="600">
-	<Window.Resources>
-		
-		<Style x:Key="BorderStyle" TargetType="Border">
-			<Setter Property="BorderBrush" Value="Black" />
-			<Setter Property="BorderThickness" Value="1" />
-			<Setter Property="Margin" Value="2" />
-		</Style>
-		
-		<Style x:Key="SubrouteListStyle" TargetType="ListViewItem">
-            <!--<Setter Property="AllowDrop" Value="DemiBold" />-->
-            <Style.Triggers>
-                
-				<!--<Trigger Property="Clicked" Value="True">
-					<Setter Property="FontWeight" Value="DemiBold" />
-				</Trigger>
-				<Trigger Property="jas:ListViewItemDragState.IsUnderDragCursor" Value="True">
-					<Setter Property="Background" Value="Blue" />
-				</Trigger>-->
-			</Style.Triggers>
-		</Style>
+    <Window.Resources>
 
-		<DataTemplate DataType="{x:Type this:SubRoute}" >
-			<Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="8 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Width="200">
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+  
+        <DataTemplate DataType="{x:Type this:SubRoute}" >
+			<Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="8 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Width="230">
 				<Label.ContextMenu>
 
 					<ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
@@ -58,13 +46,21 @@
 		</Border>
 
 		<Border Grid.Row="1" Style="{StaticResource BorderStyle}" >
-			<ListView ItemsSource="{Binding Path=SubRouteList}" ItemContainerStyle="{StaticResource SubrouteListStyle}" AllowDrop="True" SelectionMode="Single"
-				CanDragItems="True" 
-				CanReorderItems="True" 
-				ReorderMode="Enabled">
-                
+            <ListView ItemsSource="{Binding Path=SubRouteList, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                      AllowDrop="True" 
+                      SelectionMode="Extended">
 
-			</ListView>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Subroute order"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+                <i:Interaction.Behaviors>
+                    <li:MouseDragElementBehavior />
+                </i:Interaction.Behaviors>
+
+            </ListView>
 		</Border>
 
 		<Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}" Grid.ColumnSpan="2">

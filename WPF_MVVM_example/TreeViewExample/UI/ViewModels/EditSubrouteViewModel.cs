@@ -40,15 +40,21 @@ namespace TreeViewExample.UI.ViewModels
 
         #endregion
 
-        #region ItemHandlers
+        #region Methods
 
         private void FillListTest()
         {
-            for (int i = 1; i <= 10 ; i++)
+            for (int i = 1; i <= 10; i++)
             {
-                SubRouteList.Add(new SubRoute("route " + i , i, null));
+                SubRouteList.Add(new SubRoute("route " + i, i, null));
             }
         }
+
+        #endregion
+
+        #region ItemHandlers
+
+
 
         #endregion
 

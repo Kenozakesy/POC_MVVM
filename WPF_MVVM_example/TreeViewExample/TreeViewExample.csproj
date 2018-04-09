@@ -68,6 +68,7 @@
     <Compile Include="Business\Models\DiagramModels\Parameters\ProcessCelParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\RouteParameter.cs" />
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
+    <Compile Include="Business\UI_Models\ItemsControlDragDropBehaviour.cs" />
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\UI_Models\Rectangle.cs" />
