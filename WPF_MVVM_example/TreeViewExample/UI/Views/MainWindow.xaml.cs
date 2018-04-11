@@ -31,9 +31,9 @@ namespace TreeViewExample
             DataContext = new MainWindowViewModel(this);
         }
 
-        public bool ConfirmMessage()
+        public bool ConfirmMessage(string title, string text)
         {
-            if (MessageBox.Show("Remove Bin from subroute?", "Remove Bin?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show(text, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 return true;
             }

@@ -295,6 +295,41 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         #endregion
 
-     
+        #region Methods
+
+        private bool? GetConversion(bool? isRequired)
+        {
+            switch (isRequired)
+            {
+                case true:
+                    return null;
+                case false:
+                    return true;
+                case null:
+                    return false;
+                default:
+                    return null;
+            }
+        }
+
+        private bool? SetConversion(bool? isRequired)
+        {
+            switch (isRequired)
+            {
+                case true:
+                    return false;
+                case false:
+                    return null;
+                case null:
+                    return true;
+                default:
+                    return null;
+            }
+        }
+
+        
+
+        #endregion
+
     }
 }

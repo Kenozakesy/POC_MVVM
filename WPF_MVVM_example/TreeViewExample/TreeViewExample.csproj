@@ -62,13 +62,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\Enums\IsRequired.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\BinParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ProcessCelParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\RouteParameter.cs" />
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
-    <Compile Include="Business\UI_Models\ItemsControlDragDropBehaviour.cs" />
+    <Compile Include="Business\UI_Models\DragBehavior.cs" />
+    <Compile Include="Business\UI_Models\DragListViewItemBehavior.cs" />
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\UI_Models\Rectangle.cs" />
@@ -178,7 +180,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\Enums\" />
     <Folder Include="Dal\UnitOfWork\UnitOfWorkClasses\" />
     <Folder Include="UI\Images\" />
   </ItemGroup>

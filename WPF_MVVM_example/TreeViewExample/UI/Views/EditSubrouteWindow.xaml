@@ -7,10 +7,11 @@
 		xmlns:this="clr-namespace:TreeViewExample.Business.Models"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:li="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions" 
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"       
 		mc:Ignorable="d"
 		Title="EditSubrouteWindow" Height="400" Width="600">
+    <!--xmlns:local="clr-namespace:DragDropListBoxes"-->
     <Window.Resources>
-
         <Style x:Key="BorderStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value="1" />
@@ -56,15 +57,21 @@
                     </GridView>
                 </ListView.View>
 
-                <i:Interaction.Behaviors>
-                    <li:MouseDragElementBehavior />
-                </i:Interaction.Behaviors>
-
             </ListView>
 		</Border>
 
 		<Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}" Grid.ColumnSpan="2">
 		</Border>
 
-	</Grid>
+
+
+    </Grid>
 </Window>
+
+
+<!--<ListView Margin="10" ItemTemplate="{StaticResource listViewItemTemplate}">
+    <Interaction:Interaction.Behaviors>
+        <li:ItemsControlDragDropBehaviour ItemType="{x:Type this:Product}"
+                     DataTemplate="{StaticResource listViewItemTemplate}" />
+    </Interaction:Interaction.Behaviors>
+</ListView>-->

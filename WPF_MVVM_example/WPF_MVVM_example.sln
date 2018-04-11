@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMvvmExample", "WPF_MVVM_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeViewExample", "TreeViewExample\TreeViewExample.csproj", "{317FDF46-19DB-4D19-A396-303139AA577B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_MVVM_TestProject", "WPF_MVVM_TestProject\WPF_MVVM_TestProject.csproj", "{9180CF78-0032-4A77-829A-E8C2DA912469}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{317FDF46-19DB-4D19-A396-303139AA577B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{317FDF46-19DB-4D19-A396-303139AA577B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{317FDF46-19DB-4D19-A396-303139AA577B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9180CF78-0032-4A77-829A-E8C2DA912469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9180CF78-0032-4A77-829A-E8C2DA912469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9180CF78-0032-4A77-829A-E8C2DA912469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9180CF78-0032-4A77-829A-E8C2DA912469}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
