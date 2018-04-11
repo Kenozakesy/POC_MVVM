@@ -91,6 +91,7 @@
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
+                        <MenuItem Header="Create/Delete Subroute" Command="{Binding Tag.DataContext.OpenCreateSubrouteWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
                         <MenuItem Header="Create Route"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
@@ -284,6 +285,7 @@
                         </TreeViewItem.ContextMenu>
                     </TreeViewItem>
 
+                    <!--Dit moeten volgens mij helemaal geen routes zijn maar Units Dit lijkt mij veel logischer routes zijn enorm overbodig-->
                     <TreeViewItem Header="Routes" ItemsSource="{Binding Path=RouteList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     </TreeViewItem>
 

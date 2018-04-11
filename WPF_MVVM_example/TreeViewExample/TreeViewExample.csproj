@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\Enums\IsRequired.cs" />
+    <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\BinParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
@@ -80,17 +81,22 @@
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
     <Compile Include="Dal\UnitOfWork\Interfaces\IUnitOfWork.cs" />
     <Compile Include="UI\Interfaces\ICreateParameterView.cs" />
+    <Compile Include="UI\Interfaces\ICreateSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IDragDropView.cs" />
     <Compile Include="UI\Interfaces\IEditSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
     <Compile Include="UI\Interfaces\ISelectBinView.cs" />
     <Compile Include="UI\ViewModels\CreateParameterViewModel.cs" />
+    <Compile Include="UI\ViewModels\CreateSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\DragDropWindowViewModel.cs" />
     <Compile Include="UI\ViewModels\EditSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
     <Compile Include="UI\ViewModels\SelectBinWindowViewModel.cs" />
     <Compile Include="UI\Views\CreateParameterWindow.xaml.cs">
       <DependentUpon>CreateParameterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CreateSubrouteWindow.xaml.cs">
+      <DependentUpon>CreateSubrouteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\DragDropWindow.xaml.cs">
       <DependentUpon>DragDropWindow.xaml</DependentUpon>
@@ -105,6 +111,10 @@
       <DependentUpon>SelectBinWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="UI\Views\CreateParameterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\CreateSubrouteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

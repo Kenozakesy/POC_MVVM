@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.UI.ViewModels;
@@ -18,6 +19,7 @@ namespace TreeViewExample.Business.Models
         private static int _StaticNumber = 1;
         private int _Number;
         private Brush _Brush;
+        private IsValidated _IsValid;
     
         public Bin(string name, Unit unit = null)
         {
@@ -28,6 +30,7 @@ namespace TreeViewExample.Business.Models
 
             _Unit = unit;
             _Brush = Brushes.Orange;
+            
         }
 
         #region Properties
@@ -47,13 +50,21 @@ namespace TreeViewExample.Business.Models
             get { return _Number; }
             set { SetProperty(ref _Number, value); }
         }
+        public IsValidated IsValid
+        {
+            get { return _IsValid; }
+            set {
+                SetProperty(ref _IsValid, value);
+                SetColor();
+            }
+        }
         public Unit Unit
         {
             get { return _Unit; }
             private set
             {
                 SetProperty(ref _Unit, value);
-                ValidateColor();
+                Validate();
             }
         }
 
@@ -69,15 +80,32 @@ namespace TreeViewExample.Business.Models
             }
             Unit = unit;            
         }
-        private void ValidateColor()
+        private void Validate()
         {
             if (_Unit == null)
             {
-                Brush = Brushes.Orange;
+                IsValid = IsValidated.NotConnected;
             }
             else
             {
-                Brush = Brushes.LightGreen;
+                IsValid = IsValidated.Valid;
+            }
+        }
+        private void SetColor()
+        {
+            switch (IsValid)
+            {
+                case IsValidated.Valid:
+                    Brush = Brushes.LightGreen;
+                    break;
+                case IsValidated.InValid:
+                    Brush = Brushes.Red;
+                    break;
+                case IsValidated.NotConnected:
+                    Brush = Brushes.Orange;
+                    break;
+                default:
+                    break;
             }
         }
         public void ChangeColor()

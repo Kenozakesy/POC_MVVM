@@ -67,6 +67,13 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
+        public void OpenCreateSubrouteWindow(ProcessCel processcel)
+        {
+            CreateSubrouteWindow window = new CreateSubrouteWindow();
+            ((CreateSubrouteViewModel)window.DataContext).ProcessCel = processcel;
+            window.ShowDialog();
+        }
+
         public Bin OpenSelectBinWindow(ObservableCollection<Bin> binList)
         {
             SelectBinWindow window = new SelectBinWindow();

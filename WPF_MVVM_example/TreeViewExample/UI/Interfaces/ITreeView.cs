@@ -12,5 +12,6 @@ namespace WPF_MVVM_example.UI.Interfaces
         void OpenParameterSheetWindow();
         void OpenCreateParameterWindow();
         void OpenEditSubrouteWindow();
+        void OpenCreateSubrouteWindow(ProcessCel processcel);
     }
 }

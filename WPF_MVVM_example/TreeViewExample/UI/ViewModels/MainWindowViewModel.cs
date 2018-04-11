@@ -158,9 +158,8 @@ namespace TreeViewExample.UI.ViewModels
         }
         private void RemoveBinFromSubroute(Bin bin)
         {
-            string text = "Remove bin from subroute";
+            string text = "Remove bin from subroute?";
             string title = "Remove bin?";
-
             if (_TreeView.ConfirmMessage(title, text))
             {
                 bin.SetSubroute();
@@ -196,6 +195,10 @@ namespace TreeViewExample.UI.ViewModels
         {
             _TreeView.OpenEditSubrouteWindow();
         }
+        private void OpenCreateSubrouteWindow(ProcessCel processcel)
+        {
+            _TreeView.OpenCreateSubrouteWindow(processcel);
+        }
 
 
         #endregion
@@ -214,6 +217,7 @@ namespace TreeViewExample.UI.ViewModels
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
             OpenEditSubrouteWindowCommand = new RelayCommandT1<Route>(OpenEditSubrouteWindow);
+            OpenCreateSubrouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateSubrouteWindow);
         }
 
         public ICommand DeleteClickCommand { get; set; }
@@ -227,6 +231,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }
         public ICommand OpenEditSubrouteWindowCommand { get; set; }
+        public ICommand OpenCreateSubrouteWindowCommand { get; set; }
 
 
 

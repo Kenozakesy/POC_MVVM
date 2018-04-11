@@ -15,5 +15,7 @@ namespace TreeViewExample.Business.Interfaces
         void DeleteChild(IConfigObject obj);
         void CreateChild();
         List<MainListViewModel> GenerateListViewList();
+        //void SetColor();
+        //void Validate();
     }
 }

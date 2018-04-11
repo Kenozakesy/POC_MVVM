@@ -1,0 +1,55 @@
+﻿<Window x:Class="TreeViewExample.UI.Views.CreateSubrouteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:this="clr-namespace:TreeViewExample.Business.Models"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:li="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions" 
+        xmlns:local="clr-namespace:TreeViewExample.UI.Views"
+        mc:Ignorable="d"
+        Title="CreateSubrouteWindow" Height="250" Width="400">
+    <Window.Resources>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+
+        <DataTemplate DataType="{x:Type this:SubRoute}" >
+            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="8 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Width="230">
+                <Label.ContextMenu>
+
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Delete (NIY)"/>
+                    </ContextMenu>
+
+                </Label.ContextMenu>
+            </Label>
+        </DataTemplate>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" ></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource BorderStyle}">
+        </Border>
+
+        <Border Grid.Row="1" Style="{StaticResource BorderStyle}">
+            <ListView >
+                
+            </ListView>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}">
+        </Border>
+
+    </Grid>
+</Window>
