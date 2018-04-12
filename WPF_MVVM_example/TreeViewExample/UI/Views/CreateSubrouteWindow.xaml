@@ -8,7 +8,7 @@
         xmlns:li="clr-namespace:Microsoft.Expression.Interactivity.Layout;assembly=Microsoft.Expression.Interactions" 
         xmlns:local="clr-namespace:TreeViewExample.UI.Views"
         mc:Ignorable="d"
-        Title="CreateSubrouteWindow" Height="250" Width="400">
+        Title="CreateSubrouteWindow" Height="500" Width="800">
     <Window.Resources>
         <Style x:Key="BorderStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Black" />
