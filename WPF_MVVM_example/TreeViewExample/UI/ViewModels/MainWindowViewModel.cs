@@ -26,7 +26,7 @@ namespace TreeViewExample.UI.ViewModels
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
         private ObservableCollection<MainListViewModel> _ListView = new ObservableCollection<MainListViewModel>();
-        private ObservableCollection<ParameterDefinition> _ConfigurationParameterList = new ObservableCollection<ParameterDefinition>();
+        private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
 
         private ITreeView _TreeView;
         public MainWindowViewModel(ITreeView view) : base(view)
@@ -61,10 +61,10 @@ namespace TreeViewExample.UI.ViewModels
             get { return _ListView; }
             set { SetProperty(ref _ListView, value); }
         }
-        public ObservableCollection<ParameterDefinition> ConfigurationParameterList
+        public ObservableCollection<ParameterDefinition> CustomerParameterList
         {
-            get { return _ConfigurationParameterList; }
-            set { SetProperty(ref _ConfigurationParameterList, value); }
+            get { return _CustomerParameterList; }
+            set { SetProperty(ref _CustomerParameterList, value); }
         }
 
         #endregion

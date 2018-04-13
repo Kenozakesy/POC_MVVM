@@ -5,36 +5,132 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TreeViewExample.UI.Views"
         mc:Ignorable="d"
-        Title="CreateParameterWindow" Height="300" Width="800">
+        Title="CreateParameterWindow" Height="500" Width="800">
     <Window.Resources>
         <Style x:Key="BorderStyle" TargetType="Border">
-            <Setter Property="BorderBrush" Value="gray" />
+            <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Margin" Value="2" />
         </Style>
+        <Style x:Key="GridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+        </Style>
+        
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <Border Style="{StaticResource BorderStyle}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal">
-                
+
+        <Border Style="{StaticResource BorderStyle}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+            <StackPanel Orientation="Vertical">
+                <TextBlock>Parameters</TextBlock>
+                <ListView>
+
+                </ListView>
             </StackPanel>
         </Border>
 
-        <Border Style="{StaticResource BorderStyle}" Grid.Column="0" Grid.Row="1">
-            <StackPanel Orientation="Vertical" Margin="10">
+        <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-                
+                <Label Content="Parameter name" BorderBrush="Black" BorderThickness="0 0 0 1"></Label>
+                <Label Grid.Column="1" Content="Parameter value" BorderBrush="Black" BorderThickness="0 0 0 1"></Label>
+
+                <ScrollViewer Margin="5" Grid.Row="1" Grid.ColumnSpan="2">
+                    <ScrollViewer.Resources>
+                        <Style TargetType="ScrollBar">
+                            <Style.Triggers>
+                                <Trigger Property="Orientation" Value="Vertical">
+                                    <Setter Property="Width" Value="10"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ScrollViewer.Resources>
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="Parameter name" Grid.Row="0"></Label>
+                                <Label Content="Parameter description" Grid.Row="1"></Label>
+                                <Label Content="ValueOUM" Grid.Row="2"></Label>
+
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                                <ComboBox Grid.Row="0"></ComboBox>
+                                <ComboBox Grid.Row="1"></ComboBox>
+                                <ComboBox Grid.Row="2"></ComboBox>
+
+                        </Grid>
+                    </StackPanel>
+
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <RadioButton>Route Parameter</RadioButton>
+                <RadioButton>Procescell Parameter</RadioButton>
+                <RadioButton>Bin Parameter</RadioButton>
             </StackPanel>
+        </Border>
+
+        <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="2">
+            <Grid Margin="10">
+                <Button MinWidth="90" VerticalAlignment="Center" HorizontalAlignment="Right">Create Parameter</Button>
+            </Grid>
         </Border>
 
     </Grid>

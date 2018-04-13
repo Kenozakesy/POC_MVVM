@@ -294,7 +294,7 @@
 
                     <Border BorderBrush="Gray" BorderThickness="0 1 0 1" Width="230" Height="4" HorizontalAlignment="Center" />
 
-                    <TreeViewItem Header="Customer Parameters" ItemsSource="{Binding Path=ConfigurationParameterList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    <TreeViewItem Header="Customer Parameters" ItemsSource="{Binding Path=CustomerParameterList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
