@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TreeViewExample.Business.UI_Models"
         xmlns:this="clr-namespace:TreeViewExample.Business.Models"
-        xmlns:parameters="clr-namespace:TreeViewExample.Business.Models.DiagramModels.Parameters"
+        xmlns:that="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="TreeviewExample" Height="800" Width="1200">
@@ -189,8 +189,8 @@
             </Label>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type this:ParameterDefinition}">
-            <Label Content="{Binding Path=ParName}" BorderBrush="Gray" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+        <DataTemplate DataType="{x:Type that:ParameterDefinition}">
+            <Label Content="{Binding Path=ParName}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
 
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
@@ -201,7 +201,7 @@
 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown" >
-                        <i:InvokeCommandAction Command="{Binding Tag.DataContext.ShowPropInListCommand, RelativeSource={RelativeSource AncestorType=Label}}" CommandParameter="{Binding }"/>
+                        <i:InvokeCommandAction />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
 

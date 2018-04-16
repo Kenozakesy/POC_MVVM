@@ -1,4 +1,5 @@
 ﻿
+using System.Windows.Media;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models.DiagramModels
@@ -14,6 +15,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private string _Value;
         private string _ParValueUOM;
         private bool _IsStandardParameter;
+        private Brush _Brush;
 
         //private string _ValidValues;
         //private List<string> _ComboItems;
@@ -126,6 +128,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToBIN = false;
             _SequenceNumber = 0;
             _IsVisible = isStandardParameter;
+            _Brush = Brushes.LightGray;
         }
 
         #endregion
@@ -174,6 +177,11 @@ namespace TreeViewExample.Business.Models.DiagramModels
         {
             get { return _IsStandardParameter; }
             set { SetProperty(ref _IsStandardParameter, value); }
+        }
+        public Brush Brush
+        {
+            get { return _Brush; }
+            set { SetProperty(ref _Brush, value); }
         }
 
         #endregion

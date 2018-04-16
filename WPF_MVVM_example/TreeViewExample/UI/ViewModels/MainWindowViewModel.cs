@@ -205,7 +205,7 @@ namespace TreeViewExample.UI.ViewModels
         }
         private void OpenCreateParameterWindow()
         {
-            _TreeView.OpenCreateParameterWindow();
+            _TreeView.OpenCreateParameterWindow(_CustomerParameterList);
         }
         private void OpenEditSubrouteWindow(Route route)
         {

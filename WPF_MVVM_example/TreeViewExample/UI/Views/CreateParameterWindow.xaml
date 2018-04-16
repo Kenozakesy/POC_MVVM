@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TreeViewExample.UI.Views"
+        xmlns:local="clr-namespace:TreeViewExample.Business.UI_Models"
+        xmlns:that="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="CreateParameterWindow" MinHeight="500" MinWidth="800">
     <Window.Resources>
@@ -25,6 +27,49 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="0 0 20 0"></Setter>
         </Style>
+        <Style x:Key="MyLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Style.Triggers>
+                <Trigger Property="MenuItem.IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="{Binding Path=Brush}"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem,AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
+                    <Setter Property="Background" Value="{Binding Path=Brush,  Converter={x:Static local:MyCloneConverter.Instance}}"/>
+
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                      Storyboard.TargetProperty="(Label.Background).(SolidColorBrush.Opacity)" 
+                                      From="0.1" To="1" Duration="0:0:0.8" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate DataType="{x:Type that:ParameterDefinition}">
+            <Label Content="{Binding Path=ParName}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
+
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Remove" CommandParameter="{Binding}" />
+                        <MenuItem Header="Edit" CommandParameter="{Binding}" />
+                    </ContextMenu>
+                </Label.ContextMenu>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown" >
+                        <i:InvokeCommandAction />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </Label>
+        </DataTemplate>
 
     </Window.Resources>
 
@@ -42,9 +87,9 @@
         <Border Style="{StaticResource BorderStyle}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
             <StackPanel Orientation="Vertical">
                 <TextBlock>Parameters</TextBlock>
-                <ListView>
+                <TreeView ItemsSource="{Binding Path=CustomerParameterList}">
 
-                </ListView>
+                </TreeView>
             </StackPanel>
         </Border>
 
@@ -156,7 +201,7 @@
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="2">
             <Grid Margin="10">
-                <Button MinWidth="90" VerticalAlignment="Center" HorizontalAlignment="Right">Create Parameter</Button>
+                <Button MinWidth="90" VerticalAlignment="Center" HorizontalAlignment="Right" Command="{Binding Path=CreateCustomerParameterCommand}">Create Parameter</Button>
             </Grid>
         </Border>
 

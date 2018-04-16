@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
+
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
+using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.UI.Interfaces;
 using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.ViewModels;
@@ -13,10 +14,7 @@ namespace TreeViewExample.UI.ViewModels
 {
     public class CreateParameterViewModel : ViewModel, INotifyPropertyChanged
     {
-
-
-
-
+        private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
 
         private ICreateParameterView _ICreateParameterView;
         public CreateParameterViewModel(ICreateParameterView view) : base(view)
@@ -26,9 +24,13 @@ namespace TreeViewExample.UI.ViewModels
         }
 
 
-
-
         #region Properties
+
+        public ObservableCollection<ParameterDefinition> CustomerParameterList
+        {
+            get { return _CustomerParameterList; }
+            set { SetProperty(ref _CustomerParameterList, value); }
+        }
 
         #endregion
 
@@ -36,15 +38,23 @@ namespace TreeViewExample.UI.ViewModels
 
         #endregion
 
+        #region ItemHandlers
 
+        private void CreateCustomerParameter()
+        {
+            ParameterDefinition paramdef = new ParameterDefinition("just created", "", "1", "0 = not created; 1 = created", true, false);
+            CustomerParameterList.Add(paramdef);
+        }
+
+        #endregion
 
         #region Commandlogic
         private void InitializeCommand()
         {
-           // CreateRouteCommand = new RelayCommand(CreateRoute);
+            CreateCustomerParameterCommand = new RelayCommand(CreateCustomerParameter);
         }
 
-        //public ICommand CreateRouteCommand { get; set; }
+        public ICommand CreateCustomerParameterCommand { get; set; }
 
 
         #endregion

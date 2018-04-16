@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TreeViewExample.UI.Views"
-        xmlns:this="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
         mc:Ignorable="d"
         Title="ParameterSheetWindow" Height="800" Width="1400">
     <Window.Resources>
@@ -134,7 +133,6 @@
                 </StackPanel>
             </Grid>
         </Border>
-
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="1">
 

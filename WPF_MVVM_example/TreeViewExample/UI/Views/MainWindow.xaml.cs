@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TreeViewExample.Business.Models;
+using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.UI.ViewModels;
 using TreeViewExample.UI.Views;
 using WPF_MVVM_example.UI.Interfaces;
@@ -43,9 +44,10 @@ namespace TreeViewExample
             }
         }
 
-        public void OpenCreateParameterWindow()
+        public void OpenCreateParameterWindow(ObservableCollection<ParameterDefinition> customerParameterList)
         {
             CreateParameterWindow window = new CreateParameterWindow();
+            ((CreateParameterViewModel)window.DataContext).CustomerParameterList = customerParameterList;
             window.ShowDialog();
         }
 
