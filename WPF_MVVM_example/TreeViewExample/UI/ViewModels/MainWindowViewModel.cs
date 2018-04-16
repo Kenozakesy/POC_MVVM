@@ -33,10 +33,12 @@ namespace TreeViewExample.UI.ViewModels
         {
             //quick solution needs a observer pattern.
             GlobalLists.Instance.Viewmodel = this;
-
             _TreeView = view;
-            AddProcessCelsAndBins();
             InitializeCommand();
+
+            AddProcessCelsAndBins();
+            AddCustomerParameters();
+    
         }
 
         #region Properties
@@ -83,11 +85,20 @@ namespace TreeViewExample.UI.ViewModels
             ProcessCel procescel = new ProcessCel("procescel", firstAvailable);
             OrderObservableList.AddSorted(ProcessCelList, procescel);
         }
-
-        #endregion
-
-        #region ItemHandlers
-
+        /// <summary>
+        /// This is a test method
+        /// </summary>
+        private void AddCustomerParameters()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                ParameterDefinition customerParameter = new ParameterDefinition("Customer Parameter " + i, "Parameter" + i, "45", "kg", true, false);
+                CustomerParameterList.Add(customerParameter);
+            }
+        }
+        /// <summary>
+        /// This is a test method
+        /// </summary>
         private void AddProcessCelsAndBins()
         {
             for (int i = 1; i <= 5; i++)
@@ -99,6 +110,11 @@ namespace TreeViewExample.UI.ViewModels
                 BinList.Add(new Bin("Bin"));
             }
         }
+
+        #endregion
+
+        #region ItemHandlers
+
         private void DeleteClick(IConfigObject obj)
         {
             try

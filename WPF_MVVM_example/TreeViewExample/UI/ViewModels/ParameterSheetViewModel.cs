@@ -52,7 +52,7 @@ namespace TreeViewExample.UI.ViewModels
         {
             for (int i = 1; i <= 40; i++)
             {
-                ParameterDefinition configParam = new ParameterDefinition("Parameter" + i, "test parameter", i.ToString(), "KG", true);
+                ParameterDefinition configParam = new ParameterDefinition("Parameter" + i, "test parameter", i.ToString(), "KG", true, true);
                 ConfigurationParameterList.Add(configParam);
             }
         }

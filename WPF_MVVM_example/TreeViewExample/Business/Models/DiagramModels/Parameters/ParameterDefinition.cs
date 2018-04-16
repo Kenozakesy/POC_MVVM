@@ -13,6 +13,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private string _Description;
         private string _Value;
         private string _ParValueUOM;
+        private bool _IsStandardParameter;
 
         //private string _ValidValues;
         //private List<string> _ComboItems;
@@ -91,7 +92,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _SequenceNumber = sequencenumber;     
         }
 
-        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser)
+        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser, bool isStandardParameter)
         {
             _ParName = parName;
             _Description = description;
@@ -124,6 +125,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToPPR = false;
             _MappedToBIN = false;
             _SequenceNumber = 0;
+            _IsVisible = isStandardParameter;
         }
 
         #endregion
@@ -166,6 +168,12 @@ namespace TreeViewExample.Business.Models.DiagramModels
         {
             get { return _DisplayToUser; }
             set { SetProperty(ref _DisplayToUser, value); }
+        }
+
+        public bool IsStandardParameter
+        {
+            get { return _IsStandardParameter; }
+            set { SetProperty(ref _IsStandardParameter, value); }
         }
 
         #endregion

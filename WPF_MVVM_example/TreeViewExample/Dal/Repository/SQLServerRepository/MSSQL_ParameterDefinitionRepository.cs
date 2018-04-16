@@ -25,9 +25,9 @@ namespace TreeViewExample.Dal.SQLServerRepository
         {
             List<ParameterDefinition> ConfigParameters = new List<ParameterDefinition>();
 
-            ConfigParameters.Add(new ParameterDefinition("weight", "heavyness", "1000", "kg", true));
-            ConfigParameters.Add(new ParameterDefinition("weight", "heavyness", "1000", "kg", true));
-            ConfigParameters.Add(new ParameterDefinition("weight", "heavyness", "1000", "kg", true));
+            ConfigParameters.Add(new ParameterDefinition("weight", "heavyness", "1000", "kg", true, true));
+            ConfigParameters.Add(new ParameterDefinition("weight", "heavyness", "1000", "kg", true, true));
+            ConfigParameters.Add(new ParameterDefinition("weight", "heavyness", "1000", "kg", true, true));
 
             return ConfigParameters;
         }

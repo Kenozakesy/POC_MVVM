@@ -1,0 +1,1 @@
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Release\TreeViewExample.exe.config
