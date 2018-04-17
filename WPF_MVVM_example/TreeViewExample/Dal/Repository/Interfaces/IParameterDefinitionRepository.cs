@@ -7,7 +7,7 @@ using TreeViewExample.Business.Models.DiagramModels;
 
 namespace TreeViewExample.Dal.Interfaces
 {
-    internal interface IParameterDefinitionRepository 
+    public interface IParameterDefinitionRepository 
     {
         List<ParameterDefinition> GetParameterDefinitions();
         void InsertParameterDefinition(ParameterDefinition ConfigurationParameter);

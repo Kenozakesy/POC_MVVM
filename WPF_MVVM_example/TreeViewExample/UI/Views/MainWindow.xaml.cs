@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.UI.ViewModels;
@@ -96,5 +97,11 @@ namespace TreeViewExample
             MessageBox.Show(text);
         }
 
+        public void OpenAddParameterToObjectWindow(IConfigObject obj)
+        {
+            AddParameterToObjectWindow window = new AddParameterToObjectWindow();
+            ((AddParameterToObjectViewModel)window.DataContext).IConfigObject = obj;
+            window.ShowDialog();
+        }
     }
 }

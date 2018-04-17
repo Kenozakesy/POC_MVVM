@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.NonDiagramModels;
-using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.ViewModels;
 

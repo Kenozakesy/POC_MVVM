@@ -8,7 +8,6 @@ using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
-using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.ViewModels;
 
@@ -45,7 +44,6 @@ namespace TreeViewExample.Business.Models
             { 
                 AddSubRoutes();
             }
-            GlobalLists.Instance.AddRoute(this);
         }
 
         #region Properties
@@ -110,7 +108,6 @@ namespace TreeViewExample.Business.Models
                 S.Delete();
             }
             this._ProcessCel.DeleteChild(this);
-            GlobalLists.Instance.RemoveRoute(this);
         }
 
         public void DeleteChild(IConfigObject obj)

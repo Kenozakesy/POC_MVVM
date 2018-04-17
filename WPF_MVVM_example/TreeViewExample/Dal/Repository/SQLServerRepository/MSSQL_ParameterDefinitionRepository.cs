@@ -8,7 +8,7 @@ using TreeViewExample.Dal.Interfaces;
 
 namespace TreeViewExample.Dal.SQLServerRepository
 {
-    internal class MSSQL_ParameterDefinitionRepository : IParameterDefinitionRepository
+    public class MSSQL_ParameterDefinitionRepository : IParameterDefinitionRepository
     {
 
         public void AlterProcessCelTypeParameterDefinition(bool ParameterValue, string ParameterName)

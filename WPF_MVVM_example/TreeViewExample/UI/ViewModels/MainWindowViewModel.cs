@@ -12,7 +12,6 @@ using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
-using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.Interfaces;
@@ -31,14 +30,11 @@ namespace TreeViewExample.UI.ViewModels
         private ITreeView _TreeView;
         public MainWindowViewModel(ITreeView view) : base(view)
         {
-            //quick solution needs a observer pattern.
-            GlobalLists.Instance.Viewmodel = this;
             _TreeView = view;
             InitializeCommand();
 
             AddProcessCelsAndBins();
-            AddCustomerParameters();
-    
+            AddCustomerParameters();   
         }
 
         #region Properties
@@ -215,6 +211,10 @@ namespace TreeViewExample.UI.ViewModels
         {
             _TreeView.OpenCreateSubrouteWindow(processcel);
         }
+        private void OpenAddParameterToObjectWindow(IConfigObject obj)
+        {
+            _TreeView.OpenAddParameterToObjectWindow(obj);
+        }
 
 
         #endregion
@@ -234,6 +234,7 @@ namespace TreeViewExample.UI.ViewModels
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
             OpenEditSubrouteWindowCommand = new RelayCommandT1<Route>(OpenEditSubrouteWindow);
             OpenCreateSubrouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateSubrouteWindow);
+            OpenAddParameterToObjectWindowCommand = new RelayCommandT1<IConfigObject>(OpenAddParameterToObjectWindow);
         }
 
         public ICommand DeleteClickCommand { get; set; }
@@ -248,8 +249,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand OpenCreateParameterWindowCommand { get; set; }
         public ICommand OpenEditSubrouteWindowCommand { get; set; }
         public ICommand OpenCreateSubrouteWindowCommand { get; set; }
-
-
+        public ICommand OpenAddParameterToObjectWindowCommand { get; set; }
 
 
         #endregion

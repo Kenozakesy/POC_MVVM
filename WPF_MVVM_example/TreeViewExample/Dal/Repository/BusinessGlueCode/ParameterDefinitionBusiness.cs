@@ -8,7 +8,7 @@ using TreeViewExample.Dal.Interfaces;
 
 namespace TreeViewExample.Dal.DatabaseConnection
 {
-    internal class ParameterDefinitionBusiness
+    public class ParameterDefinitionBusiness
     {
         IParameterDefinitionRepository _Repository;
 

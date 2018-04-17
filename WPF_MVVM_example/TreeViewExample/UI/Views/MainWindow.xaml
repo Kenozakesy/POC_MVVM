@@ -94,6 +94,7 @@
 
                         <MenuItem Header="Create/Delete Subroute" Command="{Binding Tag.DataContext.OpenCreateSubrouteWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
                         <MenuItem Header="Create Route"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
                         
@@ -117,6 +118,7 @@
                         <MenuItem Header="Edit Subroute order" Command="{Binding Tag.DataContext.OpenEditSubrouteWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
                         <!--<MenuItem Header="Open drag/drop" Command="{Binding Tag.DataContext.OpenDragDropWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>-->
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
                     
                     </ContextMenu>
@@ -176,7 +178,7 @@
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.RemoveBinFromSubrouteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" Style="{StaticResource MenuItemBinStyle}"/>
-                        <MenuItem Header="Not Implemented" CommandParameter="{Binding}" />
+                        <MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                     </ContextMenu>
                 </Label.ContextMenu>
 
@@ -294,7 +296,9 @@
             <TreeView BorderThickness="0"> 
                        
                 <TreeViewItem Header="Configuration tree" IsExpanded="True" FontSize="30" FontWeight="Bold" >
-                    
+
+                    <Border BorderBrush="Gray" BorderThickness="0 1 0 1" Width="230" Height="4" HorizontalAlignment="Center" />
+
                     <TreeViewItem Header="ProcessCells" IsExpanded="True" ItemsSource="{Binding Path=ProcessCelList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
@@ -303,10 +307,6 @@
 
                             </ContextMenu>
                         </TreeViewItem.ContextMenu>
-                    </TreeViewItem>
-
-                    <!--Dit moeten volgens mij helemaal geen routes zijn maar Units Dit lijkt mij veel logischer routes zijn enorm overbodig-->
-                    <TreeViewItem Header="Routes" ItemsSource="{Binding Path=RouteList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     </TreeViewItem>
 
                     <TreeViewItem Header="Bins" ItemsSource="{Binding Path=BinList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}">

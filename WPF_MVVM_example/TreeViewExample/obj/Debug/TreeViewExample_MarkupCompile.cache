@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\App.xaml
-7-434619992
+8-45453198
 
-56-455251112
+57-851436048
 16644667433
-UI\Views\CreateParameterWindow.xaml;UI\Views\CreateSubrouteWindow.xaml;UI\Views\DragDropWindow.xaml;UI\Views\EditSubrouteWindow.xaml;UI\Views\MainWindow.xaml;UI\Views\ParameterSheetWindow.xaml;UI\Views\SelectBinWindow.xaml;
+UI\Views\AddParameterToObjectWindow.xaml;UI\Views\CreateParameterWindow.xaml;UI\Views\CreateSubrouteWindow.xaml;UI\Views\DragDropWindow.xaml;UI\Views\EditSubrouteWindow.xaml;UI\Views\MainWindow.xaml;UI\Views\ParameterSheetWindow.xaml;UI\Views\SelectBinWindow.xaml;
 
 False
 

@@ -79,18 +79,23 @@
     <Compile Include="Dal\Repository\Interfaces\IParameterDefinitionRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
     <Compile Include="Dal\UnitOfWork\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="UI\Interfaces\IAddParameterToObjectView.cs" />
     <Compile Include="UI\Interfaces\ICreateParameterView.cs" />
     <Compile Include="UI\Interfaces\ICreateSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IDragDropView.cs" />
     <Compile Include="UI\Interfaces\IEditSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
     <Compile Include="UI\Interfaces\ISelectBinView.cs" />
+    <Compile Include="UI\ViewModels\AddParameterToObjectViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateParameterViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\DragDropWindowViewModel.cs" />
     <Compile Include="UI\ViewModels\EditSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
     <Compile Include="UI\ViewModels\SelectBinWindowViewModel.cs" />
+    <Compile Include="UI\Views\AddParameterToObjectWindow.xaml.cs">
+      <DependentUpon>AddParameterToObjectWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Views\CreateParameterWindow.xaml.cs">
       <DependentUpon>CreateParameterWindow.xaml</DependentUpon>
     </Compile>
@@ -109,6 +114,10 @@
     <Compile Include="UI\Views\SelectBinWindow.xaml.cs">
       <DependentUpon>SelectBinWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="UI\Views\AddParameterToObjectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Views\CreateParameterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,7 +148,6 @@
     <Compile Include="Business\Models\DiagramModels\Route.cs" />
     <Compile Include="Business\Models\DiagramModels\SubRoute.cs" />
     <Compile Include="Business\Models\DiagramModels\Unit.cs" />
-    <Compile Include="Business\Singletons\GlobalLists.cs" />
     <Compile Include="Business\Statics\OrderObservableList.cs" />
     <Compile Include="UI\Commands\RelayCommand.cs" />
     <Compile Include="UI\Commands\RelayCommandT1.cs" />
@@ -189,6 +197,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Business\Singletons\" />
     <Folder Include="Dal\UnitOfWork\UnitOfWorkClasses\" />
     <Folder Include="UI\Images\" />
   </ItemGroup>
