@@ -74,7 +74,7 @@
                         <GridViewColumn Header="Value" Width="200" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate >
-                                    <TextBox Text="{Binding Path=Value}"/>
+                                    <TextBox Text="{Binding Path=DefaultValue}" MinWidth="160"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

@@ -13,7 +13,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         private string _ParName;
         private string _Description;
-        private string _Value;
+        private string _DefaultValue;
         private string _ParValueUOM;
     
         //private string _ValidValues;
@@ -100,11 +100,11 @@ namespace TreeViewExample.Business.Models.DiagramModels
         //    _SequenceNumber = sequencenumber;     
         //}
 
-        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser, bool isStandardParameter)
+        public ParameterDefinition(string parName, string description, string defaulvalue, string parValueUOM, bool displayToUser, bool isStandardParameter)
         {
             _ParName = parName;
             _Description = description;
-            _Value = value;
+            _DefaultValue = defaulvalue;
             _ParValueUOM = parValueUOM;
             _DisplayToUser = displayToUser;
 
@@ -164,10 +164,10 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _Description; }
             set { SetProperty(ref _Description, value); }
         }
-        public string Value
+        public string DefaultValue
         {
-            get { return _Value; }
-            set { SetProperty(ref _Value, value); }
+            get { return _DefaultValue; }
+            set { SetProperty(ref _DefaultValue, value); }
         }
         public string ParValueUOM
         {
