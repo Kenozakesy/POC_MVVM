@@ -1,10 +1,11 @@
 ﻿
+using System;
 using System.Windows.Media;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models.DiagramModels
 {
-    public class ParameterDefinition : ViewModelBase
+    public class ParameterDefinition : ViewModelBase, IComparable
     {
         #region Fields
         private bool _IsVisible = true;
@@ -351,7 +352,13 @@ namespace TreeViewExample.Business.Models.DiagramModels
             }
         }
 
-        
+        public int CompareTo(object obj)
+        {
+            ParameterDefinition paramdef = obj as ParameterDefinition;
+            return string.Compare(ParName, paramdef.ParName);
+        }
+
+
 
         #endregion
 

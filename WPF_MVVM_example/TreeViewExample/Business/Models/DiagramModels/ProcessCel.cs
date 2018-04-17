@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
@@ -12,7 +13,7 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
-    public class ProcessCel : ViewModelBase, IConfigObject
+    public class ProcessCel : ViewModelBase, IConfigObject, IObjectWithParameters
     {
         private string _Name;
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
@@ -38,6 +39,13 @@ namespace TreeViewExample.Business.Models
                 _Brush = Brushes.LightGreen;
             }
             AddRoutes();
+
+
+            ///these are only meant for testing and should be removed later
+            ProcessCelParameter PP = new ProcessCelParameter("test", "param", "kill" , "kg" ,true, true, this);
+            ProcessCelParameter PC = new ProcessCelParameter("AAA", "param", "kill", "kg", true, true, this);
+            _ProcessCelParameterList.Add(PP);
+            _ProcessCelParameterList.Add(PC);
         }
 
         #region Properties
@@ -84,7 +92,6 @@ namespace TreeViewExample.Business.Models
                 RouteList.Add(new Route("Route " + i, i, this, true));
             }         
         }
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -96,7 +103,6 @@ namespace TreeViewExample.Business.Models
                 Brush = Brushes.Red;
             }
         }
-
         public void Delete()
         {
             List<Route> removableRoutes = new List<Route>();
@@ -109,7 +115,6 @@ namespace TreeViewExample.Business.Models
                 R.Delete();
             }  
         }
-
         public void DeleteChild(IConfigObject obj)
         {
             Route unit = obj as Route;
@@ -122,7 +127,6 @@ namespace TreeViewExample.Business.Models
                 }
             }
         }
-
         public void CreateChild()
         {
             List<int> intList = new List<int>();
@@ -135,18 +139,15 @@ namespace TreeViewExample.Business.Models
             Route route = new Route("Route " + firstAvailable, firstAvailable, this);
             OrderObservableList.AddSorted(RouteList, route);
         }
-
         public int CompareTo(object obj)
         {
             ProcessCel cell = obj as ProcessCel;
             return string.Compare(this.Name, cell.Name);        
         }
-
         public override string ToString()
         {
             return _Name;
         }
-
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
@@ -162,6 +163,28 @@ namespace TreeViewExample.Business.Models
                 configList.Add(mainListViewModel);
             }
             return configList;
+        }
+
+        public ObservableCollection<ParameterDefinition> GetParameterList()
+        {
+            ObservableCollection<ParameterDefinition> paramList = new ObservableCollection<ParameterDefinition>();
+            foreach (ProcessCelParameter PP in ProcessCelParameterList)
+            { 
+                OrderObservableList.AddSorted(paramList, PP);
+            }
+            return paramList;
+        }
+
+        public void RemoveParameter(ParameterDefinition paramdef)
+        {
+            foreach (ProcessCelParameter PP in ProcessCelParameterList)
+            {
+                if (PP.ParName == paramdef.ParName)
+                {
+                    ProcessCelParameterList.Remove(PP);
+                    break;
+                }
+            }
         }
 
         #endregion

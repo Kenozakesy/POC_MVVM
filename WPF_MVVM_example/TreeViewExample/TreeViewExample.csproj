@@ -64,6 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Business\Enums\IsRequired.cs" />
     <Compile Include="Business\Enums\IsValidated.cs" />
+    <Compile Include="Business\Interfaces\IObjectWithParameters.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\BinParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ProcessCelParameter.cs" />
@@ -198,7 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\Singletons\" />
-    <Folder Include="Dal\UnitOfWork\UnitOfWorkClasses\" />
     <Folder Include="UI\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

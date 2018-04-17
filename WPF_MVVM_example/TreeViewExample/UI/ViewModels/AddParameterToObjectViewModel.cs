@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models;
+using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Business.Models.DiagramModels.Parameters;
+using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.Interfaces;
 using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.ViewModels;
@@ -16,7 +20,8 @@ namespace TreeViewExample.UI.ViewModels
 {
     public class AddParameterToObjectViewModel : ViewModel, INotifyPropertyChanged
     {
-        private IConfigObject _IConfigObject;
+        private IObjectWithParameters _ParameterObject;
+        private ObservableCollection<ParameterDefinition> _ParameterDefinitionList = new ObservableCollection<ParameterDefinition>();
 
         private IAddParameterToObjectView _IAddParameterToObjectView;
         public AddParameterToObjectViewModel(IAddParameterToObjectView view) : base(view)
@@ -25,30 +30,52 @@ namespace TreeViewExample.UI.ViewModels
             InitializeCommand();
         }
 
+
         #region Properties
 
-        public IConfigObject IConfigObject
+        public IObjectWithParameters ParameterObject
         {
-            get { return _IConfigObject; }
-            set { SetProperty(ref _IConfigObject, value); }
+            get { return _ParameterObject; }
+            set { SetProperty(ref _ParameterObject, value); }
+        }
+
+        public ObservableCollection<ParameterDefinition> ParameterDefinitionList
+        {
+            get { return _ParameterDefinitionList; }
+            set { SetProperty(ref _ParameterDefinitionList, value); }
         }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// Wordt op het moment op een foute plek aangeroepen (moet veranderd worden)
+        /// </summary>
+        public void InitializeParameters()
+        {
+            ParameterDefinitionList = ParameterObject.GetParameterList();
+        }
+
+
         #endregion
 
         #region ItemHandlers
+
+        private void RemoveParameter(ParameterDefinition paramdef)
+        {
+            ParameterDefinitionList.Remove(paramdef);
+            ParameterObject.RemoveParameter(paramdef);
+        }
 
         #endregion
 
         #region Commandlogic
         private void InitializeCommand()
         {
-           // CreateCustomerParameterCommand = new RelayCommand(CreateCustomerParameter);
+            RemoveParameterCommand = new RelayCommandT1<ParameterDefinition>(RemoveParameter);
         }
-        //public ICommand CreateCustomerParameterCommand { get; set; }
+        public ICommand RemoveParameterCommand { get; set; }
 
         #endregion
 

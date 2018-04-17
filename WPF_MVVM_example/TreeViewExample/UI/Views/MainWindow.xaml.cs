@@ -97,10 +97,11 @@ namespace TreeViewExample
             MessageBox.Show(text);
         }
 
-        public void OpenAddParameterToObjectWindow(IConfigObject obj)
+        public void OpenAddParameterToObjectWindow(IObjectWithParameters obj)
         {
             AddParameterToObjectWindow window = new AddParameterToObjectWindow();
-            ((AddParameterToObjectViewModel)window.DataContext).IConfigObject = obj;
+            ((AddParameterToObjectViewModel)window.DataContext).ParameterObject = obj;
+            ((AddParameterToObjectViewModel)window.DataContext).InitializeParameters();
             window.ShowDialog();
         }
     }

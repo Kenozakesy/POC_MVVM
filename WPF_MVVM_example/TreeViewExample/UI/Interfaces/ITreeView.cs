@@ -11,7 +11,7 @@ namespace WPF_MVVM_example.UI.Interfaces
         void OpenDragDropWindow();
         Bin OpenSelectBinWindow(ObservableCollection<Bin> binList);
         void OpenParameterSheetWindow();
-        void OpenAddParameterToObjectWindow(IConfigObject obj);
+        void OpenAddParameterToObjectWindow(IObjectWithParameters obj);
         void OpenCreateParameterWindow(ObservableCollection<ParameterDefinition> customerParameterList);
         void OpenEditSubrouteWindow();
         void OpenCreateSubrouteWindow(ProcessCel processcel);

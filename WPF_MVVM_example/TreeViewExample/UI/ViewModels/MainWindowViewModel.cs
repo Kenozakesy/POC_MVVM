@@ -211,7 +211,7 @@ namespace TreeViewExample.UI.ViewModels
         {
             _TreeView.OpenCreateSubrouteWindow(processcel);
         }
-        private void OpenAddParameterToObjectWindow(IConfigObject obj)
+        private void OpenAddParameterToObjectWindow(IObjectWithParameters obj)
         {
             _TreeView.OpenAddParameterToObjectWindow(obj);
         }
@@ -234,7 +234,7 @@ namespace TreeViewExample.UI.ViewModels
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
             OpenEditSubrouteWindowCommand = new RelayCommandT1<Route>(OpenEditSubrouteWindow);
             OpenCreateSubrouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateSubrouteWindow);
-            OpenAddParameterToObjectWindowCommand = new RelayCommandT1<IConfigObject>(OpenAddParameterToObjectWindow);
+            OpenAddParameterToObjectWindowCommand = new RelayCommandT1<IObjectWithParameters>(OpenAddParameterToObjectWindow);
         }
 
         public ICommand DeleteClickCommand { get; set; }
