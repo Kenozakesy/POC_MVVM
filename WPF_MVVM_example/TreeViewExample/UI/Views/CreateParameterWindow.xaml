@@ -57,13 +57,13 @@
 
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="Remove" CommandParameter="{Binding}" />
+                        <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteCustomerParameterCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
                         <MenuItem Header="Edit" CommandParameter="{Binding}" />
                     </ContextMenu>
                 </Label.ContextMenu>
 
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown" >
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
                         <i:InvokeCommandAction />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
@@ -104,7 +104,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Parameter name" BorderBrush="Black" BorderThickness="0 0 0 1"></Label>
+                <Label Content="Variable name" BorderBrush="Black" BorderThickness="0 0 0 1"></Label>
                 <Label Grid.Column="1" Content="Parameter value" BorderBrush="Black" BorderThickness="0 0 0 1" ></Label>
 
                 <ScrollViewer Margin="5" Grid.Row="1" Grid.ColumnSpan="2">

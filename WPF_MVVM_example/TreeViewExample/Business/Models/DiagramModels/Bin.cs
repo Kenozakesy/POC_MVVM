@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.UI.ViewModels;
 
@@ -14,7 +16,9 @@ namespace TreeViewExample.Business.Models
 {
     public class Bin : ViewModelBase, IConfigObject
     {
+        private ObservableCollection<BinParameter> _BinParameterList = new ObservableCollection<BinParameter>();
         private Unit _Unit;
+
         private string _Name;
         private static int _StaticNumber = 1;
         private int _Number;
@@ -35,6 +39,20 @@ namespace TreeViewExample.Business.Models
 
         #region Properties
 
+        public ObservableCollection<BinParameter> BinParameterList
+        {
+            get { return _BinParameterList; }
+            set { SetProperty(ref _BinParameterList, value); }
+        }
+        public Unit Unit
+        {
+            get { return _Unit; }
+            private set
+            {
+                SetProperty(ref _Unit, value);
+                Validate();
+            }
+        }
         public string Name
         {
             get { return _Name; }
@@ -58,15 +76,7 @@ namespace TreeViewExample.Business.Models
                 SetColor();
             }
         }
-        public Unit Unit
-        {
-            get { return _Unit; }
-            private set
-            {
-                SetProperty(ref _Unit, value);
-                Validate();
-            }
-        }
+
 
         #endregion
 
@@ -124,7 +134,6 @@ namespace TreeViewExample.Business.Models
         {
             throw new NotImplementedException();
         }
-
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();

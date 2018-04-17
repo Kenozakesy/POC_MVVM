@@ -32,6 +32,11 @@ namespace TreeViewExample.UI.Views
             this.Close();
         }
 
+        public bool ConfirmMessage(string title, string text)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ShowMessage(string text)
         {
             MessageBox.Show(text);

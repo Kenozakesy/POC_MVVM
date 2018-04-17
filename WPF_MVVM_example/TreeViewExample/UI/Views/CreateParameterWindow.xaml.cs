@@ -27,6 +27,18 @@ namespace TreeViewExample.UI.Views
             DataContext = new CreateParameterViewModel(this);
         }
 
+        public bool ConfirmMessage(string title, string text)
+        {
+            if (MessageBox.Show(text, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void ShowMessage(string text)
         {
             MessageBox.Show(text);

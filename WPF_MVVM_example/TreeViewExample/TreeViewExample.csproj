@@ -66,7 +66,6 @@
     <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\BinParameter.cs" />
-    <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ProcessCelParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\RouteParameter.cs" />
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />

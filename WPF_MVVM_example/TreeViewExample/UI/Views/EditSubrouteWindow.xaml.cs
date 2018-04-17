@@ -29,6 +29,11 @@ namespace TreeViewExample.UI.Views
             DataContext = new EditSubrouteViewModel(this);
         }
 
+        public bool ConfirmMessage(string title, string text)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ShowMessage(string text)
         {
             MessageBox.Show(text);

@@ -193,8 +193,8 @@
             <Label Content="{Binding Path=ParName}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
 
                 <Label.ContextMenu>
-                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="Remove" CommandParameter="{Binding}" />
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}" Visibility="Collapsed">
+                        <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteCustomerParameterCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
                         <MenuItem Header="Edit" CommandParameter="{Binding}" />
                     </ContextMenu>
                 </Label.ContextMenu>

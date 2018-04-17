@@ -3,5 +3,6 @@
     public interface IView
     {
         void ShowMessage(string text);
+        bool ConfirmMessage(string title, string text);
     }
 }

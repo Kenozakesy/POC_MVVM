@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
@@ -15,10 +16,11 @@ namespace TreeViewExample.Business.Models
 {
     public class Route : ViewModelBase, IConfigObject
     {
+        private ObservableCollection<RouteParameter> _RouteParameterList = new ObservableCollection<RouteParameter>();
         private ObservableCollection<SubRoute> _SubRouteList = new ObservableCollection<SubRoute>();
         private ProcessCel _ProcessCel;
+
         private string _Name;
-        //private static int _StaticNumber = 0;
         private int _Number;
         private Brush _Brush;
         private static Random ran = new Random();
@@ -46,6 +48,13 @@ namespace TreeViewExample.Business.Models
             GlobalLists.Instance.AddRoute(this);
         }
 
+        #region Properties
+
+        public ObservableCollection<RouteParameter> RouteParameterList
+        {
+            get { return _RouteParameterList; }
+            set { SetProperty(ref _RouteParameterList, value); }
+        }
         public ObservableCollection<SubRoute> SubRouteList
         {
             get { return _SubRouteList; }
@@ -67,6 +76,8 @@ namespace TreeViewExample.Business.Models
             set { SetProperty(ref _Brush, value); }
         }
 
+        #endregion
+
         #region Methods
 
         private void AddSubRoutes()
@@ -76,7 +87,6 @@ namespace TreeViewExample.Business.Models
                 SubRouteList.Add(new SubRoute("Subroute " + i.ToString(), i, this, true));
             }
         }
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -88,7 +98,6 @@ namespace TreeViewExample.Business.Models
                 Brush = Brushes.Red;
             }
         }
-
         public void Delete()
         {
             List<SubRoute> removableSubroutes = new List<SubRoute>();

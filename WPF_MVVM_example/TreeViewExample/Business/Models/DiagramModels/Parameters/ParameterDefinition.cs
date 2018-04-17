@@ -14,13 +14,14 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private string _Description;
         private string _Value;
         private string _ParValueUOM;
-        private bool _IsStandardParameter;
-        private Brush _Brush;
-
+    
         //private string _ValidValues;
         //private List<string> _ComboItems;
 
         private bool _DisplayToUser;
+
+        private bool _IsStandardParameter;
+        private Brush _Brush;
 
         #endregion
 
@@ -50,49 +51,53 @@ namespace TreeViewExample.Business.Models.DiagramModels
         public bool? _MappedToPPR;
         public bool? _MappedToBIN;
         public int _SequenceNumber;
-        
+
 
         #endregion
 
         #region Constructors
 
-        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser, 
-                         bool? usedForBG, bool? usedForBL, bool? usedForCL, bool? usedForCS, bool? usedForIL, bool? usedForOL, bool? usedForPL, bool? usedForRL, bool? usedForSL, bool? usedForTL, bool? usedForZG,
-                         bool? mappedToSYP, bool? mappedToPCA, bool? mappedToROP, bool? mappedToARP, bool? mappedToNONE, bool? mappedToPPP, bool? mappedToPSR, bool? mappedToRLP, bool? mappedToSDL,
-                         bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN, int sequencenumber)
-        {
-            _ParName = parName;
-            _Description = description;
-            _Value = value;
-            _ParValueUOM = parValueUOM;
-            _DisplayToUser = displayToUser;
+        //public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser, 
+        //                 bool? usedForBG, bool? usedForBL, bool? usedForCL, bool? usedForCS, bool? usedForIL, bool? usedForOL, bool? usedForPL, bool? usedForRL, bool? usedForSL, bool? usedForTL, bool? usedForZG,
+        //                 bool? mappedToSYP, bool? mappedToPCA, bool? mappedToROP, bool? mappedToARP, bool? mappedToNONE, bool? mappedToPPP, bool? mappedToPSR, bool? mappedToRLP, bool? mappedToSDL,
+        //                 bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN, int sequencenumber)
+        //{
+        //    _ParName = parName;
+        //    _Description = description;
+        //    _Value = value;
+        //    _ParValueUOM = parValueUOM;
+        //    _DisplayToUser = displayToUser;
 
-            _UsedForBG = usedForBG;
-            _UsedForBL = usedForBL;
-            _UsedForCL = usedForCL;
-            _UsedForCS = usedForCS;
-            _UsedForIL = usedForIL;
-            _UsedForOL = usedForOL;
-            _UsedForPL = usedForPL;
-            _UsedForRL = usedForRL;
-            _UsedForSL = usedForSL;
-            _UsedForTL = usedForTL;
-            _UsedForZG = usedForZG;
 
-            _MappedToSYP = mappedToSYP;
-            _MappedToPCA = mappedToPCA;
-            _MappedToROP = MappedToROP;
-            _MappedToARP = mappedToARP;
-            _MappedToNONE = mappedToNONE;
-            _MappedToPPP = mappedToPPP;
-            _MappedToPSR = mappedToPSR;
-            _MappedToRLP = mappedToRLP;
-            _MappedToSDL = mappedToSDL;
-            _MappedToSTA = mappedToSTA;
-            _MappedToPPR = mappedToPPR;
-            _MappedToBIN = mappedToBIN;
-            _SequenceNumber = sequencenumber;     
-        }
+        //_IsVisible = isStandardParameter;
+        //_Brush = Brushes.LightGray;
+
+        //    _UsedForBG = usedForBG;
+        //    _UsedForBL = usedForBL;
+        //    _UsedForCL = usedForCL;
+        //    _UsedForCS = usedForCS;
+        //    _UsedForIL = usedForIL;
+        //    _UsedForOL = usedForOL;
+        //    _UsedForPL = usedForPL;
+        //    _UsedForRL = usedForRL;
+        //    _UsedForSL = usedForSL;
+        //    _UsedForTL = usedForTL;
+        //    _UsedForZG = usedForZG;
+
+        //    _MappedToSYP = mappedToSYP;
+        //    _MappedToPCA = mappedToPCA;
+        //    _MappedToROP = MappedToROP;
+        //    _MappedToARP = mappedToARP;
+        //    _MappedToNONE = mappedToNONE;
+        //    _MappedToPPP = mappedToPPP;
+        //    _MappedToPSR = mappedToPSR;
+        //    _MappedToRLP = mappedToRLP;
+        //    _MappedToSDL = mappedToSDL;
+        //    _MappedToSTA = mappedToSTA;
+        //    _MappedToPPR = mappedToPPR;
+        //    _MappedToBIN = mappedToBIN;
+        //    _SequenceNumber = sequencenumber;     
+        //}
 
         public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser, bool isStandardParameter)
         {
@@ -101,6 +106,9 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _Value = value;
             _ParValueUOM = parValueUOM;
             _DisplayToUser = displayToUser;
+
+            _IsVisible = isStandardParameter;
+            _Brush = Brushes.LightGray;
 
             _UsedForBG = false;
             _UsedForBL = false;
@@ -127,8 +135,8 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToPPR = false;
             _MappedToBIN = false;
             _SequenceNumber = 0;
-            _IsVisible = isStandardParameter;
-            _Brush = Brushes.LightGray;
+
+ 
         }
 
         #endregion

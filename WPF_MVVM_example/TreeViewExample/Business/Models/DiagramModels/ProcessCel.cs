@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.ViewModels;
@@ -20,6 +17,7 @@ namespace TreeViewExample.Business.Models
         private string _Name;
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<SubRoute> _SubrouteList = new ObservableCollection<SubRoute>();
+        private ObservableCollection<ProcessCelParameter> _ProcessCelParameterList = new ObservableCollection<ProcessCelParameter>();
 
         private Brush _Brush;
         private int _Number;
@@ -53,6 +51,11 @@ namespace TreeViewExample.Business.Models
         {
             get { return _SubrouteList; }
             set { SetProperty(ref _SubrouteList, value); }
+        }
+        public ObservableCollection<ProcessCelParameter> ProcessCelParameterList
+        {
+            get { return _ProcessCelParameterList; }
+            set { SetProperty(ref _ProcessCelParameterList, value); }
         }
         public string Name
         {

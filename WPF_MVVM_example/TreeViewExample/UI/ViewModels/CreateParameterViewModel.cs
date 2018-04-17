@@ -46,15 +46,34 @@ namespace TreeViewExample.UI.ViewModels
             CustomerParameterList.Add(paramdef);
         }
 
+        private void DeleteCustomerParameter(ParameterDefinition paramdef)
+        {
+            if (!_ICreateParameterView.ConfirmMessage("Delete Parameter?!", "Are you sure you want to delete the parameterdefinition?" + Environment.NewLine + "(all parameters with this definition will be removed)"))
+            {
+                return;
+            }
+
+            foreach (ParameterDefinition P in CustomerParameterList)
+            {
+                if (P == paramdef)
+                {
+                    CustomerParameterList.Remove(P);
+                    break;
+                }
+            }
+        }
+
         #endregion
 
         #region Commandlogic
         private void InitializeCommand()
         {
             CreateCustomerParameterCommand = new RelayCommand(CreateCustomerParameter);
+            DeleteCustomerParameterCommand = new RelayCommandT1<ParameterDefinition>(DeleteCustomerParameter);
         }
 
         public ICommand CreateCustomerParameterCommand { get; set; }
+        public ICommand DeleteCustomerParameterCommand { get; set; }
 
 
         #endregion
