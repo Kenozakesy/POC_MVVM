@@ -15,6 +15,7 @@ namespace TreeViewExample.UI.ViewModels
     public class CreateParameterViewModel : ViewModel, INotifyPropertyChanged
     {
         private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
+        private ParameterDefinition _NewParameterDefinition = new ParameterDefinition();
 
         private ICreateParameterView _ICreateParameterView;
         public CreateParameterViewModel(ICreateParameterView view) : base(view)
@@ -30,6 +31,12 @@ namespace TreeViewExample.UI.ViewModels
         {
             get { return _CustomerParameterList; }
             set { SetProperty(ref _CustomerParameterList, value); }
+        }
+
+        public ParameterDefinition NewParameterDefinition
+        {
+            get { return _NewParameterDefinition; }
+            set { SetProperty(ref _NewParameterDefinition, value); }
         }
 
         #endregion

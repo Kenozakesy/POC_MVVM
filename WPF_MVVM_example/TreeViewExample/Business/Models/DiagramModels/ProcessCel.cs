@@ -40,12 +40,6 @@ namespace TreeViewExample.Business.Models
             }
             AddRoutes();
 
-
-            ///these are only meant for testing and should be removed later
-            ProcessCelParameter PP = new ProcessCelParameter("test", "param", "kill" , "kg" ,true, true, this);
-            ProcessCelParameter PC = new ProcessCelParameter("AAA", "param", "kill", "kg", true, true, this);
-            _ProcessCelParameterList.Add(PP);
-            _ProcessCelParameterList.Add(PC);
         }
 
         #region Properties
@@ -165,27 +159,17 @@ namespace TreeViewExample.Business.Models
             return configList;
         }
 
+
         public ObservableCollection<ParameterDefinition> GetParameterList()
         {
-            ObservableCollection<ParameterDefinition> paramList = new ObservableCollection<ParameterDefinition>();
-            foreach (ProcessCelParameter PP in ProcessCelParameterList)
-            { 
-                OrderObservableList.AddSorted(paramList, PP);
-            }
-            return paramList;
+            throw new NotImplementedException();
         }
 
         public void RemoveParameter(ParameterDefinition paramdef)
         {
-            foreach (ProcessCelParameter PP in ProcessCelParameterList)
-            {
-                if (PP.ParName == paramdef.ParName)
-                {
-                    ProcessCelParameterList.Remove(PP);
-                    break;
-                }
-            }
+            throw new NotImplementedException();
         }
+
 
         #endregion
 

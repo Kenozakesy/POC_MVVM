@@ -22,8 +22,7 @@ namespace WPF_MVVM_TestProject
         {
             ProcessCel processcel = new ProcessCel("name", 1);
 
-            ProcessCelParameter PP = new ProcessCelParameter("Parameter" + 1, "test parameter", 1.ToString(), "KG", true, true, processcel);
-            ProcessCelParameter PP2 = new ProcessCelParameter("Parameter" + 2, "test parameter", 2.ToString(), "KG", true, true, processcel);
+
 
 
 

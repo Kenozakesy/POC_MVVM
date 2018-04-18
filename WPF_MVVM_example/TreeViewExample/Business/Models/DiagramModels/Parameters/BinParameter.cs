@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 {
-    public class BinParameter : ParameterDefinition
+    public class BinParameter : Parameter
     {
         #region Fields
 
@@ -14,10 +14,6 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 
         #endregion
 
-        public BinParameter(string parName, string description, string value, string parValueUOM, bool displayToUser, bool isStandardParameter, Bin bin) : base(parName, description, value, parValueUOM, displayToUser, isStandardParameter)
-        {
-            _Bin = bin;           
-        }
 
         #region Properties
 

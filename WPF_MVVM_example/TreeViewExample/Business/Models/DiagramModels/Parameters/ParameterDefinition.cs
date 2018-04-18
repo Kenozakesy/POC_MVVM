@@ -58,48 +58,86 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         #region Constructors
 
-        //public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser, 
-        //                 bool? usedForBG, bool? usedForBL, bool? usedForCL, bool? usedForCS, bool? usedForIL, bool? usedForOL, bool? usedForPL, bool? usedForRL, bool? usedForSL, bool? usedForTL, bool? usedForZG,
-        //                 bool? mappedToSYP, bool? mappedToPCA, bool? mappedToROP, bool? mappedToARP, bool? mappedToNONE, bool? mappedToPPP, bool? mappedToPSR, bool? mappedToRLP, bool? mappedToSDL,
-        //                 bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN, int sequencenumber)
-        //{
-        //    _ParName = parName;
-        //    _Description = description;
-        //    _Value = value;
-        //    _ParValueUOM = parValueUOM;
-        //    _DisplayToUser = displayToUser;
+        /// <summary>
+        /// This methods is to be used when getting Parameterdefinitions from the database or changing them
+        /// </summary>
+        /// <param name="parName"></param>
+        /// <param name="description"></param>
+        /// <param name="value"></param>
+        /// <param name="parValueUOM"></param>
+        /// <param name="displayToUser"></param>
+        /// <param name="usedForBG"></param>
+        /// <param name="usedForBL"></param>
+        /// <param name="usedForCL"></param>
+        /// <param name="usedForCS"></param>
+        /// <param name="usedForIL"></param>
+        /// <param name="usedForOL"></param>
+        /// <param name="usedForPL"></param>
+        /// <param name="usedForRL"></param>
+        /// <param name="usedForSL"></param>
+        /// <param name="usedForTL"></param>
+        /// <param name="usedForZG"></param>
+        /// <param name="mappedToSYP"></param>
+        /// <param name="mappedToPCA"></param>
+        /// <param name="mappedToROP"></param>
+        /// <param name="mappedToARP"></param>
+        /// <param name="mappedToNONE"></param>
+        /// <param name="mappedToPPP"></param>
+        /// <param name="mappedToPSR"></param>
+        /// <param name="mappedToRLP"></param>
+        /// <param name="mappedToSDL"></param>
+        /// <param name="mappedToSTA"></param>
+        /// <param name="mappedToPPR"></param>
+        /// <param name="mappedToBIN"></param>
+        /// <param name="sequencenumber"></param>
+        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser,
+                         bool? usedForBG, bool? usedForBL, bool? usedForCL, bool? usedForCS, bool? usedForIL, bool? usedForOL, bool? usedForPL, bool? usedForRL, bool? usedForSL, bool? usedForTL, bool? usedForZG,
+                         bool? mappedToSYP, bool? mappedToPCA, bool? mappedToROP, bool? mappedToARP, bool? mappedToNONE, bool? mappedToPPP, bool? mappedToPSR, bool? mappedToRLP, bool? mappedToSDL,
+                         bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN, int sequencenumber)
+        {
+            _ParName = parName;
+            _Description = description;
+            _ParValueUOM = parValueUOM;
+            _DisplayToUser = displayToUser;
 
+            _Brush = Brushes.LightGray;
 
-        //_IsVisible = isStandardParameter;
-        //_Brush = Brushes.LightGray;
+            _UsedForBG = usedForBG;
+            _UsedForBL = usedForBL;
+            _UsedForCL = usedForCL;
+            _UsedForCS = usedForCS;
+            _UsedForIL = usedForIL;
+            _UsedForOL = usedForOL;
+            _UsedForPL = usedForPL;
+            _UsedForRL = usedForRL;
+            _UsedForSL = usedForSL;
+            _UsedForTL = usedForTL;
+            _UsedForZG = usedForZG;
 
-        //    _UsedForBG = usedForBG;
-        //    _UsedForBL = usedForBL;
-        //    _UsedForCL = usedForCL;
-        //    _UsedForCS = usedForCS;
-        //    _UsedForIL = usedForIL;
-        //    _UsedForOL = usedForOL;
-        //    _UsedForPL = usedForPL;
-        //    _UsedForRL = usedForRL;
-        //    _UsedForSL = usedForSL;
-        //    _UsedForTL = usedForTL;
-        //    _UsedForZG = usedForZG;
+            _MappedToSYP = mappedToSYP;
+            _MappedToPCA = mappedToPCA;
+            _MappedToROP = MappedToROP;
+            _MappedToARP = mappedToARP;
+            _MappedToNONE = mappedToNONE;
+            _MappedToPPP = mappedToPPP;
+            _MappedToPSR = mappedToPSR;
+            _MappedToRLP = mappedToRLP;
+            _MappedToSDL = mappedToSDL;
+            _MappedToSTA = mappedToSTA;
+            _MappedToPPR = mappedToPPR;
+            _MappedToBIN = mappedToBIN;
+            _SequenceNumber = sequencenumber;
+        }
 
-        //    _MappedToSYP = mappedToSYP;
-        //    _MappedToPCA = mappedToPCA;
-        //    _MappedToROP = MappedToROP;
-        //    _MappedToARP = mappedToARP;
-        //    _MappedToNONE = mappedToNONE;
-        //    _MappedToPPP = mappedToPPP;
-        //    _MappedToPSR = mappedToPSR;
-        //    _MappedToRLP = mappedToRLP;
-        //    _MappedToSDL = mappedToSDL;
-        //    _MappedToSTA = mappedToSTA;
-        //    _MappedToPPR = mappedToPPR;
-        //    _MappedToBIN = mappedToBIN;
-        //    _SequenceNumber = sequencenumber;     
-        //}
-
+        /// <summary>
+        /// This Constructor is used for testing
+        /// </summary>
+        /// <param name="parName"></param>
+        /// <param name="description"></param>
+        /// <param name="defaulvalue"></param>
+        /// <param name="parValueUOM"></param>
+        /// <param name="displayToUser"></param>
+        /// <param name="isStandardParameter"></param>
         public ParameterDefinition(string parName, string description, string defaulvalue, string parValueUOM, bool displayToUser, bool isStandardParameter)
         {
             _ParName = parName;
@@ -136,8 +174,14 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToPPR = false;
             _MappedToBIN = false;
             _SequenceNumber = 0;
+        }
 
- 
+        /// <summary>
+        /// This constructor is used for creating a new parameter dynamically 
+        /// </summary>
+        public ParameterDefinition()
+        {
+            _Brush = Brushes.LightGray;
         }
 
         #endregion

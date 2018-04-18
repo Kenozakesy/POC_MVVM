@@ -27,6 +27,15 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="0 0 20 0"></Setter>
         </Style>
+        <Style x:Key="ListviewLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+            <Setter Property="BorderBrush" Value="LightGray"></Setter>
+        </Style>
+        <Style x:Key="ListviewLabelHeaderStyle" TargetType="{x:Type Label}">
+            <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+            <Setter Property="BorderBrush" Value="LightGray"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
         <Style x:Key="MyLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontWeight" Value="Normal" />
@@ -51,6 +60,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        
 
         <DataTemplate DataType="{x:Type that:ParameterDefinition}">
             <Label Content="{Binding Path=ParName}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
@@ -139,19 +149,42 @@
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Content="Parameter name" Grid.Row="0"></Label>
-                                <Label Content="Parameter description" Grid.Row="1"></Label>
-                                <Label Content="ValueOUM" Grid.Row="2"></Label>
-                                <Label Content="BeforeSep" Grid.Row="3"></Label>
-                                <Label Content="AfterSep" Grid.Row="4"></Label>
-                                <Label Content="ValidValues" Grid.Row="5"></Label>
-                                <Label Content="Default value" Grid.Row="6"></Label>
-                                <Label Content="Paf type" Grid.Row="7"></Label>
+                                <Label Content="Required" Grid.Row="0" Style="{StaticResource ListviewLabelHeaderStyle}"></Label>
+
+                                <Label Content="Parameter name" Grid.Row="1" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Parameter description" Grid.Row="2" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="BeforeSep" Grid.Row="3" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="AfterSep" Grid.Row="4" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Editable" Grid.Row="5" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Display To User" Grid.Row="6" Style="{StaticResource ListviewLabelStyle}"></Label>
+
+                                <Label Content="Not required " Grid.Row="7" Style="{StaticResource ListviewLabelHeaderStyle}"></Label>
+                                
+                                <Label Content="ValueOUM" Grid.Row="8" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Valid Values" Grid.Row="9" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Default Values" Grid.Row="10" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Type" Grid.Row="11" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Align Values" Grid.Row="12" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Display Sequence number" Grid.Row="13" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Display Width" Grid.Row="14" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="UOM text ID" Grid.Row="15" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Is required" Grid.Row="16" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Column" Grid.Row="17" Style="{StaticResource ListviewLabelStyle}"></Label>
+
 
                             </Grid>
                         </StackPanel>
@@ -169,19 +202,36 @@
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
                                 </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                                <TextBox Grid.Row="0" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="1" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="1" Style="{StaticResource TextboxStyle}" Text="{Binding Path=NewParameterDefinition.ParName}"></TextBox>
                                 <TextBox Grid.Row="2" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="3" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="4" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="5" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="6" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="7" Style="{StaticResource TextboxStyle}"></TextBox>
+                                
+                                <TextBox Grid.Row="8" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="9" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="10" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="11" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="12" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="13" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="14" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="15" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="16" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="17" Style="{StaticResource TextboxStyle}"></TextBox>
 
                             </Grid>
                     </StackPanel>
