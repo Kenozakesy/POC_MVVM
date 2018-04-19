@@ -13,13 +13,18 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         private string _ParName;
         private string _Description;
+        private int _BeforeSep;
+        private int _AfterSep;
+        private bool _IsEditable;
+        private bool _DisplayToUser;
+     
         private string _DefaultValue;
         private string _ParValueUOM;
     
         //private string _ValidValues;
         //private List<string> _ComboItems;
 
-        private bool _DisplayToUser;
+     
 
         private bool _IsStandardParameter;
         private Brush _Brush;
@@ -181,12 +186,86 @@ namespace TreeViewExample.Business.Models.DiagramModels
         /// </summary>
         public ParameterDefinition()
         {
-            _Brush = Brushes.LightGray;
+            _IsStandardParameter = false;
+
+            _UsedForBG = false;
+            _UsedForBL = false;
+            _UsedForCL = false;
+            _UsedForCS = false;
+            _UsedForIL = false;
+            _UsedForOL = false;
+            _UsedForPL = false;
+            _UsedForRL = false;
+            _UsedForSL = false;
+            _UsedForTL = false;
+            _UsedForZG = false;
+
+            _MappedToSYP = false;
+            _MappedToPCA = true;
+            _MappedToROP = false;
+            _MappedToARP = false;
+            _MappedToNONE = false;
+            _MappedToPPP = false;
+            _MappedToPSR = false;
+            _MappedToRLP = false;
+            _MappedToSDL = false;
+            _MappedToSTA = false;
+            _MappedToPPR = false;
+            _MappedToBIN = false;
+            _SequenceNumber = 0;
         }
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// required values
+        /// </summary>
+        public string ParName
+        {
+            get { return _ParName; }
+            set { SetProperty(ref _ParName, value); }
+        }
+        public string Description
+        {
+            get { return _Description; }
+            set { SetProperty(ref _Description, value); }
+        }
+        public int BeforeSep
+        {
+            get { return _BeforeSep; }
+            set { SetProperty(ref _BeforeSep, value); }
+        }
+        public int AfterSep
+        {
+            get { return _AfterSep; }
+            set { SetProperty(ref _AfterSep, value); }
+        }
+        public bool IsEditable
+        {
+            get { return _IsEditable; }
+            set { SetProperty(ref _IsEditable, value); }
+        }
+        public bool DisplayToUser
+        {
+            get { return _DisplayToUser; }
+            set { SetProperty(ref _DisplayToUser, value); }
+        }
+
+        /// <summary>
+        /// not vrequired values
+        /// </summary>
+        public string DefaultValue
+        {
+            get { return _DefaultValue; }
+            set { SetProperty(ref _DefaultValue, value); }
+        }
+        public string ParValueUOM
+        {
+            get { return _ParValueUOM; }
+            set { SetProperty(ref _ParValueUOM, value); }
+        }
 
         public bool IsVisible
         {
@@ -198,39 +277,16 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _IsHighlighted; }
             set { SetProperty(ref _IsHighlighted, value); }
         }
-        public string ParName
-        {
-            get { return _ParName; }
-            set { SetProperty(ref _ParName, value); }
-        }
-        public string Description
-        {
-            get { return _Description; }
-            set { SetProperty(ref _Description, value); }
-        }
-        public string DefaultValue
-        {
-            get { return _DefaultValue; }
-            set { SetProperty(ref _DefaultValue, value); }
-        }
-        public string ParValueUOM
-        {
-            get { return _ParValueUOM; }
-            set { SetProperty(ref _ParValueUOM, value); }
-        }
+
         //public string ValidValues { get; set; }
         //public List<string> ComboItems { get; set; }
-        public bool DisplayToUser
-        {
-            get { return _DisplayToUser; }
-            set { SetProperty(ref _DisplayToUser, value); }
-        }
 
         public bool IsStandardParameter
         {
             get { return _IsStandardParameter; }
             set { SetProperty(ref _IsStandardParameter, value); }
         }
+
         public Brush Brush
         {
             get { return _Brush; }

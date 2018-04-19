@@ -5,7 +5,10 @@ using System.ComponentModel;
 
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Windows.Media;
+using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Business.UI_Models;
 using TreeViewExample.UI.Interfaces;
 using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.ViewModels;
@@ -14,8 +17,27 @@ namespace TreeViewExample.UI.ViewModels
 {
     public class CreateParameterViewModel : ViewModel, INotifyPropertyChanged
     {
+        #region Fields
+
         private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
-        private ParameterDefinition _NewParameterDefinition = new ParameterDefinition();
+        private ParameterDefinition _CustomerParameter = new ParameterDefinition();
+
+        private InformationFieldModel _ParNameModel = new InformationFieldModel();
+        private string _ParName;
+
+        private InformationFieldModel _DescriptionModel = new InformationFieldModel();
+        private string _Description;
+
+        private InformationFieldModel _BeforeSepModel = new InformationFieldModel();
+        private string _BeforeSep;
+
+        private InformationFieldModel _AfterSepModel = new InformationFieldModel();
+        private string _AfterSep;
+
+        private bool _IsEditable;
+        private bool _DisplayToUser;
+
+        #endregion
 
         private ICreateParameterView _ICreateParameterView;
         public CreateParameterViewModel(ICreateParameterView view) : base(view)
@@ -24,7 +46,6 @@ namespace TreeViewExample.UI.ViewModels
             InitializeCommand();
         }
 
-
         #region Properties
 
         public ObservableCollection<ParameterDefinition> CustomerParameterList
@@ -32,16 +53,127 @@ namespace TreeViewExample.UI.ViewModels
             get { return _CustomerParameterList; }
             set { SetProperty(ref _CustomerParameterList, value); }
         }
-
-        public ParameterDefinition NewParameterDefinition
+        public ParameterDefinition CustomerParameter
         {
-            get { return _NewParameterDefinition; }
-            set { SetProperty(ref _NewParameterDefinition, value); }
+            get { return _CustomerParameter; }
+            set { SetProperty(ref _CustomerParameter, value); }
+        }
+
+        public InformationFieldModel ParNameModel
+        {
+            get { return _ParNameModel; }
+            set { SetProperty(ref _ParNameModel, value); }
+        }
+        public string ParName
+        {
+            get { return _ParName; }
+            set
+            {
+                SetProperty(ref _ParName, value);
+                AdjustFieldValidation();
+            }
+        }
+
+        public InformationFieldModel DescriptionModel
+        {
+            get { return _DescriptionModel; }
+            set { SetProperty(ref _DescriptionModel, value); }
+        }
+        public string Description
+        {
+            get { return _Description; }
+            set
+            {
+                SetProperty(ref _Description, value);
+                AdjustFieldValidation();
+            }
+        }
+
+        public InformationFieldModel BeforeSepModel
+        {
+            get { return _BeforeSepModel; }
+            set { SetProperty(ref _BeforeSepModel, value); }
+        }
+        public string BeforeSep
+        {
+            get { return _BeforeSep; }
+            set
+            {
+                SetProperty(ref _BeforeSep, value);
+                AdjustFieldValidation();
+            }
+        }
+
+        public InformationFieldModel AfterSepModel
+        {
+            get { return _AfterSepModel; }
+            set { SetProperty(ref _AfterSepModel, value); }
+        }
+        public string AfterSep
+        {
+            get { return _AfterSep; }
+            set
+            {
+                SetProperty(ref _AfterSep, value);
+                AdjustFieldValidation();
+            }
+        }
+
+        public bool IsEditable
+        {
+            get { return _IsEditable; }
+            set { SetProperty(ref _IsEditable, value); }
+        }
+        public bool DisplayToUser
+        {
+            get { return _DisplayToUser; }
+            set { SetProperty(ref _DisplayToUser, value); }
         }
 
         #endregion
 
         #region Methods
+
+        private void AdjustFieldValidation()
+        {
+            if (string.IsNullOrEmpty(ParName) || ParName.Contains(" "))
+            {
+                ParNameModel.IsValid = IsValidated.InValid;
+            }
+            else
+            {
+                ParNameModel.IsValid = IsValidated.Valid;
+            }
+
+            if (string.IsNullOrEmpty(Description))
+            {
+                DescriptionModel.IsValid = IsValidated.InValid;
+            }
+            else
+            {
+                DescriptionModel.IsValid = IsValidated.Valid;
+            }
+
+            int before;
+            if (int.TryParse(BeforeSep, out before))
+            {
+                BeforeSepModel.IsValid = IsValidated.Valid;
+            }
+            else
+            {
+                BeforeSepModel.IsValid = IsValidated.InValid;
+            }
+
+            int after;
+            if (int.TryParse(AfterSep, out after))
+            {
+                AfterSepModel.IsValid = IsValidated.Valid;
+            }
+            else
+            {
+                AfterSepModel.IsValid = IsValidated.InValid;
+            }
+        }
 
         #endregion
 
@@ -49,8 +181,30 @@ namespace TreeViewExample.UI.ViewModels
 
         private void CreateCustomerParameter()
         {
-            ParameterDefinition paramdef = new ParameterDefinition("just created", "", "1", "0 = not created; 1 = created", true, false);
-            CustomerParameterList.Add(paramdef);
+            if (ParNameModel.CheckValidated() && DescriptionModel.CheckValidated() && BeforeSepModel.CheckValidated() && AfterSepModel.CheckValidated())
+            {
+                int beforeSep = Convert.ToInt32(BeforeSep);
+                int afterSep = Convert.ToInt32(AfterSep);
+
+                CustomerParameter.ParName = ParName;
+                CustomerParameter.Description = Description;
+                CustomerParameter.BeforeSep = beforeSep;
+                CustomerParameter.AfterSep = afterSep;
+                CustomerParameter.DisplayToUser = DisplayToUser;
+                CustomerParameter.IsEditable = IsEditable;
+
+                //method to add other parameters if valid
+
+
+                //paramdef.insert
+
+
+                CustomerParameter = new ParameterDefinition();
+            }
+            else
+            {
+                _ICreateParameterView.ShowMessage("Not all Parameters are Valid. Creatig has been canceled");
+            }
         }
 
         private void DeleteCustomerParameter(ParameterDefinition paramdef)
@@ -64,6 +218,7 @@ namespace TreeViewExample.UI.ViewModels
             {
                 if (P == paramdef)
                 {
+                    //p.delete or something here
                     CustomerParameterList.Remove(P);
                     break;
                 }

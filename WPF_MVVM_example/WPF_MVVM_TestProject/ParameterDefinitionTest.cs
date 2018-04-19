@@ -4,6 +4,7 @@ using TreeViewExample;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
+using TreeViewExample.Dal.DatabaseConnection;
 
 namespace WPF_MVVM_TestProject
 {
@@ -18,14 +19,9 @@ namespace WPF_MVVM_TestProject
         }
 
         [TestMethod]
-        public void Listmapping()
+        public void DatabaseConnectiontest()
         {
-            ProcessCel processcel = new ProcessCel("name", 1);
-
-
-
-
-
+            Assert.IsTrue(DatabaseConnectionClass.OpenConnection());
         }
     }
 }

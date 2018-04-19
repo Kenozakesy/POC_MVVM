@@ -17,31 +17,14 @@ namespace TreeViewExample.Dal.DatabaseConnection
             _Repository = repository;
         }
 
-        public void AlterProcessCelTypeParameterDefinition(bool parameterValue, string parameterName)
+        public bool CheckIfParamNameExists(ParameterDefinition ConfigurationParameter)
         {
-            _Repository.AlterProcessCelTypeParameterDefinition(parameterValue, parameterName);
+           return _Repository.CheckIfParamNameExists(ConfigurationParameter);
         }
 
-        public void AlterTableParameterDefinition(bool parameterValue, string parameterName)
+        public bool InsertParameterDefinition(ParameterDefinition configurationParameter)
         {
-            _Repository.AlterTableParameterDefinition(parameterValue, parameterName);
-        }
-
-        public List<ParameterDefinition> GetParameterDefinitions()
-        {
-            List<ParameterDefinition> configList = new List<ParameterDefinition>();
-
-            //now you do not have to edit the database specifically 
-            var results = from c in configList            
-                          where c.DisplayToUser == true
-                          select c;
-
-            return results.ToList();
-        }
-
-        public void InsertParameterDefinition(ParameterDefinition configurationParameter)
-        {
-            _Repository.InsertParameterDefinition(configurationParameter);
+           return _Repository.InsertNewParameterDefinition(configurationParameter);
         }
 
     }

@@ -9,10 +9,8 @@ namespace TreeViewExample.Dal.Interfaces
 {
     public interface IParameterDefinitionRepository 
     {
-        List<ParameterDefinition> GetParameterDefinitions();
-        void InsertParameterDefinition(ParameterDefinition ConfigurationParameter);
+        bool InsertNewParameterDefinition(ParameterDefinition ConfigurationParameter);
+        bool CheckIfParamNameExists(ParameterDefinition ConfigurationParameter);
 
-        void AlterTableParameterDefinition(bool ParameterValue, string ParameterName);
-        void AlterProcessCelTypeParameterDefinition(bool ParameterValue, string ParameterName);
     }
 }

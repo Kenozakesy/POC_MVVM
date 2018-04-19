@@ -27,6 +27,15 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="0 0 20 0"></Setter>
         </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="WhiteSmoke"></Setter>
+            <Setter Property="BorderBrush" Value="Gray"></Setter>
+            <Setter Property="IsEditable" Value="False"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="MinWidth" Value="140"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="0 0 20 0"></Setter>
+        </Style>
         <Style x:Key="ListviewLabelStyle" TargetType="{x:Type Label}">
             <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
             <Setter Property="BorderBrush" Value="LightGray"></Setter>
@@ -95,12 +104,18 @@
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-            <StackPanel Orientation="Vertical">
-                <TextBlock>Parameters</TextBlock>
-                <TreeView ItemsSource="{Binding Path=CustomerParameterList}">
-
-                </TreeView>
-            </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0 ">Parameters</TextBlock>
+                <TreeView Grid.Row="1" ItemsSource="{Binding Path=CustomerParameterList}"></TreeView>
+                
+            </Grid>
         </Border>
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="0">
@@ -117,7 +132,7 @@
                 <Label Content="Variable name" BorderBrush="Black" BorderThickness="0 0 0 1"></Label>
                 <Label Grid.Column="1" Content="Parameter value" BorderBrush="Black" BorderThickness="0 0 0 1" ></Label>
 
-                <ScrollViewer Margin="5" Grid.Row="1" Grid.ColumnSpan="2">
+                <ScrollViewer Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Padding="0 0 0 0">
                     <ScrollViewer.Resources>
                         <Style TargetType="ScrollBar">
                             <Style.Triggers>
@@ -158,6 +173,7 @@
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -172,18 +188,18 @@
                                 <Label Content="Editable" Grid.Row="5" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="Display To User" Grid.Row="6" Style="{StaticResource ListviewLabelStyle}"></Label>
 
-                                <Label Content="Not required " Grid.Row="7" Style="{StaticResource ListviewLabelHeaderStyle}"></Label>
+                                <Label Content="Not required " Grid.Row="8" Style="{StaticResource ListviewLabelHeaderStyle}"></Label>
                                 
-                                <Label Content="ValueOUM" Grid.Row="8" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Valid Values" Grid.Row="9" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Default Values" Grid.Row="10" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Type" Grid.Row="11" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Align Values" Grid.Row="12" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Display Sequence number" Grid.Row="13" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Display Width" Grid.Row="14" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="UOM text ID" Grid.Row="15" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Is required" Grid.Row="16" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Column" Grid.Row="17" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="ValueOUM" Grid.Row="9" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Valid Values" Grid.Row="10" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Default Values" Grid.Row="11" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Type" Grid.Row="12" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Align Values" Grid.Row="13" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Display Sequence number" Grid.Row="14" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Display Width" Grid.Row="15" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="UOM text ID" Grid.Row="16" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Is required" Grid.Row="17" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Column" Grid.Row="18" Style="{StaticResource ListviewLabelStyle}"></Label>
 
 
                             </Grid>
@@ -210,19 +226,26 @@
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
                                     <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="30"></RowDefinition>
                                 </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                                <TextBox Grid.Row="1" Style="{StaticResource TextboxStyle}" Text="{Binding Path=NewParameterDefinition.ParName}"></TextBox>
-                                <TextBox Grid.Row="2" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="3" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="4" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="5" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="6" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="1" Style="{StaticResource TextboxStyle}" Text="{Binding Path=ParName}" BorderBrush="{Binding Path=ParNameModel.Brush}"></TextBox>
+                                <TextBox Grid.Row="2" Style="{StaticResource TextboxStyle}" Text="{Binding Path=Description}" BorderBrush="{Binding Path=DescriptionModel.Brush}"></TextBox>
+                                <TextBox Grid.Row="3" Style="{StaticResource TextboxStyle}" Text="{Binding Path=BeforeSep}" MaxLength="8" BorderBrush="{Binding Path=BeforeSepModel.Brush}"></TextBox>
+                                <TextBox Grid.Row="4" Style="{StaticResource TextboxStyle}" Text="{Binding Path=AfterSep}" MaxLength="8" BorderBrush="{Binding Path=AfterSepModel.Brush}"></TextBox>
                                 
-                                <TextBox Grid.Row="8" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <ComboBox Grid.Row="5" Style="{StaticResource ComboBoxStyle}" Text="{Binding Path=IsEditable, Mode=OneWayToSource}">
+                                    <ComboBoxItem Content="True" IsSelected="True"></ComboBoxItem>
+                                    <ComboBoxItem Content="False"></ComboBoxItem>
+                                </ComboBox>
+                                <ComboBox Grid.Row="6" Style="{StaticResource ComboBoxStyle}" Text="{Binding Path=DisplayToUser, Mode=OneWayToSource}">
+                                    <ComboBoxItem Content="True" IsSelected="True"></ComboBoxItem>
+                                    <ComboBoxItem Content="False"></ComboBoxItem>
+                                </ComboBox>
+
                                 <TextBox Grid.Row="9" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="10" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="11" Style="{StaticResource TextboxStyle}"></TextBox>
@@ -232,6 +255,7 @@
                                 <TextBox Grid.Row="15" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="16" Style="{StaticResource TextboxStyle}"></TextBox>
                                 <TextBox Grid.Row="17" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="18" Style="{StaticResource TextboxStyle}"></TextBox>
 
                             </Grid>
                     </StackPanel>
@@ -243,9 +267,9 @@
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="1" Grid.Row="1">
             <StackPanel Orientation="Vertical" Margin="10">
-                <RadioButton>Route Parameter</RadioButton>
-                <RadioButton>Procescell Parameter</RadioButton>
-                <RadioButton>Bin Parameter</RadioButton>
+                <RadioButton IsChecked="{Binding Path=CustomerParameter.MappedToPCA}">Procescell Parameter</RadioButton>
+                <RadioButton IsChecked="{Binding Path=CustomerParameter.MappedToROP}">Route Parameter</RadioButton>
+                <RadioButton IsChecked="{Binding Path=CustomerParameter.MappedToBIN}">Bin Parameter</RadioButton>
             </StackPanel>
         </Border>
 
