@@ -14,8 +14,8 @@ namespace WPF_MVVM_TestProject
         [TestMethod]
         public void CheckIsrequiredTest()
         {
-            ParameterDefinition configParam = new ParameterDefinition("Parameter" + 1, "test parameter", 1.ToString(), "KG", true, true);
-            Assert.AreEqual(configParam.UsedForBG, false);
+            //ParameterDefinition configParam = new ParameterDefinition("Parameter" + 1, "test parameter", 1.ToString(), "KG", true, true);
+            //Assert.AreEqual(configParam.UsedForBG, false);
         }
 
         [TestMethod]

@@ -55,11 +55,9 @@ namespace TreeViewExample.UI.ViewModels
         {
             for (int i = 1; i <= 40; i++)
             {
-                ParameterDefinition configParam = new ParameterDefinition("Parameter" + i, "test parameter", i.ToString(), "KG", true, true);
+                ParameterDefinition configParam = new ParameterDefinition("Parameter" + i, "test parameter", 4, 4, true, true, true);
                 OrderObservableList.AddSorted(ConfigurationParameterList, configParam);
             }
-            ParameterDefinition configParam2 = new ParameterDefinition("AAA", "test parameter", "41", "KG", true, true);
-            OrderObservableList.AddSorted(ConfigurationParameterList, configParam2);
         }
 
         private void ParameterSearch()

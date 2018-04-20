@@ -10,7 +10,7 @@ namespace TreeViewExample.Dal.Interfaces
     public interface IParameterDefinitionRepository 
     {
         bool InsertNewParameterDefinition(ParameterDefinition ConfigurationParameter);
-        bool CheckIfParamNameExists(ParameterDefinition ConfigurationParameter);
+        List<ParameterDefinition> GetAllParameterDefinitions();
 
     }
 }

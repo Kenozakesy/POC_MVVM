@@ -88,7 +88,7 @@ namespace TreeViewExample.UI.ViewModels
         {
             for (int i = 1; i <= 10; i++)
             {
-                ParameterDefinition customerParameter = new ParameterDefinition("Customer Parameter " + i, "Parameter" + i, "45", "kg", true, false);
+                ParameterDefinition customerParameter = new ParameterDefinition("name", "", 1,1 ,true, true, true);
                 CustomerParameterList.Add(customerParameter);
             }
         }

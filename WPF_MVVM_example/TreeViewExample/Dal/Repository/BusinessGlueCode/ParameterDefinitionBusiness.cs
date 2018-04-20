@@ -19,7 +19,16 @@ namespace TreeViewExample.Dal.DatabaseConnection
 
         public bool CheckIfParamNameExists(ParameterDefinition ConfigurationParameter)
         {
-           return _Repository.CheckIfParamNameExists(ConfigurationParameter);
+           List<ParameterDefinition> paramDefinitions = _Repository.GetAllParameterDefinitions();
+
+            foreach (ParameterDefinition PD in paramDefinitions)
+            {
+                if (ConfigurationParameter.ParName == PD.ParName)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool InsertParameterDefinition(ParameterDefinition configurationParameter)

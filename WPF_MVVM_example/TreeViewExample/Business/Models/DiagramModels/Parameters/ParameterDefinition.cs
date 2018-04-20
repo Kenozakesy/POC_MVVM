@@ -1,13 +1,17 @@
 ﻿
 using System;
 using System.Windows.Media;
+using TreeViewExample.Dal.DatabaseConnection;
+using TreeViewExample.Dal.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models.DiagramModels
 {
     public class ParameterDefinition : ViewModelBase, IComparable
     {
+        private ParameterDefinitionBusiness db = new ParameterDefinitionBusiness(new MSSQL_ParameterDefinitionRepository());
         #region Fields
+
         private bool _IsVisible = true;
         private bool _IsHighlighted = false;
 
@@ -95,14 +99,16 @@ namespace TreeViewExample.Business.Models.DiagramModels
         /// <param name="mappedToPPR"></param>
         /// <param name="mappedToBIN"></param>
         /// <param name="sequencenumber"></param>
-        public ParameterDefinition(string parName, string description, string value, string parValueUOM, bool displayToUser,
+        public ParameterDefinition(string parName, string description, int beforeSep, int afterSep, bool isEditable, bool displayToUser,
                          bool? usedForBG, bool? usedForBL, bool? usedForCL, bool? usedForCS, bool? usedForIL, bool? usedForOL, bool? usedForPL, bool? usedForRL, bool? usedForSL, bool? usedForTL, bool? usedForZG,
                          bool? mappedToSYP, bool? mappedToPCA, bool? mappedToROP, bool? mappedToARP, bool? mappedToNONE, bool? mappedToPPP, bool? mappedToPSR, bool? mappedToRLP, bool? mappedToSDL,
-                         bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN, int sequencenumber)
+                         bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN)
         {
             _ParName = parName;
             _Description = description;
-            _ParValueUOM = parValueUOM;
+            _BeforeSep = beforeSep;
+            _AfterSep = afterSep;
+            _IsEditable = isEditable;
             _DisplayToUser = displayToUser;
 
             _Brush = Brushes.LightGray;
@@ -131,7 +137,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToSTA = mappedToSTA;
             _MappedToPPR = mappedToPPR;
             _MappedToBIN = mappedToBIN;
-            _SequenceNumber = sequencenumber;
+            //_SequenceNumber = sequencenumber;
         }
 
         /// <summary>
@@ -143,15 +149,16 @@ namespace TreeViewExample.Business.Models.DiagramModels
         /// <param name="parValueUOM"></param>
         /// <param name="displayToUser"></param>
         /// <param name="isStandardParameter"></param>
-        public ParameterDefinition(string parName, string description, string defaulvalue, string parValueUOM, bool displayToUser, bool isStandardParameter)
+        public ParameterDefinition(string parName, string description, int beforeSep, int afterSep, bool isEditable, bool displayToUser, bool isStandardParameter)
         {
             _ParName = parName;
             _Description = description;
-            _DefaultValue = defaulvalue;
-            _ParValueUOM = parValueUOM;
+            _BeforeSep = beforeSep;
+            _AfterSep = afterSep;
+            _IsEditable = isEditable;
             _DisplayToUser = displayToUser;
+            _IsStandardParameter = IsStandardParameter;
 
-            _IsVisible = isStandardParameter;
             _Brush = Brushes.LightGray;
 
             _UsedForBG = false;
@@ -450,6 +457,15 @@ namespace TreeViewExample.Business.Models.DiagramModels
                 default:
                     return null;
             }
+        }
+
+        public bool CheckIfParNameExist()
+        {
+            if (db.CheckIfParamNameExists(this))
+            {
+                return true;
+            }
+            return false;
         }
 
         public int CompareTo(object obj)

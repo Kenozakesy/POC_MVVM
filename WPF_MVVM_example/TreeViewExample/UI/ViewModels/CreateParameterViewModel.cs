@@ -136,7 +136,8 @@ namespace TreeViewExample.UI.ViewModels
 
         private void AdjustFieldValidation()
         {
-            if (string.IsNullOrEmpty(ParName) || ParName.Contains(" "))
+            _CustomerParameter.ParName = ParName;
+            if (string.IsNullOrEmpty(ParName) || ParName.Contains(" ") || _CustomerParameter.CheckIfParNameExist())
             {
                 ParNameModel.IsValid = IsValidated.InValid;
             }
