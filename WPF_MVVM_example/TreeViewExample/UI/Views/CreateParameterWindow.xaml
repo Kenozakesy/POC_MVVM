@@ -70,7 +70,6 @@
             </Style.Triggers>
         </Style>
         
-
         <DataTemplate DataType="{x:Type that:ParameterDefinition}">
             <Label Content="{Binding Path=ParName}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
 
@@ -181,10 +180,10 @@
 
                                 <Label Content="Required" Grid.Row="0" Style="{StaticResource ListviewLabelHeaderStyle}"></Label>
 
-                                <Label Content="Parameter name" Grid.Row="1" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Parameter description" Grid.Row="2" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="BeforeSep" Grid.Row="3" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="AfterSep" Grid.Row="4" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Parameter name" Grid.Row="1" ToolTip="Cannot be empty or filled with spaces" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Parameter description" Grid.Row="2" ToolTip="Cannot be empty" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="BeforeSep" Grid.Row="3" ToolTip="Should be a positive whole number" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="AfterSep" Grid.Row="4" ToolTip="Should be a positive whole number" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="Editable" Grid.Row="5" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="Display To User" Grid.Row="6" Style="{StaticResource ListviewLabelStyle}"></Label>
 

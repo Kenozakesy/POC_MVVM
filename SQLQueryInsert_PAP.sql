@@ -1,5 +1,5 @@
 --Insert statements PAP tabel
-
+USE [PROMASST_MES_V7.3.0_WithTestData]
 --first empty current table
 TRUNCATE TABLE pap_ParDefsParTables;
 

@@ -69,11 +69,25 @@ namespace TreeViewExample.Dal.SQLServerRepository
                     SqlCommand cmd = new SqlCommand();
                     cmd.Connection = DatabaseConnectionClass.connect;
 
-                    cmd.CommandText = "INSERT INTO (paf_ParNm, paf_ParDesc, paf_ParValueUOM, paf_BeforeSep, paf_AfterSep, paf_ValidValues, paf_DefValue " + 
-                                                   " paf_Type, paf_Alignm, paf_Editable, paf_DisplaySequence) VALUES ()";
-                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = "INSERT INTO paf_ParDefs (paf_ParNm, paf_ParDesc, paf_BeforeSep, paf_AfterSep, paf_Type, paf_alignm, paf_Editable, paf_DisplayToUser, paf_IsStandardPar)" +
+                                                        " VALUES (@ParNm, @ParDesc, @BeforeSep, @AfterSep, @Type, @Alignm, @Editable, @DisplayToUser, @IsStandardPar)";
 
-                    
+                    cmd.Parameters.Add(new SqlParameter("ParNm", ConfigurationParameter.ParName));
+                    cmd.Parameters.Add(new SqlParameter("ParDesc", ConfigurationParameter.Description));
+                    cmd.Parameters.Add(new SqlParameter("BeforeSep", ConfigurationParameter.BeforeSep));
+                    cmd.Parameters.Add(new SqlParameter("AfterSep", ConfigurationParameter.AfterSep));
+                    cmd.Parameters.Add(new SqlParameter("Type", ConfigurationParameter.Type));
+                    cmd.Parameters.Add(new SqlParameter("Alignm", ConfigurationParameter.Alignm));
+                    cmd.Parameters.Add(new SqlParameter("Editable", ConfigurationParameter.IsEditable));
+                    string yesOrNo = "0";
+                    if (ConfigurationParameter.DisplayToUser)
+                    {
+                        yesOrNo = "1";
+                    }
+                    cmd.Parameters.Add(new SqlParameter("DisplayToUser", yesOrNo));
+                    cmd.Parameters.Add(new SqlParameter("IsStandardPar", ConfigurationParameter.IsStandardParameter));
+
+                    cmd.ExecuteNonQuery();                 
                 }
                 catch (SqlException e)
                 {

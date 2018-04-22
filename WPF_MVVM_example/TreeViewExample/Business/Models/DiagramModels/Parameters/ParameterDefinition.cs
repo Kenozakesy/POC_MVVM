@@ -19,6 +19,8 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private string _Description;
         private int _BeforeSep;
         private int _AfterSep;
+        private int _Type;
+        private int _Alignm;
         private bool _IsEditable;
         private bool _DisplayToUser;
      
@@ -189,11 +191,16 @@ namespace TreeViewExample.Business.Models.DiagramModels
         }
 
         /// <summary>
-        /// This constructor is used for creating a new parameter dynamically 
+        /// This constructor is used for creating a new customer parameter dynamically 
         /// </summary>
         public ParameterDefinition()
         {
             _IsStandardParameter = false;
+
+            _Type = 1;
+            _Alignm = 1;
+
+            _Brush = Brushes.LightGray;
 
             _UsedForBG = false;
             _UsedForBL = false;
@@ -208,7 +215,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _UsedForZG = false;
 
             _MappedToSYP = false;
-            _MappedToPCA = true;
+            _MappedToPCA = false;
             _MappedToROP = false;
             _MappedToARP = false;
             _MappedToNONE = false;
@@ -248,6 +255,16 @@ namespace TreeViewExample.Business.Models.DiagramModels
         {
             get { return _AfterSep; }
             set { SetProperty(ref _AfterSep, value); }
+        }
+        public int Type
+        {
+            get { return _Type; }
+            set { SetProperty(ref _Type, value); }
+        }
+        public int Alignm
+        {
+            get { return _Alignm; }
+            set { SetProperty(ref _Alignm, value); }
         }
         public bool IsEditable
         {
@@ -467,6 +484,16 @@ namespace TreeViewExample.Business.Models.DiagramModels
             }
             return false;
         }
+
+        public bool InsertParameterDefinition()
+        {
+            if (db.InsertParameterDefinition(this))
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         public int CompareTo(object obj)
         {

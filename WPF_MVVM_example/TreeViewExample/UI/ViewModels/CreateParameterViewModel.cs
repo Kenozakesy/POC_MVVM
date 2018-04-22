@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Business.Statics;
 using TreeViewExample.Business.UI_Models;
 using TreeViewExample.UI.Interfaces;
 using WPF_MVVM_example.UI.Commands;
@@ -176,10 +177,21 @@ namespace TreeViewExample.UI.ViewModels
             }
         }
 
+        private void ClearFields()
+        {
+            ParName = "";
+            Description = "";
+            BeforeSep = "";
+            AfterSep = "";
+        }
+
         #endregion
 
         #region ItemHandlers
 
+        /// <summary>
+        /// Creates new parameter definition in the database
+        /// </summary>
         private void CreateCustomerParameter()
         {
             if (ParNameModel.CheckValidated() && DescriptionModel.CheckValidated() && BeforeSepModel.CheckValidated() && AfterSepModel.CheckValidated())
@@ -194,17 +206,25 @@ namespace TreeViewExample.UI.ViewModels
                 CustomerParameter.DisplayToUser = DisplayToUser;
                 CustomerParameter.IsEditable = IsEditable;
 
-                //method to add other parameters if valid
-
+                //method to add other parameters (if valid)
 
                 //paramdef.insert
-
-
-                CustomerParameter = new ParameterDefinition();
+                if (CustomerParameter.InsertParameterDefinition())
+                {
+                    //OrderObservableList.AddSorted(CustomerParameterList, new ParameterDefinition("hello", "", 9, 9, true, true, true));
+                    OrderObservableList.AddSorted(CustomerParameterList, CustomerParameter);
+                    CustomerParameter = new ParameterDefinition();
+                    ClearFields();
+                    _ICreateParameterView.ShowMessage("Customer ParameterDefinition has been added");
+                }
+                else
+                {
+                    _ICreateParameterView.ShowMessage("Something in the database went wrong. Please check if everything is correctly filled in");
+                }                        
             }
             else
             {
-                _ICreateParameterView.ShowMessage("Not all Parameters are Valid. Creatig has been canceled");
+                _ICreateParameterView.ShowMessage("Not all Parameters are valid. Creating has been canceled");
             }
         }
 
