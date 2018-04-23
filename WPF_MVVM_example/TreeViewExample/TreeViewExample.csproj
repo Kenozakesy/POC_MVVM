@@ -62,9 +62,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\Enums\Alignment.cs" />
     <Compile Include="Business\Enums\IsRequired.cs" />
     <Compile Include="Business\Enums\IsValidated.cs" />
+    <Compile Include="Business\Enums\ParameterType.cs" />
     <Compile Include="Business\Interfaces\IObjectWithParameters.cs" />
+    <Compile Include="Business\UI_Models\EnumToArrayConverter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\BinParameter.cs" />

@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Statics;
@@ -14,11 +13,15 @@ using TreeViewExample.UI.Interfaces;
 using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.ViewModels;
 
+
 namespace TreeViewExample.UI.ViewModels
 {
     public class CreateParameterViewModel : ViewModel, INotifyPropertyChanged
     {
         #region Fields
+
+        private List<ParameterType> _TypeValuesList = new List<ParameterType>();
+        private List<Alignment> _AlignmentValuesList = new List<Alignment>();
 
         private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
         private ParameterDefinition _CustomerParameter = new ParameterDefinition();
@@ -35,6 +38,8 @@ namespace TreeViewExample.UI.ViewModels
         private InformationFieldModel _AfterSepModel = new InformationFieldModel();
         private string _AfterSep;
 
+        private ParameterType _ParameterType;
+        private Alignment _Alignment;
         private bool _IsEditable;
         private bool _DisplayToUser;
 
@@ -48,6 +53,33 @@ namespace TreeViewExample.UI.ViewModels
         }
 
         #region Properties
+
+        public List<ParameterType> TypeValuesList
+        {
+            get
+            {
+                return Enum.GetValues(typeof(ParameterType)).Cast<ParameterType>().ToList();
+            }
+            set { SetProperty(ref _TypeValuesList, value); }
+        }
+        public List<Alignment> AlignmentValuesList
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Alignment)).Cast<Alignment>().ToList();
+            }
+            set { SetProperty(ref _AlignmentValuesList, value); }
+        }
+        public ParameterType ParameterType
+        {
+            get { return _ParameterType; }
+            set { SetProperty(ref _ParameterType, value); }
+        }
+        public Alignment Alignment
+        {
+            get { return _Alignment; }
+            set { SetProperty(ref _Alignment, value); }
+        }
 
         public ObservableCollection<ParameterDefinition> CustomerParameterList
         {
@@ -203,6 +235,8 @@ namespace TreeViewExample.UI.ViewModels
                 CustomerParameter.Description = Description;
                 CustomerParameter.BeforeSep = beforeSep;
                 CustomerParameter.AfterSep = afterSep;
+                CustomerParameter.Type = ParameterType;
+                CustomerParameter.Alignm = Alignment;
                 CustomerParameter.DisplayToUser = DisplayToUser;
                 CustomerParameter.IsEditable = IsEditable;
 
@@ -211,7 +245,6 @@ namespace TreeViewExample.UI.ViewModels
                 //paramdef.insert
                 if (CustomerParameter.InsertParameterDefinition())
                 {
-                    //OrderObservableList.AddSorted(CustomerParameterList, new ParameterDefinition("hello", "", 9, 9, true, true, true));
                     OrderObservableList.AddSorted(CustomerParameterList, CustomerParameter);
                     CustomerParameter = new ParameterDefinition();
                     ClearFields();

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Windows.Media;
+using TreeViewExample.Business.Enums;
 using TreeViewExample.Dal.DatabaseConnection;
 using TreeViewExample.Dal.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
@@ -10,28 +11,31 @@ namespace TreeViewExample.Business.Models.DiagramModels
     public class ParameterDefinition : ViewModelBase, IComparable
     {
         private ParameterDefinitionBusiness db = new ParameterDefinitionBusiness(new MSSQL_ParameterDefinitionRepository());
+
         #region Fields
 
         private bool _IsVisible = true;
         private bool _IsHighlighted = false;
 
+        //Necessary variables
         private string _ParName;
         private string _Description;
         private int _BeforeSep;
         private int _AfterSep;
-        private int _Type;
-        private int _Alignm;
+        private ParameterType _Type;
+        private Alignment _Alignm;
         private bool _IsEditable;
         private bool _DisplayToUser;
-     
-        private string _DefaultValue;
+
+        //Optional variables
         private string _ParValueUOM;
+        private string _ValidValues;
+        private string _DefValue;
+        private string _DisplaySeqNr;
+        private string _DisPlayWidth;
+        private string _ParUOM_TextId;
+        private string _Column;
     
-        //private string _ValidValues;
-        //private List<string> _ComboItems;
-
-     
-
         private bool _IsStandardParameter;
         private Brush _Brush;
 
@@ -196,10 +200,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
         public ParameterDefinition()
         {
             _IsStandardParameter = false;
-
-            _Type = 1;
-            _Alignm = 1;
-
             _Brush = Brushes.LightGray;
 
             _UsedForBG = false;
@@ -215,7 +215,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _UsedForZG = false;
 
             _MappedToSYP = false;
-            _MappedToPCA = false;
+            _MappedToPCA = true;
             _MappedToROP = false;
             _MappedToARP = false;
             _MappedToNONE = false;
@@ -234,7 +234,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         #region Properties
 
         /// <summary>
-        /// required values
+        /// required variables
         /// </summary>
         public string ParName
         {
@@ -256,12 +256,12 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _AfterSep; }
             set { SetProperty(ref _AfterSep, value); }
         }
-        public int Type
+        public ParameterType Type
         {
             get { return _Type; }
             set { SetProperty(ref _Type, value); }
         }
-        public int Alignm
+        public Alignment Alignm
         {
             get { return _Alignm; }
             set { SetProperty(ref _Alignm, value); }
@@ -278,19 +278,45 @@ namespace TreeViewExample.Business.Models.DiagramModels
         }
 
         /// <summary>
-        /// not vrequired values
+        /// Optional Variables
         /// </summary>
-        public string DefaultValue
-        {
-            get { return _DefaultValue; }
-            set { SetProperty(ref _DefaultValue, value); }
-        }
         public string ParValueUOM
         {
             get { return _ParValueUOM; }
             set { SetProperty(ref _ParValueUOM, value); }
         }
+        public string ValidValues
+        {
+            get { return _ValidValues; }
+            set { SetProperty(ref _ValidValues, value); }
+        }
+        public string DefaultValue
+        {
+            get { return _DefValue; }
+            set { SetProperty(ref _DefValue, value); }
+        }
+        public string DisplaySeqNr
+        {
+            get { return _DisplaySeqNr; }
+            set { SetProperty(ref _DisplaySeqNr, value); }
+        }
+        public string DisplayWidth
+        {
+            get { return _DisPlayWidth; }
+            set { SetProperty(ref _DisPlayWidth, value); }
+        }
+        public string ParUOM_TextId
+        {
+            get { return _ParUOM_TextId; }
+            set { SetProperty(ref _ParUOM_TextId, value); }
+        }
+        public string Column
+        {
+            get { return _Column; }
+            set { SetProperty(ref _Column, value); }
+        }
 
+        //GUI propertys
         public bool IsVisible
         {
             get { return _IsVisible; }
@@ -301,16 +327,11 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _IsHighlighted; }
             set { SetProperty(ref _IsHighlighted, value); }
         }
-
-        //public string ValidValues { get; set; }
-        //public List<string> ComboItems { get; set; }
-
         public bool IsStandardParameter
         {
             get { return _IsStandardParameter; }
             set { SetProperty(ref _IsStandardParameter, value); }
         }
-
         public Brush Brush
         {
             get { return _Brush; }
@@ -460,7 +481,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
                     return null;
             }
         }
-
         private bool? SetConversion(bool? isRequired)
         {
             switch (isRequired)
@@ -475,7 +495,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
                     return null;
             }
         }
-
         public bool CheckIfParNameExist()
         {
             if (db.CheckIfParamNameExists(this))
@@ -489,11 +508,60 @@ namespace TreeViewExample.Business.Models.DiagramModels
         {
             if (db.InsertParameterDefinition(this))
             {
+                InsertParameterConnections();
                 return true;
             }
             return false;
         }
 
+        private void InsertParameterConnections()
+        {
+            //for TPM table
+            if (_MappedToARP == true)
+            {
+                db.InsertIntoTpm(this, "arp_ArtPars");
+            }
+            if (_MappedToBIN == true)
+            {
+                db.InsertIntoTpm(this, "bip_BinPars");
+            }
+            if (_MappedToNONE == true)
+            {
+                db.InsertIntoTpm(this, "NONE");
+            }
+            if (_MappedToPCA == true)
+            {
+                db.InsertIntoTpm(this, "pca_ProcCellPars");
+            }
+            if (_MappedToPPP == true)
+            {
+                db.InsertIntoTpm(this, "ppp_ProdPresPars");
+            }
+            if (_MappedToPSR == true)
+            {
+                db.InsertIntoTpm(this, "psr_ParSetPars");
+            }
+            if (_MappedToRLP == true)
+            {
+                db.InsertIntoTpm(this, "rlp_RelationPars");
+            }
+            if (_MappedToROP == true)
+            {
+                db.InsertIntoTpm(this, "rop_RoutePars");
+            }
+            if (_MappedToSDL == true)
+            {
+                db.InsertIntoTpm(this, "sdl_SupplyLnDetailLns");
+            }
+            if (_MappedToSTA == true)
+            {
+                db.InsertIntoTpm(this, "sta_SPTranspBatchPars");
+            }
+            if (_MappedToSYP == true)
+            {
+                db.InsertIntoTpm(this, "syp_SystemPars");
+            }
+        }
 
         public int CompareTo(object obj)
         {

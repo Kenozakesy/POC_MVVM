@@ -11,6 +11,7 @@ namespace TreeViewExample.Dal.Interfaces
     {
         bool InsertNewParameterDefinition(ParameterDefinition ConfigurationParameter);
         List<ParameterDefinition> GetAllParameterDefinitions();
+        bool InsertIntoTpm(ParameterDefinition ConfigurationParameter, string tableId);
 
     }
 }

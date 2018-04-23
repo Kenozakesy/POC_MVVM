@@ -17,6 +17,8 @@ namespace TreeViewExample.Dal.DatabaseConnection
             _Repository = repository;
         }
 
+        #region Methods
+
         public bool CheckIfParamNameExists(ParameterDefinition ConfigurationParameter)
         {
            List<ParameterDefinition> paramDefinitions = _Repository.GetAllParameterDefinitions();
@@ -29,12 +31,23 @@ namespace TreeViewExample.Dal.DatabaseConnection
                 }
             }
             return false;
+
+            //voorbeeld voor later
+            //var selected = from p in paramDefinitions
+            //               where p.ParName == ConfigurationParameter.ParName
+            //               select p;
         }
 
         public bool InsertParameterDefinition(ParameterDefinition configurationParameter)
         {
-           return _Repository.InsertNewParameterDefinition(configurationParameter);
+            return _Repository.InsertNewParameterDefinition(configurationParameter);
         }
 
+        public bool InsertIntoTpm(ParameterDefinition ConfigurationParameter, string tableId)
+        {
+            return _Repository.InsertIntoTpm(ConfigurationParameter, tableId);
+        }
+
+        #endregion 
     }
 }
