@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Dal.DatabaseConnection;
@@ -32,10 +33,11 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private string _ValidValues;
         private string _DefValue;
         private string _DisplaySeqNr;
-        private string _DisPlayWidth;
+        private int? _DisPlayWidth;
         private string _ParUOM_TextId;
         private string _Column;
-    
+        public int _SequenceNumber;
+
         private bool _IsStandardParameter;
         private Brush _Brush;
 
@@ -66,7 +68,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
         public bool? _MappedToSTA;
         public bool? _MappedToPPR;
         public bool? _MappedToBIN;
-        public int _SequenceNumber;
 
 
         #endregion
@@ -105,45 +106,79 @@ namespace TreeViewExample.Business.Models.DiagramModels
         /// <param name="mappedToPPR"></param>
         /// <param name="mappedToBIN"></param>
         /// <param name="sequencenumber"></param>
-        public ParameterDefinition(string parName, string description, int beforeSep, int afterSep, bool isEditable, bool displayToUser,
-                         bool? usedForBG, bool? usedForBL, bool? usedForCL, bool? usedForCS, bool? usedForIL, bool? usedForOL, bool? usedForPL, bool? usedForRL, bool? usedForSL, bool? usedForTL, bool? usedForZG,
-                         bool? mappedToSYP, bool? mappedToPCA, bool? mappedToROP, bool? mappedToARP, bool? mappedToNONE, bool? mappedToPPP, bool? mappedToPSR, bool? mappedToRLP, bool? mappedToSDL,
-                         bool? mappedToSTA, bool? mappedToPPR, bool? mappedToBIN)
+        public ParameterDefinition(string parName, string description, string parValueUOM, int beforeSep, int afterSep, string validValues, string defaultValue, ParameterType type, Alignment alignm,
+                                   int sequenceNumber, bool isEditable, bool displayToUser, int? displayWidth, string parUOM_TextId, string column, bool isStandard)
         {
-            _ParName = parName;
-            _Description = description;
-            _BeforeSep = beforeSep;
-            _AfterSep = afterSep;
-            _IsEditable = isEditable;
-            _DisplayToUser = displayToUser;
-
             _Brush = Brushes.LightGray;
 
-            _UsedForBG = usedForBG;
-            _UsedForBL = usedForBL;
-            _UsedForCL = usedForCL;
-            _UsedForCS = usedForCS;
-            _UsedForIL = usedForIL;
-            _UsedForOL = usedForOL;
-            _UsedForPL = usedForPL;
-            _UsedForRL = usedForRL;
-            _UsedForSL = usedForSL;
-            _UsedForTL = usedForTL;
-            _UsedForZG = usedForZG;
+            _ParName = parName;
+            _Description = description;
+            _ParValueUOM = parValueUOM;
+            _BeforeSep = beforeSep;
+            _AfterSep = afterSep;
+            _ValidValues = validValues;
+            _DefValue = defaultValue;
+            _Type = type;
+            _Alignm = alignm;
+            _SequenceNumber = sequenceNumber;
+            _IsEditable = isEditable;
+            _DisplayToUser = displayToUser;
+            _DisPlayWidth = displayWidth;
+            _ParUOM_TextId = parUOM_TextId;
+            _Column = column;
+            _IsStandardParameter = isStandard;
 
-            _MappedToSYP = mappedToSYP;
-            _MappedToPCA = mappedToPCA;
-            _MappedToROP = MappedToROP;
-            _MappedToARP = mappedToARP;
-            _MappedToNONE = mappedToNONE;
-            _MappedToPPP = mappedToPPP;
-            _MappedToPSR = mappedToPSR;
-            _MappedToRLP = mappedToRLP;
-            _MappedToSDL = mappedToSDL;
-            _MappedToSTA = mappedToSTA;
-            _MappedToPPR = mappedToPPR;
-            _MappedToBIN = mappedToBIN;
-            //_SequenceNumber = sequencenumber;
+
+            //_UsedForBG = usedForBG;
+            //_UsedForBL = usedForBL;
+            //_UsedForCL = usedForCL;
+            //_UsedForCS = usedForCS;
+            //_UsedForIL = usedForIL;
+            //_UsedForOL = usedForOL;
+            //_UsedForPL = usedForPL;
+            //_UsedForRL = usedForRL;
+            //_UsedForSL = usedForSL;
+            //_UsedForTL = usedForTL;
+            //_UsedForZG = usedForZG;
+
+            //_MappedToSYP = mappedToSYP;
+            //_MappedToPCA = mappedToPCA;
+            //_MappedToROP = MappedToROP;
+            //_MappedToARP = mappedToARP;
+            //_MappedToNONE = mappedToNONE;
+            //_MappedToPPP = mappedToPPP;
+            //_MappedToPSR = mappedToPSR;
+            //_MappedToRLP = mappedToRLP;
+            //_MappedToSDL = mappedToSDL;
+            //_MappedToSTA = mappedToSTA;
+            //_MappedToPPR = mappedToPPR;
+            //_MappedToBIN = mappedToBIN;
+
+
+            _UsedForBG = false;
+            _UsedForBL = false;
+            _UsedForCL = false;
+            _UsedForCS = false;
+            _UsedForIL = false;
+            _UsedForOL = false;
+            _UsedForPL = false;
+            _UsedForRL = false;
+            _UsedForSL = false;
+            _UsedForTL = false;
+            _UsedForZG = false;
+
+            _MappedToSYP = false;
+            _MappedToPCA = false;
+            _MappedToROP = false;
+            _MappedToARP = false;
+            _MappedToNONE = false;
+            _MappedToPPP = false;
+            _MappedToPSR = false;
+            _MappedToRLP = false;
+            _MappedToSDL = false;
+            _MappedToSTA = false;
+            _MappedToPPR = false;
+            _MappedToBIN = false;
         }
 
         /// <summary>
@@ -300,7 +335,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _DisplaySeqNr; }
             set { SetProperty(ref _DisplaySeqNr, value); }
         }
-        public string DisplayWidth
+        public int? DisplayWidth
         {
             get { return _DisPlayWidth; }
             set { SetProperty(ref _DisPlayWidth, value); }
@@ -503,7 +538,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
             }
             return false;
         }
-
         public bool InsertParameterDefinition()
         {
             if (db.InsertParameterDefinition(this))
@@ -513,7 +547,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
             }
             return false;
         }
-
         private void InsertParameterConnections()
         {
             //for TPM table
@@ -561,6 +594,11 @@ namespace TreeViewExample.Business.Models.DiagramModels
             {
                 db.InsertIntoTpm(this, "syp_SystemPars");
             }
+        }
+
+        public ObservableCollection<ParameterDefinition> GetAllCustomerParameters()
+        {
+            return db.GetAllCustomerParameterDefinitions();
         }
 
         public int CompareTo(object obj)

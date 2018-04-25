@@ -186,7 +186,7 @@
 
                                 <Label Content="Required" Grid.Row="0" Style="{StaticResource ListviewLabelHeaderStyle}"></Label>
 
-                                <Label Content="Parameter name" Grid.Row="1" ToolTip="Cannot be empty or filled with spaces" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Parameter name" Grid.Row="1" ToolTip="Cannot be empty, filled with spaces or be a duplicate" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="Parameter description" Grid.Row="2" ToolTip="Cannot be empty" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="BeforeSep" Grid.Row="3" ToolTip="Should be a positive whole number" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="AfterSep" Grid.Row="4" ToolTip="Should be a positive whole number" Style="{StaticResource ListviewLabelStyle}"></Label>
@@ -196,15 +196,26 @@
                                 <Label Content="Display To User" Grid.Row="8" Style="{StaticResource ListviewLabelStyle}"></Label>
 
                                 <Label Content="Not required " Grid.Row="10" Style="{StaticResource ListviewLabelHeaderStyle}"></Label>
-                                
-                                <Label Content="ValueOUM" Grid.Row="11" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Valid Values" Grid.Row="12" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Default Value" Grid.Row="13" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Display Sequence number" Grid.Row="14" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Display Width" Grid.Row="15" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="UOM text ID" Grid.Row="16" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Is required" Grid.Row="17" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Column" Grid.Row="18" Style="{StaticResource ListviewLabelStyle}"></Label>
+
+                                <Label Content="ValueUOM" ToolTip="Unit of measurement (text)" Grid.Row="11" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Valid Values" ToolTipService.ShowDuration="15000" Grid.Row="12" Style="{StaticResource ListviewLabelStyle}">
+                                    <Label.ToolTip>
+                                        <TextBlock>
+                                            "&lt;number": less than number
+                                            <LineBreak />
+                                            "number1-number2": range from number1 to number2;
+                                            <LineBreak />
+                                            "number1:number2": range from number1 to number2, including number2
+                                            <LineBreak />
+                                            "text1;text2": text1 or text2
+                                        </TextBlock>
+                                    </Label.ToolTip>
+                                </Label>
+                                <Label Content="Default Value" ToolTip="Default value of the parameter (text)" Grid.Row="13" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Display Sequence number" ToolTip="Should be a positive whole number" Grid.Row="14" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Display Width" ToolTip="Should be a positive whole number" Grid.Row="15" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="UOM text ID" ToolTip="text" Grid.Row="16" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Column" ToolTip="Column in which the parameter will be shown" Grid.Row="17" Style="{StaticResource ListviewLabelStyle}"></Label>
 
 
                             </Grid>
@@ -256,14 +267,17 @@
                                     <ComboBoxItem Content="False"></ComboBoxItem>
                                 </ComboBox>
 
-                                <TextBox Grid.Row="11" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="12" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="13" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="14" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="15" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="16" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="17" Style="{StaticResource TextboxStyle}"></TextBox>
-                                <TextBox Grid.Row="18" Style="{StaticResource TextboxStyle}"></TextBox>
+                                <TextBox Grid.Row="11" Style="{StaticResource TextboxStyle}" Text="{Binding Path=CustomerParameter.ParValueUOM}"></TextBox>
+                                <TextBox Grid.Row="12" Style="{StaticResource TextboxStyle}" Text="{Binding Path=CustomerParameter.ValidValues}"></TextBox>
+                                <TextBox Grid.Row="13" Style="{StaticResource TextboxStyle}" Text="{Binding Path=CustomerParameter.DefaultValue}"></TextBox>
+                                <TextBox Grid.Row="14" Style="{StaticResource TextboxStyle}" Text="{Binding Path=CustomerParameter.DisplaySeqNr}"></TextBox>
+                                <TextBox Grid.Row="15" Style="{StaticResource TextboxStyle}" Text="{Binding Path=CustomerParameter.DisplayWidth}"></TextBox>
+                                <TextBox Grid.Row="16" Style="{StaticResource TextboxStyle}" Text="{Binding Path=CustomerParameter.ParUOM_TextId}"></TextBox>
+                                <ComboBox Grid.Row="17" Style="{StaticResource ComboBoxStyle}" Text="{Binding Path=CustomerParameter.Column, Mode=OneWayToSource}">
+                                    <ComboBoxItem Content="1" IsSelected="True"></ComboBoxItem>
+                                    <ComboBoxItem Content="2"></ComboBoxItem>
+                                    <ComboBoxItem Content="3"></ComboBoxItem>
+                                </ComboBox>
 
                             </Grid>
                     </StackPanel>

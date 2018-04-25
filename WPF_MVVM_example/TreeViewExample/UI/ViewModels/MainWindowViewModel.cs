@@ -82,15 +82,12 @@ namespace TreeViewExample.UI.ViewModels
             OrderObservableList.AddSorted(ProcessCelList, procescel);
         }
         /// <summary>
-        /// This is a test method
+        /// Gets all Customer Parameters
         /// </summary>
         private void AddCustomerParameters()
         {
-            for (int i = 1; i <= 10; i++)
-            {
-                ParameterDefinition customerParameter = new ParameterDefinition("name", "", 1,1 ,true, true, false);
-                CustomerParameterList.Add(customerParameter);
-            }
+            ParameterDefinition paramDef = new ParameterDefinition();
+            CustomerParameterList = paramDef.GetAllCustomerParameters();
         }
         /// <summary>
         /// This is a test method
