@@ -12,15 +12,20 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 
         private Route _Route;
 
+        public RouteParameter(string parName, string description, string value, string parValueUOM, string validValues, bool displayToUser, bool isStandard, Route route) : base(parName, description, value, parValueUOM, validValues, displayToUser, isStandard)
+        {
+            this._Route = route;
+        }
+
         #endregion
 
         #region Properties
 
-        //public Route Route
-        //{
-        //    get { return _Route; }
-        //    set { SetProperty(ref _Route, value); }
-        //}
+        public Route Route
+        {
+            get { return _Route; }
+            set { SetProperty(ref _Route, value); }
+        }
 
         #endregion
 

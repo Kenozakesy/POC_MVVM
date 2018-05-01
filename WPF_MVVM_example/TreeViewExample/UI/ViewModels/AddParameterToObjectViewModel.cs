@@ -21,7 +21,9 @@ namespace TreeViewExample.UI.ViewModels
     public class AddParameterToObjectViewModel : ViewModel, INotifyPropertyChanged
     {
         private IObjectWithParameters _ParameterObject;
-        private ObservableCollection<ParameterDefinition> _ParameterDefinitionList = new ObservableCollection<ParameterDefinition>();
+        private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
+        //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
+        //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
 
         private IAddParameterToObjectView _IAddParameterToObjectView;
         public AddParameterToObjectViewModel(IAddParameterToObjectView view) : base(view)
@@ -39,10 +41,10 @@ namespace TreeViewExample.UI.ViewModels
             set { SetProperty(ref _ParameterObject, value); }
         }
 
-        public ObservableCollection<ParameterDefinition> ParameterDefinitionList
+        public ObservableCollection<Parameter> ParameterList
         {
-            get { return _ParameterDefinitionList; }
-            set { SetProperty(ref _ParameterDefinitionList, value); }
+            get { return _ParameterList; }
+            set { SetProperty(ref _ParameterList, value); }
         }
 
         #endregion
@@ -54,7 +56,7 @@ namespace TreeViewExample.UI.ViewModels
         /// </summary>
         public void InitializeParameters()
         {
-            ParameterDefinitionList = ParameterObject.GetParameterList();
+            ParameterList = ParameterObject.GetParameterList();
         }
 
 
@@ -62,9 +64,9 @@ namespace TreeViewExample.UI.ViewModels
 
         #region ItemHandlers
 
-        private void RemoveParameter(ParameterDefinition paramdef)
+        private void RemoveParameter(Parameter paramdef)
         {
-            ParameterDefinitionList.Remove(paramdef);
+            ParameterList.Remove(paramdef);
             ParameterObject.RemoveParameter(paramdef);
         }
 
@@ -73,7 +75,7 @@ namespace TreeViewExample.UI.ViewModels
         #region Commandlogic
         private void InitializeCommand()
         {
-            RemoveParameterCommand = new RelayCommandT1<ParameterDefinition>(RemoveParameter);
+            RemoveParameterCommand = new RelayCommandT1<Parameter>(RemoveParameter);
         }
         public ICommand RemoveParameterCommand { get; set; }
 

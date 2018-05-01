@@ -74,7 +74,7 @@
         <Style x:Key="MenuItemBinStyle" TargetType="MenuItem">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Unit}" Value="{x:Null}">
-                    <Setter Property = "Visibility" Value="Collapsed"/>
+                    <Setter Property ="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -180,6 +180,7 @@
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.RemoveBinFromSubrouteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" Style="{StaticResource MenuItemBinStyle}"/>
                         <!--<MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>-->
+                        <MenuItem Header="Not implemented"/>
                     </ContextMenu>
                 </Label.ContextMenu>
 

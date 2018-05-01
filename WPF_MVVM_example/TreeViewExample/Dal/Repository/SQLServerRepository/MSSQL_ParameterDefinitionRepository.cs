@@ -61,6 +61,7 @@ namespace TreeViewExample.Dal.SQLServerRepository
                 catch (SqlException e)
                 {
                     Console.WriteLine("Query Failed: " + e.StackTrace + e.Message.ToString());
+                    throw;
                 }
                 finally
                 {

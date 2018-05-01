@@ -37,6 +37,29 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="0 0 20 0"></Setter>
         </Style>
+        <Style x:Key="ComboBoxDoubleColumnStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="WhiteSmoke"></Setter>
+            <Setter Property="BorderBrush" Value="Gray"></Setter>
+            <Setter Property="IsEditable" Value="False"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="MinWidth" Value="140"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="0 0 20 0"></Setter>
+            <!--<Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="5" Grid.Column="0" Text="{Binding }"/>
+                            <TextBlock Margin="5" Grid.Column="1" Text="{Binding }"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>-->
+        </Style>
         <Style x:Key="ListviewLabelStyle" TargetType="{x:Type Label}">
             <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
             <Setter Property="BorderBrush" Value="LightGray"></Setter>
@@ -190,7 +213,70 @@
                                 <Label Content="Parameter description" Grid.Row="2" ToolTip="Cannot be empty" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="BeforeSep" Grid.Row="3" ToolTip="Should be a positive whole number" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="AfterSep" Grid.Row="4" ToolTip="Should be a positive whole number" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Type" Grid.Row="5" ToolTip="Type of the parameter (string/int/etc..)" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Type" Grid.Row="5" ToolTipService.ShowDuration="35000" Style="{StaticResource ListviewLabelStyle}">
+                                    <Label.ToolTip>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Padding="0 0 15 0">
+                                                Long: 
+                                                <LineBreak />
+                                                String:
+                                                <LineBreak />
+                                                Double:
+                                                <LineBreak />
+                                                Date: 
+                                                <LineBreak />
+                                                Boolean: 
+                                                <LineBreak />
+                                                LongString: 
+                                                <LineBreak />
+                                                DoubleString:
+                                                <LineBreak />
+                                                DateString:
+                                                <LineBreak />
+                                                Time: tijd
+                                                <LineBreak />
+                                                TimeString: 
+                                                <LineBreak />
+                                                DateTime:
+                                                <LineBreak />
+                                                DateTimeString: 
+                                            </TextBlock>
+
+                                            <TextBlock Grid.Column="1">
+                                                cijfer
+                                                <LineBreak />
+                                                text
+                                                <LineBreak />
+                                                komma getal
+                                                <LineBreak />
+                                                datum
+                                                <LineBreak />
+                                                yes/no
+                                                <LineBreak />
+                                                cijfer in text
+                                                <LineBreak />
+                                                komma getal in text
+                                                <LineBreak />
+                                                datum in text
+                                                <LineBreak />
+                                                tijd
+                                                <LineBreak />
+                                                tijd in text
+                                                <LineBreak />
+                                                datum inclusief tijd
+                                                <LineBreak />
+                                                datum inclusief tijd in text
+                                            </TextBlock>
+                                        </Grid>
+                                    </Label.ToolTip>
+                                </Label>
                                 <Label Content="Alignment" Grid.Row="6" ToolTip="Determines the alignment of the parameter when displayed" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="Editable" Grid.Row="7" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="Display To User" Grid.Row="8" Style="{StaticResource ListviewLabelStyle}"></Label>
@@ -255,7 +341,7 @@
                                 <TextBox Grid.Row="3" Style="{StaticResource TextboxStyle}" Text="{Binding Path=BeforeSep}" MaxLength="8" BorderBrush="{Binding Path=BeforeSepModel.Brush}"></TextBox>
                                 <TextBox Grid.Row="4" Style="{StaticResource TextboxStyle}" Text="{Binding Path=AfterSep}" MaxLength="8" BorderBrush="{Binding Path=AfterSepModel.Brush}"></TextBox>
 
-                                <ComboBox Grid.Row="5" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Path=TypeValuesList}" SelectedIndex="0" SelectedItem="{Binding Path=ParameterType}"></ComboBox>
+                                <ComboBox Grid.Row="5" Style="{StaticResource ComboBoxDoubleColumnStyle}" ItemsSource="{Binding Path=TypeValuesList}" SelectedIndex="0" SelectedItem="{Binding Path=ParameterType}"></ComboBox>
                                 <ComboBox Grid.Row="6" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Path=AlignmentValuesList}" SelectedIndex="0" SelectedItem="{Binding Path=Alignment}"></ComboBox>
                                 
                                 <ComboBox Grid.Row="7" Style="{StaticResource ComboBoxStyle}" Text="{Binding Path=IsEditable, Mode=OneWayToSource}">

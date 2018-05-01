@@ -167,7 +167,7 @@ namespace TreeViewExample.UI.ViewModels
         }
         private void RemoveBinFromSubroute(Bin bin)
         {
-            string text = "Remove bin from subroute?";
+            string text = "Remove bin from " + bin.Unit.Name + "?";
             string title = "Remove bin?";
             if (_TreeView.ConfirmMessage(title, text))
             {

@@ -165,6 +165,11 @@ namespace TreeViewExample.Business.Models
             return configList;
         }
 
+        public void ValidateObject()
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

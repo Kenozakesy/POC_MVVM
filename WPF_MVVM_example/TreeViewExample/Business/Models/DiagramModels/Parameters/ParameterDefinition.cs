@@ -595,7 +595,10 @@ namespace TreeViewExample.Business.Models.DiagramModels
                 db.InsertIntoTpm(this, "syp_SystemPars");
             }
         }
-
+        private void UpdateCellType()
+        {
+            //hier moet route en cell aangevinkt worden
+        }
         public ObservableCollection<ParameterDefinition> GetAllCustomerParameters()
         {
             return db.GetAllCustomerParameterDefinitions();

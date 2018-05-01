@@ -169,6 +169,11 @@ namespace TreeViewExample.Business.Models
             return Name;
         }
 
+        public void ValidateObject()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

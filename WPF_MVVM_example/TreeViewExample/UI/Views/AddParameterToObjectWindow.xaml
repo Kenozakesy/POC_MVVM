@@ -23,6 +23,15 @@
             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
             <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Padding" Value="10 0 10 0"></Setter>
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="IsEnabled" Value="True"></Setter>
+            <!--<Style.Triggers>
+                <DataTrigger Binding="{Binding Path=}" Value="0">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>-->
         </Style>
         <Style x:Key="ListItemStyle" TargetType="{x:Type ListViewItem}">
             <Setter Property="BorderBrush" Value="LightGray" />
@@ -34,6 +43,7 @@
                 <Setter.Value>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
                         <MenuItem Header="Delete" Command="{Binding Tag.DataContext.RemoveParameterCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
+                        <MenuItem Header="Not implemented" />
                     </ContextMenu>
                 </Setter.Value>
             </Setter>
@@ -56,7 +66,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -64,22 +73,24 @@
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource BorderStyle}">
-            <ListView ItemContainerStyle="{StaticResource ListItemStyle}" ItemsSource="{Binding Path=ParameterDefinitionList}">
+            <ListView ItemContainerStyle="{StaticResource ListItemStyle}" ItemsSource="{Binding Path=ParameterList}">
                 <ListView.View>
                     <GridView >
 
-                        <GridViewColumn Header="ParName" Width="100" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParName}" />
-                        <GridViewColumn Header="Description" Width="150" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Description}"/>
+                        <GridViewColumn Header="ParName" Width="Auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParName}" />
+                        <GridViewColumn Header="Description" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Description}"/>
+                        <GridViewColumn Header="ValueUOM" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParValueUOM}"/>
 
-                        <GridViewColumn Header="Value" Width="200" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
+                        <GridViewColumn Header="Value" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate >
-                                    <TextBox Text="{Binding Path=DefaultValue}" MinWidth="160"/>
+                                    <TextBox Text="{Binding Path=Value}" MinWidth="120"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="ValueUOM" Width="100" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParValueUOM}"/>
+                        <GridViewColumn Header="Is standard parameter" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=IsStandard}"/>
+                        <GridViewColumn Header="Display To User" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=DisplayToUser}"/>
 
                     </GridView >
                 </ListView.View>
@@ -98,7 +109,7 @@
                 
                 <StackPanel Grid.Row="0" Margin="8" Orientation="Vertical">
                     <Label>Parameters</Label>
-                    <ComboBox></ComboBox>
+                    <ComboBox Style="{StaticResource ComboBoxStyle}"></ComboBox>
                     <Button Style="{StaticResource TextboxStyle}">Add</Button>
 
                     <Label>Customer Parameters</Label>

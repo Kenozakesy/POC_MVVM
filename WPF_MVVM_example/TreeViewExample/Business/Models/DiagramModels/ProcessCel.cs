@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
+using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
@@ -22,6 +23,7 @@ namespace TreeViewExample.Business.Models
 
         private Brush _Brush;
         private int _Number;
+        private IsValidated _Isvalid;
         private static Random ran = new Random();
 
         public ProcessCel(string name, int number)
@@ -39,7 +41,7 @@ namespace TreeViewExample.Business.Models
                 _Brush = Brushes.LightGreen;
             }
             AddRoutes();
-
+            GetProcesscelParameters();
         }
 
         #region Properties
@@ -64,21 +66,38 @@ namespace TreeViewExample.Business.Models
             get { return _Name; }
             set { SetProperty(ref _Name, value); }
         }
-        public int Number
-        {
-            get { return _Number; }
-            private set { SetProperty(ref _Number, value); }
-        }
+ 
         public Brush Brush
         {
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
+        }
+        public IsValidated IsValid
+        {
+            get { return _Isvalid; }
+            set { SetProperty(ref _Isvalid, value); }
+        }
+        public int Number
+        {
+            get { return _Number; }
+            private set { SetProperty(ref _Number, value); }
         }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        /// Moet omgebouwd worden zodat die naar de databasde toe gaat
+        /// </summary>
+        private void GetProcesscelParameters()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                ProcessCelParameter procescelparameter = new ProcessCelParameter("Name", "description", "5", "-", "1-5", true, true, this);
+                ProcessCelParameterList.Add(procescelparameter);
+            }
+        }
         private void AddRoutes()
         {
             for (int i = 0; i < 3; i++)
@@ -159,15 +178,35 @@ namespace TreeViewExample.Business.Models
             return configList;
         }
 
+        public ObservableCollection<Parameter> GetParameterList()
+        {
+            ObservableCollection<Parameter> parameterList = new ObservableCollection<Parameter>();
+            foreach (ProcessCelParameter PP in ProcessCelParameterList)
+            {
+                parameterList.Add(PP);
+            }
+            return parameterList;
+        }
 
-        public ObservableCollection<ParameterDefinition> GetParameterList()
+        public void RemoveParameter(Parameter paramdef)
         {
             throw new NotImplementedException();
         }
 
-        public void RemoveParameter(ParameterDefinition paramdef)
+        /// <summary>
+        /// Checks whether a object is valid or not. Also checks objects in underlying tree branches.
+        /// (current implementation is a placeholder)
+        /// </summary>
+        public void ValidateObject()
         {
-            throw new NotImplementedException();
+            switch (IsValid)
+            {
+                case IsValidated.InValid:
+
+                    break;
+                case IsValidated.Valid:
+                    break;
+            }
         }
 
 
