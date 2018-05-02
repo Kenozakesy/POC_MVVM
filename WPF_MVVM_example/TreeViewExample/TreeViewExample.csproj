@@ -95,7 +95,6 @@
     <Compile Include="UI\ViewModels\AddParameterToObjectViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateParameterViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateSubrouteViewModel.cs" />
-    <Compile Include="UI\ViewModels\DragDropWindowViewModel.cs" />
     <Compile Include="UI\ViewModels\EditSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
     <Compile Include="UI\ViewModels\SelectBinWindowViewModel.cs" />
@@ -107,9 +106,6 @@
     </Compile>
     <Compile Include="UI\Views\CreateSubrouteWindow.xaml.cs">
       <DependentUpon>CreateSubrouteWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\DragDropWindow.xaml.cs">
-      <DependentUpon>DragDropWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\EditSubrouteWindow.xaml.cs">
       <DependentUpon>EditSubrouteWindow.xaml</DependentUpon>
@@ -129,10 +125,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\CreateSubrouteWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\DragDropWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

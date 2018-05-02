@@ -178,10 +178,6 @@ namespace TreeViewExample.UI.ViewModels
         {
             CreateNewProcesCel();
         }
-        private void OpenDragDropWindow(Route route)
-        {
-            _TreeView.OpenDragDropWindow();
-        }
         private void ShowPropInList(IConfigObject obj)
         {
             ListView.Clear();
@@ -225,7 +221,6 @@ namespace TreeViewExample.UI.ViewModels
             SetbinCommand = new RelayCommandT1<Unit>(SetBinToUnit);
             RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
             CreateProcesCelCommand = new RelayCommand(CreateProcesCel);
-            OpenDragDropWindowCommand = new RelayCommandT1<Route>(OpenDragDropWindow);
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
@@ -240,7 +235,6 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand SetbinCommand { get; set; }
         public ICommand RemoveBinFromSubrouteCommand { get; set; }
         public ICommand CreateProcesCelCommand { get; set; }
-        public ICommand OpenDragDropWindowCommand { get; set; }
         public ICommand ShowPropInListCommand { get; set; }
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }

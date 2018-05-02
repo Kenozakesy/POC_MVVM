@@ -70,7 +70,6 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-   
         <Style x:Key="MenuItemBinStyle" TargetType="MenuItem">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=Unit}" Value="{x:Null}">

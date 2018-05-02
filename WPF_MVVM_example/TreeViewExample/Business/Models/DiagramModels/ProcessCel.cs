@@ -105,6 +105,7 @@ namespace TreeViewExample.Business.Models
                 RouteList.Add(new Route("Route " + i, i, this, true));
             }         
         }
+
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -130,12 +131,12 @@ namespace TreeViewExample.Business.Models
         }
         public void DeleteChild(IConfigObject obj)
         {
-            Route unit = obj as Route;
+            Route route = obj as Route;
             foreach (Route U in RouteList)
             {
-                if (U.Equals(unit))
+                if (U.Equals(route))
                 {
-                    RouteList.Remove(unit);
+                    RouteList.Remove(route);
                     break;
                 }
             }
@@ -151,15 +152,6 @@ namespace TreeViewExample.Business.Models
 
             Route route = new Route("Route " + firstAvailable, firstAvailable, this);
             OrderObservableList.AddSorted(RouteList, route);
-        }
-        public int CompareTo(object obj)
-        {
-            ProcessCel cell = obj as ProcessCel;
-            return string.Compare(this.Name, cell.Name);        
-        }
-        public override string ToString()
-        {
-            return _Name;
         }
         public List<MainListViewModel> GenerateListViewList()
         {
@@ -177,6 +169,15 @@ namespace TreeViewExample.Business.Models
             }
             return configList;
         }
+        public int CompareTo(object obj)
+        {
+            ProcessCel cell = obj as ProcessCel;
+            return string.Compare(this.Name, cell.Name);        
+        }
+        public override string ToString()
+        {
+            return _Name;
+        }
 
         public ObservableCollection<Parameter> GetParameterList()
         {
@@ -187,27 +188,12 @@ namespace TreeViewExample.Business.Models
             }
             return parameterList;
         }
-
         public void RemoveParameter(Parameter paramdef)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Checks whether a object is valid or not. Also checks objects in underlying tree branches.
-        /// (current implementation is a placeholder)
-        /// </summary>
-        public void ValidateObject()
-        {
-            switch (IsValid)
-            {
-                case IsValidated.InValid:
 
-                    break;
-                case IsValidated.Valid:
-                    break;
-            }
-        }
 
 
         #endregion

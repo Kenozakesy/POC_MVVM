@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.NonDiagramModels;
@@ -12,11 +10,13 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
-    public class SubRoute : ViewModelBase, IConfigObject
+    public class SubRoute : ViewModelBase, IConfigObject, ICloneable
     {
         private ObservableCollection<Unit> _UnitList = new ObservableCollection<Unit>();
 
+        //private ProcessCel _ProcessCel;
         private Route _Route;
+
         private string _Name;
         private int _Number;
         private Brush _Brush;
@@ -78,7 +78,6 @@ namespace TreeViewExample.Business.Models
                 UnitList.Add(new Unit("Unit " + i.ToString(), i, this));
             }
         }
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -90,7 +89,6 @@ namespace TreeViewExample.Business.Models
                 Brush = Brushes.Red;
             }
         }
-
         public void Delete()
         {
             List<Unit> removableUnits = new List<Unit>();
@@ -130,8 +128,6 @@ namespace TreeViewExample.Business.Models
             Unit unit = new Unit("Unit " + firstAvailable, firstAvailable, this);
             OrderObservableList.AddSorted(UnitList, unit);
         }
-
-
         public int CompareTo(object obj)
         {
             SubRoute subroute = obj as SubRoute;
@@ -146,12 +142,10 @@ namespace TreeViewExample.Business.Models
             }
             return 0;
         }
-
         public override string ToString()
         {
             return _Name;
         }
-
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
@@ -168,11 +162,12 @@ namespace TreeViewExample.Business.Models
             }
             return configList;
         }
-
-        public void ValidateObject()
+        public object Clone()
         {
             throw new NotImplementedException();
         }
+
+
 
         #endregion
 

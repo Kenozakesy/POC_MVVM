@@ -45,20 +45,6 @@
             <Setter Property="MinWidth" Value="140"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="Margin" Value="0 0 20 0"></Setter>
-            <!--<Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Margin="5" Grid.Column="0" Text="{Binding }"/>
-                            <TextBlock Margin="5" Grid.Column="1" Text="{Binding }"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>-->
         </Style>
         <Style x:Key="ListviewLabelStyle" TargetType="{x:Type Label}">
             <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>

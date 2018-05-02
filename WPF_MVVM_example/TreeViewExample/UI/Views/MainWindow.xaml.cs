@@ -52,12 +52,6 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
-        public void OpenDragDropWindow()
-        {
-            DragDropWindow window = new DragDropWindow();
-            window.ShowDialog();
-        }
-
         public void OpenEditSubrouteWindow()
         {
             EditSubrouteWindow window = new EditSubrouteWindow();
