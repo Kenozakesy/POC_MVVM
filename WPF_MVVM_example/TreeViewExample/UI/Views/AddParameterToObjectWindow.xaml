@@ -49,18 +49,11 @@
             </Setter>
         </Style>
 
-        <DataTemplate DataType="{x:Type that:ParameterDefinition}" >
-            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="8 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Width="230">
-                <Label.ContextMenu>
-
-                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="Delete (NIY)"/>
-                    </ContextMenu>
-
-                </Label.ContextMenu>
-            </Label>
-        </DataTemplate>
-
+        <!--<DataTemplate DataType="ComboBox">
+            <ComboBox ItemsSource="">
+                
+            </ComboBox>
+        </DataTemplate>-->
    
             </Window.Resources>
     <Grid>
@@ -84,7 +77,10 @@
                         <GridViewColumn Header="Value" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate >
-                                    <TextBox Text="{Binding Path=Value}" MinWidth="120"/>
+                                    <ComboBox ItemsSource="{Binding Path=ValidValuesComboBox}" SelectedValue="{Binding Path=Value}" Width="50">
+                                    </ComboBox>
+                               
+                                    <!--<TextBox Text="{Binding Path=Value}" MinWidth="120"/>-->
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -106,7 +102,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
+
                 <StackPanel Grid.Row="0" Margin="8" Orientation="Vertical">
                     <Label>Parameters</Label>
                     <ComboBox Style="{StaticResource ComboBoxStyle}"></ComboBox>
@@ -115,9 +111,7 @@
                     <Label>Customer Parameters</Label>
                     <ComboBox></ComboBox>
                     <Button Style="{StaticResource TextboxStyle}">Add</Button>
-               
                 </StackPanel>
-
                 <StackPanel Grid.Row="1" Margin="8" VerticalAlignment="Bottom">
                     <Button Style="{StaticResource TextboxStyle}">Finish</Button>
                 </StackPanel>

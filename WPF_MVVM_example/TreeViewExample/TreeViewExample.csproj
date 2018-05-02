@@ -78,7 +78,6 @@
     <Compile Include="Business\UI_Models\DragListViewItemBehavior.cs" />
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
-    <Compile Include="Business\UI_Models\Rectangle.cs" />
     <Compile Include="Business\UI_Models\InformationFieldModel.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
     <Compile Include="Dal\DatabaseConnection\DatabaseConnectionClass.cs" />
