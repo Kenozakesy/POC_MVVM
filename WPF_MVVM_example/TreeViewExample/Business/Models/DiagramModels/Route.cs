@@ -13,8 +13,10 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
-    public class Route : ViewModelBase, IConfigObject
+    public class Route : ViewModelBase, IConfigObject, IObjectWithParameters
     {
+        #region Fields
+
         private ObservableCollection<RouteParameter> _RouteParameterList = new ObservableCollection<RouteParameter>();
         private ObservableCollection<SubRoute> _SubRouteList = new ObservableCollection<SubRoute>();
         private ProcessCel _ProcessCel;
@@ -23,6 +25,8 @@ namespace TreeViewExample.Business.Models
         private int _Number;
         private Brush _Brush;
         private static Random ran = new Random();
+
+        #endregion
 
         public Route(string name, int number, ProcessCel processCel, bool addsubroutes = false)
         {
@@ -44,6 +48,7 @@ namespace TreeViewExample.Business.Models
             { 
                 AddSubRoutes();
             }
+            GetRouteParameters();
         }
 
         #region Properties
@@ -78,6 +83,18 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
+
+        /// <summary>
+        /// Moet omgebouwd worden zodat die naar de databasde toe gaat
+        /// </summary>
+        private void GetRouteParameters()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                RouteParameter routeParameter = new RouteParameter("Name", "description", "1", "-", "1;2;3;4;5", true, true, this);
+                RouteParameterList.Add(routeParameter);
+            }
+        }
         private void AddSubRoutes()
         {
             for (int i = 0; i < 3; i++)
@@ -109,7 +126,6 @@ namespace TreeViewExample.Business.Models
             }
             this._ProcessCel.DeleteChild(this);
         }
-
         public void DeleteChild(IConfigObject obj)
         {
             SubRoute unit = obj as SubRoute;
@@ -122,7 +138,6 @@ namespace TreeViewExample.Business.Models
                 }
             }
         }
-
         public void CreateChild()
         {
             List<int> intList = new List<int>();
@@ -136,12 +151,10 @@ namespace TreeViewExample.Business.Models
             OrderObservableList.AddSorted(SubRouteList, subroute);
 
         }
-
         public override string ToString()
         {
             return _Name;
         }
-
         public int CompareTo(object obj)
         {
             Route route = obj as Route;
@@ -171,6 +184,19 @@ namespace TreeViewExample.Business.Models
                 configList.Add(mainListViewModel);
             }
             return configList;
+        }
+        public ObservableCollection<Parameter> GetParameterList()
+        {
+            ObservableCollection<Parameter> parameterList = new ObservableCollection<Parameter>();
+            foreach (RouteParameter RP in RouteParameterList)
+            {
+                parameterList.Add(RP);
+            }
+            return parameterList;
+        }
+        public void RemoveParameter(Parameter paramdef)
+        {
+            throw new NotImplementedException();
         }
 
 

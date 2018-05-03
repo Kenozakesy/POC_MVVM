@@ -14,7 +14,7 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
-    public class Bin : ViewModelBase, IConfigObject
+    public class Bin : ViewModelBase, IConfigObject, IObjectWithParameters
     {
         private ObservableCollection<BinParameter> _BinParameterList = new ObservableCollection<BinParameter>();
         private Unit _Unit;
@@ -34,7 +34,8 @@ namespace TreeViewExample.Business.Models
 
             _Unit = unit;
             _Brush = Brushes.Orange;
-            
+
+            GetBinParameters();
         }
 
         #region Properties
@@ -81,6 +82,15 @@ namespace TreeViewExample.Business.Models
         #endregion
 
         #region Methods
+
+        private void GetBinParameters()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                BinParameter binParameter = new BinParameter("Name", "description", "1", "-", "1;2;3;4;5", true, true, this);
+                BinParameterList.Add(binParameter);
+            }
+        }
 
         public void SetSubroute(Unit unit = null)
         {
@@ -167,6 +177,21 @@ namespace TreeViewExample.Business.Models
         public override string ToString()
         {
             return Name;
+        }
+
+        public ObservableCollection<Parameter> GetParameterList()
+        {
+            ObservableCollection<Parameter> parameterList = new ObservableCollection<Parameter>();
+            foreach (BinParameter BP in BinParameterList)
+            {
+                parameterList.Add(BP);
+            }
+            return parameterList;
+        }
+
+        public void RemoveParameter(Parameter paramdef)
+        {
+            throw new NotImplementedException();
         }
 
 

@@ -27,6 +27,11 @@ namespace TreeViewExample.UI.Views
             DataContext = new AddParameterToObjectViewModel(this);
         }
 
+        public void CloseDialog()
+        {
+            this.Close();
+        }
+
         public bool ConfirmMessage(string title, string text)
         {
             if (MessageBox.Show(text, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)

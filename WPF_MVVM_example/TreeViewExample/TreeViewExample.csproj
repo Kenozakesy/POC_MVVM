@@ -76,6 +76,7 @@
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
     <Compile Include="Business\UI_Models\DragBehavior.cs" />
     <Compile Include="Business\UI_Models\DragListViewItemBehavior.cs" />
+    <Compile Include="Business\UI_Models\GreaterThan.cs" />
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\UI_Models\InformationFieldModel.cs" />

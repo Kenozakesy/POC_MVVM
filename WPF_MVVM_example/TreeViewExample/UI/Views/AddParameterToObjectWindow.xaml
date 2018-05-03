@@ -6,9 +6,10 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:TreeViewExample.Business.UI_Models"
         xmlns:this="clr-namespace:TreeViewExample.Business.Models"
-        xmlns:that="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
+        xmlns:that="clr-namespace:TreeViewExample.Business.Models.DiagramModels.Parameters" 
         mc:Ignorable="d"
-        Title="AddParameterToObjectWindow" MinHeight="400" MinWidth="800" Width="1000">
+        Title="{Binding Path=ViewHeader}" MinHeight="400" MinWidth="800" Width="1000" >
+
     <Window.Resources>
         <Style x:Key="BorderStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Black" />
@@ -49,13 +50,20 @@
             </Setter>
         </Style>
 
-        <!--<DataTemplate DataType="ComboBox">
-            <ComboBox ItemsSource="">
-                
-            </ComboBox>
-        </DataTemplate>-->
-   
-            </Window.Resources>
+        <DataTemplate x:Key="ComboboxTemplate" DataType="{x:Type that:Parameter}">
+            <ComboBox ItemsSource="{Binding Path=ValidValuesComboBox}" SelectedValue="{Binding Path=Value}" Width="50"></ComboBox>
+        </DataTemplate>
+
+        <DataTemplate x:Key="NumericTemplate" DataType="{x:Type that:Parameter}">
+            <TextBox Text="{Binding Path=Value}" Width="50"/>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="TextTemplate" DataType="{x:Type that:Parameter}">
+            <TextBox Text="{Binding Path=Value}" Width="50"/>
+        </DataTemplate>
+
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -68,27 +76,47 @@
         <Border Style="{StaticResource BorderStyle}">
             <ListView ItemContainerStyle="{StaticResource ListItemStyle}" ItemsSource="{Binding Path=ParameterList}">
                 <ListView.View>
-                    <GridView >
+                    <GridView>
 
                         <GridViewColumn Header="ParName" Width="Auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParName}" />
                         <GridViewColumn Header="Description" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Description}"/>
                         <GridViewColumn Header="ValueUOM" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ParValueUOM}"/>
-
+                                           
                         <GridViewColumn Header="Value" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}">
                             <GridViewColumn.CellTemplate>
-                                <DataTemplate >
-                                    <ComboBox ItemsSource="{Binding Path=ValidValuesComboBox}" SelectedValue="{Binding Path=Value}" Width="50">
-                                    </ComboBox>
-                               
-                                    <!--<TextBox Text="{Binding Path=Value}" MinWidth="120"/>-->
+
+                                <DataTemplate DataType="{x:Type that:Parameter}">
+                                    <ContentControl Content="{Binding }">
+                                        <ContentControl.Style>
+                                            <Style TargetType="{x:Type ContentControl}">
+
+                                                <!-- Default Template -->
+                                                <Setter Property="ContentTemplate" Value="{StaticResource TextTemplate}" />
+
+                                                <!-- Triggers to change Template -->
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ValidValuesComboBox.Count, Converter={local:GreaterThan 0}}" Value="true">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource ComboboxTemplate}" />
+                                                    </DataTrigger>
+
+                                                    <DataTrigger  Binding="{Binding ValidValues.Item2, Converter={local:GreaterThan 0}}" Value="true">
+                                                        <Setter Property="ContentTemplate" Value="{StaticResource NumericTemplate}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                                
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
+                        <GridViewColumn Header="Valid Values" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=ValidValuesText}" />
+
                         <GridViewColumn Header="Is standard parameter" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=IsStandard}"/>
                         <GridViewColumn Header="Display To User" Width="auto" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=DisplayToUser}"/>
 
-                    </GridView >
+                    </GridView>
                 </ListView.View>
             </ListView>
         </Border>
@@ -113,7 +141,7 @@
                     <Button Style="{StaticResource TextboxStyle}">Add</Button>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Margin="8" VerticalAlignment="Bottom">
-                    <Button Style="{StaticResource TextboxStyle}">Finish</Button>
+                    <Button Style="{StaticResource TextboxStyle}" Command="{Binding FinishEditingCommand}">Finish</Button>
                 </StackPanel>
             </Grid>
         </Border>

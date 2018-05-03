@@ -25,13 +25,14 @@ namespace TreeViewExample.UI.ViewModels
         //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
         //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
 
+        private string _ViewHeader;
+
         private IAddParameterToObjectView _IAddParameterToObjectView;
         public AddParameterToObjectViewModel(IAddParameterToObjectView view) : base(view)
         {
             this._IAddParameterToObjectView = view;
             InitializeCommand();
         }
-
 
         #region Properties
 
@@ -45,6 +46,10 @@ namespace TreeViewExample.UI.ViewModels
         {
             get { return _ParameterList; }
             set { SetProperty(ref _ParameterList, value); }
+        }
+        public string ViewHeader
+        {
+            get { return _ParameterObject.Name + " ParameterAddWindow"; }
         }
 
         #endregion
@@ -64,20 +69,29 @@ namespace TreeViewExample.UI.ViewModels
 
         #region ItemHandlers
 
-        private void RemoveParameter(Parameter paramdef)
+        private void RemoveParameter(Parameter parameter)
         {
-            ParameterList.Remove(paramdef);
-            ParameterObject.RemoveParameter(paramdef);
+            ParameterList.Remove(parameter);
+            ParameterObject.RemoveParameter(parameter);
+        }
+
+        private void FinishEditing()
+        {
+            _IAddParameterToObjectView.CloseDialog();
         }
 
         #endregion
 
         #region Commandlogic
+
         private void InitializeCommand()
         {
             RemoveParameterCommand = new RelayCommandT1<Parameter>(RemoveParameter);
+            FinishEditingCommand = new RelayCommand(FinishEditing);
         }
+
         public ICommand RemoveParameterCommand { get; set; }
+        public ICommand FinishEditingCommand { get; set; }
 
         #endregion
 
