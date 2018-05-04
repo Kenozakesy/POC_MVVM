@@ -67,6 +67,7 @@
     <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Enums\ParameterType.cs" />
     <Compile Include="Business\Interfaces\IObjectWithParameters.cs" />
+    <Compile Include="Business\Singletons\ListGodClass.cs" />
     <Compile Include="Business\UI_Models\EnumToArrayConverter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
@@ -195,7 +196,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\Singletons\" />
     <Folder Include="UI\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -22,7 +22,6 @@ namespace TreeViewExample.UI.ViewModels
     public class MainWindowViewModel : ViewModel, INotifyPropertyChanged
     {
         private ObservableCollection<ProcessCel> _ProcessCelList = new ObservableCollection<ProcessCel>();
-        private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
         private ObservableCollection<MainListViewModel> _ListView = new ObservableCollection<MainListViewModel>();
         private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
@@ -43,11 +42,6 @@ namespace TreeViewExample.UI.ViewModels
         {
             get { return _ProcessCelList; }
             set { SetProperty(ref _ProcessCelList, value); }
-        }
-        public ObservableCollection<Route> RouteList
-        {
-            get { return _RouteList; }
-            set { SetProperty(ref _RouteList, value); }
         }
         public ObservableCollection<Bin> BinList
         {
@@ -190,7 +184,7 @@ namespace TreeViewExample.UI.ViewModels
         private void OpenParameterSheetWindow()
         {
             _TreeView.OpenParameterSheetWindow();
-            //After altering parameter configuration there has to be a check if all object are still valid or not. (if not turn red otherwise green)
+            AddCustomerParameters();
         }
         private void OpenCreateParameterWindow()
         {
@@ -213,6 +207,7 @@ namespace TreeViewExample.UI.ViewModels
         #endregion
 
         #region commandlogic
+
         private void InitializeCommand()
         {    
             DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);

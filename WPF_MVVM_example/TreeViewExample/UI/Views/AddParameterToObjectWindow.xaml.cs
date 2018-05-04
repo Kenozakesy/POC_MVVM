@@ -44,6 +44,12 @@ namespace TreeViewExample.UI.Views
             }
         }
 
+        public void OpenCreateParameterWindow()
+        {
+            CreateParameterWindow window = new CreateParameterWindow();
+            window.ShowDialog();
+        }
+
         public void ShowMessage(string text)
         {
             MessageBox.Show(text);

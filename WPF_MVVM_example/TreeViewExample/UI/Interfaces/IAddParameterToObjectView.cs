@@ -10,5 +10,6 @@ namespace TreeViewExample.UI.Interfaces
     public interface IAddParameterToObjectView : IView
     {
         void CloseDialog();
+        void OpenCreateParameterWindow();
     }
 }

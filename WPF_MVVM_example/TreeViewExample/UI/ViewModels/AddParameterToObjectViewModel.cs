@@ -72,10 +72,13 @@ namespace TreeViewExample.UI.ViewModels
             ParameterList.Remove(parameter);
             ParameterObject.RemoveParameter(parameter);
         }
-
         private void FinishEditing()
         {
             _IAddParameterToObjectView.CloseDialog();
+        }
+        private void OpenCreateParameterWindow()
+        {
+            _IAddParameterToObjectView.OpenCreateParameterWindow();
         }
 
         #endregion
@@ -86,10 +89,12 @@ namespace TreeViewExample.UI.ViewModels
         {
             RemoveParameterCommand = new RelayCommandT1<Parameter>(RemoveParameter);
             FinishEditingCommand = new RelayCommand(FinishEditing);
+            OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
         }
 
         public ICommand RemoveParameterCommand { get; set; }
         public ICommand FinishEditingCommand { get; set; }
+        public ICommand OpenCreateParameterWindowCommand { get; set; }
 
         #endregion
 
