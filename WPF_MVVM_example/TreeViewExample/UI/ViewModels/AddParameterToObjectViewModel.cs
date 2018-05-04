@@ -25,8 +25,6 @@ namespace TreeViewExample.UI.ViewModels
         //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
         //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
 
-        private string _ViewHeader;
-
         private IAddParameterToObjectView _IAddParameterToObjectView;
         public AddParameterToObjectViewModel(IAddParameterToObjectView view) : base(view)
         {

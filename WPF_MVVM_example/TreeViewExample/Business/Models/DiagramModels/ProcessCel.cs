@@ -94,7 +94,7 @@ namespace TreeViewExample.Business.Models
         {
             for (int i = 0; i < 5; i++)
             {
-                ProcessCelParameter procescelparameter = new ProcessCelParameter("Name", "description", "1", "-", "1;2;3;4;5", true, true, this);
+                ProcessCelParameter procescelparameter = new ProcessCelParameter("Name", "description", "1", "-", "1-5", true, true, this);
                 ProcessCelParameterList.Add(procescelparameter);
             }
         }

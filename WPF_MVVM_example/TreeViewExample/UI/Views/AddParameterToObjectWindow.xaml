@@ -55,8 +55,9 @@
         </DataTemplate>
 
         <DataTemplate x:Key="NumericTemplate" DataType="{x:Type that:Parameter}">
-            <TextBox Text="{Binding Path=Value}" Width="50"/>
-
+            <Grid>
+                <TextBox Text="{Binding Path=Value}" Width="50" IsEnabled="False"/>
+            </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="TextTemplate" DataType="{x:Type that:Parameter}">
