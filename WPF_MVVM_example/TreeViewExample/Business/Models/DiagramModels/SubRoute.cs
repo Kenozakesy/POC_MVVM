@@ -167,6 +167,11 @@ namespace TreeViewExample.Business.Models
             throw new NotImplementedException();
         }
 
+        public void Validate()
+        {
+            throw new NotImplementedException();
+        }
+
 
 
         #endregion

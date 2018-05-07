@@ -12,6 +12,7 @@ using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
+using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.Interfaces;
@@ -33,7 +34,7 @@ namespace TreeViewExample.UI.ViewModels
             InitializeCommand();
 
             AddProcessCelsAndBins();
-            AddCustomerParameters();   
+            _CustomerParameterList = ListGodClass.Instance.CustomerParameterList; 
         }
 
         #region Properties
@@ -75,14 +76,7 @@ namespace TreeViewExample.UI.ViewModels
             ProcessCel procescel = new ProcessCel("procescel", firstAvailable);
             OrderObservableList.AddSorted(ProcessCelList, procescel);
         }
-        /// <summary>
-        /// Gets all Customer Parameters
-        /// </summary>
-        private void AddCustomerParameters()
-        {
-            ParameterDefinition paramDef = new ParameterDefinition();
-            CustomerParameterList = paramDef.GetAllCustomerParameters();
-        }
+  
         /// <summary>
         /// This is a test method
         /// </summary>
@@ -184,11 +178,10 @@ namespace TreeViewExample.UI.ViewModels
         private void OpenParameterSheetWindow()
         {
             _TreeView.OpenParameterSheetWindow();
-            AddCustomerParameters();
         }
         private void OpenCreateParameterWindow()
         {
-            _TreeView.OpenCreateParameterWindow(_CustomerParameterList);
+            _TreeView.OpenCreateParameterWindow();
         }
         private void OpenEditSubrouteWindow(Route route)
         {

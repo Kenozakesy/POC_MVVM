@@ -105,10 +105,14 @@ C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\ob
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\TreeViewExample.exe.config
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\TreeViewExample.exe
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\TreeViewExample.pdb
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.dll
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\Microsoft.Expression.Interactions.dll
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\Microsoft.Windows.Design.Interaction.dll
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\Microsoft.Windows.Design.Extensibility.dll
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.xml
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\Microsoft.Windows.Design.Interaction.xml
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\Microsoft.Windows.Design.Extensibility.xml
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll

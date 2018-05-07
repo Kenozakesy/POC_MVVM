@@ -39,9 +39,18 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -63,6 +72,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\Enums\Alignment.cs" />
+    <Compile Include="Business\Enums\IsEditable.cs" />
     <Compile Include="Business\Enums\IsRequired.cs" />
     <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Enums\ParameterType.cs" />
@@ -81,11 +91,11 @@
     <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\UI_Models\InformationFieldModel.cs" />
+    <Compile Include="Dal\EntityFramework\UniContext.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
     <Compile Include="Dal\DatabaseConnection\DatabaseConnectionClass.cs" />
     <Compile Include="Dal\Repository\Interfaces\IParameterDefinitionRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
-    <Compile Include="Dal\UnitOfWork\Interfaces\IUnitOfWork.cs" />
     <Compile Include="UI\Interfaces\IAddParameterToObjectView.cs" />
     <Compile Include="UI\Interfaces\ICreateParameterView.cs" />
     <Compile Include="UI\Interfaces\ICreateSubrouteView.cs" />
@@ -186,6 +196,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -196,6 +207,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Business\Models\DatabaseModels\" />
     <Folder Include="UI\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

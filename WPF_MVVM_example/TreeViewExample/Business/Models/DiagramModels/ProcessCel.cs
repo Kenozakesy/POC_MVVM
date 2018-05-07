@@ -40,8 +40,11 @@ namespace TreeViewExample.Business.Models
             {
                 _Brush = Brushes.LightGreen;
             }
+
             AddRoutes();
             GetProcesscelParameters();
+
+            Validate();
         }
 
         #region Properties
@@ -192,6 +195,12 @@ namespace TreeViewExample.Business.Models
         {
             throw new NotImplementedException();
         }
+
+        public void Validate()
+        {
+            throw new NotImplementedException();
+        }
+
 
 
 

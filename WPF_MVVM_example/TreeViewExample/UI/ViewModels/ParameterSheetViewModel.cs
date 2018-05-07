@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.Interfaces;
@@ -55,7 +56,7 @@ namespace TreeViewExample.UI.ViewModels
         {
             for (int i = 1; i <= 40; i++)
             {
-                ParameterDefinition configParam = new ParameterDefinition("Parameter" + i, "test parameter", 4, 4, true, true, true);
+                ParameterDefinition configParam = new ParameterDefinition("Parameter" + i, "test parameter", 4, 4, IsEditable.Editable , true, true);
                 OrderObservableList.AddSorted(ConfigurationParameterList, configParam);
             }
         }

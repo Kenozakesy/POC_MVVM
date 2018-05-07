@@ -33,10 +33,9 @@ namespace TreeViewExample
             }
         }
 
-        public void OpenCreateParameterWindow(ObservableCollection<ParameterDefinition> customerParameterList)
+        public void OpenCreateParameterWindow()
         {
             CreateParameterWindow window = new CreateParameterWindow();
-            ((CreateParameterViewModel)window.DataContext).CustomerParameterList = customerParameterList;
             window.ShowDialog();
         }
 

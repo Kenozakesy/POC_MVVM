@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FirstModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="paf_ParDefs">
+          <Key>
+            <PropertyRef Name="paf_ParNm" />
+          </Key>
+          <Property Name="paf_ParNm" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="paf_ParDesc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="paf_ParValueUOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="paf_BeforeSep" Type="int" Nullable="false" />
+          <Property Name="paf_AfterSep" Type="int" Nullable="false" />
+          <Property Name="paf_ValidValues" Type="nvarchar" MaxLength="1000" />
+          <Property Name="paf_DefValue" Type="nvarchar" MaxLength="100" />
+          <Property Name="paf_Type" Type="int" Nullable="false" />
+          <Property Name="paf_Alignm" Type="int" Nullable="false" />
+          <Property Name="paf_Editable" Type="int" Nullable="false" />
+          <Property Name="paf_DisplaySeqNr" Type="int" />
+          <Property Name="paf_DisplayWidth" Type="int" />
+          <Property Name="paf_ParUOM_TextId" Type="nvarchar" MaxLength="30" />
+          <Property Name="paf_DisplayToUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="paf_IsRequired" Type="bit" />
+          <Property Name="paf_Column" Type="int" />
+          <Property Name="paf_IsStandardPar" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="FirstModelStoreContainer">
+          <EntitySet Name="paf_ParDefs" EntityType="Self.paf_ParDefs" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="FirstModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="FirstModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="paf_ParDefs" EntityType="FirstModel.paf_ParDefs" />
+        </EntityContainer>
+        <EntityType Name="paf_ParDefs">
+          <Key>
+            <PropertyRef Name="paf_ParNm" />
+          </Key>
+          <Property Name="paf_ParNm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paf_ParDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paf_ParValueUOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paf_BeforeSep" Type="Int32" Nullable="false" />
+          <Property Name="paf_AfterSep" Type="Int32" Nullable="false" />
+          <Property Name="paf_ValidValues" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="paf_DefValue" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="paf_Type" Type="Int32" Nullable="false" />
+          <Property Name="paf_Alignm" Type="Int32" Nullable="false" />
+          <Property Name="paf_Editable" Type="Int32" Nullable="false" />
+          <Property Name="paf_DisplaySeqNr" Type="Int32" />
+          <Property Name="paf_DisplayWidth" Type="Int32" />
+          <Property Name="paf_ParUOM_TextId" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="paf_DisplayToUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="paf_IsRequired" Type="Boolean" />
+          <Property Name="paf_Column" Type="Int32" />
+          <Property Name="paf_IsStandardPar" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="FirstModel" />
+        <Alias Key="Target" Value="FirstModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="FirstModelContainer" StorageEntityContainer="FirstModelStoreContainer">
+          <EntitySetMapping Name="paf_ParDefs">
+            <EntityTypeMapping TypeName="FirstModel.paf_ParDefs">
+              <MappingFragment StoreEntitySet="paf_ParDefs">
+                <ScalarProperty Name="paf_IsStandardPar" ColumnName="paf_IsStandardPar" />
+                <ScalarProperty Name="paf_Column" ColumnName="paf_Column" />
+                <ScalarProperty Name="paf_IsRequired" ColumnName="paf_IsRequired" />
+                <ScalarProperty Name="paf_DisplayToUser" ColumnName="paf_DisplayToUser" />
+                <ScalarProperty Name="paf_ParUOM_TextId" ColumnName="paf_ParUOM_TextId" />
+                <ScalarProperty Name="paf_DisplayWidth" ColumnName="paf_DisplayWidth" />
+                <ScalarProperty Name="paf_DisplaySeqNr" ColumnName="paf_DisplaySeqNr" />
+                <ScalarProperty Name="paf_Editable" ColumnName="paf_Editable" />
+                <ScalarProperty Name="paf_Alignm" ColumnName="paf_Alignm" />
+                <ScalarProperty Name="paf_Type" ColumnName="paf_Type" />
+                <ScalarProperty Name="paf_DefValue" ColumnName="paf_DefValue" />
+                <ScalarProperty Name="paf_ValidValues" ColumnName="paf_ValidValues" />
+                <ScalarProperty Name="paf_AfterSep" ColumnName="paf_AfterSep" />
+                <ScalarProperty Name="paf_BeforeSep" ColumnName="paf_BeforeSep" />
+                <ScalarProperty Name="paf_ParValueUOM" ColumnName="paf_ParValueUOM" />
+                <ScalarProperty Name="paf_ParDesc" ColumnName="paf_ParDesc" />
+                <ScalarProperty Name="paf_ParNm" ColumnName="paf_ParNm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

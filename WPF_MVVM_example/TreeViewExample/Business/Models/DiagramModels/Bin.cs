@@ -29,13 +29,13 @@ namespace TreeViewExample.Business.Models
         {
             _Number = _StaticNumber;
             _StaticNumber++;
-
             _Name = name + " " + _Number;
-
             _Unit = unit;
-            _Brush = Brushes.Orange;
 
+
+            _Brush = Brushes.Orange;
             GetBinParameters();
+            Validate();
         }
 
         #region Properties
@@ -91,7 +91,6 @@ namespace TreeViewExample.Business.Models
                 BinParameterList.Add(binParameter);
             }
         }
-
         public void SetSubroute(Unit unit = null)
         {
             if (this.Unit != null)
@@ -100,7 +99,7 @@ namespace TreeViewExample.Business.Models
             }
             Unit = unit;            
         }
-        private void Validate()
+        public void Validate()
         {
             if (_Unit == null)
             {
@@ -117,9 +116,6 @@ namespace TreeViewExample.Business.Models
             {
                 case IsValidated.Valid:
                     Brush = Brushes.LightGreen;
-                    break;
-                case IsValidated.InValid:
-                    Brush = Brushes.Red;
                     break;
                 case IsValidated.NotConnected:
                     Brush = Brushes.Orange;
@@ -160,7 +156,6 @@ namespace TreeViewExample.Business.Models
             }
             return configList;
         }
-
         public int CompareTo(object obj)
         {
             Bin bin = obj as Bin;
@@ -178,7 +173,6 @@ namespace TreeViewExample.Business.Models
         {
             return Name;
         }
-
         public ObservableCollection<Parameter> GetParameterList()
         {
             ObservableCollection<Parameter> parameterList = new ObservableCollection<Parameter>();
@@ -188,7 +182,6 @@ namespace TreeViewExample.Business.Models
             }
             return parameterList;
         }
-
         public void RemoveParameter(Parameter paramdef)
         {
             throw new NotImplementedException();

@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.Business.UI_Models;
 using TreeViewExample.UI.Interfaces;
@@ -22,6 +23,7 @@ namespace TreeViewExample.UI.ViewModels
 
         private List<ParameterType> _TypeValuesList = new List<ParameterType>();
         private List<Alignment> _AlignmentValuesList = new List<Alignment>();
+        private List<IsEditable> _IsEditableList = new List<IsEditable>();
 
         private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
         private ParameterDefinition _CustomerParameter = new ParameterDefinition();
@@ -40,7 +42,7 @@ namespace TreeViewExample.UI.ViewModels
 
         private ParameterType _ParameterType;
         private Alignment _Alignment;
-        private bool _IsEditable;
+        private IsEditable _IsEditable;
         private bool _DisplayToUser;
 
         #endregion
@@ -50,6 +52,8 @@ namespace TreeViewExample.UI.ViewModels
         {
             this._ICreateParameterView = view;
             InitializeCommand();
+
+            _CustomerParameterList = ListGodClass.Instance.CustomerParameterList;
         }
 
         #region Properties
@@ -70,6 +74,17 @@ namespace TreeViewExample.UI.ViewModels
             }
             set { SetProperty(ref _AlignmentValuesList, value); }
         }
+        public List<IsEditable> IsEditableList
+        {
+            get
+            {
+                return Enum.GetValues(typeof(IsEditable)).Cast<IsEditable>().ToList();
+            }
+            set { SetProperty(ref _IsEditableList, value); }
+        }
+
+
+
         public ParameterType ParameterType
         {
             get { return _ParameterType; }
@@ -152,7 +167,7 @@ namespace TreeViewExample.UI.ViewModels
             }
         }
 
-        public bool IsEditable
+        public IsEditable IsEditable
         {
             get { return _IsEditable; }
             set { SetProperty(ref _IsEditable, value); }

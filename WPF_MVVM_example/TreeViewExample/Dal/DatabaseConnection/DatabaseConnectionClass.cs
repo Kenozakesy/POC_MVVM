@@ -40,6 +40,30 @@ namespace TreeViewExample.Dal.DatabaseConnection
             }
         }
 
+        public static string GetConnectionString()
+        {
+            connect = new SqlConnection();
+
+            try
+            {
+                connect.ConnectionString = "Server=172.21.5.120;Initial Catalog=STG_KWAR_PROMASST_MES_V7.3.0;Persist Security Info=True; User = sa; password=k00lZ@@D";
+                //connect.ConnectionString = "Server=localhost;Initial Catalog=PROMASST_MES_V7.3.0_WithTestData;Persist Security Info=False;Integrated Security=true";
+                connect.Open();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.StackTrace);
+            }
+            if (connect.State == ConnectionState.Open)
+            {
+                return connect.ConnectionString;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// Close database connection
         /// </summary>

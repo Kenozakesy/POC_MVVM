@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TreeViewExample.Business.UI_Models"
+        xmlns:enums="clr-namespace:TreeViewExample.Business.Enums;assembly=TreeViewExample"
         xmlns:this="clr-namespace:TreeViewExample.Business.Models"
         xmlns:that="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
@@ -25,14 +26,36 @@
         <Style x:Key="MyLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="BorderBrush" Value="{Binding Path=Brush}" />
+            <Setter Property="BorderThickness" Value="5 0 0 0" />
             <Style.Triggers>
                 <Trigger Property="MenuItem.IsMouseOver" Value="true">
                     <Setter Property="Background" Value="{Binding Path=Brush}"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </Trigger>
+
+                <!--#region Colour triggers-->
+
+                <!--is usefull is you want to edit all colours directly on screen. but it has the least amount of functionality-->
+
+                <!--<DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.Valid}" >
+                    <Setter Property="BorderBrush" Value="LightGreen"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.InValid}" >
+                    <Setter Property="BorderBrush" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.NotConnected}" >
+                    <Setter Property="BorderBrush" Value="Bisque"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.InValidChildren}" >
+                    <Setter Property="BorderBrush" Value="Orange"/>
+                </DataTrigger>-->
+
+                <!--#endregion-->
+
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem,AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
                     <Setter Property="Background" Value="{Binding Path=Brush,  Converter={x:Static local:MyCloneConverter.Instance}}"/>
-                    
+
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
@@ -42,13 +65,14 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
-                    
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="MyLabelStyleProc" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="BorderBrush" Value="{Binding Path=Brush}" />
+            <Setter Property="BorderThickness" Value="8 0 0 0" />
             <Style.Triggers>
                 <Trigger Property="MenuItem.IsMouseOver" Value="true">
                     <Setter Property="Background" Value="{Binding Path=Brush}"/>
@@ -88,7 +112,7 @@
         </Style>
 
         <HierarchicalDataTemplate ItemsSource="{Binding Path=RouteList}" DataType="{x:Type this:ProcessCel}" >
-            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="8 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyleProc}">
+            <Label Content="{Binding Path=Name}"  Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyleProc}">
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
@@ -110,7 +134,7 @@
         </HierarchicalDataTemplate>
 
         <HierarchicalDataTemplate ItemsSource="{Binding Path=SubRouteList}" DataType="{x:Type this:Route}">
-            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+            <Label Content="{Binding Path=Name}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
@@ -132,7 +156,7 @@
         </HierarchicalDataTemplate>
 
         <HierarchicalDataTemplate ItemsSource="{Binding Path=BinList}" DataType="{x:Type this:Unit}">
-            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+            <Label Content="{Binding Path=Name}"  Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
@@ -152,7 +176,7 @@
         </HierarchicalDataTemplate>
 
         <HierarchicalDataTemplate ItemsSource="{Binding Path=UnitList}" DataType="{x:Type this:SubRoute}">
-            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+            <Label Content="{Binding Path=Name}"  Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
@@ -172,7 +196,7 @@
         </HierarchicalDataTemplate>
 
         <DataTemplate DataType="{x:Type this:Bin}" >
-            <Label Content="{Binding Path=Name}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+            <Label Content="{Binding Path=Name}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
 
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
@@ -192,7 +216,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type that:ParameterDefinition}">
-            <Label Content="{Binding Path=ParName}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
+            <Label Content="{Binding Path=ParName}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
 
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}" Visibility="Collapsed">

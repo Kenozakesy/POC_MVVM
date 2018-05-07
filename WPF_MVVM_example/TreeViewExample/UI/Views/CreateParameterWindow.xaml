@@ -287,7 +287,7 @@
                                 <Label Content="Display Sequence number" ToolTip="Should be a positive whole number" Grid.Row="14" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="Display Width" ToolTip="Should be a positive whole number" Grid.Row="15" Style="{StaticResource ListviewLabelStyle}"></Label>
                                 <Label Content="UOM text ID" ToolTip="text" Grid.Row="16" Style="{StaticResource ListviewLabelStyle}"></Label>
-                                <Label Content="Column" ToolTip="Column in which the parameter will be shown" Grid.Row="17" Style="{StaticResource ListviewLabelStyle}"></Label>
+                                <Label Content="Column" ToolTip="A positive whole number" Grid.Row="17" Style="{StaticResource ListviewLabelStyle}"></Label>
 
 
                             </Grid>
@@ -329,11 +329,7 @@
 
                                 <ComboBox Grid.Row="5" Style="{StaticResource ComboBoxDoubleColumnStyle}" ItemsSource="{Binding Path=TypeValuesList}" SelectedIndex="0" SelectedItem="{Binding Path=ParameterType}"></ComboBox>
                                 <ComboBox Grid.Row="6" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Path=AlignmentValuesList}" SelectedIndex="0" SelectedItem="{Binding Path=Alignment}"></ComboBox>
-                                
-                                <ComboBox Grid.Row="7" Style="{StaticResource ComboBoxStyle}" Text="{Binding Path=IsEditable, Mode=OneWayToSource}">
-                                    <ComboBoxItem Content="True" IsSelected="True"></ComboBoxItem>
-                                    <ComboBoxItem Content="False"></ComboBoxItem>
-                                </ComboBox>
+                                <ComboBox Grid.Row="7" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Path=IsEditableList}" SelectedIndex="0" SelectedItem="{Binding Path=IsEditable, Mode=OneWayToSource}"></ComboBox>
                                 <ComboBox Grid.Row="8" Style="{StaticResource ComboBoxStyle}" Text="{Binding Path=DisplayToUser, Mode=OneWayToSource}">
                                     <ComboBoxItem Content="True" IsSelected="True"></ComboBoxItem>
                                     <ComboBoxItem Content="False"></ComboBoxItem>

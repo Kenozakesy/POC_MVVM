@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Dal.DatabaseConnection;
@@ -9,6 +11,7 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models.DiagramModels
 {
+    [Table("paf_ParDefs")]
     public class ParameterDefinition : ViewModelBase, IComparable
     {
         private ParameterDefinitionBusiness db = new ParameterDefinitionBusiness(new MSSQL_ParameterDefinitionRepository());
@@ -17,29 +20,30 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         private bool _IsVisible = true;
         private bool _IsHighlighted = false;
+        private Brush _Brush;
 
         //Necessary variables
+
         private string _ParName;
         private string _Description;
         private int _BeforeSep;
         private int _AfterSep;
         private ParameterType _Type;
         private Alignment _Alignm;
-        private bool _IsEditable;
+        private IsEditable _IsEditable;
         private bool _DisplayToUser;
 
         //Optional variables
         private string _ParValueUOM;
         private string _ValidValues;
         private string _DefValue;
-        private string _DisplaySeqNr;
+        private int? _DisplaySeqNr;
         private int? _DisPlayWidth;
         private string _ParUOM_TextId;
-        private string _Column;
-        public int _SequenceNumber;
-
+        private int? _Column;
         private bool _IsStandardParameter;
-        private Brush _Brush;
+
+
 
         #endregion
 
@@ -106,8 +110,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         /// <param name="mappedToPPR"></param>
         /// <param name="mappedToBIN"></param>
         /// <param name="sequencenumber"></param>
-        public ParameterDefinition(string parName, string description, string parValueUOM, int beforeSep, int afterSep, string validValues, string defaultValue, ParameterType type, Alignment alignm,
-                                   int sequenceNumber, bool isEditable, bool displayToUser, int? displayWidth, string parUOM_TextId, string column, bool isStandard)
+        public ParameterDefinition(string parName, string description, string parValueUOM, int beforeSep, int afterSep, string validValues, string defaultValue, ParameterType type, Alignment alignm, int? sequenceNumber, IsEditable isEditable, bool displayToUser, int? displayWidth, string parUOM_TextId, int? column, bool isStandard)
         {
             _Brush = Brushes.LightGray;
 
@@ -120,7 +123,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _DefValue = defaultValue;
             _Type = type;
             _Alignm = alignm;
-            _SequenceNumber = sequenceNumber;
+            _DisplaySeqNr = sequenceNumber;
             _IsEditable = isEditable;
             _DisplayToUser = displayToUser;
             _DisPlayWidth = displayWidth;
@@ -190,7 +193,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         /// <param name="parValueUOM"></param>
         /// <param name="displayToUser"></param>
         /// <param name="isStandardParameter"></param>
-        public ParameterDefinition(string parName, string description, int beforeSep, int afterSep, bool isEditable, bool displayToUser, bool isStandardParameter)
+        public ParameterDefinition(string parName, string description, int beforeSep, int afterSep, IsEditable isEditable, bool displayToUser, bool isStandardParameter)
         {
             _ParName = parName;
             _Description = description;
@@ -226,7 +229,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToSTA = false;
             _MappedToPPR = false;
             _MappedToBIN = false;
-            _SequenceNumber = 0;
+            _DisplaySeqNr = 0;
         }
 
         /// <summary>
@@ -261,7 +264,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToSTA = false;
             _MappedToPPR = false;
             _MappedToBIN = false;
-            _SequenceNumber = 0;
+            _DisplaySeqNr = 0;
         }
 
         #endregion
@@ -271,102 +274,156 @@ namespace TreeViewExample.Business.Models.DiagramModels
         /// <summary>
         /// required variables
         /// </summary>
+        [Key]
+        [Column("paf_ParNm")]
         public string ParName
         {
             get { return _ParName; }
             set { SetProperty(ref _ParName, value); }
         }
+
+        [Column("paf_ParDesc")]
         public string Description
         {
             get { return _Description; }
             set { SetProperty(ref _Description, value); }
         }
+
+        [Column("paf_BeforeSep")]
         public int BeforeSep
         {
             get { return _BeforeSep; }
             set { SetProperty(ref _BeforeSep, value); }
         }
+
+        [Column("paf_AfterSep")]
         public int AfterSep
         {
             get { return _AfterSep; }
             set { SetProperty(ref _AfterSep, value); }
         }
+
+        [Column("paf_Type")]
         public ParameterType Type
         {
             get { return _Type; }
             set { SetProperty(ref _Type, value); }
         }
+
+        [Column("paf_Alignm")]
         public Alignment Alignm
         {
             get { return _Alignm; }
             set { SetProperty(ref _Alignm, value); }
         }
-        public bool IsEditable
+
+        [Column("paf_Editable")]
+        public IsEditable IsEditable
         {
             get { return _IsEditable; }
             set { SetProperty(ref _IsEditable, value); }
         }
+
+        [NotMapped]
         public bool DisplayToUser
         {
             get { return _DisplayToUser; }
             set { SetProperty(ref _DisplayToUser, value); }
         }
 
+        [Column("paf_DisplayToUser")]
+        public string DisplayToUserText
+        {
+            get
+            {
+                if (DisplayToUser)
+                {
+                    return "1";
+                }
+                else 
+                {
+                    return "0";
+                };
+            }
+            set
+            {
+                if (value.ToString() == "0")
+                {
+                    DisplayToUser = false;
+                }
+                else if (value.ToString() == "1")
+                {
+                    DisplayToUser = true;
+                };
+            }
+        }
+
         /// <summary>
         /// Optional Variables
         /// </summary>
+        [Column("paf_ParValueUOM")]
         public string ParValueUOM
         {
             get { return _ParValueUOM; }
             set { SetProperty(ref _ParValueUOM, value); }
         }
+        [Column("paf_ValidValues")]
         public string ValidValues
         {
             get { return _ValidValues; }
             set { SetProperty(ref _ValidValues, value); }
         }
+        [Column("paf_DefValue")]
         public string DefaultValue
         {
             get { return _DefValue; }
             set { SetProperty(ref _DefValue, value); }
         }
-        public string DisplaySeqNr
+        [Column("paf_DisplaySeqNr")]
+        public int? DisplaySeqNr
         {
             get { return _DisplaySeqNr; }
             set { SetProperty(ref _DisplaySeqNr, value); }
         }
+        [Column("paf_DisplayWidth")]
         public int? DisplayWidth
         {
             get { return _DisPlayWidth; }
             set { SetProperty(ref _DisPlayWidth, value); }
         }
+        [Column("paf_ParUOM_TextId")]
         public string ParUOM_TextId
         {
             get { return _ParUOM_TextId; }
             set { SetProperty(ref _ParUOM_TextId, value); }
         }
-        public string Column
+        [Column("paf_Column")]
+        public int? Column
         {
             get { return _Column; }
             set { SetProperty(ref _Column, value); }
         }
-
-        //GUI propertys
-        public bool IsVisible
-        {
-            get { return _IsVisible; }
-            set { SetProperty(ref _IsVisible, value); }
-        }
-        public bool IsHighlighted
-        {
-            get { return _IsHighlighted; }
-            set { SetProperty(ref _IsHighlighted, value); }
-        }
+        [Column("paf_IsStandardPar")]
         public bool IsStandardParameter
         {
             get { return _IsStandardParameter; }
             set { SetProperty(ref _IsStandardParameter, value); }
         }
+
+
+        [NotMapped]
+        public bool IsVisible
+        {
+            get { return _IsVisible; }
+            set { SetProperty(ref _IsVisible, value); }
+        }
+        [NotMapped]
+        public bool IsHighlighted
+        {
+            get { return _IsHighlighted; }
+            set { SetProperty(ref _IsHighlighted, value); }
+        }  
+        [NotMapped]
         public Brush Brush
         {
             get { return _Brush; }
@@ -377,126 +434,145 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         #region ConfigurationProperties
 
+        [NotMapped]
         public bool? UsedForBG
         {
             get { return _UsedForBG; }
             set { SetProperty(ref _UsedForBG, value); }
         }
+        [NotMapped]
         public bool? UsedForBL
         {
             get { return _UsedForBL; }
             set { SetProperty(ref _UsedForBL, value); }
         }
+        [NotMapped]
         public bool? UsedForCL
         {
             get { return _UsedForCL; }
             set { SetProperty(ref _UsedForCL, value); }
         }
+        [NotMapped]
         public bool? UsedForCS
         {
             get { return _UsedForCS; }
             set { SetProperty(ref _UsedForCS, value); }
         }
+        [NotMapped]
         public bool? UsedForIL
         {
             get { return _UsedForIL; }
             set { SetProperty(ref _UsedForIL, value); }
         }
+        [NotMapped]
         public bool? UsedForOL
         {
             get { return _UsedForOL; }
             set { SetProperty(ref _UsedForOL, value); }
         }
+        [NotMapped]
         public bool? UsedForPL
         {
             get { return _UsedForPL; }
             set { SetProperty(ref _UsedForPL, value); }
         }
+        [NotMapped]
         public bool? UsedForRL
         {
             get { return _UsedForRL; }
             set { SetProperty(ref _UsedForRL, value); }
         }
+        [NotMapped]
         public bool? UsedForSL
         {
             get { return _UsedForSL; }
             set { SetProperty(ref _UsedForSL, value); }
         }
+        [NotMapped]
         public bool? UsedForTL
         {
             get { return _UsedForTL; }
             set { SetProperty(ref _UsedForTL, value); }
         }
+        [NotMapped]
         public bool? UsedForZG
         {
             get { return _UsedForZG; }
             set { SetProperty(ref _UsedForZG, value); }
         }
+        [NotMapped]
         public bool? MappedToSYP
         {
             get { return _MappedToSYP; }
             set { SetProperty(ref _MappedToSYP, value); }
         }
+        [NotMapped]
         public bool? MappedToPCA
         {
             get { return _MappedToPCA; }
             set { SetProperty(ref _MappedToPCA, value); }
         }
+        [NotMapped]
         public bool? MappedToROP
         {
             get { return _MappedToROP; }
             set { SetProperty(ref _MappedToROP, value); }
         }
+        [NotMapped]
         public bool? MappedToARP
         {
             get { return _MappedToARP; }
             set { SetProperty(ref _MappedToARP, value); }
         }
+        [NotMapped]
         public bool? MappedToNONE
         {
             get { return _MappedToNONE; }
             set { SetProperty(ref _MappedToNONE, value); }
         }
+        [NotMapped]
         public bool? MappedToPPP
         {
             get { return _MappedToPPP; }
             set { SetProperty(ref _MappedToPPP, value); }
         }
+        [NotMapped]
         public bool? MappedToPSR
         {
             get { return _MappedToPSR; }
             set { SetProperty(ref _MappedToPSR, value); }
         }
+        [NotMapped]
         public bool? MappedToRLP
         {
             get { return _MappedToRLP; }
             set { SetProperty(ref _MappedToRLP, value); }
         }
+        [NotMapped]
         public bool? MappedToSDL
         {
             get { return _MappedToSDL; }
             set { SetProperty(ref _MappedToSDL, value); }
         }
+        [NotMapped]
         public bool? MappedToSTA
         {
             get { return _MappedToSTA; }
             set { SetProperty(ref _MappedToSTA, value); }
         }
+        [NotMapped]
         public bool? MappedToPPR
         {
             get { return _MappedToPPR; }
             set { SetProperty(ref _MappedToPPR, value); }
         }
+        [NotMapped]
         public bool? MappedToBIN
         {
             get { return _MappedToBIN; }
             set { SetProperty(ref _MappedToBIN, value); }
         }
-        public int SequenceNumber
-        {
-            get { return _SequenceNumber; }
-            set { SetProperty(ref _SequenceNumber, value); }
-        }
+
 
         #endregion
 
