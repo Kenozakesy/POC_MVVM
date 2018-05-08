@@ -64,7 +64,7 @@
                     <Setter Property="Foreground" Value="Black"/>
                 </Trigger>
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem,AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
-                    <Setter Property="Background" Value="{Binding Path=Brush,  Converter={x:Static local:MyCloneConverter.Instance}}"/>
+                    <Setter Property="Background" Value="{Binding Path=Brush, Converter={x:Static local:MyCloneConverter.Instance}}"/>
 
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>

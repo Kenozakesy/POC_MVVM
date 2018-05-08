@@ -160,4 +160,3 @@ C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csproj.GenerateResource.Cache
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.exe
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.pdb
-C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csprojResolveAssemblyReference.cache

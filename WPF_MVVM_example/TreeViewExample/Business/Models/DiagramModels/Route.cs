@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,15 +35,7 @@ namespace TreeViewExample.Business.Models
             this._Name = name;
             this._ProcessCel = processCel;
 
-            int newRan = ran.Next(0, 10);
-            if (newRan >= 8)
-            {
-                _Brush = Brushes.Red;
-            }
-            else
-            {
-                _Brush = Brushes.LightGreen;
-            }
+            Validate();
 
             if (addsubroutes)
             { 
@@ -53,16 +46,21 @@ namespace TreeViewExample.Business.Models
 
         #region Properties
 
+        [NotMapped]
         public ObservableCollection<RouteParameter> RouteParameterList
         {
             get { return _RouteParameterList; }
             set { SetProperty(ref _RouteParameterList, value); }
         }
+        [NotMapped]
         public ObservableCollection<SubRoute> SubRouteList
         {
             get { return _SubRouteList; }
             set { SetProperty(ref _SubRouteList, value); }
         }
+
+
+
         public string Name
         {
             get { return _Name; }
@@ -172,17 +170,17 @@ namespace TreeViewExample.Business.Models
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
-            foreach (var prop in this.GetType().GetProperties())
-            {
-                if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
-                {
-                    continue;
-                }
-                string name = prop.Name;
-                string value = prop.GetValue(this, null).ToString();
-                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
-                configList.Add(mainListViewModel);
-            }
+            //foreach (var prop in this.GetType().GetProperties())
+            //{
+            //    if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
+            //    {
+            //        continue;
+            //    }
+            //    string name = prop.Name;
+            //    string value = prop.GetValue(this, null).ToString();
+            //    MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
+            //    configList.Add(mainListViewModel);
+            //}
             return configList;
         }
         public ObservableCollection<Parameter> GetParameterList()
@@ -201,10 +199,22 @@ namespace TreeViewExample.Business.Models
 
         public void Validate()
         {
-            throw new NotImplementedException();
+            int newRan = ran.Next(0, 10);
+            if (newRan >= 8)
+            {
+                _Brush = Brushes.Red;
+            }
+            else
+            {
+                _Brush = Brushes.LightGreen;
+            }
         }
 
 
+        public string GetName()
+        {
+            return Name;
+        }
 
 
         #endregion

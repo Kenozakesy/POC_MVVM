@@ -34,7 +34,8 @@ namespace TreeViewExample.UI.ViewModels
             InitializeCommand();
 
             AddProcessCelsAndBins();
-            _CustomerParameterList = ListGodClass.Instance.CustomerParameterList; 
+            _CustomerParameterList = ListGodClass.Instance.CustomerParameterList;
+            _ProcessCelList = ListGodClass.Instance.ProcessCelList;
         }
 
         #region Properties
@@ -63,29 +64,12 @@ namespace TreeViewExample.UI.ViewModels
         #endregion
 
         #region Methods
-
-        private void CreateNewProcesCel()
-        {
-            List<int> intList = new List<int>();
-            foreach (ProcessCel P in ProcessCelList)
-            {
-                intList.Add(P.Number);
-            }
-            int firstAvailable = Enumerable.Range(1, int.MaxValue).Except(intList).FirstOrDefault();
-
-            ProcessCel procescel = new ProcessCel("procescel", firstAvailable);
-            OrderObservableList.AddSorted(ProcessCelList, procescel);
-        }
   
         /// <summary>
         /// This is a test method
         /// </summary>
         private void AddProcessCelsAndBins()
         {
-            for (int i = 1; i <= 5; i++)
-            {
-                CreateNewProcesCel();
-            }
             for (int i = 1; i <= 10; i++)
             {
                 BinList.Add(new Bin("Bin"));
@@ -162,10 +146,6 @@ namespace TreeViewExample.UI.ViewModels
                 bin.SetSubroute();
             }
         }
-        private void CreateProcesCel()
-        {
-            CreateNewProcesCel();
-        }
         private void ShowPropInList(IConfigObject obj)
         {
             ListView.Clear();
@@ -208,7 +188,6 @@ namespace TreeViewExample.UI.ViewModels
             CreateObjectClickCommand = new RelayCommandT1<IConfigObject>(CreateObjectClick);
             SetbinCommand = new RelayCommandT1<Unit>(SetBinToUnit);
             RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
-            CreateProcesCelCommand = new RelayCommand(CreateProcesCel);
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
@@ -222,7 +201,6 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand CreateObjectClickCommand { get; set; }
         public ICommand SetbinCommand { get; set; }
         public ICommand RemoveBinFromSubrouteCommand { get; set; }
-        public ICommand CreateProcesCelCommand { get; set; }
         public ICommand ShowPropInListCommand { get; set; }
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }

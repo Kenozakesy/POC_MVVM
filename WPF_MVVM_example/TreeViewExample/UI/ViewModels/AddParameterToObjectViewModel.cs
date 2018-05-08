@@ -47,7 +47,7 @@ namespace TreeViewExample.UI.ViewModels
         }
         public string ViewHeader
         {
-            get { return _ParameterObject.Name + " ParameterAddWindow"; }
+            get { return _ParameterObject.GetName() + " ParameterAddWindow"; }
         }
 
         #endregion

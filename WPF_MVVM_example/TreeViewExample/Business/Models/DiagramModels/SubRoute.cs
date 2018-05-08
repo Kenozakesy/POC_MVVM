@@ -149,17 +149,17 @@ namespace TreeViewExample.Business.Models
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
-            foreach (var prop in this.GetType().GetProperties())
-            {
-                if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
-                {
-                    continue;
-                }
-                string name = prop.Name;
-                string value = prop.GetValue(this, null).ToString();
-                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
-                configList.Add(mainListViewModel);
-            }
+            //foreach (var prop in this.GetType().GetProperties())
+            //{
+            //    if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
+            //    {
+            //        continue;
+            //    }
+            //    string name = prop.Name;
+            //    string value = prop.GetValue(this, null).ToString();
+            //    MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
+            //    configList.Add(mainListViewModel);
+            //}
             return configList;
         }
         public object Clone()

@@ -23,6 +23,7 @@ namespace TreeViewExample.Business.Singletons
         private ListGodClass()
         {
             AddCustomerParameters();
+            AddProcesCellsParameters();
         }
 
         public static ListGodClass Instance
@@ -66,6 +67,15 @@ namespace TreeViewExample.Business.Singletons
         {
             ParameterDefinition paramDef = new ParameterDefinition();
             CustomerParameterList = paramDef.GetAllCustomerParameters();
+        }
+
+        /// <summary>
+        /// Gets all ProcesCells
+        /// </summary>
+        private void AddProcesCellsParameters()
+        {
+            ProcessCel procCell = new ProcessCel();
+            ProcessCelList = procCell.GetAllProcesCells();
         }
 
         #endregion

@@ -19,10 +19,10 @@ namespace TreeViewExample.Dal.SQLServerRepository
             {
                 try
                 {
-                    var select = (from r in context.ParameterDefinitions select r);
+                    var select = (from r in context.ParameterDefinitions orderby r.ParName select r);
                     parameterDefinitionList = select.ToList();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     context.Dispose();
                 }

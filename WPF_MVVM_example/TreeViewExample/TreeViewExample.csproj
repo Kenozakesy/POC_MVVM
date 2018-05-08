@@ -94,8 +94,11 @@
     <Compile Include="Dal\EntityFramework\UniContext.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
     <Compile Include="Dal\DatabaseConnection\DatabaseConnectionClass.cs" />
+    <Compile Include="Dal\Repository\BusinessGlueCode\ProcesCellBusiness.cs" />
     <Compile Include="Dal\Repository\Interfaces\IParameterDefinitionRepository.cs" />
+    <Compile Include="Dal\Repository\Interfaces\IProcesCellRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
+    <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ProcesCellRepository.cs" />
     <Compile Include="UI\Interfaces\IAddParameterToObjectView.cs" />
     <Compile Include="UI\Interfaces\ICreateParameterView.cs" />
     <Compile Include="UI\Interfaces\ICreateSubrouteView.cs" />
