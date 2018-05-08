@@ -183,10 +183,7 @@ namespace TreeViewExample.Business.Models
         }
         private void AddRoutes()
         {
-            for (int i = 0; i < 3; i++)
-            {
-                RouteList.Add(new Route("Route " + i, i, this, true));
-            }         
+            //database stuff       
         }
 
         public void ChangeColor()
@@ -226,15 +223,7 @@ namespace TreeViewExample.Business.Models
         }
         public void CreateChild()
         {
-            List<int> intList = new List<int>();
-            foreach (Route R in RouteList)
-            {
-                intList.Add(R.Number);
-            }
-            int firstAvailable = Enumerable.Range(0, int.MaxValue).Except(intList).FirstOrDefault();
-
-            Route route = new Route("Route " + firstAvailable, firstAvailable, this);
-            OrderObservableList.AddSorted(RouteList, route);
+            //database stuff
         }
         public List<MainListViewModel> GenerateListViewList()
         {

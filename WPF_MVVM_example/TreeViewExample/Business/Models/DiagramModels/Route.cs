@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
+    [Table("rot_Routes")]
     public class Route : ViewModelBase, IConfigObject, IObjectWithParameters
     {
         #region Fields
@@ -22,25 +24,26 @@ namespace TreeViewExample.Business.Models
         private ObservableCollection<SubRoute> _SubRouteList = new ObservableCollection<SubRoute>();
         private ProcessCel _ProcessCel;
 
-        private string _Name;
-        private int _Number;
         private Brush _Brush;
         private static Random ran = new Random();
 
+        private string _ProcesCellId;
+        private string _RouteId;
+        private string _RouteName;
+        private string _ShortRouteName;
+        private string _ProcedureId;
+        private int _Available;
+        private int _SelectPriority;
+
         #endregion
 
-        public Route(string name, int number, ProcessCel processCel, bool addsubroutes = false)
+        /// <summary>
+        /// Ued with entity framework
+        /// </summary>
+        public Route()
         {
-            this._Number = number;
-            this._Name = name;
-            this._ProcessCel = processCel;
-
             Validate();
-
-            if (addsubroutes)
-            { 
-                AddSubRoutes();
-            }
+            AddSubRoutes();           
             GetRouteParameters();
         }
 
@@ -58,24 +61,66 @@ namespace TreeViewExample.Business.Models
             get { return _SubRouteList; }
             set { SetProperty(ref _SubRouteList, value); }
         }
-
-
-
-        public string Name
-        {
-            get { return _Name; }
-            set { SetProperty(ref _Name, value); }
-        }
-        public int Number
-        {
-            get { return _Number; }
-            set { SetProperty(ref _Number, value); }
-        }
         public Brush Brush
         {
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
         }
+
+        #region rot_Routes Columns
+
+        public virtual ProcessCel ProcesCell
+        {
+            get { return _ProcessCel; }
+            set { SetProperty(ref _ProcessCel, value); }
+        }
+
+        [Key, ForeignKey("ProcesCell")]
+        [Column("rot_ProcCellId")]
+        public string ProcesCellId
+        {
+            get { return _ProcesCellId; }
+            set { SetProperty(ref _ProcesCellId, value); }
+        }
+        [Key]
+        [Column("rot_RouteId")]
+        public string RouteId
+        {
+            get { return _RouteId; }
+            set { SetProperty(ref _RouteId, value); }
+        }
+        [Column("rot_RouteNm")]
+        public string RouteName
+        {
+            get { return _RouteName; }
+            set { SetProperty(ref _RouteName, value); }
+        }
+        [Column("rot_ShortRouteName")]
+        public string ShortRouteName
+        {
+            get { return _ShortRouteName; }
+            set { SetProperty(ref _ShortRouteName, value); }
+        }
+        [Column("rot_ProcedureId")]
+        public string ProcedureId
+        {
+            get { return _ProcedureId; }
+            set { SetProperty(ref _ProcedureId, value); }
+        }
+        [Column("rot_Available")]
+        public int Available
+        {
+            get { return _Available; }
+            set { SetProperty(ref _Available, value); }
+        }
+        [Column("rot_SelectPriority")]
+        public int SelectPriority
+        {
+            get { return _SelectPriority; }
+            set { SetProperty(ref _SelectPriority, value); }
+        }
+
+        #endregion
 
         #endregion
 
@@ -149,22 +194,11 @@ namespace TreeViewExample.Business.Models
             OrderObservableList.AddSorted(SubRouteList, subroute);
 
         }
-        public override string ToString()
-        {
-            return _Name;
-        }
+
         public int CompareTo(object obj)
         {
             Route route = obj as Route;
-            if (this._Number > route._Number)
-            {
-                return 1;
-            }
-            else if (this._Number < route._Number)
-            {
-                return -1;
-            }
-            return 0;
+            return string.Compare(this.RouteName, route.RouteName);
         }
 
         public List<MainListViewModel> GenerateListViewList()
@@ -213,7 +247,7 @@ namespace TreeViewExample.Business.Models
 
         public string GetName()
         {
-            return Name;
+            return RouteId;
         }
 
 
