@@ -47,6 +47,23 @@ namespace TreeViewExample.Business.Models
             Validate();
         }
 
+        public ProcessCel()
+        {
+            int newRan = ran.Next(0, 10);
+            if (newRan >= 8)
+            {
+                _Brush = Brushes.Red;
+            }
+            else
+            {
+                _Brush = Brushes.LightGreen;
+            }
+
+            AddRoutes();
+            GetProcesscelParameters();
+            Validate();
+        }
+
         #region Properties
 
         public ObservableCollection<Route> RouteList

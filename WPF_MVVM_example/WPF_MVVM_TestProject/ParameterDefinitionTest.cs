@@ -29,17 +29,23 @@ namespace WPF_MVVM_TestProject
             {
                 try
                 { 
-                    ParameterDefinition param = new ParameterDefinition();
-                    param.ParName = "test90";
-                    param.Description = "test";
-                    param.BeforeSep = 9;
+                    ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
                     param.AfterSep = 9;
                     param.Type = ParameterType.Date;
                     param.Alignm = Alignment.Left;
-                    param.DisplayToUser = true;
-                    param.IsEditable = IsEditable.Editable;
 
-                    context.ParameterDefinitions.Add(param);
+                    ParameterDefinition param2 = new ParameterDefinition("test90", "desc", 99, 99, IsEditable.Editable, true, true);
+                    param.AfterSep = 9;
+                    param.Type = ParameterType.Date;
+                    param.Alignm = Alignment.Left;
+
+                    var parameter = context.ParameterDefinitions.Find(param.ParName);
+                    context.Entry(parameter).CurrentValues.SetValues(param);
+   
+                    //context.ParameterDefinitions.Add(param);
+                    //context.ParameterDefinitions.Add(param2);
+     
+
                     context.SaveChanges();
                 }
                 catch (Exception e)
@@ -64,6 +70,29 @@ namespace WPF_MVVM_TestProject
                 catch (Exception e)
                 {
                     context.Dispose();
+                }
+            }
+
+        }
+
+        [TestMethod]
+        public void SelectCheckFrameworkTest2()
+        {
+            using (var context = new UniContext())
+            {
+                using (var dbcontext = context.Database.BeginTransaction())
+                { 
+                    try
+                    {
+                        var select = (from r in context.ParameterDefinitions select r);
+                        List<ParameterDefinition> paramdefs = select.ToList();
+                        Assert.IsNotNull(paramdefs);
+                    }
+                    catch (Exception)
+                    {             
+                        dbcontext.Rollback();
+                        context.Dispose();
+                    }
                 }
             }
 

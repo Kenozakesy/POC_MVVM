@@ -16,9 +16,16 @@ namespace TreeViewExample.Dal.EntityFramework
 
         }
 
+        #region DBsets
+
         public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
 
+        #endregion
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }
