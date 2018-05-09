@@ -23,7 +23,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         }
 
         [ForeignKey("ProcCellId")]
-        public virtual ProcessCel sri_ProcCellId { get; set; }
+        public virtual ProcessCel procescell { get; set; }
 
         [Key]
         [Column("sri_ProcCellId", Order = 0)]

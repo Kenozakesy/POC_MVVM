@@ -317,7 +317,7 @@
         </Border>
 
         <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource BorderStyle}">
-            <TreeView BorderThickness="0"> 
+            <TreeView BorderThickness="0" > 
                        
                 <TreeViewItem Header="Configuration tree" IsExpanded="True" FontSize="30" FontWeight="Bold" >
 

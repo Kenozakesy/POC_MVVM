@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Dal.EntityFramework;
 using TreeViewExample.Dal.Repository.Interfaces;
+using System.Data.Entity;
 
 namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
@@ -13,20 +14,23 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
     {
         public List<ProcessCel> GetAllProcesCells()
         {
-            List<ProcessCel> parameterDefinitionList = new List<ProcessCel>();
+            List<ProcessCel> procescells = new List<ProcessCel>();
             using (var context = new UniContext())
             {
                 try
                 {
-                    var select = (from r in context.ProcesCells orderby r.ProcesCellName select r);
-                    parameterDefinitionList = select.ToList();
+                    var select = (from r in context.ProcesCells
+                                  .Include(x => x.RouteList)
+                                  .Include(x => x.SubrouteList)
+                                  select r);
+                    procescells = select.ToList();
                 }
                 catch (Exception)
                 {
                     context.Dispose();
                 }
             }
-            return parameterDefinitionList;
+            return procescells;
         }
 
         public List<Route> GetAllRoutesByProcesCell(ProcessCel procescell)

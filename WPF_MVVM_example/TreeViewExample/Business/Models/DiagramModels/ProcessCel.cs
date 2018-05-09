@@ -59,14 +59,14 @@ namespace TreeViewExample.Business.Models
 
         #region Properties
 
-        [NotMapped]
-        public ObservableCollection<Route> RouteList
+
+        public virtual ObservableCollection<Route> RouteList
         {
             get { return _RouteList; }
             set { SetProperty(ref _RouteList, value); }
         }
-        [NotMapped]
-        public ObservableCollection<SubRoute> SubrouteList
+
+        public virtual ObservableCollection<SubRoute> SubrouteList
         {
             get { return _SubrouteList; }
             set { SetProperty(ref _SubrouteList, value); }
@@ -276,30 +276,13 @@ namespace TreeViewExample.Business.Models
         {
              return db.GetAllProcesCells();
         }
-        public void GetRoutesAndSubroutesDatabase()
-        {
-            RouteList = db.GetAllRoutesByProcesCell(this);
-            SubrouteList = db.GetAllSubRoutesByProcesCell(this);
-
-            foreach (Route R in RouteList)
-            {
-                R.ProcesCell = this;
-                //R.getSubroutes();
-            }
-            foreach (SubRoute SR in SubrouteList)
-            {
-                SR.ProcessCel = this;
-                //R.units();
-                //R.getbins();
-            }
-        }
-
-
+ 
         public string GetName()
         {
             return ProcesCellId;
         }
 
+        
 
 
 

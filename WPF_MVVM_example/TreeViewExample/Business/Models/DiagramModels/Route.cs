@@ -74,7 +74,8 @@ namespace TreeViewExample.Business.Models
 
         #region rot_Routes Columns
 
-        public ProcessCel ProcesCell
+        [ForeignKey("ProcesCellId")]
+        public virtual ProcessCel ProcesCell
         {
             get { return _ProcessCel; }
             set { SetProperty(ref _ProcessCel, value); }

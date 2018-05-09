@@ -145,13 +145,14 @@ namespace WPF_MVVM_TestProject
         [TestMethod]
         public void SelectSubroutesInRouteTest()
         {
+            List<SubRoutesInRoutes> subroutes = new List<SubRoutesInRoutes>();
             using (var context = new UniContext())
             {             
                 try
                 {
                     var select = (from r in context.SubRoutesInRoutes select r);
-                    List<SubRoutesInRoutes> subroutes = select.ToList();
-                    Assert.IsNotNull(subroutes);
+                    subroutes = select.ToList();
+                    Assert.IsNotNull(subroutes[0].procescell);
 
                 }
                 catch (Exception)
@@ -166,13 +167,14 @@ namespace WPF_MVVM_TestProject
         [TestMethod]
         public void SelectProcesCellTest()
         {
+            List<ProcessCel> procescells = new List<ProcessCel>();
             using (var context = new UniContext())
             {
                 try
                 {
                     var select = (from r in context.ProcesCells select r);
-                    List<ProcessCel> subroutes = select.ToList();
-                    Assert.IsNotNull(subroutes);
+                    procescells = select.ToList();
+                    Assert.IsNotNull(procescells);
 
                 }
                 catch (Exception)

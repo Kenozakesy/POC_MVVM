@@ -76,12 +76,6 @@ namespace TreeViewExample.Business.Singletons
         {
             ProcessCel procCell = new ProcessCel();
             ProcessCelList = procCell.GetAllProcesCells();
-
-            foreach (ProcessCel P in ProcessCelList)
-            {
-                P.GetRoutesAndSubroutesDatabase();
-            }
-
         }
 
         #endregion

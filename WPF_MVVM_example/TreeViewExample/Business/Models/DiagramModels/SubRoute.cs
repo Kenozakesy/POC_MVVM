@@ -47,8 +47,9 @@ namespace TreeViewExample.Business.Models
             get { return _UnitList; }
             set { SetProperty(ref _UnitList, value); }
         }
-        [NotMapped]
-        public ProcessCel ProcessCel
+
+        [ForeignKey("ProcesCellId")]
+        public virtual ProcessCel ProcessCel
         {
             get { return _ProcessCel; }
             set { SetProperty(ref _ProcessCel, value); }
