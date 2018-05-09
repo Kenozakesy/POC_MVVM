@@ -28,8 +28,6 @@ namespace TreeViewExample.Business.Models
 
         public SubRoute()
         {
-
-            AddUnits();
             Validate();
         }
 
@@ -80,13 +78,6 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
-        private void AddUnits()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                UnitList.Add(new Unit("Unit " + i.ToString(), i, this));
-            }
-        }
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -128,15 +119,15 @@ namespace TreeViewExample.Business.Models
         }
         public void CreateChild()
         {
-            List<int> intList = new List<int>();
-            foreach (Unit R in UnitList)
-            {
-                intList.Add(R.Number);
-            }
-            int firstAvailable = Enumerable.Range(0, int.MaxValue).Except(intList).FirstOrDefault();
+            //List<int> intList = new List<int>();
+            //foreach (Unit R in UnitList)
+            //{
+            //    intList.Add(R.Number);
+            //}
+            //int firstAvailable = Enumerable.Range(0, int.MaxValue).Except(intList).FirstOrDefault();
 
-            Unit unit = new Unit("Unit " + firstAvailable, firstAvailable, this);
-            OrderObservableList.AddSorted(UnitList, unit);
+            //Unit unit = new Unit("Unit " + firstAvailable, firstAvailable, this);
+            //OrderObservableList.AddSorted(UnitList, unit);
         }
         public int CompareTo(object obj)
         {

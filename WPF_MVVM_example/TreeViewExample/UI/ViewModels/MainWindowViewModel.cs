@@ -33,7 +33,6 @@ namespace TreeViewExample.UI.ViewModels
             _TreeView = view;
             InitializeCommand();
 
-            AddProcessCelsAndBins();
             _CustomerParameterList = ListGodClass.Instance.CustomerParameterList;
             _ProcessCelList = ListGodClass.Instance.ProcessCelList;
         }
@@ -65,17 +64,6 @@ namespace TreeViewExample.UI.ViewModels
 
         #region Methods
   
-        /// <summary>
-        /// This is a test method
-        /// </summary>
-        private void AddProcessCelsAndBins()
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                BinList.Add(new Bin("Bin"));
-            }
-        }
-
         #endregion
 
         #region ItemHandlers
@@ -139,12 +127,12 @@ namespace TreeViewExample.UI.ViewModels
         }
         private void RemoveBinFromSubroute(Bin bin)
         {
-            string text = "Remove bin from " + bin.Unit.Name + "?";
-            string title = "Remove bin?";
-            if (_TreeView.ConfirmMessage(title, text))
-            {
-                bin.SetSubroute();
-            }
+            //string text = "Remove bin from " + bin.Unit.Name + "?";
+            //string title = "Remove bin?";
+            //if (_TreeView.ConfirmMessage(title, text))
+            //{
+            //    bin.SetSubroute();
+            //}
         }
         private void ShowPropInList(IConfigObject obj)
         {
