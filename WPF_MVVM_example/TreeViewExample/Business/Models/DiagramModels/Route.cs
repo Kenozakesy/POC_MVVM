@@ -11,6 +11,8 @@ using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
+using TreeViewExample.Dal.Repository.BusinessGlueCode;
+using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
@@ -18,6 +20,8 @@ namespace TreeViewExample.Business.Models
     [Table("rot_Routes")]
     public class Route : ViewModelBase, IConfigObject, IObjectWithParameters
     {
+        RouteBusiness db = new RouteBusiness(new MSSQL_RouteRepository());
+
         #region Fields
 
         private ObservableCollection<RouteParameter> _RouteParameterList = new ObservableCollection<RouteParameter>();
@@ -43,7 +47,7 @@ namespace TreeViewExample.Business.Models
         public Route()
         {
             Validate();
-            AddSubRoutes();           
+            GetSubRoutesDatabase();           
             GetRouteParameters();
         }
 
@@ -61,6 +65,7 @@ namespace TreeViewExample.Business.Models
             get { return _SubRouteList; }
             set { SetProperty(ref _SubRouteList, value); }
         }
+        [NotMapped]
         public Brush Brush
         {
             get { return _Brush; }
@@ -69,21 +74,21 @@ namespace TreeViewExample.Business.Models
 
         #region rot_Routes Columns
 
-        public virtual ProcessCel ProcesCell
+        public ProcessCel ProcesCell
         {
             get { return _ProcessCel; }
             set { SetProperty(ref _ProcessCel, value); }
         }
 
-        [Key, ForeignKey("ProcesCell")]
-        [Column("rot_ProcCellId")]
+        [Key]
+        [Column("rot_ProcCellId", Order = 0)]
         public string ProcesCellId
         {
             get { return _ProcesCellId; }
             set { SetProperty(ref _ProcesCellId, value); }
         }
         [Key]
-        [Column("rot_RouteId")]
+        [Column("rot_RouteId", Order = 1)]
         public string RouteId
         {
             get { return _RouteId; }
@@ -95,7 +100,7 @@ namespace TreeViewExample.Business.Models
             get { return _RouteName; }
             set { SetProperty(ref _RouteName, value); }
         }
-        [Column("rot_ShortRouteName")]
+        [Column("rot_ShortRouteNm")]
         public string ShortRouteName
         {
             get { return _ShortRouteName; }
@@ -138,12 +143,9 @@ namespace TreeViewExample.Business.Models
                 RouteParameterList.Add(routeParameter);
             }
         }
-        private void AddSubRoutes()
+        private void GetSubRoutesDatabase()
         {
-            for (int i = 0; i < 3; i++)
-            {
-                SubRouteList.Add(new SubRoute("Subroute " + i.ToString(), i, this, true));
-            }
+             //database stuff
         }
         public void ChangeColor()
         {
@@ -183,16 +185,7 @@ namespace TreeViewExample.Business.Models
         }
         public void CreateChild()
         {
-            List<int> intList = new List<int>();
-            foreach (SubRoute R in SubRouteList)
-            {
-                intList.Add(R.Number);
-            }
-            int firstAvailable = Enumerable.Range(0, int.MaxValue).Except(intList).FirstOrDefault();
-
-            SubRoute subroute = new SubRoute("Subroute " + firstAvailable, firstAvailable, this);
-            OrderObservableList.AddSorted(SubRouteList, subroute);
-
+            throw new NotImplementedException();
         }
 
         public int CompareTo(object obj)

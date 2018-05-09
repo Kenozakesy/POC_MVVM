@@ -53,7 +53,6 @@ namespace TreeViewExample.Business.Models
         /// </summary>
         public ProcessCel()
         {
-            AddRoutes();
             GetProcesscelParameters();
             Validate();
         }
@@ -181,10 +180,7 @@ namespace TreeViewExample.Business.Models
                 ProcessCelParameterList.Add(procescelparameter);
             }
         }
-        private void AddRoutes()
-        {
-            //database stuff       
-        }
+
 
         public void ChangeColor()
         {
@@ -280,6 +276,24 @@ namespace TreeViewExample.Business.Models
         {
              return db.GetAllProcesCells();
         }
+        public void GetRoutesAndSubroutesDatabase()
+        {
+            RouteList = db.GetAllRoutesByProcesCell(this);
+            SubrouteList = db.GetAllSubRoutesByProcesCell(this);
+
+            foreach (Route R in RouteList)
+            {
+                R.ProcesCell = this;
+                //R.getSubroutes();
+            }
+            foreach (SubRoute SR in SubrouteList)
+            {
+                SR.ProcessCel = this;
+                //R.units();
+                //R.getbins();
+            }
+        }
+
 
         public string GetName()
         {

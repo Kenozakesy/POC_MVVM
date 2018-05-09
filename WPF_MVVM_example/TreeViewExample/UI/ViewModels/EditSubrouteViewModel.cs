@@ -27,7 +27,6 @@ namespace TreeViewExample.UI.ViewModels
         {
             this._IEditSubrouteView = view;
 
-            FillListTest();
         }
 
         #region Properties
@@ -42,18 +41,10 @@ namespace TreeViewExample.UI.ViewModels
 
         #region Methods
 
-        private void FillListTest()
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                SubRouteList.Add(new SubRoute("route " + i, i, null));
-            }
-        }
 
         #endregion
 
         #region ItemHandlers
-
 
 
         #endregion

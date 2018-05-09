@@ -9,6 +9,10 @@ namespace TreeViewExample.Dal.Repository.Interfaces
 {
     public interface IProcesCellRepository
     {
-        List<ProcessCel> GetAllParameterDefinitions();
+        List<ProcessCel> GetAllProcesCells();
+
+        List<Route> GetAllRoutesByProcesCell(ProcessCel procescell);
+
+        List<SubRoute> GetAllSubroutesByProcesCell(ProcessCel procescell);
     }
 }

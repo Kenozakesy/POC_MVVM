@@ -23,7 +23,7 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
 
         public ObservableCollection<ProcessCel> GetAllProcesCells()
         {
-            List<ProcessCel> paramDefinitions = _Repository.GetAllParameterDefinitions();
+            List<ProcessCel> paramDefinitions = _Repository.GetAllProcesCells();
 
             var selected = from p in paramDefinitions
                            select p;
@@ -36,6 +36,40 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
             }
 
             return ProcesCellList;
+        }
+
+        public ObservableCollection<Route> GetAllRoutesByProcesCell(ProcessCel procescell)
+        {
+            List<Route> routes = _Repository.GetAllRoutesByProcesCell(procescell);
+
+            var selected = from p in routes
+                           select p;
+
+            ObservableCollection<Route> RouteList = new ObservableCollection<Route>();
+
+            foreach (Route PC in selected.ToList())
+            {
+                OrderObservableList.AddSorted(RouteList, PC);
+            }
+
+            return RouteList;
+        }
+
+        public ObservableCollection<SubRoute> GetAllSubRoutesByProcesCell(ProcessCel procescell)
+        {
+            List<SubRoute> subroutes = _Repository.GetAllSubroutesByProcesCell(procescell);
+
+            var selected = from p in subroutes
+                           select p;
+
+            ObservableCollection<SubRoute> SubRouteList = new ObservableCollection<SubRoute>();
+
+            foreach (SubRoute PC in selected.ToList())
+            {
+                OrderObservableList.AddSorted(SubRouteList, PC);
+            }
+
+            return SubRouteList;
         }
 
         #endregion

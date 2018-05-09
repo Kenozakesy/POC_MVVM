@@ -9,6 +9,7 @@ using TreeViewExample.Dal.EntityFramework;
 using TreeViewExample.Business.Enums;
 using System.Linq;
 using System.Collections.Generic;
+using TreeViewExample.Business.Models.DatabaseModels;
 
 namespace WPF_MVVM_TestProject
 {
@@ -137,6 +138,48 @@ namespace WPF_MVVM_TestProject
                         context.Dispose();
                     }
                 }
+            }
+
+        }
+
+        [TestMethod]
+        public void SelectSubroutesInRouteTest()
+        {
+            using (var context = new UniContext())
+            {             
+                try
+                {
+                    var select = (from r in context.SubRoutesInRoutes select r);
+                    List<SubRoutesInRoutes> subroutes = select.ToList();
+                    Assert.IsNotNull(subroutes);
+
+                }
+                catch (Exception)
+                {
+                    context.Dispose();
+                }
+                
+            }
+
+        }
+
+        [TestMethod]
+        public void SelectProcesCellTest()
+        {
+            using (var context = new UniContext())
+            {
+                try
+                {
+                    var select = (from r in context.ProcesCells select r);
+                    List<ProcessCel> subroutes = select.ToList();
+                    Assert.IsNotNull(subroutes);
+
+                }
+                catch (Exception)
+                {
+                    context.Dispose();
+                }
+
             }
 
         }

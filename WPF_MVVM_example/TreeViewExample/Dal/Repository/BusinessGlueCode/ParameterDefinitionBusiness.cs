@@ -44,12 +44,10 @@ namespace TreeViewExample.Dal.DatabaseConnection
                            select p;
 
             ObservableCollection<ParameterDefinition> paramDefinitionsForReturn = new ObservableCollection<ParameterDefinition>();
-
             foreach (ParameterDefinition PD in selected.ToList())
             {
                 OrderObservableList.AddSorted(paramDefinitionsForReturn, PD);
             }
-
             return paramDefinitionsForReturn;
         }
 

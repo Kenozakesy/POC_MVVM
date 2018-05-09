@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
@@ -10,61 +12,67 @@ using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
+    [Table("sur_SubRoutes")]
     public class SubRoute : ViewModelBase, IConfigObject, ICloneable
     {
-        private ObservableCollection<Unit> _UnitList = new ObservableCollection<Unit>();
-
-        //private ProcessCel _ProcessCel;
-        private Route _Route;
-
-        private string _Name;
-        private int _Number;
         private Brush _Brush;
         private static Random ran = new Random();
 
-        public SubRoute(string name, int number, Route route , bool addUnits = false)
+        private ObservableCollection<Unit> _UnitList = new ObservableCollection<Unit>();
+        private ProcessCel _ProcessCel;
+        private List<Route> _RouteList;
+
+        private string _ProcesCellId;
+        private string _SubRouteId;
+        private string _SubRouteName;
+
+        public SubRoute()
         {
-            this._Name = name;
-            this._Number = number;
-            this._Route = route;
 
-            int newRan = ran.Next(0, 10);
-            if (newRan >= 8)
-            {
-                _Brush = Brushes.Red;
-            }
-            else
-            {
-                _Brush = Brushes.LightGreen;
-            }
-
-            if (addUnits)
-            {
-                AddUnits();
-            }
+            AddUnits();
+            Validate();
         }
 
         #region Properties
 
-        public ObservableCollection<Unit> UnitList
-        {
-            get { return _UnitList; }
-            set { SetProperty(ref _UnitList, value); }
-        }
-        public string Name
-        {
-            get { return _Name; }
-            set { SetProperty(ref _Name, value); }
-        }
+        [NotMapped]
         public Brush Brush
         {
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
         }
-        public int Number
+        [NotMapped]
+        public ObservableCollection<Unit> UnitList
         {
-            get { return _Number; }
-            set { SetProperty(ref _Number, value); }
+            get { return _UnitList; }
+            set { SetProperty(ref _UnitList, value); }
+        }
+        [NotMapped]
+        public ProcessCel ProcessCel
+        {
+            get { return _ProcessCel; }
+            set { SetProperty(ref _ProcessCel, value); }
+        }
+
+        [Key]
+        [Column("sur_ProcCellId", Order = 0)]
+        public string ProcesCellId
+        {
+            get { return _ProcesCellId; }
+            set { SetProperty(ref _ProcesCellId, value); }
+        }
+        [Key]
+        [Column("sur_SubRouteId", Order = 1)]
+        public string SubRouteId
+        {
+            get { return _SubRouteId; }
+            set { SetProperty(ref _SubRouteId, value); }
+        }
+        [Column("sur_SubRouteNm")]
+        public string SubRouteName
+        {
+            get { return _SubRouteName; }
+            set { SetProperty(ref _SubRouteName, value); }
         }
 
         #endregion
@@ -91,17 +99,18 @@ namespace TreeViewExample.Business.Models
         }
         public void Delete()
         {
-            List<Unit> removableUnits = new List<Unit>();
-            foreach (Unit U in UnitList)
-            {
-                removableUnits.Add(U);
-            }
-            foreach (Unit U in removableUnits)
-            {
-                U.Delete();
-            }
+            throw new NotImplementedException();
+            //List<Unit> removableUnits = new List<Unit>();
+            //foreach (Unit U in UnitList)
+            //{
+            //    removableUnits.Add(U);
+            //}
+            //foreach (Unit U in removableUnits)
+            //{
+            //    U.Delete();
+            //}
                     
-            this._Route.DeleteChild(this);
+            //this._RouteList.DeleteChild(this);
         }
         public void DeleteChild(IConfigObject obj)
         {
@@ -131,20 +140,7 @@ namespace TreeViewExample.Business.Models
         public int CompareTo(object obj)
         {
             SubRoute subroute = obj as SubRoute;
-       
-            if (this._Number > subroute._Number)
-            {
-                return 1;
-            }
-            else if (this._Number < subroute._Number)
-            {
-                return -1;
-            }
-            return 0;
-        }
-        public override string ToString()
-        {
-            return _Name;
+            return string.Compare(this.SubRouteName, subroute._SubRouteName);
         }
         public List<MainListViewModel> GenerateListViewList()
         {
@@ -169,7 +165,16 @@ namespace TreeViewExample.Business.Models
 
         public void Validate()
         {
-            throw new NotImplementedException();
+            int newRan = ran.Next(0, 10);
+            if (newRan >= 8)
+            {
+                _Brush = Brushes.Red;
+            }
+            else
+            {
+                _Brush = Brushes.LightGreen;
+            }
+
         }
 
 
