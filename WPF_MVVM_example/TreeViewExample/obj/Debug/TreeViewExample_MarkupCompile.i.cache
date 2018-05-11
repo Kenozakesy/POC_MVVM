@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\
 TreeViewExample
 none
 false
 DEBUG;TRACE
-C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\App.xaml
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\App.xaml
 731240821
 
-74916886766
-19487265991
+74-1684047474
+191184723593
 UI\Views\AddParameterToObjectWindow.xaml;UI\Views\CreateParameterWindow.xaml;UI\Views\CreateSubrouteWindow.xaml;UI\Views\EditSubrouteWindow.xaml;UI\Views\MainWindow.xaml;UI\Views\ParameterSheetWindow.xaml;UI\Views\SelectBinWindow.xaml;
 
-True
+False
 

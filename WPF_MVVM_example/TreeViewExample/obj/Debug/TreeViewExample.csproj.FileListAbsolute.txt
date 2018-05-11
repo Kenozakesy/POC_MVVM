@@ -79,7 +79,6 @@ C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bi
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\en\Microsoft.Windows.Design.Extensibility.resources.dll
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csprojResolveAssemblyReference.cache
-C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\DragDropWindow.g.cs
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\MainWindow.g.cs
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\ParameterSheetWindow.g.cs
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\SelectBinWindow.g.cs
@@ -87,7 +86,6 @@ C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\ob
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample_MarkupCompile.cache
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample_MarkupCompile.lref
-C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\DragDropWindow.baml
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\MainWindow.baml
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\ParameterSheetWindow.baml
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\SelectBinWindow.baml
@@ -161,3 +159,7 @@ C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.exe
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.pdb
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csprojResolveAssemblyReference.cache
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.dll
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.xml
+C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.SqlServer.xml
