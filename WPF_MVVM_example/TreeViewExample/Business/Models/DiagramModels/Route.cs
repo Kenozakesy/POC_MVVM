@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
@@ -25,8 +26,9 @@ namespace TreeViewExample.Business.Models
         #region Fields
 
         private ObservableCollection<RouteParameter> _RouteParameterList = new ObservableCollection<RouteParameter>();
-        private ObservableCollection<SubRoute> _SubRouteList = new ObservableCollection<SubRoute>();
         private ProcessCel _ProcessCel;
+        private ObservableCollection<sri_SubRoutesInRoutes> _SubrouteInRouteList = new ObservableCollection<sri_SubRoutesInRoutes>();
+        private ObservableCollection<SubRoute> _SubRouteList = new ObservableCollection<SubRoute>();
 
         private Brush _Brush;
         private static Random ran = new Random();
@@ -46,9 +48,10 @@ namespace TreeViewExample.Business.Models
         /// </summary>
         public Route()
         {
-            Validate();
-            GetSubRoutesDatabase();           
+             
+
             GetRouteParameters();
+            Validate();
         }
 
         #region Properties
@@ -60,26 +63,42 @@ namespace TreeViewExample.Business.Models
             set { SetProperty(ref _RouteParameterList, value); }
         }
         [NotMapped]
-        public ObservableCollection<SubRoute> SubRouteList
-        {
-            get { return _SubRouteList; }
-            set { SetProperty(ref _SubRouteList, value); }
-        }
-        [NotMapped]
         public Brush Brush
         {
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
         }
+        [NotMapped]
+        public ObservableCollection<SubRoute> SubRouteList
+        {
+            get
+            {
+                _SubRouteList.Clear();
+                foreach (sri_SubRoutesInRoutes sir in SubrouteInRouteList)
+                {
+                    _SubRouteList.Add(sir.sur_SubRoutes);
+                }
+                return _SubRouteList;
+            }
+            set { SetProperty(ref _SubRouteList, value); }
+        }
 
-        #region rot_Routes Columns
+        public virtual ObservableCollection<sri_SubRoutesInRoutes> SubrouteInRouteList
+        {
+            get { return _SubrouteInRouteList; }
+            set
+            {
+                SetProperty(ref _SubrouteInRouteList, value);
+            }
+        }
 
-        [ForeignKey("ProcesCellId")]
         public virtual ProcessCel ProcesCell
         {
             get { return _ProcessCel; }
             set { SetProperty(ref _ProcessCel, value); }
         }
+
+        #region rot_Routes Columns
 
         [Key]
         [Column("rot_ProcCellId", Order = 0)]
@@ -144,10 +163,7 @@ namespace TreeViewExample.Business.Models
                 RouteParameterList.Add(routeParameter);
             }
         }
-        private void GetSubRoutesDatabase()
-        {
-             //database stuff
-        }
+
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -161,28 +177,30 @@ namespace TreeViewExample.Business.Models
         }
         public void Delete()
         {
-            List<SubRoute> removableSubroutes = new List<SubRoute>();
-            foreach (SubRoute S in SubRouteList)
-            {
-                removableSubroutes.Add(S);
-            }
-            foreach (SubRoute S in removableSubroutes)
-            {
-                S.Delete();
-            }
-            this._ProcessCel.DeleteChild(this);
+            throw new NotImplementedException();
+            //List<SubRoute> removableSubroutes = new List<SubRoute>();
+            //foreach (SubRoute S in SubRouteList)
+            //{
+            //    removableSubroutes.Add(S);
+            //}
+            //foreach (SubRoute S in removableSubroutes)
+            //{
+            //    S.Delete();
+            //}
+            //this._ProcessCel.DeleteChild(this);
         }
         public void DeleteChild(IConfigObject obj)
         {
-            SubRoute unit = obj as SubRoute;
-            foreach (SubRoute U in SubRouteList)
-            {
-                if (U.Equals(unit))
-                {
-                    SubRouteList.Remove(unit);
-                    break;
-                }
-            }
+            throw new NotImplementedException();
+            //SubRoute unit = obj as SubRoute;
+            //foreach (SubRoute U in SubRouteList)
+            //{
+            //    if (U.Equals(unit))
+            //    {
+            //        SubRouteList.Remove(unit);
+            //        break;
+            //    }
+            //}
         }
         public void CreateChild()
         {

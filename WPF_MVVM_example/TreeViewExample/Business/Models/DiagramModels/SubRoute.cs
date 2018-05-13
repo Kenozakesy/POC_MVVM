@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.ViewModels;
@@ -20,7 +22,7 @@ namespace TreeViewExample.Business.Models
 
         private ObservableCollection<Unit> _UnitList = new ObservableCollection<Unit>();
         private ProcessCel _ProcessCel;
-        private List<Route> _RouteList;
+        private List<sri_SubRoutesInRoutes> _SubrouteInRouteList = new List<DatabaseModels.sri_SubRoutesInRoutes>();
 
         private string _ProcesCellId;
         private string _SubRouteId;
@@ -44,6 +46,12 @@ namespace TreeViewExample.Business.Models
         {
             get { return _UnitList; }
             set { SetProperty(ref _UnitList, value); }
+        }
+
+        public virtual List<sri_SubRoutesInRoutes> sri_SubRoutesInRoutes
+        {
+            get { return _SubrouteInRouteList; }
+            set { SetProperty(ref _SubrouteInRouteList, value); }
         }
 
         [ForeignKey("ProcesCellId")]

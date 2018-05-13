@@ -19,11 +19,14 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
+
                     var select = (from r in context.ProcesCells
                                   .Include(x => x.RouteList)
+                                  .Include(x => x.RouteList.Select(y => y.SubrouteInRouteList))
                                   .Include(x => x.SubrouteList)
-                                  .Include(x => x.SubrouteList).Include(y => y.SubrouteList)
+                                  .Include(x => x.SubrouteList.Select(y => y.sri_SubRoutesInRoutes))
                                   select r);
+
                     procescells = select.ToList();
                 }
                 catch (Exception)

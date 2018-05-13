@@ -138,12 +138,34 @@
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
-                        <!--<MenuItem Header="Create Subroute" Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>-->
+                        <MenuItem Header="Create Subroute" Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Edit Subroute order" Command="{Binding Tag.DataContext.OpenEditSubrouteWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
-                    
+
+                    </ContextMenu>
+                </Label.ContextMenu>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding Tag.DataContext.ShowPropInListCommand, RelativeSource={RelativeSource AncestorType=Label}}" CommandParameter="{Binding }"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Label>
+        </HierarchicalDataTemplate>
+
+ 
+
+        <HierarchicalDataTemplate  ItemsSource="{Binding Path=UnitList}" DataType="{x:Type this:SubRoute}">
+            <Label Content="{Binding Path=SubRouteName}" ContentStringFormat="Subroute: {0}"  Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
+                <Label.ContextMenu>
+                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+
+                        <MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
+
                     </ContextMenu>
                 </Label.ContextMenu>
 
@@ -174,27 +196,7 @@
                 </i:Interaction.Triggers>
             </Label>
         </HierarchicalDataTemplate>
-
-        <HierarchicalDataTemplate ItemsSource="{Binding Path=UnitList}" DataType="{x:Type this:SubRoute}">
-            <Label Content="{Binding Path=Name}"  Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
-                <Label.ContextMenu>
-                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-
-                        <MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
-
-                    </ContextMenu>
-                </Label.ContextMenu>
-
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown" >
-                        <i:InvokeCommandAction Command="{Binding Tag.DataContext.ShowPropInListCommand, RelativeSource={RelativeSource AncestorType=Label}}" CommandParameter="{Binding }"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Label>
-        </HierarchicalDataTemplate>
-
+   
         <DataTemplate DataType="{x:Type this:Bin}" >
             <Label Content="{Binding Path=Name}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
 

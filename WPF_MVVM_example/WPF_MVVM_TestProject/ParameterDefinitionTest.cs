@@ -1,15 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TreeViewExample;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models;
-using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Dal.DatabaseConnection;
 using TreeViewExample.Dal.EntityFramework;
 using TreeViewExample.Business.Enums;
 using System.Linq;
 using System.Collections.Generic;
-using TreeViewExample.Business.Models.DatabaseModels;
 
 namespace WPF_MVVM_TestProject
 {
@@ -142,27 +139,7 @@ namespace WPF_MVVM_TestProject
 
         }
 
-        [TestMethod]
-        public void SelectSubroutesInRouteTest()
-        {
-            List<SubRoutesInRoutes> subroutes = new List<SubRoutesInRoutes>();
-            using (var context = new UniContext())
-            {             
-                try
-                {
-                    var select = (from r in context.SubRoutesInRoutes select r);
-                    subroutes = select.ToList();
-                    Assert.IsNotNull(subroutes[0].procescell);
 
-                }
-                catch (Exception)
-                {
-                    context.Dispose();
-                }
-                
-            }
-
-        }
 
         [TestMethod]
         public void SelectProcesCellTest()

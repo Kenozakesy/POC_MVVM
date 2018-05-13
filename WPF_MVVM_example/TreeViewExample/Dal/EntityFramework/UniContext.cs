@@ -15,9 +15,9 @@ namespace TreeViewExample.Dal.EntityFramework
     {
         public UniContext() : base(nameOrConnectionString: DatabaseConnectionClass.GetConnectionString())
         {
-            Configuration.LazyLoadingEnabled = true;
-            Configuration.AutoDetectChangesEnabled = true;
-            Configuration.ProxyCreationEnabled = true;
+            //Configuration.AutoDetectChangesEnabled = true;
+            //Configuration.ProxyCreationEnabled = true;
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         #region DBsets
@@ -33,7 +33,7 @@ namespace TreeViewExample.Dal.EntityFramework
 
         #region DatabaseSetsOnly
 
-        public DbSet<SubRoutesInRoutes> SubRoutesInRoutes { get; set; }
+        public DbSet<sri_SubRoutesInRoutes> SubRoutesInRoutes { get; set; }
 
         #endregion
 
@@ -43,14 +43,24 @@ namespace TreeViewExample.Dal.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<ProcessCel>()
-            //            .HasMany(r => r.RouteList)
-            //            .WithRequired(p => p.ProcesCell);
 
-            //modelBuilder.Entity<ProcessCel>()
-            //            .HasMany(r => r.SubrouteList)
-            //            .WithRequired(p => p.ProcessCel);
+            //modelBuilder.Entity<Route>()
+            //    .HasMany(e => e.RouteParameterList)
+            //    .WithRequired(e => e.Route)
+            //    .HasForeignKey(e => new { e.Route, e.rop_RouteId })
+            //    .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Route>()
+                .HasMany(e => e.SubrouteInRouteList)
+                .WithRequired(e => e.rot_Routes)
+                .HasForeignKey(e => new { e.sri_ProcCellId, e.sri_RouteId })
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SubRoute>()
+                 .HasMany(e => e.sri_SubRoutesInRoutes)
+                 .WithRequired(e => e.sur_SubRoutes)
+                 .HasForeignKey(e => new { e.sri_ProcCellId, e.sri_SubRouteId })
+                 .WillCascadeOnDelete(false);
 
         }
 
