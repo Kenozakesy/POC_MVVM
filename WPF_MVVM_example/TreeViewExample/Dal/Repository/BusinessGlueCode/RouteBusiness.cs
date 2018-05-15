@@ -21,7 +21,20 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
 
         #region Methods
 
+        public bool DatabaseDelete(object obj)
+        {
+            return _Repository.DatabaseDelete(obj);
+        }
 
+        public bool DatabaseInsert(object obj)
+        {
+            return _Repository.DatabaseInsert(obj);
+        }
+
+        public bool DatabaseUpdate(object obj)
+        {
+            return _Repository.DatabaseUpdate(obj);
+        }
 
         #endregion
     }

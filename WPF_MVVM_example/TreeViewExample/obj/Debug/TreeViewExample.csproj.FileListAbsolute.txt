@@ -157,9 +157,9 @@ C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csproj.GenerateResource.Cache
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.exe
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.pdb
-C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csprojResolveAssemblyReference.cache
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.dll
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.xml
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Gebruiker\Documents\GitHub\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csprojResolveAssemblyReference.cache
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csprojResolveAssemblyReference.cache

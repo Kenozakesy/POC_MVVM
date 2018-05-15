@@ -33,8 +33,11 @@ namespace TreeViewExample.UI.ViewModels
             _TreeView = view;
             InitializeCommand();
 
+            ListGodClass.Instance.LoadDataFromDB();
+
             _CustomerParameterList = ListGodClass.Instance.CustomerParameterList;
             _ProcessCelList = ListGodClass.Instance.ProcessCelList;
+            _BinList = ListGodClass.Instance.BinList;
         }
 
         #region Properties
@@ -70,32 +73,34 @@ namespace TreeViewExample.UI.ViewModels
 
         private void DeleteClick(IConfigObject obj)
         {
-            try
+            if (_TreeView.ConfirmMessage("delete " + obj.GetName(), "Are you sure you want to delete " + obj.GetName() + "?"))
             {
-                IConfigObject configObject = obj as IConfigObject;
-                if (configObject is ProcessCel)
+                try
                 {
-                    foreach (ProcessCel P in _ProcessCelList)
+                    IConfigObject configObject = obj as IConfigObject;
+                    if (configObject is ProcessCel)
                     {
-                        if (P == configObject)
+                        foreach (ProcessCel P in _ProcessCelList)
                         {
-                            P.Delete();
-                            ProcessCelList.Remove(P);
-                            break;
+                            if (P == configObject)
+                            {
+                                P.Delete();
+                                ProcessCelList.Remove(P);
+                                break;
+                            }
                         }
                     }
+                    else if (configObject != null)
+                    {
+                        configObject.Delete();
+                    }
                 }
-                else if (configObject != null)
+                catch (NotImplementedException e)
                 {
-                    configObject.Delete();
+                    e.ToString();
+                    _TreeView.ShowMessage("This functionality has not been implemented yet.");
                 }
-            }
-            catch (NotImplementedException e)
-            {
-                e.ToString();
-                _TreeView.ShowMessage("This functionality has not been implemented yet.");
-            }
-           
+            }         
         }
         private void ChangeColorClick(IConfigObject obj)
         {
@@ -136,12 +141,12 @@ namespace TreeViewExample.UI.ViewModels
         }
         private void ShowPropInList(IConfigObject obj)
         {
-            ListView.Clear();
-            List<MainListViewModel> listView = obj.GenerateListViewList();
-            foreach (MainListViewModel ML in listView)
-            {
-                ListView.Add(ML);
-            }        
+            //ListView.Clear();
+            //List<MainListViewModel> listView = obj.GenerateListViewList();
+            //foreach (MainListViewModel ML in listView)
+            //{
+            //    ListView.Add(ML);
+            //}        
         }
         private void OpenParameterSheetWindow()
         {
@@ -175,7 +180,7 @@ namespace TreeViewExample.UI.ViewModels
             ChangeColorClickCommand = new RelayCommandT1<IConfigObject>(ChangeColorClick);
             CreateObjectClickCommand = new RelayCommandT1<IConfigObject>(CreateObjectClick);
             SetbinCommand = new RelayCommandT1<Unit>(SetBinToUnit);
-            RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
+            //RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
@@ -188,7 +193,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand ChangeColorClickCommand { get; set; }
         public ICommand CreateObjectClickCommand { get; set; }
         public ICommand SetbinCommand { get; set; }
-        public ICommand RemoveBinFromSubrouteCommand { get; set; }
+        //public ICommand RemoveBinFromSubrouteCommand { get; set; }
         public ICommand ShowPropInListCommand { get; set; }
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }

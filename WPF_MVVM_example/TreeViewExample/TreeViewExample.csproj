@@ -77,14 +77,21 @@
     <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Enums\ParameterType.cs" />
     <Compile Include="Business\Interfaces\IObjectWithParameters.cs" />
+    <Compile Include="Business\Interfaces\IParameterObject.cs" />
+    <Compile Include="Business\Models\DatabaseModels\bib_BinBatches.cs" />
     <Compile Include="Business\Models\DatabaseModels\bir_BinsInSubRoutes.cs" />
+    <Compile Include="Business\Models\DatabaseModels\bis_BinStocks.cs" />
+    <Compile Include="Business\Models\DatabaseModels\pri_PropIns.cs" />
     <Compile Include="Business\Models\DatabaseModels\sri_SubRoutesInRoutes.cs" />
+    <Compile Include="Business\Models\DatabaseModels\tbb_TempBinBatches.cs" />
+    <Compile Include="Business\Models\DatabaseModels\uis_UnitsInSubRoutes.cs" />
+    <Compile Include="Business\Models\DiagramModels\Parameters\bip_BinPars.cs" />
+    <Compile Include="Business\Models\DiagramModels\Parameters\pca_ProcCellPars.cs" />
+    <Compile Include="Business\Models\DiagramModels\Parameters\rop_RoutePars.cs" />
     <Compile Include="Business\Singletons\ListGodClass.cs" />
     <Compile Include="Business\Statics\UI_Models\EnumToArrayConverter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
-    <Compile Include="Business\Models\DiagramModels\Parameters\BinParameter.cs" />
-    <Compile Include="Business\Models\DiagramModels\Parameters\ProcessCelParameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\RouteParameter.cs" />
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
     <Compile Include="Business\Statics\UI_Models\DragBehavior.cs" />
@@ -94,18 +101,23 @@
     <Compile Include="Business\Statics\UI_Models\MyCloneConverter.cs" />
     <Compile Include="Business\Statics\UI_Models\InformationFieldModel.cs" />
     <Compile Include="Dal\EntityFramework\UniContext.cs" />
+    <Compile Include="Dal\Repository\BusinessGlueCode\BinBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
     <Compile Include="Dal\DatabaseConnection\DatabaseConnectionClass.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ProcesCellBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\RouteBusiness.cs" />
+    <Compile Include="Dal\Repository\Interfaces\IBinRepository.cs" />
+    <Compile Include="Dal\Repository\Interfaces\IDatabaseActions.cs" />
     <Compile Include="Dal\Repository\Interfaces\IParameterDefinitionRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\IProcesCellRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\IRouteRepository.cs" />
+    <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_BinRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ProcesCellRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_RouteRepository.cs" />
     <Compile Include="UI\Interfaces\IAddParameterToObjectView.cs" />
     <Compile Include="UI\Interfaces\ICreateParameterView.cs" />
+    <Compile Include="UI\Interfaces\ICreateProcesCellView.cs" />
     <Compile Include="UI\Interfaces\ICreateSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IDragDropView.cs" />
     <Compile Include="UI\Interfaces\IEditSubrouteView.cs" />
@@ -113,6 +125,7 @@
     <Compile Include="UI\Interfaces\ISelectBinView.cs" />
     <Compile Include="UI\ViewModels\AddParameterToObjectViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateParameterViewModel.cs" />
+    <Compile Include="UI\ViewModels\CreateProcesCellViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\EditSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
@@ -122,6 +135,9 @@
     </Compile>
     <Compile Include="UI\Views\CreateParameterWindow.xaml.cs">
       <DependentUpon>CreateParameterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\CreateProcesCellWindow.xaml.cs">
+      <DependentUpon>CreateProcesCellWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\CreateSubrouteWindow.xaml.cs">
       <DependentUpon>CreateSubrouteWindow.xaml</DependentUpon>
@@ -140,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Views\CreateParameterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Views\CreateProcesCellWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,7 +7,7 @@ using TreeViewExample.Business.Models;
 
 namespace TreeViewExample.Dal.Repository.Interfaces
 {
-    public interface IRouteRepository
+    public interface IRouteRepository : IDatabaseActions
     {
 
     }

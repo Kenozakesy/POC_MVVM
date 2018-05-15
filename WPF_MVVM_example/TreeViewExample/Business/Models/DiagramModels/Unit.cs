@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.ViewModels;
@@ -19,30 +20,11 @@ namespace TreeViewExample.Business.Models
     [Table("oud_OAUnitDefs")]
     public class Unit : ViewModelBase, IConfigObject
     {
-        private SubRoute _Subroute;
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
+        private ObservableCollection<uis_UnitsInSubRoutes> _UnitsInSubroute = new ObservableCollection<uis_UnitsInSubRoutes>();
 
         private Brush _Brush;
         private static Random ran = new Random();
-
-        #region Oud fields
-
-        private string _OAUnitId;
-        private string _OAUnitPUObjectNm;
-        private string _OAOperPUObjectNm;
-        private string _OAUnitAllocNm;
-        private string _OAUnitCntObjectNm;
-        private string _OAPropEMObjectNm;
-        private string _OAIndObjectNm;
-        private string _ImplementedIFs;
-        private string _UnitNm;
-        private string _UnitRoles;
-        private string _BatchRegTypeId;
-        private bool _IsUnit;
-        private bool _IsTransportHandler;
-        private bool _OAUnitInTransportHandler;
-
-        #endregion
 
         public Unit()
         {
@@ -51,104 +33,67 @@ namespace TreeViewExample.Business.Models
 
         #region Properties
 
+        [NotMapped]
         public Brush Brush
         {
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
         }
+        [NotMapped]
         public ObservableCollection<Bin> BinList
         {
             get { return _BinList; }
             set { SetProperty(ref _BinList, value); }
         }
 
+        public virtual ObservableCollection<uis_UnitsInSubRoutes> uis_UnitsInSubRoutes
+        {
+            get { return _UnitsInSubroute; }
+            set { SetProperty(ref _UnitsInSubroute, value); }
+        }
+
         #region Oud columns
 
         [Key]
-        [Column("oud_OAUnitId")]
-        public string OAUnitId
-        {
-            get { return _OAUnitId; }
-            set { SetProperty(ref _OAUnitId, value); }
-        }
-        [Column("oud_OAUnitPUObjectNm")]
-        public string OAUnitPUObjectNm
-        {
-            get { return _OAUnitPUObjectNm; }
-            set { SetProperty(ref _OAUnitPUObjectNm, value); }
-        }
-        [Column("oud_OAOperPUObjectNm")]
-        public string OAOperPUObjectNm
-        {
-            get { return _OAOperPUObjectNm; }
-            set { SetProperty(ref _OAOperPUObjectNm, value); }
-        }
-        [Column("oud_OAUnitAllocNm")]
-        public string OAUnitAllocNm
-        {
-            get { return _OAUnitAllocNm; }
-            set { SetProperty(ref _OAUnitAllocNm, value); }
-        }
-        [Column("oud_OAUnitCntObjectNm")]
-        public string OAUnitCntObjectNm
-        {
-            get { return _OAUnitCntObjectNm; }
-            set { SetProperty(ref _OAUnitCntObjectNm, value); }
-        }
-        [Column("oud_OAPropEMObjectNm")]
-        public string OAPropEMObjectNm
-        {
-            get { return _OAPropEMObjectNm; }
-            set { SetProperty(ref _OAPropEMObjectNm, value); }
-        }
-        [Column("oud_OAIndObjectNm")]
-        public string OAIndObjectNm
-        {
-            get { return _OAIndObjectNm; }
-            set { SetProperty(ref _OAIndObjectNm, value); }
-        }
-        [Column("oud_ImplementedIFs")]
-        public string ImplementedIFs
-        {
-            get { return _ImplementedIFs; }
-            set { SetProperty(ref _ImplementedIFs, value); }
-        }
-        [Column("oud_UnitNm")]
-        public string UnitNm
-        {
-            get { return _UnitNm; }
-            set { SetProperty(ref _UnitNm, value); }
-        }
-        [Column("oud_UnitRoles")]
-        public string UnitRoles
-        {
-            get { return _UnitRoles; }
-            set { SetProperty(ref _UnitRoles, value); }
-        }
-        [Column("oud_BatchRegTypeId")]
-        public string BatchRegTypeId
-        {
-            get { return _BatchRegTypeId; }
-            set { SetProperty(ref _BatchRegTypeId, value); }
-        }
-        [Column("oud_IsUnit")]
-        public bool IsUnit
-        {
-            get { return _IsUnit; }
-            set { SetProperty(ref _IsUnit, value); }
-        }
-        [Column("oud_IsTransportHandler")]
-        public bool IsTransportHandler
-        {
-            get { return _IsTransportHandler; }
-            set { SetProperty(ref _IsTransportHandler, value); }
-        }
-        [Column("oud_OAUnitInTransportHandler")]
-        public bool OAUnitInTransportHandler
-        {
-            get { return _OAUnitInTransportHandler; }
-            set { SetProperty(ref _OAUnitInTransportHandler, value); }
-        }
+        [StringLength(50)]
+        public string oud_OAUnitId { get; set; }
+
+        [Required]
+        [StringLength(256)]
+        public string oud_OAUnitPUObjectNm { get; set; }
+
+        [StringLength(256)]
+        public string oud_OAOperPUObjectNm { get; set; }
+
+        [StringLength(256)]
+        public string oud_OAUnitAllocNm { get; set; }
+
+        [StringLength(256)]
+        public string oud_OAUnitCntObjectNm { get; set; }
+
+        [StringLength(256)]
+        public string oud_OAPropEMObjectNm { get; set; }
+
+        [StringLength(256)]
+        public string oud_OAIndObjectNm { get; set; }
+
+        [StringLength(50)]
+        public string oud_ImplementedIFs { get; set; }
+
+        [StringLength(50)]
+        public string oud_UnitNm { get; set; }
+
+        [StringLength(50)]
+        public string oud_UnitRoles { get; set; }
+
+        [StringLength(50)]
+        public string oud_BatchRegTypeId { get; set; }
+
+        public bool? oud_IsUnit { get; set; }
+
+        public bool? oud_IsTransportHandler { get; set; }
+
+        public bool? oud_OAUnitInTransportHandler { get; set; }
 
 
         #endregion
@@ -171,18 +116,18 @@ namespace TreeViewExample.Business.Models
 
         public void Delete()
         {
-            List<Bin> removableBins = new List<Bin>();
-            foreach (Bin B in BinList)
-            {
-                removableBins.Add(B);
-            }
-            foreach (Bin B in removableBins)
-            {
-                B.SetSubroute();
-                BinList.Remove(B);
-            }
+            //List<Bin> removableBins = new List<Bin>();
+            //foreach (Bin B in BinList)
+            //{
+            //    removableBins.Add(B);
+            //}
+            //foreach (Bin B in removableBins)
+            //{
+            //    B.SetSubroute();
+            //    BinList.Remove(B);
+            //}
 
-            this._Subroute.DeleteChild(this);
+            //this._Subroute.DeleteChild(this);
         }
 
         public bool AddBinToSubroute(Bin bin)
@@ -221,7 +166,7 @@ namespace TreeViewExample.Business.Models
         public int CompareTo(object obj)
         {
             Unit cell = obj as Unit;
-            return string.Compare(this.UnitNm, cell.UnitNm);
+            return string.Compare(this.oud_UnitNm, cell.oud_UnitNm);
         }
 
 
@@ -253,6 +198,11 @@ namespace TreeViewExample.Business.Models
             {
                 _Brush = Brushes.LightGreen;
             }
+        }
+
+        public string GetName()
+        {
+            throw new NotImplementedException();
         }
 
 

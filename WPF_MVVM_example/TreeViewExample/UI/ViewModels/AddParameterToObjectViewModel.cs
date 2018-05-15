@@ -21,9 +21,7 @@ namespace TreeViewExample.UI.ViewModels
     public class AddParameterToObjectViewModel : ViewModel, INotifyPropertyChanged
     {
         private IObjectWithParameters _ParameterObject;
-        private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
-        //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
-        //private ObservableCollection<Parameter> _ParameterList = new ObservableCollection<Parameter>();
+        private ObservableCollection<IParameterObject> _ParameterList = new ObservableCollection<IParameterObject>();
 
         private IAddParameterToObjectView _IAddParameterToObjectView;
         public AddParameterToObjectViewModel(IAddParameterToObjectView view) : base(view)
@@ -40,7 +38,7 @@ namespace TreeViewExample.UI.ViewModels
             set { SetProperty(ref _ParameterObject, value); }
         }
 
-        public ObservableCollection<Parameter> ParameterList
+        public ObservableCollection<IParameterObject> ParameterList
         {
             get { return _ParameterList; }
             set { SetProperty(ref _ParameterList, value); }
@@ -67,10 +65,10 @@ namespace TreeViewExample.UI.ViewModels
 
         #region ItemHandlers
 
-        private void RemoveParameter(Parameter parameter)
+        private void RemoveParameter(IParameterObject parameter)
         {
             ParameterList.Remove(parameter);
-            ParameterObject.RemoveParameter(parameter);
+            //ParameterObject.RemoveParameter(parameter);
         }
         private void FinishEditing()
         {
@@ -87,7 +85,7 @@ namespace TreeViewExample.UI.ViewModels
 
         private void InitializeCommand()
         {
-            RemoveParameterCommand = new RelayCommandT1<Parameter>(RemoveParameter);
+            RemoveParameterCommand = new RelayCommandT1<IParameterObject>(RemoveParameter);
             FinishEditingCommand = new RelayCommand(FinishEditing);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
         }

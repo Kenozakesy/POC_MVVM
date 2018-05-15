@@ -20,9 +20,11 @@ namespace TreeViewExample.Business.Models
         private Brush _Brush;
         private static Random ran = new Random();
 
-        private ObservableCollection<Unit> _UnitList = new ObservableCollection<Unit>();
+        private List<sri_SubRoutesInRoutes> _SubrouteInRouteList = new List<sri_SubRoutesInRoutes>();
+        private List<bir_BinsInSubRoutes> _BinInSubRouteList = new List<bir_BinsInSubRoutes>();
+        private List<uis_UnitsInSubRoutes> _UnitsInSubroute = new List<uis_UnitsInSubRoutes>();
+
         private ProcessCel _ProcessCel;
-        private List<sri_SubRoutesInRoutes> _SubrouteInRouteList = new List<DatabaseModels.sri_SubRoutesInRoutes>();
 
         private string _ProcesCellId;
         private string _SubRouteId;
@@ -39,19 +41,33 @@ namespace TreeViewExample.Business.Models
         public Brush Brush
         {
             get { return _Brush; }
-            set { SetProperty(ref _Brush, value); }
-        }
-        [NotMapped]
-        public ObservableCollection<Unit> UnitList
-        {
-            get { return _UnitList; }
-            set { SetProperty(ref _UnitList, value); }
+            set
+            {
+                SetProperty(ref _Brush, value);
+
+                foreach (sri_SubRoutesInRoutes sri in _SubrouteInRouteList)
+                {
+                    sri.Brush = Brush;
+                }
+            }
         }
 
         public virtual List<sri_SubRoutesInRoutes> sri_SubRoutesInRoutes
         {
             get { return _SubrouteInRouteList; }
             set { SetProperty(ref _SubrouteInRouteList, value); }
+        }
+
+        public virtual List<bir_BinsInSubRoutes> bir_BinsInSubRoutes
+        {
+            get { return _BinInSubRouteList; }
+            set { SetProperty(ref _BinInSubRouteList, value); }
+        }
+
+        public virtual List<uis_UnitsInSubRoutes> uis_UnitsInSubRoutes
+        {
+            get { return _UnitsInSubroute; }
+            set { SetProperty(ref _UnitsInSubroute, value); }
         }
 
         [ForeignKey("ProcesCellId")]
@@ -114,15 +130,15 @@ namespace TreeViewExample.Business.Models
         }
         public void DeleteChild(IConfigObject obj)
         {
-            Unit unit = obj as Unit;
-            foreach (Unit U in UnitList)
-            {
-                if (U.Equals(unit))
-                {
-                    UnitList.Remove(unit);
-                    break;
-                }
-            }
+            //Unit unit = obj as Unit;
+            //foreach (Unit U in UnitList)
+            //{
+            //    if (U.Equals(unit))
+            //    {
+            //        UnitList.Remove(unit);
+            //        break;
+            //    }
+            //}
 
         }
         public void CreateChild()
@@ -175,6 +191,11 @@ namespace TreeViewExample.Business.Models
                 _Brush = Brushes.LightGreen;
             }
 
+        }
+
+        public string GetName()
+        {
+            throw new NotImplementedException();
         }
 
 

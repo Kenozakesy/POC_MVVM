@@ -10,6 +10,7 @@ namespace TreeViewExample.Business.Interfaces
 {
     public interface IConfigObject : IComparable
     {
+        string GetName();
         void ChangeColor();
         void Delete();
         void DeleteChild(IConfigObject obj);

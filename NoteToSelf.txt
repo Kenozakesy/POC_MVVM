@@ -1,7 +1,9 @@
--bins toevoegen + koppeling met de subroutes
--units toevoegen aan de subroutes
+
+
 -verwijderen mogelijk maken
 -toevoegen mogelijk maken
+
+-units toevoegen aan de subroutes
 
 -toepassingen invoeren
 -lijst laten zien mogelijk maken

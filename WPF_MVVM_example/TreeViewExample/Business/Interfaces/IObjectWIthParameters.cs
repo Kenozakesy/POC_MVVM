@@ -12,7 +12,7 @@ namespace TreeViewExample.Business.Interfaces
     public interface IObjectWithParameters
     {
         string GetName();
-        ObservableCollection<Parameter> GetParameterList();
+        ObservableCollection<IParameterObject> GetParameterList();
         void RemoveParameter(Parameter paramdef);
 
     }

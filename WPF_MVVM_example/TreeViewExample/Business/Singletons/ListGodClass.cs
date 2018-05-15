@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Business.Statics;
 
 namespace TreeViewExample.Business.Singletons
 {
@@ -22,8 +23,14 @@ namespace TreeViewExample.Business.Singletons
 
         private ListGodClass()
         {
+         
+        }
+
+        public void LoadDataFromDB()
+        {
+            AddProcesCells();
             AddCustomerParameters();
-            AddProcesCellsParameters();
+            AddBinsFromDatabase();
         }
 
         public static ListGodClass Instance
@@ -72,11 +79,26 @@ namespace TreeViewExample.Business.Singletons
         /// <summary>
         /// Gets all ProcesCells
         /// </summary>
-        private void AddProcesCellsParameters()
+        private void AddProcesCells()
         {
             ProcessCel procCell = new ProcessCel();
             ProcessCelList = procCell.GetAllProcesCells();
         }
+
+        public void AddBin(Bin bin)
+        {
+            OrderObservableList.AddSorted(BinList, bin);
+        }
+        public void DeleteBin(Bin bin)
+        {
+            BinList.Remove(bin);
+        }
+
+        private void AddBinsFromDatabase()
+        {
+            List<Bin> bins = Bin.GetAllBins();
+        }
+
 
         #endregion
     }

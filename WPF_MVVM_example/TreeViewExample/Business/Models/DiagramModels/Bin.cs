@@ -10,25 +10,29 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
+using TreeViewExample.Business.Singletons;
+using TreeViewExample.Dal.Repository.BusinessGlueCode;
+using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
     [Table("bin_Bins")]
-    public class Bin : ViewModelBase, IConfigObject, IObjectWithParameters
+    public class Bin : ViewModelBase, IConfigObject, IObjectWithParameters, IEquatable<Bin>
     {
-        private ObservableCollection<BinParameter> _BinParameterList = new ObservableCollection<BinParameter>();
-        private Unit _Unit;
+        private static BinBusiness db = new BinBusiness(new MSSQL_BinRepository());
+
+        private ObservableCollection<bir_BinsInSubRoutes> _BinInSubRouteList = new ObservableCollection<bir_BinsInSubRoutes>();
         private Brush _Brush;
         private IsValidated _IsValid;
 
         public Bin()
         {
             _Brush = Brushes.Orange;
-            GetBinParameters();
-            Validate();
+            ListGodClass.Instance.AddBin(this);
         }
 
         #region Properties
@@ -37,8 +41,20 @@ namespace TreeViewExample.Business.Models
         [NotMapped]
         public Brush Brush
         {
-            get { return _Brush; }
-            set { SetProperty(ref _Brush, value); }
+            get
+            {
+                //Validate();
+                return _Brush;
+            }
+            set
+            {
+                SetProperty(ref _Brush, value);
+
+                foreach (bir_BinsInSubRoutes bir in _BinInSubRouteList)
+                {
+                    bir.Brush = Brush;
+                }
+            }
         }
         [NotMapped]
         public IsValidated IsValid
@@ -50,25 +66,16 @@ namespace TreeViewExample.Business.Models
             }
         }
 
-        [NotMapped]
-        public ObservableCollection<BinParameter> BinParameterList
+        public virtual ObservableCollection<bir_BinsInSubRoutes> bir_BinsInSubRoutes
         {
-            get { return _BinParameterList; }
-            set { SetProperty(ref _BinParameterList, value); }
+            get { return _BinInSubRouteList; }
+            set { SetProperty(ref _BinInSubRouteList, value); }
         }
-        [NotMapped]
-        public Unit Unit
-        {
-            get { return _Unit; }
-            private set
-            {
-                SetProperty(ref _Unit, value);
-                Validate();
-            }
-        }
-
-        //public virtual ObservableCollection<bip_BinPars> bip_BinPars { get; set; }
-        //public virtual ObservableCollection<bir_BinsInSubRoutes> bir_BinsInSubRoutes { get; set; }
+        public virtual ObservableCollection<bip_BinPars> bip_BinPars { get; set; }
+        public virtual ObservableCollection<bib_BinBatches> bib_BinBatches { get; set; }
+        public virtual ObservableCollection<tbb_TempBinBatches> tbb_TempBinBatches { get; set; }
+        public virtual bis_BinStocks bis_BinStocks { get; set; }
+        public virtual ObservableCollection<pri_PropIns> pri_PropIns { get; set; }
 
         #region BIN columns
 
@@ -189,29 +196,24 @@ namespace TreeViewExample.Business.Models
 
         #endregion
 
+      
+
         #endregion
 
         #region Methods
 
-        private void GetBinParameters()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                BinParameter binParameter = new BinParameter("Name", "description", "1", "-", "1;2;3;4;5", true, true, this);
-                BinParameterList.Add(binParameter);
-            }
-        }
+
         public void SetSubroute(Unit unit = null)
         {
-            if (this.Unit != null)
-            {
-                this.Unit.DeleteBin(this);
-            }
-            Unit = unit;            
+            //if (this.Unit != null)
+            //{
+            //    this.Unit.DeleteBin(this);
+            //}
+            //Unit = unit;            
         }
         public void Validate()
         {
-            if (_Unit == null)
+            if (_BinInSubRouteList.Count == 0)
             {
                 IsValid = IsValidated.NotConnected;
             }
@@ -225,10 +227,10 @@ namespace TreeViewExample.Business.Models
             switch (IsValid)
             {
                 case IsValidated.Valid:
-                    Brush = Brushes.LightGreen;
+                    _Brush = Brushes.LightGreen;
                     break;
                 case IsValidated.NotConnected:
-                    Brush = Brushes.Orange;
+                    _Brush = Brushes.Orange;
                     break;
                 default:
                     break;
@@ -236,11 +238,21 @@ namespace TreeViewExample.Business.Models
         }
         public void ChangeColor()
         {
-            throw new NotImplementedException();
+            if (_Brush == Brushes.Orange)
+            {
+                Brush = Brushes.LightGreen;
+            }
+            else
+            {
+                Brush = Brushes.Orange;
+            }
         }
         public void Delete()
         {
-            throw new NotImplementedException();
+            if (db.DatabaseDelete(this))
+            {
+                ListGodClass.Instance.DeleteBin(this);
+            } 
         }
         public void DeleteChild(IConfigObject obj)
         {
@@ -269,26 +281,66 @@ namespace TreeViewExample.Business.Models
         public int CompareTo(object obj)
         {
             Bin bin = obj as Bin;
-            return string.Compare(this.bin_BinNm ,bin.bin_BinNm);
+            return string.Compare(bin.bin_BinId ,this.bin_BinId);
         }
-        public ObservableCollection<Parameter> GetParameterList()
-        {
-            ObservableCollection<Parameter> parameterList = new ObservableCollection<Parameter>();
-            foreach (BinParameter BP in BinParameterList)
-            {
-                parameterList.Add(BP);
-            }
-            return parameterList;
-        }
+
         public void RemoveParameter(Parameter paramdef)
         {
             throw new NotImplementedException();
         }
-
-
         public string GetName()
         {
-            return bin_BinNm;
+            return "Bin: " + bin_BinId;
+        }
+
+        public static List<Bin> GetAllBins()
+        {
+            List<Bin> BinList = new List<Bin>();
+            return db.GetAllBins();
+        }
+
+        private void DatabaseUpdate()
+        {
+            db.DatabaseUpdate(this);
+        }
+        private void DatabaseDelete()
+        {
+            throw new NotImplementedException();
+        }
+        private void DatabaseInsert()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Equals(Bin obj)
+        {
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj.GetType() == typeof(Bin)))
+            {
+                return false;
+            }
+
+            Bin other = (Bin)obj;
+
+            if ((other.bin_BinId != bin_BinId))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public ObservableCollection<IParameterObject> GetParameterList()
+        {
+            ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(bip_BinPars);
+            return parameterList;
         }
 
         #endregion

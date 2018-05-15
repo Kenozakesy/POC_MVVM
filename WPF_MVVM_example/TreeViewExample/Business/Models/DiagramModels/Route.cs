@@ -44,44 +44,22 @@ namespace TreeViewExample.Business.Models
         #endregion
 
         /// <summary>
-        /// Ued with entity framework
+        /// Used with entity framework
         /// </summary>
         public Route()
-        {
-             
-
-            GetRouteParameters();
+        {            
             Validate();
         }
 
         #region Properties
 
         [NotMapped]
-        public ObservableCollection<RouteParameter> RouteParameterList
-        {
-            get { return _RouteParameterList; }
-            set { SetProperty(ref _RouteParameterList, value); }
-        }
-        [NotMapped]
         public Brush Brush
         {
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
         }
-        [NotMapped]
-        public ObservableCollection<SubRoute> SubRouteList
-        {
-            get
-            {
-                _SubRouteList.Clear();
-                foreach (sri_SubRoutesInRoutes sir in SubrouteInRouteList)
-                {
-                    _SubRouteList.Add(sir.sur_SubRoutes);
-                }
-                return _SubRouteList;
-            }
-            set { SetProperty(ref _SubRouteList, value); }
-        }
+
 
         public virtual ObservableCollection<sri_SubRoutesInRoutes> SubrouteInRouteList
         {
@@ -91,7 +69,7 @@ namespace TreeViewExample.Business.Models
                 SetProperty(ref _SubrouteInRouteList, value);
             }
         }
-
+        public virtual ObservableCollection<rop_RoutePars> rop_RoutePars { get; set; }
         public virtual ProcessCel ProcesCell
         {
             get { return _ProcessCel; }
@@ -152,18 +130,6 @@ namespace TreeViewExample.Business.Models
         #region Methods
 
 
-        /// <summary>
-        /// Moet omgebouwd worden zodat die naar de databasde toe gaat
-        /// </summary>
-        private void GetRouteParameters()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                RouteParameter routeParameter = new RouteParameter("Name", "description", "1", "-", "1;2;3;4;5", true, true, this);
-                RouteParameterList.Add(routeParameter);
-            }
-        }
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -177,17 +143,7 @@ namespace TreeViewExample.Business.Models
         }
         public void Delete()
         {
-            throw new NotImplementedException();
-            //List<SubRoute> removableSubroutes = new List<SubRoute>();
-            //foreach (SubRoute S in SubRouteList)
-            //{
-            //    removableSubroutes.Add(S);
-            //}
-            //foreach (SubRoute S in removableSubroutes)
-            //{
-            //    S.Delete();
-            //}
-            //this._ProcessCel.DeleteChild(this);
+            db.DatabaseDelete(this);
         }
         public void DeleteChild(IConfigObject obj)
         {
@@ -229,13 +185,9 @@ namespace TreeViewExample.Business.Models
             //}
             return configList;
         }
-        public ObservableCollection<Parameter> GetParameterList()
+        public ObservableCollection<IParameterObject> GetParameterList()
         {
-            ObservableCollection<Parameter> parameterList = new ObservableCollection<Parameter>();
-            foreach (RouteParameter RP in RouteParameterList)
-            {
-                parameterList.Add(RP);
-            }
+            ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(rop_RoutePars);
             return parameterList;
         }
         public void RemoveParameter(Parameter paramdef)

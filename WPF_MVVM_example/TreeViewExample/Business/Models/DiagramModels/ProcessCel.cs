@@ -26,7 +26,6 @@ namespace TreeViewExample.Business.Models
 
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<SubRoute> _SubrouteList = new ObservableCollection<SubRoute>();
-        private ObservableCollection<ProcessCelParameter> _ProcessCelParameterList = new ObservableCollection<ProcessCelParameter>();
 
         private Brush _Brush;
         private static Random ran = new Random();
@@ -53,30 +52,22 @@ namespace TreeViewExample.Business.Models
         /// </summary>
         public ProcessCel()
         {
-            GetProcesscelParameters();
             Validate();
         }
 
         #region Properties
-
 
         public virtual ObservableCollection<Route> RouteList
         {
             get { return _RouteList; }
             set { SetProperty(ref _RouteList, value); }
         }
-
         public virtual ObservableCollection<SubRoute> SubrouteList
         {
             get { return _SubrouteList; }
             set { SetProperty(ref _SubrouteList, value); }
         }
-        [NotMapped]
-        public ObservableCollection<ProcessCelParameter> ProcessCelParameterList
-        {
-            get { return _ProcessCelParameterList; }
-            set { SetProperty(ref _ProcessCelParameterList, value); }
-        }
+        public virtual ObservableCollection<pca_ProcCellPars> pca_ProcCellPars { get; set; }
 
         [NotMapped]
         public Brush Brush
@@ -169,19 +160,6 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
-        /// <summary>
-        /// Moet omgebouwd worden zodat die naar de databasde toe gaat
-        /// </summary>
-        private void GetProcesscelParameters()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                ProcessCelParameter procescelparameter = new ProcessCelParameter("Name", "description", "1", "-", "1-5", true, true, this);
-                ProcessCelParameterList.Add(procescelparameter);
-            }
-        }
-
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -245,15 +223,12 @@ namespace TreeViewExample.Business.Models
             return string.Compare(this.ProcesCellId, cell.ProcesCellId);        
         }
 
-        public ObservableCollection<Parameter> GetParameterList()
+        public ObservableCollection<IParameterObject> GetParameterList()
         {
-            ObservableCollection<Parameter> parameterList = new ObservableCollection<Parameter>();
-            foreach (ProcessCelParameter PP in ProcessCelParameterList)
-            {
-                parameterList.Add(PP);
-            }
+            ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(pca_ProcCellPars);
             return parameterList;
         }
+
         public void RemoveParameter(Parameter paramdef)
         {
             throw new NotImplementedException();
