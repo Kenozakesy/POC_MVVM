@@ -15,9 +15,7 @@ namespace TreeViewExample.Dal.EntityFramework
     {
         public UniContext() : base(nameOrConnectionString: DatabaseConnectionClass.GetConnectionString())
         {
-            //Configuration.AutoDetectChangesEnabled = true;
-            //Configuration.ProxyCreationEnabled = true;
-            //this.Configuration.LazyLoadingEnabled = false;
+            //this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
         #region DBsets
@@ -44,6 +42,12 @@ namespace TreeViewExample.Dal.EntityFramework
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ProcessCel>()
+                 .HasMany(e => e.opc_OAProcCellDefs)
+                 .WithRequired(e => e.prc_ProcCells)
+                 .HasForeignKey(e => e.opc_ProcCellId)
+                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Route>()
                 .HasMany(e => e.SubrouteInRouteList)

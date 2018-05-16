@@ -19,9 +19,13 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
+               
+
                     var select = (from r in context.ProcesCells
                                   .Include(x => x.pca_ProcCellPars)
                                   .Include(x => x.pca_ProcCellPars.Select(z => z.prc_ProcCells))
+                                  .Include(x => x.opc_OAProcCellDefs)
+                                  .Include(x => x.opc_OAProcCellDefs.Select(z => z.prc_ProcCells))
 
                                   .Include(x => x.RouteList)
                                   .Include(x => x.RouteList.Select(z => z.rop_RoutePars))
@@ -35,16 +39,16 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes))
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins)))
 
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars)))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.bin_Bins))))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks)))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks.bin_Bins)))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bib_BinBatches)))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bib_BinBatches.Select(s => s.bin_Bins))))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.tbb_TempBinBatches)))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.tbb_TempBinBatches.Select(s => s.bin_Bins))))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.pri_PropIns)))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.pri_PropIns.Select(s => s.bin_Bins))))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars)))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.bin_Bins))))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks)))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks.bin_Bins)))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bib_BinBatches)))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bib_BinBatches.Select(s => s.bin_Bins))))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.tbb_TempBinBatches)))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.tbb_TempBinBatches.Select(s => s.bin_Bins))))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.pri_PropIns)))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.pri_PropIns.Select(s => s.bin_Bins))))
 
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bir_BinsInSubRoutes.Select(s => s.sur_SubRoutes))))
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes))
@@ -52,6 +56,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes.Select(z => z.Unit.uis_UnitsInSubRoutes.Select(s => s.sur_SubRoutes))))
                                   select r);
 
+                    var sql = select.ToString();
                     procescells = select.ToList();
                 }
                 catch (Exception)
@@ -62,47 +67,48 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             return procescells;
         }
 
-        public List<Route> GetAllRoutesByProcesCell(ProcessCel procescell)
+        public bool DatabaseDelete(object obj)
         {
-            List<Route> routeList = new List<Route>();
+            ProcessCel cell = obj as ProcessCel;
             using (var context = new UniContext())
             {
                 try
                 {
-                    var select = (from r
-                                  in context.Routes
-                                  where r.ProcesCellId == procescell.ProcesCellId
-                                  orderby r.RouteId select r);
-                    routeList = select.ToList();
+                    context.ProcesCells.Attach(cell);
+                    context.ProcesCells.Remove(cell);
+                    context.SaveChanges();
+                    return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     context.Dispose();
+                    return false;
                 }
             }
-            return routeList;
         }
 
-        public List<SubRoute> GetAllSubroutesByProcesCell(ProcessCel procescell)
+        public bool DatabaseInsert(object obj)
         {
-            List<SubRoute> routeList = new List<SubRoute>();
+            ProcessCel cell = obj as ProcessCel;
             using (var context = new UniContext())
             {
                 try
                 {
-                    var select = (from r
-                                  in context.SubRoutes
-                                  where r.ProcesCellId == procescell.ProcesCellId
-                                  orderby r.SubRouteName
-                                  select r);
-                    routeList = select.ToList();
+                    context.ProcesCells.Add(cell);
+                    context.SaveChanges();
+                    return true;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     context.Dispose();
+                    return false;
                 }
             }
-            return routeList;
+        }
+
+        public bool DatabaseUpdate(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

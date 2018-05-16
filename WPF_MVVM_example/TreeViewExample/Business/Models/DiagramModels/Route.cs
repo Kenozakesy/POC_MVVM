@@ -51,6 +51,16 @@ namespace TreeViewExample.Business.Models
             Validate();
         }
 
+        public Route(string routeid, string routeNm, int available, int selectpriority)
+        {
+            this.RouteId = routeid;
+            this.RouteName = routeNm;
+            this.Available = available;
+            this.SelectPriority = selectpriority;
+
+            Validate();
+        }
+
         #region Properties
 
         [NotMapped]
@@ -143,7 +153,7 @@ namespace TreeViewExample.Business.Models
         }
         public void Delete()
         {
-            db.DatabaseDelete(this);
+            throw new NotImplementedException();
         }
         public void DeleteChild(IConfigObject obj)
         {
@@ -212,6 +222,21 @@ namespace TreeViewExample.Business.Models
         public string GetName()
         {
             return RouteId;
+        }
+
+        public void DatabaseInsert()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DatabaseUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DatabaseDelete()
+        {
+            db.DatabaseDelete(this);
         }
 
 

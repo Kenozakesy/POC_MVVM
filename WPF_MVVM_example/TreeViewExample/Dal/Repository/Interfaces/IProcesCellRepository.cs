@@ -7,12 +7,9 @@ using TreeViewExample.Business.Models;
 
 namespace TreeViewExample.Dal.Repository.Interfaces
 {
-    public interface IProcesCellRepository
+    public interface IProcesCellRepository : IDatabaseActions
     {
         List<ProcessCel> GetAllProcesCells();
 
-        List<Route> GetAllRoutesByProcesCell(ProcessCel procescell);
-
-        List<SubRoute> GetAllSubroutesByProcesCell(ProcessCel procescell);
     }
 }

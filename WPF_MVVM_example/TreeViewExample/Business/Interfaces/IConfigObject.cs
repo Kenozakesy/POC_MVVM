@@ -20,5 +20,9 @@ namespace TreeViewExample.Business.Interfaces
 
         //void SetColor();
         //void Validate();
+
+        void DatabaseInsert();
+        void DatabaseUpdate();
+        void DatabaseDelete();
     }
 }

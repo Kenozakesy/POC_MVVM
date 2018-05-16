@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels;
@@ -63,10 +64,18 @@ namespace TreeViewExample.UI.ViewModels
             set { SetProperty(ref _CustomerParameterList, value); }
         }
 
+        public List<ProcesCellType> ProcesCellTypes
+        {
+            get
+            {
+                return Enum.GetValues(typeof(ProcesCellType)).Cast<ProcesCellType>().ToList();
+            }
+        }
+
         #endregion
 
         #region Methods
-  
+
         #endregion
 
         #region ItemHandlers
@@ -77,22 +86,21 @@ namespace TreeViewExample.UI.ViewModels
             {
                 try
                 {
-                    IConfigObject configObject = obj as IConfigObject;
-                    if (configObject is ProcessCel)
+                    if (obj is ProcessCel)
                     {
                         foreach (ProcessCel P in _ProcessCelList)
                         {
-                            if (P == configObject)
+                            if (P == obj)
                             {
-                                P.Delete();
+                                obj.DatabaseDelete();
                                 ProcessCelList.Remove(P);
                                 break;
                             }
                         }
                     }
-                    else if (configObject != null)
+                    else if (obj != null)
                     {
-                        configObject.Delete();
+                        obj.DatabaseDelete();
                     }
                 }
                 catch (NotImplementedException e)
@@ -100,7 +108,7 @@ namespace TreeViewExample.UI.ViewModels
                     e.ToString();
                     _TreeView.ShowMessage("This functionality has not been implemented yet.");
                 }
-            }         
+            }
         }
         private void ChangeColorClick(IConfigObject obj)
         {
@@ -156,6 +164,11 @@ namespace TreeViewExample.UI.ViewModels
         {
             _TreeView.OpenCreateParameterWindow();
         }
+        private void OpenCreateProcesCell(ProcesCellType type)
+        {
+            ProcessCel procescell = new ProcessCel(type);
+            _TreeView.OpenCreateProcesCellWindow(procescell);
+        }
         private void OpenEditSubrouteWindow(Route route)
         {
             _TreeView.OpenEditSubrouteWindow();
@@ -183,6 +196,7 @@ namespace TreeViewExample.UI.ViewModels
             //RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
+            OpenCreateProcesCellWindowCommand = new RelayCommandT1<ProcesCellType>(OpenCreateProcesCell);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
             OpenEditSubrouteWindowCommand = new RelayCommandT1<Route>(OpenEditSubrouteWindow);
             OpenCreateSubrouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateSubrouteWindow);
@@ -197,6 +211,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand ShowPropInListCommand { get; set; }
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }
+        public ICommand OpenCreateProcesCellWindowCommand { get; set; }
         public ICommand OpenEditSubrouteWindowCommand { get; set; }
         public ICommand OpenCreateSubrouteWindowCommand { get; set; }
         public ICommand OpenAddParameterToObjectWindowCommand { get; set; }

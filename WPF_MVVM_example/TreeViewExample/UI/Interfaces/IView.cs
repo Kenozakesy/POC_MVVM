@@ -4,5 +4,6 @@
     {
         void ShowMessage(string text);
         bool ConfirmMessage(string title, string text);
+        void CloseWindow();
     }
 }

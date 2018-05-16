@@ -75,7 +75,6 @@ namespace TreeViewExample.Business.Singletons
             ParameterDefinition paramDef = new ParameterDefinition();
             CustomerParameterList = paramDef.GetAllCustomerParameters();
         }
-
         /// <summary>
         /// Gets all ProcesCells
         /// </summary>
@@ -84,7 +83,6 @@ namespace TreeViewExample.Business.Singletons
             ProcessCel procCell = new ProcessCel();
             ProcessCelList = procCell.GetAllProcesCells();
         }
-
         public void AddBin(Bin bin)
         {
             OrderObservableList.AddSorted(BinList, bin);
@@ -97,6 +95,24 @@ namespace TreeViewExample.Business.Singletons
         private void AddBinsFromDatabase()
         {
             List<Bin> bins = Bin.GetAllBins();
+        }
+
+        public int? GetFirstAvailableProccellId(ProcessCel cell)
+        {
+            List<int> procIds = new List<int>();
+            procIds.Add(0);
+
+            foreach (ProcessCel r in ProcessCelList)
+            {
+                if (cell.ProcesCellTypeId == r.ProcesCellTypeId)
+                {
+                    string routeid = new String(r.ProcesCellId.Where(Char.IsDigit).ToArray());
+                    procIds.Add(Convert.ToInt32(routeid));
+                }
+            }
+            int? firstAvailable = Enumerable.Range(0, int.MaxValue).Except(procIds).FirstOrDefault();
+
+            return firstAvailable;
         }
 
 

@@ -85,5 +85,17 @@ namespace TreeViewExample
             ((AddParameterToObjectViewModel)window.DataContext).InitializeParameters();
             window.ShowDialog();
         }
+
+        public void OpenCreateProcesCellWindow(ProcessCel cell)
+        {
+            CreateProcesCellWindow window = new CreateProcesCellWindow();
+            ((CreateProcesCellViewModel)window.DataContext).ProcesCell = cell;
+            window.ShowDialog();
+        }
+
+        public void CloseWindow()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

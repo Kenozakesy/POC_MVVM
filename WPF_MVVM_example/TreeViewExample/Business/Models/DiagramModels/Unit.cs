@@ -205,7 +205,20 @@ namespace TreeViewExample.Business.Models
             throw new NotImplementedException();
         }
 
+        public void DatabaseInsert()
+        {
+            throw new NotImplementedException();
+        }
 
+        public void DatabaseUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DatabaseDelete()
+        {
+            throw new NotImplementedException();
+        }
 
 
 

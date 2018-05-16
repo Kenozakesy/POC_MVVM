@@ -27,6 +27,11 @@ namespace TreeViewExample.UI.Views
             DataContext = new CreateSubrouteViewModel(this);
         }
 
+        public void CloseWindow()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool ConfirmMessage(string title, string text)
         {
             throw new NotImplementedException();

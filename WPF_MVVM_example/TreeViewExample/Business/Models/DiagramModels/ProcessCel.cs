@@ -7,11 +7,14 @@ using System.Linq;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
+using TreeViewExample.Business.Models.DatabaseModelsF;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
+using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.Dal.Repository.BusinessGlueCode;
+using TreeViewExample.Dal.Repository.Interfaces;
 using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
 
@@ -30,6 +33,13 @@ namespace TreeViewExample.Business.Models
         private Brush _Brush;
         private static Random ran = new Random();
         private IsValidated _Isvalid;
+        private ProcesCellType _Type;
+        
+        private bool _BatchOptionsP;
+        private bool _BatchOptionsD;
+        private bool _BatchOptionsS;
+        private bool _BatchOptionsL;
+        private bool _BatchOptionsR;
 
         #region prc_columns fields
 
@@ -55,6 +65,28 @@ namespace TreeViewExample.Business.Models
             Validate();
         }
 
+        public ProcessCel(ProcesCellType type)
+        {
+            this._Type = type;
+            ProcesCellTypeId = _Type.ToString();
+
+            int? firstAvailable = ListGodClass.Instance.GetFirstAvailableProccellId(this);
+         
+            ProcesCellId = _Type.ToString() + firstAvailable;
+            ProcesCellName = Enumerations.GetEnumDescription(_Type) + " " + firstAvailable;
+            ShortProcesCellName = _Type.ToString() + firstAvailable;
+            ProdLocked = false;
+            OAProcesCellId = "pc" + _Type.ToString() + "" + firstAvailable;
+            OABatchReqObjectName = "Customer."+ Enumerations.GetEnumDescription(_Type) + ".pc" + _Type.ToString() + firstAvailable + ".General.scBatchRequest" + _Type.ToString() + firstAvailable;
+            _BatchRegTypeId = "DC";
+            _BatchStartTypeId = "Scheduled";
+            BatchOptions = "";
+            Display = "1";
+
+            AddDefaultRoute();
+            Validate();
+        }
+
         #region Properties
 
         public virtual ObservableCollection<Route> RouteList
@@ -68,7 +100,21 @@ namespace TreeViewExample.Business.Models
             set { SetProperty(ref _SubrouteList, value); }
         }
         public virtual ObservableCollection<pca_ProcCellPars> pca_ProcCellPars { get; set; }
+        public virtual ObservableCollection<opc_OAProcCellDefs> opc_OAProcCellDefs { get; set; }
 
+        [NotMapped]
+        public ProcesCellType ProcesCellType
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                SetProperty(ref _Type, value);
+                ProcesCellTypeId = value.ToString();
+            }
+        }
         [NotMapped]
         public Brush Brush
         {
@@ -80,6 +126,47 @@ namespace TreeViewExample.Business.Models
         {
             get { return _Isvalid; }
             set { SetProperty(ref _Isvalid, value); }
+        }
+        [NotMapped]
+        public bool BatchOptionsP
+        {
+            get { return _BatchOptionsP; }
+            set { SetProperty(ref _BatchOptionsP, value); BatchOptionsChange(); }
+        }
+        [NotMapped]
+        public bool BatchOptionsD
+        {
+            get { return _BatchOptionsD; }
+            set
+            {
+                SetProperty(ref _BatchOptionsD, value);
+                BatchOptionsChange();
+            }
+        }
+        [NotMapped]
+        public bool BatchOptionsS
+        {
+            get { return _BatchOptionsS; }
+            set {
+                SetProperty(ref _BatchOptionsS, value);
+                BatchOptionsChange();
+            }
+        }
+        [NotMapped]
+        public bool BatchOptionsL
+        {
+            get { return _BatchOptionsL; }
+            set { SetProperty(ref _BatchOptionsL, value);
+                BatchOptionsChange();
+            }
+        }
+        [NotMapped]
+        public bool BatchOptionsR
+        {
+            get { return _BatchOptionsR; }
+            set { SetProperty(ref _BatchOptionsR, value);
+                BatchOptionsChange();
+            }
         }
 
         #region prc_columns properties
@@ -159,6 +246,62 @@ namespace TreeViewExample.Business.Models
 
 
         #region Methods
+
+        private void BatchOptionsChange()
+        {
+            BatchOptions = "";
+            if (BatchOptionsP)
+            {
+                BatchOptions += "P";
+            }
+            if (BatchOptionsD)
+            {
+                BatchOptions += "D";
+            }
+            if (BatchOptionsS)
+            {
+                BatchOptions += "S";
+            }
+            if (BatchOptionsL)
+            {
+                BatchOptions += "L";
+            }
+            if (BatchOptionsR)
+            {
+                BatchOptions += "R";
+            }
+        }
+
+        public void AddGeneratedRoute()
+        {
+            List<int> RouteIds = new List<int>();
+            RouteIds.Add(0);
+            foreach (Route r in RouteList)
+            {
+                string routeid = new String(r.RouteId.Where(Char.IsDigit).ToArray());
+                RouteIds.Add(Convert.ToInt32(routeid));
+            }
+            int? firstAvailable = Enumerable.Range(0, int.MaxValue).Except(RouteIds).FirstOrDefault();
+
+            Route route = new Route();
+            route.RouteId = "R" + firstAvailable;
+            route.RouteName = ProcesCellId + ":" + route.RouteId + ":";
+            RouteList.Add(route);
+        }
+
+        public void RemoveGeneratedRoute()
+        {
+            if (RouteList.Count > 0)
+            {
+                RouteList.RemoveAt(RouteList.Count - 1);
+            }
+        }
+
+        private void AddDefaultRoute()
+        {
+            Route route = new Route("R" + 1, ProcesCellId + ":R1:", 1, 1);
+            RouteList.Add(route);
+        }
 
         public void ChangeColor()
         {
@@ -251,13 +394,26 @@ namespace TreeViewExample.Business.Models
         {
              return db.GetAllProcesCells();
         }
+
+
  
         public string GetName()
         {
             return ProcesCellId;
         }
 
-        
+        public void DatabaseInsert()
+        {
+            db.DatabaseInsert(this);
+        }
+        public void DatabaseUpdate()
+        {
+            db.DatabaseUpdate(this);
+        }
+        public void DatabaseDelete()
+        {
+            db.DatabaseDelete(this);
+        }
 
 
 

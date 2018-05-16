@@ -299,18 +299,6 @@ namespace TreeViewExample.Business.Models
             return db.GetAllBins();
         }
 
-        private void DatabaseUpdate()
-        {
-            db.DatabaseUpdate(this);
-        }
-        private void DatabaseDelete()
-        {
-            throw new NotImplementedException();
-        }
-        private void DatabaseInsert()
-        {
-            throw new NotImplementedException();
-        }
 
         public bool Equals(Bin obj)
         {
@@ -342,6 +330,20 @@ namespace TreeViewExample.Business.Models
             ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(bip_BinPars);
             return parameterList;
         }
+
+        public void DatabaseUpdate()
+        {
+            db.DatabaseUpdate(this);
+        }
+        public void DatabaseDelete()
+        {
+            db.DatabaseDelete(this);
+        }
+        public void DatabaseInsert()
+        {
+            db.DatabaseInsert(this);
+        }
+
 
         #endregion
     }

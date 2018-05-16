@@ -61,6 +61,11 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             bin_Bins.ChangeColor();
         }
 
+
+
+
+
+
         public void Delete()
         {
             throw new NotImplementedException();
@@ -92,6 +97,21 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         }
 
         public string GetName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DatabaseInsert()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DatabaseUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DatabaseDelete()
         {
             throw new NotImplementedException();
         }

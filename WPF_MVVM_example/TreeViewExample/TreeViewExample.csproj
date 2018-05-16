@@ -76,11 +76,13 @@
     <Compile Include="Business\Enums\IsRequired.cs" />
     <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Enums\ParameterType.cs" />
+    <Compile Include="Business\Enums\ProcesCellType.cs" />
     <Compile Include="Business\Interfaces\IObjectWithParameters.cs" />
     <Compile Include="Business\Interfaces\IParameterObject.cs" />
     <Compile Include="Business\Models\DatabaseModels\bib_BinBatches.cs" />
     <Compile Include="Business\Models\DatabaseModels\bir_BinsInSubRoutes.cs" />
     <Compile Include="Business\Models\DatabaseModels\bis_BinStocks.cs" />
+    <Compile Include="Business\Models\DatabaseModels\opc_OAProcCellDefs.cs" />
     <Compile Include="Business\Models\DatabaseModels\pri_PropIns.cs" />
     <Compile Include="Business\Models\DatabaseModels\sri_SubRoutesInRoutes.cs" />
     <Compile Include="Business\Models\DatabaseModels\tbb_TempBinBatches.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Business\Models\DiagramModels\Parameters\pca_ProcCellPars.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\rop_RoutePars.cs" />
     <Compile Include="Business\Singletons\ListGodClass.cs" />
+    <Compile Include="Business\Statics\Enumerations.cs" />
     <Compile Include="Business\Statics\UI_Models\EnumToArrayConverter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
     <Compile Include="Business\Statics\UI_Models\DragBehavior.cs" />
     <Compile Include="Business\Statics\UI_Models\DragListViewItemBehavior.cs" />
+    <Compile Include="Business\Statics\UI_Models\EnumToStringConverter.cs" />
     <Compile Include="Business\Statics\UI_Models\GreaterThan.cs" />
     <Compile Include="Business\Statics\UI_Models\MouseBehaviour.cs" />
     <Compile Include="Business\Statics\UI_Models\MyCloneConverter.cs" />

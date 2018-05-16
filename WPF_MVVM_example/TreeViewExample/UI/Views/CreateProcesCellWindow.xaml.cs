@@ -27,6 +27,11 @@ namespace TreeViewExample.UI.Views
             DataContext = new CreateProcesCellViewModel(this);
         }
 
+        public void CloseWindow()
+        {
+            this.Close();
+        }
+
         public bool ConfirmMessage(string title, string text)
         {
             throw new NotImplementedException();

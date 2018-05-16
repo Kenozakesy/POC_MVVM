@@ -38,39 +38,23 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
             return ProcesCellList;
         }
 
-        public ObservableCollection<Route> GetAllRoutesByProcesCell(ProcessCel procescell)
+        public bool DatabaseDelete(object obj)
         {
-            List<Route> routes = _Repository.GetAllRoutesByProcesCell(procescell);
-
-            var selected = from p in routes
-                           select p;
-
-            ObservableCollection<Route> RouteList = new ObservableCollection<Route>();
-
-            foreach (Route PC in selected.ToList())
-            {
-                OrderObservableList.AddSorted(RouteList, PC);
-            }
-
-            return RouteList;
+            return _Repository.DatabaseDelete(obj);
         }
 
-        public ObservableCollection<SubRoute> GetAllSubRoutesByProcesCell(ProcessCel procescell)
+        public bool DatabaseInsert(object obj)
         {
-            List<SubRoute> subroutes = _Repository.GetAllSubroutesByProcesCell(procescell);
-
-            var selected = from p in subroutes
-                           select p;
-
-            ObservableCollection<SubRoute> SubRouteList = new ObservableCollection<SubRoute>();
-
-            foreach (SubRoute PC in selected.ToList())
-            {
-                OrderObservableList.AddSorted(SubRouteList, PC);
-            }
-
-            return SubRouteList;
+           return _Repository.DatabaseInsert(obj);
         }
+
+        public bool DatabaseUpdate(object obj)
+        {
+            return _Repository.DatabaseUpdate(obj);
+        }
+
+
+
 
         #endregion
     }
