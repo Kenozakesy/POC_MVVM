@@ -11,6 +11,7 @@ using System.Windows.Input;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Singletons;
+using TreeViewExample.Business.Statics;
 using TreeViewExample.UI.Interfaces;
 using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.Interfaces;
@@ -69,7 +70,7 @@ namespace TreeViewExample.UI.ViewModels
         private void SaveProcesCelld()
         {
             ProcesCell.DatabaseInsert();
-            procesCellList.Add(ProcesCell);
+            OrderObservableList.AddSorted(procesCellList, ProcesCell);
             _View.CloseWindow();
         }
 

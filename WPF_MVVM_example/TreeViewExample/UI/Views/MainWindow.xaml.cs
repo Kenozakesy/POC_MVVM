@@ -54,7 +54,7 @@ namespace TreeViewExample
         public void OpenCreateSubrouteWindow(ProcessCel processcel)
         {
             CreateSubrouteWindow window = new CreateSubrouteWindow();
-            ((CreateSubrouteViewModel)window.DataContext).ProcessCel = processcel;
+            ((CreateSubrouteViewModel)window.DataContext).ProcesCell = processcel;
             window.ShowDialog();
         }
 
@@ -93,9 +93,18 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
+        public void OpenCreateRouteWindow(Route route)
+        {
+            CreateRouteWindow window = new CreateRouteWindow();
+            ((CreateRouteViewModel)window.DataContext).Route = route;
+            window.ShowDialog();
+        }
+
         public void CloseWindow()
         {
-            throw new NotImplementedException();
+            this.Close();
         }
+
+    
     }
 }

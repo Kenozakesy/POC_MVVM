@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,60 +7,62 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TreeViewExample.Business.Models;
-using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.UI.Interfaces;
+using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.Interfaces;
 using WPF_MVVM_example.UI.ViewModels;
 
 namespace TreeViewExample.UI.ViewModels
 {
-    public class EditSubrouteViewModel : ViewModel, INotifyPropertyChanged
+    public class CreateRouteViewModel : ViewModel, INotifyPropertyChanged
     {
         #region Fields
 
+        private Route _Route;
 
         #endregion
 
-        private IEditSubrouteView _IEditSubrouteView;
-        public EditSubrouteViewModel(IEditSubrouteView view) : base(view)
+        private ICreateRouteView _View;
+
+        public CreateRouteViewModel(ICreateRouteView view) : base(view)
         {
-            this._IEditSubrouteView = view;
-
-            SubRouteInRouteList = new ObservableCollection<sri_SubRoutesInRoutes>();
-            Subroutelist = new ObservableCollection<SubRoute>();
-
-            generatetest();
+            _View = view;
+            InitializeCommand();
         }
 
         #region Properties
 
-        public ObservableCollection<sri_SubRoutesInRoutes> SubRouteInRouteList { get; set; }
-
-        public ObservableCollection<SubRoute> Subroutelist { get; set; }
-
+        public ProcessCel ProcesCell { get; set; }
+        public Route Route
+        {
+            get { return _Route; }
+            set
+            {
+                SetProperty(ref _Route, value);
+                ProcesCell = Route.ProcesCell;
+            }
+        }
 
         #endregion
 
         #region Methods
 
-        private void generatetest()
+        private void GenerateRoute()
         {
-            for (int i = 0; i < 3; i++)
-            {
-                sri_SubRoutesInRoutes test = new sri_SubRoutesInRoutes();
-                SubRouteInRouteList.Add(test);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                SubRoute test = new SubRoute();
-                Subroutelist.Add(test);
-            }
+
         }
 
         #endregion
 
+
         #region ItemHandlers
 
+        private void SaveRoute()
+        {
+            Route.DatabaseInsert();
+            ProcesCell.AddRouteToList(Route);
+            _View.CloseWindow();
+        }
 
         #endregion
 
@@ -70,10 +71,10 @@ namespace TreeViewExample.UI.ViewModels
 
         private void InitializeCommand()
         {
-            //CreateRouteCommand = new RelayCommand(CreateRoute);
+            SaveRouteCommand = new RelayCommand(SaveRoute);
         }
 
-        //public ICommand CreateRouteCommand { get; set; }
+        public ICommand SaveRouteCommand { get; set; }
 
 
         #endregion

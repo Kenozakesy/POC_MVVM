@@ -51,12 +51,20 @@ namespace TreeViewExample.Business.Models
             Validate();
         }
 
-        public Route(string routeid, string routeNm, int available, int selectpriority)
+        public Route(string routeid, int available, int selectpriority, ProcessCel processCel)
         {
             this.RouteId = routeid;
-            this.RouteName = routeNm;
+            this.RouteName = processCel.ProcesCellId +":"+ routeid +":";
+            this.ShortRouteName = routeid;
             this.Available = available;
             this.SelectPriority = selectpriority;
+            this.ProcedureId = processCel.ProcesCellId + routeid;
+            this.ProcesCellId = processCel.ProcesCellId;
+
+            this.ProcesCell = processCel;
+
+            pru_Procedures procedure = new pru_Procedures(this);
+            pru_Procedures = procedure;
 
             Validate();
         }
@@ -80,6 +88,8 @@ namespace TreeViewExample.Business.Models
             }
         }
         public virtual ObservableCollection<rop_RoutePars> rop_RoutePars { get; set; }
+        public virtual pru_Procedures pru_Procedures { get; set; }
+
         public virtual ProcessCel ProcesCell
         {
             get { return _ProcessCel; }
@@ -226,12 +236,12 @@ namespace TreeViewExample.Business.Models
 
         public void DatabaseInsert()
         {
-            throw new NotImplementedException();
+            db.DatabaseInsert(this);
         }
 
         public void DatabaseUpdate()
         {
-            throw new NotImplementedException();
+            db.DatabaseUpdate(this);
         }
 
         public void DatabaseDelete()

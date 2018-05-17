@@ -119,7 +119,7 @@
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
                         <MenuItem Header="Manage Subroutes" Command="{Binding Tag.DataContext.OpenCreateSubrouteWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
-                        <MenuItem Header="Create Route"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Create Route"  Command="{Binding Tag.DataContext.OpenCreateRouteWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
                         <Separator />
@@ -145,8 +145,7 @@
 
                         <MenuItem Header="set Subroutes" Command="{Binding Tag.DataContext.OpenEditSubrouteWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-
-
+                        <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
                         <Separator />
                         <MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
                         <MenuItem Header="Validate"/>

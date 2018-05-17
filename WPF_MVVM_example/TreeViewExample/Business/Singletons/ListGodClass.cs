@@ -91,12 +91,10 @@ namespace TreeViewExample.Business.Singletons
         {
             BinList.Remove(bin);
         }
-
         private void AddBinsFromDatabase()
         {
             List<Bin> bins = Bin.GetAllBins();
         }
-
         public int? GetFirstAvailableProccellId(ProcessCel cell)
         {
             List<int> procIds = new List<int>();

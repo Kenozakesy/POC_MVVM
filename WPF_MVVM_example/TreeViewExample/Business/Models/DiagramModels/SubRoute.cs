@@ -10,13 +10,18 @@ using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Statics;
+using TreeViewExample.Dal.Repository.BusinessGlueCode;
+using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Models
 {
     [Table("sur_SubRoutes")]
-    public class SubRoute : ViewModelBase, IConfigObject, ICloneable
+    public class SubRoute : ViewModelBase, IConfigObject
     {
+        private SubrouteBusiness db = new SubrouteBusiness(new MSSQL_SubrouteRepository());
+
+
         private Brush _Brush;
         private static Random ran = new Random();
 
@@ -32,6 +37,16 @@ namespace TreeViewExample.Business.Models
 
         public SubRoute()
         {
+            Validate();
+        }
+
+        public SubRoute(ProcessCel procescell, string id)
+        {
+            this.ProcesCellId = procescell.ProcesCellId;
+            this.SubRouteId = id;
+            this.SubRouteName = procescell.ProcesCellId + " " + id;
+
+
             Validate();
         }
 
@@ -115,18 +130,7 @@ namespace TreeViewExample.Business.Models
         }
         public void Delete()
         {
-            throw new NotImplementedException();
-            //List<Unit> removableUnits = new List<Unit>();
-            //foreach (Unit U in UnitList)
-            //{
-            //    removableUnits.Add(U);
-            //}
-            //foreach (Unit U in removableUnits)
-            //{
-            //    U.Delete();
-            //}
-                    
-            //this._RouteList.DeleteChild(this);
+            db.DatabaseDelete(this);
         }
         public void DeleteChild(IConfigObject obj)
         {
@@ -156,7 +160,18 @@ namespace TreeViewExample.Business.Models
         public int CompareTo(object obj)
         {
             SubRoute subroute = obj as SubRoute;
-            return string.Compare(this.SubRouteName, subroute._SubRouteName);
+            int other = Convert.ToInt32(subroute.SubRouteId.Replace("SR", ""));
+            int current = Convert.ToInt32(this.SubRouteId.Replace("SR", ""));
+
+            if (current > other)
+            {
+                return 1;
+            }
+            else if(current < other)
+            {
+                return -1;
+            }
+            return 0;
         }
         public List<MainListViewModel> GenerateListViewList()
         {
@@ -173,10 +188,6 @@ namespace TreeViewExample.Business.Models
             //    configList.Add(mainListViewModel);
             //}
             return configList;
-        }
-        public object Clone()
-        {
-            throw new NotImplementedException();
         }
 
         public void Validate()
@@ -195,22 +206,22 @@ namespace TreeViewExample.Business.Models
 
         public string GetName()
         {
-            throw new NotImplementedException();
+            return "Subroute " + this.SubRouteName;
         }
 
         public void DatabaseInsert()
         {
-            throw new NotImplementedException();
+            db.DatabaseInsert(this);
         }
 
         public void DatabaseUpdate()
         {
-            throw new NotImplementedException();
+            db.DatabaseUpdate(this);
         }
 
         public void DatabaseDelete()
         {
-            throw new NotImplementedException();
+            db.DatabaseDelete(this);
         }
 
         #endregion

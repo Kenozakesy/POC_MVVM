@@ -9,23 +9,18 @@ using TreeViewExample.Dal.Repository.Interfaces;
 
 namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
-    public class MSSQL_RouteRepository : IRouteRepository
+    public class MSSQL_SubrouteRepository : ISubrouteRepository
     {
         public bool DatabaseDelete(object obj)
         {
-            Route route = obj as Route;
-
+            SubRoute subroute = obj as SubRoute;
             using (var context = new UniContext())
             {
                 try
                 {
-                    context.Routes.Attach(route);
-                    if (route.pru_Procedures != null)
-                    {
-                        context.Procedures.Remove(route.pru_Procedures);
-                    }
-                    context.Routes.Remove(route);
-                   
+                    context.SubRoutes.Attach(subroute);
+                    context.SubRoutes.Remove(subroute);
+
                     context.SaveChanges();
                     return true;
                 }
@@ -39,13 +34,12 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseInsert(object obj)
         {
-            Route route = obj as Route;
+            SubRoute subroute = obj as SubRoute;
             using (var context = new UniContext())
             {
                 try
                 {
-                    route.ProcesCell = null;
-                    context.Routes.Add(route);
+                    context.SubRoutes.Add(subroute);
                     context.SaveChanges();
                     return true;
                 }
@@ -59,8 +53,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseUpdate(object obj)
         {
-            Route route = obj as Route;
-
             throw new NotImplementedException();
         }
     }

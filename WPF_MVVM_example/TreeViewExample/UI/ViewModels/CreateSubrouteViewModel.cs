@@ -6,8 +6,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
 using TreeViewExample.UI.Interfaces;
+using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.ViewModels;
 
 namespace TreeViewExample.UI.ViewModels
@@ -16,30 +19,23 @@ namespace TreeViewExample.UI.ViewModels
     {
         #region Fields
 
-        private ObservableCollection<SubRoute> _SubrouteList = new ObservableCollection<SubRoute>();
-        private ProcessCel _ProcessCel;
+        private ProcessCel _ProcesCell;
 
         #endregion
 
-        private ICreateSubrouteView _ICreateSubrouteView;
+        private ICreateSubrouteView _View;
         public CreateSubrouteViewModel(ICreateSubrouteView view) : base(view)
         {
-            this._ICreateSubrouteView = view;
+            this._View = view;
             InitializeCommand();
         }
 
         #region Properties
 
-        public ObservableCollection<SubRoute> SubrouteList
+        public ProcessCel ProcesCell
         {
-            get { return _SubrouteList; }
-            set { SetProperty(ref _SubrouteList, value); }
-        }
-
-        public ProcessCel ProcessCel
-        {
-            get { return _ProcessCel; }
-            set { SetProperty(ref _ProcessCel, value); }
+            get { return _ProcesCell; }
+            set { SetProperty(ref _ProcesCell, value); }
         }
 
         #endregion
@@ -48,14 +44,43 @@ namespace TreeViewExample.UI.ViewModels
 
         #endregion
 
+        #region ItemHandlers
+
+        private void CreateNewSubroute()
+        {
+            ProcesCell.AddNewSubroute();
+        }
+
+        private void DeleteClick(IConfigObject obj)
+        {
+            if (_View.ConfirmMessage("delete " + obj.GetName(), "Are you sure you want to delete " + obj.GetName() + "?"))
+            {
+                try
+                {
+                    if (obj != null)
+                    {
+                        obj.DatabaseDelete();
+                    }
+                }
+                catch (NotImplementedException e)
+                {
+                    e.ToString();
+                    _View.ShowMessage("This functionality has not been implemented yet.");
+                }
+            }
+        }
+
+        #endregion
 
         #region Commandlogic
 
         private void InitializeCommand()
         {
-            // CreateRouteCommand = new RelayCommand(CreateRoute);
+            CreateNewSubrouteCommand = new RelayCommand(CreateNewSubroute);
+            DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);
         }
-        //public ICommand CreateRouteCommand { get; set; }
+        public ICommand CreateNewSubrouteCommand { get; set; }
+        public ICommand DeleteClickCommand { get; set; }
 
         #endregion
 

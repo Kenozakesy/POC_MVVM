@@ -7,6 +7,7 @@ using TreeViewExample.Business.Models;
 using TreeViewExample.Dal.EntityFramework;
 using TreeViewExample.Dal.Repository.Interfaces;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
@@ -30,6 +31,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.RouteList)
                                   .Include(x => x.RouteList.Select(z => z.rop_RoutePars))
                                   .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.rot_Routes)))
+
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures))
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.rot_Routes))
 
                                   .Include(x => x.RouteList.Select(y => y.SubrouteInRouteList))
                       
@@ -75,6 +79,11 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 try
                 {
                     context.ProcesCells.Attach(cell);
+                    foreach (Route R in cell.RouteList)
+                    {
+                        context.Procedures.Remove(R.pru_Procedures);
+                    }
+
                     context.ProcesCells.Remove(cell);
                     context.SaveChanges();
                     return true;
@@ -108,7 +117,29 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseUpdate(object obj)
         {
-            throw new NotImplementedException();
+            ProcessCel cell = obj as ProcessCel;
+            using (var context = new UniContext())
+            {
+                try
+                {
+                    context.ProcesCells.Attach(cell);
+
+                    var procescell = context.ProcesCells.Find(cell.ProcesCellId);
+                    context.Entry(procescell).CurrentValues.SetValues(cell);
+
+                    context.SaveChanges();
+
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    context.Dispose();
+                    return false;
+                }
+            }
+
+
+
         }
     }
 }

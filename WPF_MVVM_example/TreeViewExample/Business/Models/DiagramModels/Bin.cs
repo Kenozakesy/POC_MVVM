@@ -337,7 +337,10 @@ namespace TreeViewExample.Business.Models
         }
         public void DatabaseDelete()
         {
-            db.DatabaseDelete(this);
+            if (db.DatabaseDelete(this))
+            {
+                ListGodClass.Instance.DeleteBin(this);
+            }       
         }
         public void DatabaseInsert()
         {

@@ -169,6 +169,11 @@ namespace TreeViewExample.UI.ViewModels
             ProcessCel procescell = new ProcessCel(type);
             _TreeView.OpenCreateProcesCellWindow(procescell);
         }
+        private void OpenCreateRouteWindow(ProcessCel cell)
+        {
+            Route route = cell.GetGeneratedRoute();
+            _TreeView.OpenCreateRouteWindow(route);
+        }
         private void OpenEditSubrouteWindow(Route route)
         {
             _TreeView.OpenEditSubrouteWindow();
@@ -197,6 +202,7 @@ namespace TreeViewExample.UI.ViewModels
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateProcesCellWindowCommand = new RelayCommandT1<ProcesCellType>(OpenCreateProcesCell);
+            OpenCreateRouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateRouteWindow);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
             OpenEditSubrouteWindowCommand = new RelayCommandT1<Route>(OpenEditSubrouteWindow);
             OpenCreateSubrouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateSubrouteWindow);
@@ -212,6 +218,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }
         public ICommand OpenCreateProcesCellWindowCommand { get; set; }
+        public ICommand OpenCreateRouteWindowCommand { get; set; }
         public ICommand OpenEditSubrouteWindowCommand { get; set; }
         public ICommand OpenCreateSubrouteWindowCommand { get; set; }
         public ICommand OpenAddParameterToObjectWindowCommand { get; set; }

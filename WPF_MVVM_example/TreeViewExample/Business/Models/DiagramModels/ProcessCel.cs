@@ -247,6 +247,67 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
+        public void AddNewSubroute()
+        {
+            List<int> subRouteIds = new List<int>();
+            foreach (SubRoute sr in SubrouteList)
+            {
+                string routeid = new String(sr.SubRouteId.Where(Char.IsDigit).ToArray());
+                subRouteIds.Add(Convert.ToInt32(routeid));
+            }
+            int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(subRouteIds).FirstOrDefault();
+
+            SubRoute subroute = new SubRoute(this, "SR" + firstAvailable);
+            subroute.DatabaseInsert();
+            subroute.ProcessCel = this;
+            OrderObservableList.AddSorted(SubrouteList, subroute);
+        }
+
+        public void AddGeneratedRoute()
+        {
+            List<int> RouteIds = new List<int>();
+            RouteIds.Add(0);
+            foreach (Route r in RouteList)
+            {
+                string routeid = new String(r.RouteId.Where(Char.IsDigit).ToArray());
+                RouteIds.Add(Convert.ToInt32(routeid));
+            }
+            int? firstAvailable = Enumerable.Range(0, int.MaxValue).Except(RouteIds).FirstOrDefault();
+
+            Route route = new Route("R" + firstAvailable, 1, 1, this);       
+            RouteList.Add(route);
+        }
+        public Route GetGeneratedRoute()
+        {
+            List<int> RouteIds = new List<int>();
+            foreach (Route r in RouteList)
+            {
+                string routeid = new String(r.RouteId.Where(Char.IsDigit).ToArray());
+                RouteIds.Add(Convert.ToInt32(routeid));
+            }
+            int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(RouteIds).FirstOrDefault();
+
+            Route route = new Route("R" + firstAvailable, 1, 1, this);
+            return route;
+        }
+        private void AddDefaultRoute()
+        {
+            Route route = new Route("R" + 1, 1, 1, this);
+            RouteList.Add(route);
+        }
+        public void RemoveGeneratedRoute()
+        {
+            if (RouteList.Count > 0)
+            {
+                RouteList.RemoveAt(RouteList.Count - 1);
+            }
+        }
+        public void AddRouteToList(Route route)
+        {
+            route.ProcesCell = this;
+            OrderObservableList.AddSorted(RouteList, route);
+        }
+
         private void BatchOptionsChange()
         {
             BatchOptions = "";
@@ -271,38 +332,6 @@ namespace TreeViewExample.Business.Models
                 BatchOptions += "R";
             }
         }
-
-        public void AddGeneratedRoute()
-        {
-            List<int> RouteIds = new List<int>();
-            RouteIds.Add(0);
-            foreach (Route r in RouteList)
-            {
-                string routeid = new String(r.RouteId.Where(Char.IsDigit).ToArray());
-                RouteIds.Add(Convert.ToInt32(routeid));
-            }
-            int? firstAvailable = Enumerable.Range(0, int.MaxValue).Except(RouteIds).FirstOrDefault();
-
-            Route route = new Route();
-            route.RouteId = "R" + firstAvailable;
-            route.RouteName = ProcesCellId + ":" + route.RouteId + ":";
-            RouteList.Add(route);
-        }
-
-        public void RemoveGeneratedRoute()
-        {
-            if (RouteList.Count > 0)
-            {
-                RouteList.RemoveAt(RouteList.Count - 1);
-            }
-        }
-
-        private void AddDefaultRoute()
-        {
-            Route route = new Route("R" + 1, ProcesCellId + ":R1:", 1, 1);
-            RouteList.Add(route);
-        }
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -340,7 +369,8 @@ namespace TreeViewExample.Business.Models
         }
         public void CreateChild()
         {
-            //database stuff
+            Route route = new Route("R" + 1, 1, 1, this);
+            RouteList.Add(route);
         }
         public List<MainListViewModel> GenerateListViewList()
         {

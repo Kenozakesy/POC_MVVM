@@ -17,15 +17,16 @@ using TreeViewExample.UI.ViewModels;
 namespace TreeViewExample.UI.Views
 {
     /// <summary>
-    /// Interaction logic for CreateSubrouteWindow.xaml
+    /// Interaction logic for CreateRouteWindow.xaml
     /// </summary>
-    public partial class CreateSubrouteWindow : Window, ICreateSubrouteView
+    public partial class CreateRouteWindow : Window, ICreateRouteView
     {
-        public CreateSubrouteWindow()
+        public CreateRouteWindow()
         {
             InitializeComponent();
-            DataContext = new CreateSubrouteViewModel(this);
+            DataContext = new CreateRouteViewModel(this);
         }
+
 
         public void CloseWindow()
         {
@@ -34,19 +35,12 @@ namespace TreeViewExample.UI.Views
 
         public bool ConfirmMessage(string title, string text)
         {
-            if (MessageBox.Show(text, title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            throw new NotImplementedException();
         }
 
         public void ShowMessage(string text)
         {
-            MessageBox.Show(text);
+            throw new NotImplementedException();
         }
     }
 }
