@@ -107,18 +107,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public string GetName()
         {
-            return "Subroute " + sri_RouteId; 
-        }
-
-        public void RemoveSubrouteInRoute()
-        {
-            //this should be just a delete.
-            sur_SubRoutes.sri_SubRoutesInRoutes.Remove(this);
-            rot_Routes.SubrouteInRouteList.Remove(this);
-            if (DatabaseDelete())
-            {
-                //add routes back if it didn't work
-            }                 
+            return sur_SubRoutes.GetName(); 
         }
 
         #endregion
@@ -135,6 +124,8 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public bool DatabaseDelete()
         {
+            sur_SubRoutes.sri_SubRoutesInRoutes.Remove(this);
+            rot_Routes.SubrouteInRouteList.Remove(this);
             return db.DatabaseDelete(this);
         }
     }

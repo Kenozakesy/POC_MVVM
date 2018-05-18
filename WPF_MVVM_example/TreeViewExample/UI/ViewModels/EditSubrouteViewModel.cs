@@ -68,7 +68,7 @@ namespace TreeViewExample.UI.ViewModels
 
         private void RemoveSubRouteFromRoute(sri_SubRoutesInRoutes subrouteInRoute)
         {
-            subrouteInRoute.RemoveSubrouteInRoute();
+            subrouteInRoute.DatabaseDelete();
             ManageLists();
         }
 
