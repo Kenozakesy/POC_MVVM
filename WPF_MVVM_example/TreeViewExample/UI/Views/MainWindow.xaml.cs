@@ -39,9 +39,11 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
-        public void OpenEditSubrouteWindow()
+        public void OpenEditSubrouteWindow(Route route)
         {
             EditSubrouteWindow window = new EditSubrouteWindow();
+            ((EditSubrouteViewModel)window.DataContext).Route = route;
+            ((EditSubrouteViewModel)window.DataContext).ManageLists();
             window.ShowDialog();
         }
 

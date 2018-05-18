@@ -101,17 +101,17 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             throw new NotImplementedException();
         }
 
-        public void DatabaseInsert()
+        public bool DatabaseInsert()
         {
             throw new NotImplementedException();
         }
 
-        public void DatabaseUpdate()
+        public bool DatabaseUpdate()
         {
             throw new NotImplementedException();
         }
 
-        public void DatabaseDelete()
+        public bool DatabaseDelete()
         {
             throw new NotImplementedException();
         }

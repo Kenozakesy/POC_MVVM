@@ -331,20 +331,22 @@ namespace TreeViewExample.Business.Models
             return parameterList;
         }
 
-        public void DatabaseUpdate()
+        public bool DatabaseUpdate()
         {
-            db.DatabaseUpdate(this);
+            return db.DatabaseUpdate(this);
         }
-        public void DatabaseDelete()
+        public bool DatabaseDelete()
         {
             if (db.DatabaseDelete(this))
             {
                 ListGodClass.Instance.DeleteBin(this);
-            }       
+                return true;
+            }
+            return false; 
         }
-        public void DatabaseInsert()
+        public bool DatabaseInsert()
         {
-            db.DatabaseInsert(this);
+           return db.DatabaseInsert(this);
         }
 
 

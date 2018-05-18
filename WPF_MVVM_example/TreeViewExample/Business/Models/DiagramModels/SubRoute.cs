@@ -117,6 +117,7 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
+
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -209,19 +210,44 @@ namespace TreeViewExample.Business.Models
             return "Subroute " + this.SubRouteName;
         }
 
-        public void DatabaseInsert()
+        public override bool Equals(object obj)
         {
-            db.DatabaseInsert(this);
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj.GetType() == typeof(SubRoute)))
+            {
+                return false;
+            }
+
+            SubRoute other = (SubRoute)obj;
+
+            if ((other.ProcesCellId != ProcesCellId || other.SubRouteId != SubRouteId))
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        public void DatabaseUpdate()
+        public bool DatabaseInsert()
         {
-            db.DatabaseUpdate(this);
+            return db.DatabaseInsert(this);
         }
 
-        public void DatabaseDelete()
+        public bool DatabaseUpdate()
         {
-            db.DatabaseDelete(this);
+            return db.DatabaseUpdate(this);
+        }
+
+        public bool DatabaseDelete()
+        {
+            return db.DatabaseDelete(this);
         }
 
         #endregion

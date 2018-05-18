@@ -15,6 +15,7 @@ using TreeViewExample.Business.Statics;
 using TreeViewExample.Dal.Repository.BusinessGlueCode;
 using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
+using System.Data.Entity;
 
 namespace TreeViewExample.Business.Models
 {
@@ -77,7 +78,6 @@ namespace TreeViewExample.Business.Models
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
         }
-
 
         public virtual ObservableCollection<sri_SubRoutesInRoutes> SubrouteInRouteList
         {
@@ -149,6 +149,40 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
+        public bool AddSubroute(SubRoute subroute)
+        {
+            sri_SubRoutesInRoutes SubrouteInRoute = new sri_SubRoutesInRoutes(this, subroute);
+            if (SubrouteInRoute.DatabaseInsert())
+            {
+                SubrouteInRoute.sur_SubRoutes = subroute;
+                SubrouteInRoute.rot_Routes = this;
+
+                OrderObservableList.AddSorted(SubrouteInRouteList, SubrouteInRoute);
+                OrderObservableList.AddSorted(subroute.sri_SubRoutesInRoutes, SubrouteInRoute);
+                return true;
+            }
+            return false;
+        }
+        public ObservableCollection<SubRoute> GetSubrouteNotInRoute()
+        {
+            ObservableCollection<SubRoute> inRoute = new ObservableCollection<SubRoute>();
+            foreach (sri_SubRoutesInRoutes sri in SubrouteInRouteList)
+            {
+                inRoute.Add(sri.sur_SubRoutes);
+            }
+
+            ObservableCollection<SubRoute> notInRoute = new ObservableCollection<SubRoute>();
+            foreach (SubRoute S in ProcesCell.SubrouteList)
+            {
+                if (!inRoute.Contains(S))
+                {
+                    OrderObservableList.AddSorted(notInRoute, S);
+                }
+   
+            }
+
+            return notInRoute;
+        }
 
         public void ChangeColor()
         {
@@ -231,22 +265,22 @@ namespace TreeViewExample.Business.Models
 
         public string GetName()
         {
-            return RouteId;
+            return "Route " + RouteId;
         }
 
-        public void DatabaseInsert()
+        public bool DatabaseInsert()
         {
-            db.DatabaseInsert(this);
+            return db.DatabaseInsert(this);
         }
 
-        public void DatabaseUpdate()
+        public bool DatabaseUpdate()
         {
-            db.DatabaseUpdate(this);
+            return db.DatabaseUpdate(this);
         }
 
-        public void DatabaseDelete()
+        public bool DatabaseDelete()
         {
-            db.DatabaseDelete(this);
+            return db.DatabaseDelete(this);
         }
 
 

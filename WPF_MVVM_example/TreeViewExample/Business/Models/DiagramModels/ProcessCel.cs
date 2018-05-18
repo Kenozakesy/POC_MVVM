@@ -432,17 +432,19 @@ namespace TreeViewExample.Business.Models
             return ProcesCellId;
         }
 
-        public void DatabaseInsert()
+        public bool DatabaseInsert()
         {
-            db.DatabaseInsert(this);
+            return db.DatabaseInsert(this);
         }
-        public void DatabaseUpdate()
+
+        public bool DatabaseUpdate()
         {
-            db.DatabaseUpdate(this);
+            return db.DatabaseUpdate(this);
         }
-        public void DatabaseDelete()
+
+        public bool DatabaseDelete()
         {
-            db.DatabaseDelete(this);
+            return db.DatabaseDelete(this);
         }
 
 

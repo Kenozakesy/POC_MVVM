@@ -28,14 +28,9 @@ namespace TreeViewExample.Dal.EntityFramework
         public DbSet<Bin> Bins { get; set; }
         public DbSet<bis_BinStocks> BinStock { get; set; }
         public DbSet<pru_Procedures> Procedures { get; set; }
-
-        
-
-        #region DatabaseSetsOnly
-
         public DbSet<sri_SubRoutesInRoutes> SubRoutesInRoutes { get; set; }
 
-        #endregion
+
 
         #endregion
 

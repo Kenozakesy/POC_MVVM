@@ -176,7 +176,7 @@ namespace TreeViewExample.UI.ViewModels
         }
         private void OpenEditSubrouteWindow(Route route)
         {
-            _TreeView.OpenEditSubrouteWindow();
+            _TreeView.OpenEditSubrouteWindow(route);
         }
         private void OpenCreateSubrouteWindow(ProcessCel processcel)
         {

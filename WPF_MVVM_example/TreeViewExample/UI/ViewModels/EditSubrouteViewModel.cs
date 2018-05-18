@@ -10,6 +10,7 @@ using System.Windows.Input;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.UI.Interfaces;
+using WPF_MVVM_example.UI.Commands;
 using WPF_MVVM_example.UI.Interfaces;
 using WPF_MVVM_example.UI.ViewModels;
 
@@ -19,6 +20,8 @@ namespace TreeViewExample.UI.ViewModels
     {
         #region Fields
 
+        private Route _Route;
+        public ObservableCollection<SubRoute> _SubRouteList;
 
         #endregion
 
@@ -26,42 +29,58 @@ namespace TreeViewExample.UI.ViewModels
         public EditSubrouteViewModel(IEditSubrouteView view) : base(view)
         {
             this._IEditSubrouteView = view;
-
-            SubRouteInRouteList = new ObservableCollection<sri_SubRoutesInRoutes>();
-            Subroutelist = new ObservableCollection<SubRoute>();
-
-            generatetest();
+            InitializeCommand();
         }
 
         #region Properties
 
-        public ObservableCollection<sri_SubRoutesInRoutes> SubRouteInRouteList { get; set; }
-
-        public ObservableCollection<SubRoute> Subroutelist { get; set; }
-
+        public Route Route
+        {
+            get { return _Route; }
+            set { SetProperty(ref _Route, value); }
+        }
+      
+        public ObservableCollection<SubRoute> SubRouteList
+        {
+            get { return _SubRouteList; }
+            set { SetProperty(ref _SubRouteList, value); }
+        } 
 
         #endregion
 
         #region Methods
 
-        private void generatetest()
+        public void ManageLists()
         {
-            for (int i = 0; i < 3; i++)
-            {
-                sri_SubRoutesInRoutes test = new sri_SubRoutesInRoutes();
-                SubRouteInRouteList.Add(test);
-            }
-            for (int i = 0; i < 3; i++)
-            {
-                SubRoute test = new SubRoute();
-                Subroutelist.Add(test);
-            }
+            SubRouteList = Route.GetSubrouteNotInRoute();
         }
 
         #endregion
 
         #region ItemHandlers
 
+        private void AddSubRouteToRoute(SubRoute subroute)
+        {
+            Route.AddSubroute(subroute);
+            ManageLists();
+
+        }
+
+        private void RemoveSubRouteFromRoute(sri_SubRoutesInRoutes subrouteInRoute)
+        {
+            subrouteInRoute.RemoveSubrouteInRoute();
+            ManageLists();
+        }
+
+        private void SequenceDown(sri_SubRoutesInRoutes subrouteInRoute)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SequenceUp(sri_SubRoutesInRoutes subrouteInRoute)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
 
@@ -70,10 +89,12 @@ namespace TreeViewExample.UI.ViewModels
 
         private void InitializeCommand()
         {
-            //CreateRouteCommand = new RelayCommand(CreateRoute);
+            AddSubRouteToRouteCommand = new RelayCommandT1<SubRoute>(AddSubRouteToRoute);
+            RemoveSubRouteFromRouteCommand = new RelayCommandT1<sri_SubRoutesInRoutes>(RemoveSubRouteFromRoute);
         }
 
-        //public ICommand CreateRouteCommand { get; set; }
+       public ICommand AddSubRouteToRouteCommand { get; set; }
+       public ICommand RemoveSubRouteFromRouteCommand { get; set; }
 
 
         #endregion

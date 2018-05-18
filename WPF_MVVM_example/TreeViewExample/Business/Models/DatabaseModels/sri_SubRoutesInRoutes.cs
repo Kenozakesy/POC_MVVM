@@ -11,6 +11,9 @@ namespace TreeViewExample.Business.Models.DatabaseModels
     using TreeViewExample.Business.Models;
     using UI.ViewModels;
     using NonDiagramModels;
+    using Dal.Repository.BusinessGlueCode;
+    using Dal.Repository.SQLServerRepository;
+    using Dal.Repository.Interfaces;
 
     [Table("sri_SubRoutesInRoutes")]
     public partial class sri_SubRoutesInRoutes : ViewModelBase, IConfigObject
@@ -18,14 +21,21 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         #region Fields
 
         private Brush _Brush;
-
+        SubrouteInRouteBusiness db = new SubrouteInRouteBusiness(new MSSQL_SubRouteInRouteRepository());
 
         #endregion
 
         public sri_SubRoutesInRoutes()
         {
 
+        }
 
+        public sri_SubRoutesInRoutes(Route route, SubRoute subroute)
+        {
+            sri_ProcCellId = route.ProcesCellId;
+            sri_RouteId = route.RouteId;
+            sri_SubRouteId = subroute.SubRouteId;
+            sri_SeqNr = 1;
         }
 
         [Key]
@@ -55,6 +65,8 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             get { return sur_SubRoutes.Brush; }
             set { SetProperty(ref _Brush, value); }
         }
+
+        #region Methods
 
         public void ChangeColor()
         {
@@ -89,27 +101,41 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            sri_SubRoutesInRoutes subrouteinRoute = obj as sri_SubRoutesInRoutes;
+            return sur_SubRoutes.CompareTo(subrouteinRoute.sur_SubRoutes);
         }
 
         public string GetName()
         {
-            throw new NotImplementedException();
+            return "Subroute " + sri_RouteId; 
         }
 
-        public void DatabaseInsert()
+        public void RemoveSubrouteInRoute()
         {
-            throw new NotImplementedException();
+            //this should be just a delete.
+            sur_SubRoutes.sri_SubRoutesInRoutes.Remove(this);
+            rot_Routes.SubrouteInRouteList.Remove(this);
+            if (DatabaseDelete())
+            {
+                //add routes back if it didn't work
+            }                 
         }
 
-        public void DatabaseUpdate()
+        #endregion
+
+        public bool DatabaseInsert()
         {
-            throw new NotImplementedException();
+            return db.DatabaseInsert(this);
         }
 
-        public void DatabaseDelete()
+        public bool DatabaseUpdate()
         {
-            throw new NotImplementedException();
+            return db.DatabaseUpdate(this);
+        }
+
+        public bool DatabaseDelete()
+        {
+            return db.DatabaseDelete(this);
         }
     }
 }
