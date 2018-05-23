@@ -257,6 +257,16 @@
   <ItemGroup>
     <Folder Include="UI\Images\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Visual Studio 2015\Projects\linked_projects\PromasCommon\PromasCommon.csproj">
+      <Project>{A7DF80D2-FA82-4BF7-9995-BBD4B95539E8}</Project>
+      <Name>PromasCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Visual Studio 2015\Projects\linked_projects\PromasConstants\PromasConstants.csproj">
+      <Project>{99EEDCC5-250A-4143-9B25-D30009C2DED7}</Project>
+      <Name>PromasConstants</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
