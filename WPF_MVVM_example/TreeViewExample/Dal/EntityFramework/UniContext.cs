@@ -28,6 +28,7 @@ namespace TreeViewExample.Dal.EntityFramework
         public DbSet<Bin> Bins { get; set; }
         public DbSet<bis_BinStocks> BinStock { get; set; }
         public DbSet<pru_Procedures> Procedures { get; set; }
+        public DbSet<oar_OARcps> OARrecipes { get; set; }
         public DbSet<sri_SubRoutesInRoutes> SubRoutesInRoutes { get; set; }
         public DbSet<bir_BinsInSubRoutes> BinsInSubroutes { get; set; }
 
@@ -126,11 +127,11 @@ namespace TreeViewExample.Dal.EntityFramework
             // .HasForeignKey(e => e.pru_ProcedureTypeId)
             // .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<pru_Procedures>()
-            //    .HasMany(e => e.oar_OARcps)
-            //    .WithRequired(e => e.pru_Procedures)
-            //    .HasForeignKey(e => e.oar_ProcedureId)
-            //    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<pru_Procedures>()
+                .HasMany(e => e.oar_OARcps)
+                .WithRequired(e => e.pru_Procedures)
+                .HasForeignKey(e => e.oar_ProcedureId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<pru_Procedures>()
                 .HasMany(e => e.rot_Routes)

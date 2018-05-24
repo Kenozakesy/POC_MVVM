@@ -12,7 +12,7 @@ namespace TreeViewExample.Business.Models
     {
         public pru_Procedures()
         {
-            //oar_OARcps = new HashSet<oar_OARcps>();
+            oar_OARcps = new ObservableCollection<oar_OARcps>();
             rot_Routes = new ObservableCollection<Route>();
         }
 
@@ -40,7 +40,7 @@ namespace TreeViewExample.Business.Models
         public string pru_ProcedureTypeId { get; set; }
 
 
-        //public virtual ObservableCollection<oar_OARcps> oar_OARcps { get; set; }
+        public virtual ObservableCollection<oar_OARcps> oar_OARcps { get; set; }
         //public virtual prt_ProcedureTypes prt_ProcedureTypes { get; set; }
 
         public virtual ObservableCollection<Route> rot_Routes { get; set; }

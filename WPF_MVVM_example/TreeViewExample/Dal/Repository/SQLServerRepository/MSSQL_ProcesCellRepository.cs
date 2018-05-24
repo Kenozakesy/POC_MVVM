@@ -20,7 +20,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
-               
+
 
                     var select = (from r in context.ProcesCells
                                   .Include(x => x.pca_ProcCellPars)
@@ -31,9 +31,11 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.RouteList)
                                   .Include(x => x.RouteList.Select(z => z.rop_RoutePars))
                                   .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.rot_Routes)))
-
                                   .Include(x => x.RouteList.Select(z => z.pru_Procedures))
                                   .Include(x => x.RouteList.Select(z => z.pru_Procedures.rot_Routes))
+
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps))
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures)))
 
                                   .Include(x => x.RouteList.Select(y => y.SubrouteInRouteList))
                       
@@ -81,7 +83,11 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                     context.ProcesCells.Attach(cell);
                     foreach (Route R in cell.RouteList)
                     {
-                        context.Procedures.Remove(R.pru_Procedures);
+                        if (R.pru_Procedures != null)
+                        {
+                            context.Procedures.Attach(R.pru_Procedures);
+                            context.Procedures.Remove(R.pru_Procedures);
+                        }
                     }
 
                     context.ProcesCells.Remove(cell);

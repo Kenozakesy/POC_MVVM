@@ -88,6 +88,7 @@
     <Compile Include="Business\Models\DatabaseModels\sri_SubRoutesInRoutes.cs" />
     <Compile Include="Business\Models\DatabaseModels\tbb_TempBinBatches.cs" />
     <Compile Include="Business\Models\DatabaseModels\uis_UnitsInSubRoutes.cs" />
+    <Compile Include="Business\Models\DiagramModels\oar_OARcps.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\bip_BinPars.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\pca_ProcCellPars.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\rop_RoutePars.cs" />
