@@ -107,6 +107,12 @@ namespace TreeViewExample
             this.Close();
         }
 
-    
+        public void OpenSetBinsWindow(SubRoute subroute)
+        {
+            SetBinsWindow window = new SetBinsWindow();
+            ((SetBinsViewModel)window.DataContext).Subroute = subroute;
+            ((SetBinsViewModel)window.DataContext).GetSourceDestinationLists();
+            window.ShowDialog();
+        }
     }
 }

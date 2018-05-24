@@ -12,7 +12,6 @@ namespace TreeViewExample.Business.Interfaces
     {
         string GetName();
         void ChangeColor();
-        void Delete();
         void DeleteChild(IConfigObject obj);
         void CreateChild();
         void Validate();

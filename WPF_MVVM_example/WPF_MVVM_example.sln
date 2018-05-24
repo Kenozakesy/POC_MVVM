@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeViewExample", "TreeView
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_MVVM_TestProject", "WPF_MVVM_TestProject\WPF_MVVM_TestProject.csproj", "{9180CF78-0032-4A77-829A-E8C2DA912469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromasCommon", "..\..\..\Visual Studio 2015\Projects\linked_projects\PromasCommon\PromasCommon.csproj", "{A7DF80D2-FA82-4BF7-9995-BBD4B95539E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromasConstants", "..\..\..\Visual Studio 2015\Projects\linked_projects\PromasConstants\PromasConstants.csproj", "{99EEDCC5-250A-4143-9B25-D30009C2DED7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,14 +27,6 @@ Global
 		{9180CF78-0032-4A77-829A-E8C2DA912469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9180CF78-0032-4A77-829A-E8C2DA912469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9180CF78-0032-4A77-829A-E8C2DA912469}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A7DF80D2-FA82-4BF7-9995-BBD4B95539E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7DF80D2-FA82-4BF7-9995-BBD4B95539E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7DF80D2-FA82-4BF7-9995-BBD4B95539E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7DF80D2-FA82-4BF7-9995-BBD4B95539E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99EEDCC5-250A-4143-9B25-D30009C2DED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99EEDCC5-250A-4143-9B25-D30009C2DED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99EEDCC5-250A-4143-9B25-D30009C2DED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99EEDCC5-250A-4143-9B25-D30009C2DED7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

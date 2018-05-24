@@ -29,7 +29,7 @@ namespace TreeViewExample.Dal.EntityFramework
         public DbSet<bis_BinStocks> BinStock { get; set; }
         public DbSet<pru_Procedures> Procedures { get; set; }
         public DbSet<sri_SubRoutesInRoutes> SubRoutesInRoutes { get; set; }
-
+        public DbSet<bir_BinsInSubRoutes> BinsInSubroutes { get; set; }
 
 
         #endregion

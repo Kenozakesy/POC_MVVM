@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Windows.Media;
+using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
@@ -25,9 +26,9 @@ namespace TreeViewExample.Business.Models
         private Brush _Brush;
         private static Random ran = new Random();
 
-        private List<sri_SubRoutesInRoutes> _SubrouteInRouteList = new List<sri_SubRoutesInRoutes>();
-        private List<bir_BinsInSubRoutes> _BinInSubRouteList = new List<bir_BinsInSubRoutes>();
-        private List<uis_UnitsInSubRoutes> _UnitsInSubroute = new List<uis_UnitsInSubRoutes>();
+        private ObservableCollection<sri_SubRoutesInRoutes> _SubrouteInRouteList = new ObservableCollection<sri_SubRoutesInRoutes>();
+        private ObservableCollection<bir_BinsInSubRoutes> _BinInSubRouteList = new ObservableCollection<bir_BinsInSubRoutes>();
+        private ObservableCollection<uis_UnitsInSubRoutes> _UnitsInSubroute = new ObservableCollection<uis_UnitsInSubRoutes>();
 
         private ProcessCel _ProcessCel;
 
@@ -67,19 +68,17 @@ namespace TreeViewExample.Business.Models
             }
         }
 
-        public virtual List<sri_SubRoutesInRoutes> sri_SubRoutesInRoutes
+        public virtual ObservableCollection<sri_SubRoutesInRoutes> sri_SubRoutesInRoutes
         {
             get { return _SubrouteInRouteList; }
             set { SetProperty(ref _SubrouteInRouteList, value); }
         }
-
-        public virtual List<bir_BinsInSubRoutes> bir_BinsInSubRoutes
+        public virtual ObservableCollection<bir_BinsInSubRoutes> bir_BinsInSubRoutes
         {
             get { return _BinInSubRouteList; }
             set { SetProperty(ref _BinInSubRouteList, value); }
         }
-
-        public virtual List<uis_UnitsInSubRoutes> uis_UnitsInSubRoutes
+        public virtual ObservableCollection<uis_UnitsInSubRoutes> uis_UnitsInSubRoutes
         {
             get { return _UnitsInSubroute; }
             set { SetProperty(ref _UnitsInSubroute, value); }
@@ -117,6 +116,48 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
+        public ObservableCollection<bir_BinsInSubRoutes> GetAllSourceBins()
+        {
+            ObservableCollection<bir_BinsInSubRoutes> SourceBins = new ObservableCollection<bir_BinsInSubRoutes>();
+
+            foreach (bir_BinsInSubRoutes bir in bir_BinsInSubRoutes)
+            {
+                if (bir.bir_SourceDest == "S" )
+                {
+                    OrderObservableList.AddSorted(SourceBins, bir);
+                }
+            }
+
+            return SourceBins;
+        }
+        public ObservableCollection<bir_BinsInSubRoutes> GetAllDestinationBins()
+        {
+            ObservableCollection<bir_BinsInSubRoutes> DestinationBins = new ObservableCollection<bir_BinsInSubRoutes>();
+
+            foreach (bir_BinsInSubRoutes bir in bir_BinsInSubRoutes)
+            {
+                if (bir.bir_SourceDest == "D")
+                {
+                    OrderObservableList.AddSorted(DestinationBins, bir);
+                }
+            }
+
+            return DestinationBins;
+        }
+        public bool AddBinToSubroute(Bin bin, SourceDest sourcedest)
+        {
+            bir_BinsInSubRoutes BinInSubroute = new bir_BinsInSubRoutes(bin, this, sourcedest);
+            if (BinInSubroute.DatabaseInsert())
+            {
+                BinInSubroute.bin_Bins = bin;
+                BinInSubroute.sur_SubRoutes = this;
+
+                OrderObservableList.AddSorted(bir_BinsInSubRoutes, BinInSubroute);
+                OrderObservableList.AddSorted(bin.bir_BinsInSubRoutes, BinInSubroute);
+                return true;
+            }
+            return false;
+        }
 
         public void ChangeColor()
         {
@@ -128,10 +169,6 @@ namespace TreeViewExample.Business.Models
             {
                 Brush = Brushes.Red;
             }
-        }
-        public void Delete()
-        {
-            db.DatabaseDelete(this);
         }
         public void DeleteChild(IConfigObject obj)
         {
@@ -234,17 +271,19 @@ namespace TreeViewExample.Business.Models
 
             return true;
         }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
         public bool DatabaseInsert()
         {
             return db.DatabaseInsert(this);
         }
-
         public bool DatabaseUpdate()
         {
             return db.DatabaseUpdate(this);
         }
-
         public bool DatabaseDelete()
         {
             return db.DatabaseDelete(this);

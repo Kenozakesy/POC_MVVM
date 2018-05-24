@@ -11,6 +11,7 @@ using System.Windows.Input;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
+using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Singletons;
@@ -118,26 +119,6 @@ namespace TreeViewExample.UI.ViewModels
                 configObject.ChangeColor();
             }
         }
-        private void CreateObjectClick(IConfigObject obj)
-        {
-            IConfigObject configObject = obj as IConfigObject;         
-            if (configObject != null)
-            {
-                configObject.CreateChild();
-            }
-        }
-        private void SetBinToUnit(Unit unit)
-        {
-            Bin bin = _TreeView.OpenSelectBinWindow(BinList);
-            if (bin == null)
-            {
-                //do nothing
-            }
-            else if (!unit.AddBinToSubroute(bin))
-            {
-                _TreeView.ShowMessage("This bin is already added to this subroute");
-            }
-        }
         private void RemoveBinFromSubroute(Bin bin)
         {
             //string text = "Remove bin from " + bin.Unit.Name + "?";
@@ -186,7 +167,10 @@ namespace TreeViewExample.UI.ViewModels
         {
             _TreeView.OpenAddParameterToObjectWindow(obj);
         }
-
+        private void OpenSetBinsWindow(sri_SubRoutesInRoutes subrouteInRoute)
+        {
+            _TreeView.OpenSetBinsWindow(subrouteInRoute.sur_SubRoutes);
+        }
 
         #endregion
 
@@ -196,9 +180,6 @@ namespace TreeViewExample.UI.ViewModels
         {    
             DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);
             ChangeColorClickCommand = new RelayCommandT1<IConfigObject>(ChangeColorClick);
-            CreateObjectClickCommand = new RelayCommandT1<IConfigObject>(CreateObjectClick);
-            SetbinCommand = new RelayCommandT1<Unit>(SetBinToUnit);
-            //RemoveBinFromSubrouteCommand = new RelayCommandT1<Bin>(RemoveBinFromSubroute);
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateProcesCellWindowCommand = new RelayCommandT1<ProcesCellType>(OpenCreateProcesCell);
@@ -207,14 +188,13 @@ namespace TreeViewExample.UI.ViewModels
             OpenEditSubrouteWindowCommand = new RelayCommandT1<Route>(OpenEditSubrouteWindow);
             OpenCreateSubrouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateSubrouteWindow);
             OpenAddParameterToObjectWindowCommand = new RelayCommandT1<IObjectWithParameters>(OpenAddParameterToObjectWindow);
+            OpenSetBinsWindowCommand = new RelayCommandT1<sri_SubRoutesInRoutes>(OpenSetBinsWindow);
         }
 
         public ICommand DeleteClickCommand { get; set; }
         public ICommand ChangeColorClickCommand { get; set; }
-        public ICommand CreateObjectClickCommand { get; set; }
-        public ICommand SetbinCommand { get; set; }
-        //public ICommand RemoveBinFromSubrouteCommand { get; set; }
         public ICommand ShowPropInListCommand { get; set; }
+
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }
         public ICommand OpenCreateProcesCellWindowCommand { get; set; }
@@ -222,7 +202,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand OpenEditSubrouteWindowCommand { get; set; }
         public ICommand OpenCreateSubrouteWindowCommand { get; set; }
         public ICommand OpenAddParameterToObjectWindowCommand { get; set; }
-
+        public ICommand OpenSetBinsWindowCommand { get; set; }
 
         #endregion
 

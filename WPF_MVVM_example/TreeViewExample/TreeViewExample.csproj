@@ -77,6 +77,7 @@
     <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Enums\ParameterType.cs" />
     <Compile Include="Business\Enums\ProcesCellType.cs" />
+    <Compile Include="Business\Enums\SourceDest.cs" />
     <Compile Include="Business\Interfaces\IObjectWithParameters.cs" />
     <Compile Include="Business\Interfaces\IParameterObject.cs" />
     <Compile Include="Business\Models\DatabaseModels\bib_BinBatches.cs" />
@@ -93,26 +94,29 @@
     <Compile Include="Business\Models\DiagramModels\pru_Procedures.cs" />
     <Compile Include="Business\Singletons\ListGodClass.cs" />
     <Compile Include="Business\Statics\Enumerations.cs" />
-    <Compile Include="Business\Statics\UI_Models\EnumToArrayConverter.cs" />
+    <Compile Include="Business\UI_Models\EnumToArrayConverter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\RouteParameter.cs" />
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
-    <Compile Include="Business\Statics\UI_Models\DragBehavior.cs" />
-    <Compile Include="Business\Statics\UI_Models\DragListViewItemBehavior.cs" />
-    <Compile Include="Business\Statics\UI_Models\EnumToStringConverter.cs" />
-    <Compile Include="Business\Statics\UI_Models\GreaterThan.cs" />
-    <Compile Include="Business\Statics\UI_Models\MouseBehaviour.cs" />
-    <Compile Include="Business\Statics\UI_Models\MyCloneConverter.cs" />
-    <Compile Include="Business\Statics\UI_Models\InformationFieldModel.cs" />
+    <Compile Include="Business\UI_Models\DragBehavior.cs" />
+    <Compile Include="Business\UI_Models\DragListViewItemBehavior.cs" />
+    <Compile Include="Business\UI_Models\EnumToStringConverter.cs" />
+    <Compile Include="Business\UI_Models\GreaterThan.cs" />
+    <Compile Include="Business\UI_Models\MouseBehaviour.cs" />
+    <Compile Include="Business\UI_Models\MultiSelectionBehavior.cs" />
+    <Compile Include="Business\UI_Models\MyCloneConverter.cs" />
+    <Compile Include="Business\UI_Models\InformationFieldModel.cs" />
     <Compile Include="Dal\EntityFramework\UniContext.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\BinBusiness.cs" />
+    <Compile Include="Dal\Repository\BusinessGlueCode\BinInSubrouteBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
     <Compile Include="Dal\DatabaseConnection\DatabaseConnectionClass.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ProcesCellBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\RouteBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\SubrouteBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\SubrouteInRouteBusiness.cs" />
+    <Compile Include="Dal\Repository\Interfaces\IBinInSubrouteRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\IBinRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\IDatabaseActions.cs" />
     <Compile Include="Dal\Repository\Interfaces\IParameterDefinitionRepository.cs" />
@@ -120,6 +124,7 @@
     <Compile Include="Dal\Repository\Interfaces\IRouteRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\ISubRouteInRouteRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\ISubrouteRepository.cs" />
+    <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_BinInSubrouteRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_BinRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ProcesCellRepository.cs" />
@@ -135,6 +140,7 @@
     <Compile Include="UI\Interfaces\IEditSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
     <Compile Include="UI\Interfaces\ISelectBinView.cs" />
+    <Compile Include="UI\Interfaces\ISetBinsView.cs" />
     <Compile Include="UI\ViewModels\AddParameterToObjectViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateParameterViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateProcesCellViewModel.cs" />
@@ -142,6 +148,7 @@
     <Compile Include="UI\ViewModels\CreateSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\EditSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
+    <Compile Include="UI\ViewModels\SetBinsViewModel.cs" />
     <Compile Include="UI\ViewModels\SelectBinWindowViewModel.cs" />
     <Compile Include="UI\Views\AddParameterToObjectWindow.xaml.cs">
       <DependentUpon>AddParameterToObjectWindow.xaml</DependentUpon>
@@ -166,6 +173,9 @@
     </Compile>
     <Compile Include="UI\Views\SelectBinWindow.xaml.cs">
       <DependentUpon>SelectBinWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Views\SetBinsWindow.xaml.cs">
+      <DependentUpon>SetBinsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="UI\Views\AddParameterToObjectWindow.xaml">
       <SubType>Designer</SubType>
@@ -225,6 +235,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Views\SetBinsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -256,16 +270,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\Images\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Visual Studio 2015\Projects\linked_projects\PromasCommon\PromasCommon.csproj">
-      <Project>{A7DF80D2-FA82-4BF7-9995-BBD4B95539E8}</Project>
-      <Name>PromasCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Visual Studio 2015\Projects\linked_projects\PromasConstants\PromasConstants.csproj">
-      <Project>{99EEDCC5-250A-4143-9B25-D30009C2DED7}</Project>
-      <Name>PromasConstants</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

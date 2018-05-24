@@ -9,12 +9,16 @@ namespace TreeViewExample.Business.Models.DatabaseModels
     using System.Windows.Media;
     using UI.ViewModels;
     using NonDiagramModels;
+    using Enums;
+    using Dal.Repository.BusinessGlueCode;
+    using Dal.Repository.SQLServerRepository;
 
     public partial class bir_BinsInSubRoutes : ViewModelBase, IConfigObject
     {
 
         #region Fields
 
+        BinInSubrouteBusiness db = new BinInSubrouteBusiness(new MSSQL_BinInSubrouteRepository());
         private Brush _Brush;
 
         #endregion
@@ -23,6 +27,14 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         {
 
 
+        }
+
+        public bir_BinsInSubRoutes(Bin bin, SubRoute subroute, SourceDest sourcedest)
+        {
+            bir_ProcCellId = subroute.ProcesCellId;
+            bir_SubRouteId = subroute.SubRouteId;
+            bir_BinId = bin.bin_BinId;
+            bir_SourceDest = sourcedest.ToString();
         }
 
         [Key]
@@ -62,15 +74,6 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         }
 
 
-
-
-
-
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeleteChild(IConfigObject obj)
         {
             throw new NotImplementedException();
@@ -93,7 +96,8 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public int CompareTo(object obj)
         {
-            throw new NotImplementedException();
+            bir_BinsInSubRoutes binInSubroute = obj as bir_BinsInSubRoutes;
+            return binInSubroute.bin_Bins.CompareTo(bin_Bins);
         }
 
         public string GetName()
@@ -103,17 +107,17 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public bool DatabaseInsert()
         {
-            throw new NotImplementedException();
+            return db.DatabaseInsert(this);
         }
-
         public bool DatabaseUpdate()
         {
-            throw new NotImplementedException();
+            return db.DatabaseUpdate(this);
         }
-
         public bool DatabaseDelete()
         {
-            throw new NotImplementedException();
+            sur_SubRoutes.bir_BinsInSubRoutes.Remove(this);
+            bin_Bins.bir_BinsInSubRoutes.Remove(this);
+            return db.DatabaseDelete(this);
         }
     }
 }

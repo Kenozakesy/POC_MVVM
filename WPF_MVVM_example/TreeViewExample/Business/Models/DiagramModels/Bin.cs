@@ -26,6 +26,7 @@ namespace TreeViewExample.Business.Models
         private static BinBusiness db = new BinBusiness(new MSSQL_BinRepository());
 
         private ObservableCollection<bir_BinsInSubRoutes> _BinInSubRouteList = new ObservableCollection<bir_BinsInSubRoutes>();
+
         private Brush _Brush;
         private IsValidated _IsValid;
 

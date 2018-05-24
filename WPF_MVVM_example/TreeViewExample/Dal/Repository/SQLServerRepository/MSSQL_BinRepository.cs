@@ -72,6 +72,8 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
                     var select = (from r in context.Bins
                                   .Where(x => !binIds.Contains(x.bin_BinId))
+                                  .Include(x => x.bir_BinsInSubRoutes)
+
                                   .Include(x => x.bis_BinStocks)
                                   .Include(x => x.bis_BinStocks.bin_Bins)
                                   .Include(x => x.bip_BinPars)

@@ -17,5 +17,6 @@ namespace WPF_MVVM_example.UI.Interfaces
         void OpenCreateRouteWindow(Route route);
         void OpenEditSubrouteWindow(Route route);
         void OpenCreateSubrouteWindow(ProcessCel processcel);
+        void OpenSetBinsWindow(SubRoute subroute);
     }
 }

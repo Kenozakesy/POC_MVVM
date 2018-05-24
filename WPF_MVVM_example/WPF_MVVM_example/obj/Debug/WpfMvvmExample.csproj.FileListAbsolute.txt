@@ -38,4 +38,3 @@ C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\ob
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WpfMvvmExample.csproj.GenerateResource.Cache
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.exe
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WPF_MVVM_example.pdb
-C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\WPF_MVVM_example\obj\Debug\WpfMvvmExample.csprojResolveAssemblyReference.cache
