@@ -19,7 +19,7 @@ namespace TreeViewExample.Business.Singletons
 
         private ObservableCollection<ProcessCel> _ProcessCelList = new ObservableCollection<ProcessCel>();
         private ObservableCollection<Bin> _BinList = new ObservableCollection<Bin>();
-        private ObservableCollection<ParameterDefinition> _CustomerParameterList = new ObservableCollection<ParameterDefinition>();
+        private ObservableCollection<ParameterDefinition> _ParameterDefinitionList = new ObservableCollection<ParameterDefinition>();
 
         private ListGodClass()
         {
@@ -29,8 +29,15 @@ namespace TreeViewExample.Business.Singletons
         public void LoadDataFromDB()
         {
             AddProcesCells();
-            AddCustomerParameters();
-            AddBinsFromDatabase();
+            //GetAllParameterDefinitions();
+            GetBinsFromDatabase();
+
+            //validateAll()
+
+            foreach (ParameterDefinition paf in ParameterDefinitionList)
+            {
+                paf.ConvertValidValues();
+            }
         }
 
         public static ListGodClass Instance
@@ -57,23 +64,19 @@ namespace TreeViewExample.Business.Singletons
             get { return _BinList; }
             set { _BinList = value; }
         }
-        public ObservableCollection<ParameterDefinition> CustomerParameterList
+        public ObservableCollection<ParameterDefinition> ParameterDefinitionList
         {
-            get { return _CustomerParameterList; }
-            set { _CustomerParameterList = value; }
+            get { return _ParameterDefinitionList; }
+            set { _ParameterDefinitionList = value; }
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// Gets all Customer Parameters
-        /// </summary>
-        private void AddCustomerParameters()
+        private void GetAllParameterDefinitions()
         {
-            ParameterDefinition paramDef = new ParameterDefinition();
-            CustomerParameterList = paramDef.GetAllCustomerParameters();
+            ParameterDefinitionList = ParameterDefinition.GetAllCustomerParameters();
         }
         /// <summary>
         /// Gets all ProcesCells
@@ -91,7 +94,7 @@ namespace TreeViewExample.Business.Singletons
         {
             BinList.Remove(bin);
         }
-        private void AddBinsFromDatabase()
+        private void GetBinsFromDatabase()
         {
             List<Bin> bins = Bin.GetAllBins();
         }
@@ -112,7 +115,6 @@ namespace TreeViewExample.Business.Singletons
 
             return firstAvailable;
         }
-
 
         #endregion
     }

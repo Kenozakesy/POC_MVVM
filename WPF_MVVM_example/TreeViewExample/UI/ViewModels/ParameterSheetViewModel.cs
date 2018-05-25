@@ -73,7 +73,7 @@ namespace TreeViewExample.UI.ViewModels
 
             foreach (ParameterDefinition CP in ConfigurationParameterList)
             {
-                if (CP.ParName.Contains(TextboxSearch))
+                if (CP.paf_ParNm.Contains(TextboxSearch))
                 {
                     CP.IsVisible = true;
                 }

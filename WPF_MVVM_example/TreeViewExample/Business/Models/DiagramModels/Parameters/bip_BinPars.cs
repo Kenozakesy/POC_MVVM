@@ -5,6 +5,7 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System;
 
     public partial class bip_BinPars : IParameterObject
     {
@@ -39,5 +40,48 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         public string bip_DisplayToUser { get; set; }
 
         public virtual Bin bin_Bins { get; set; }
+
+        [NotMapped]
+        public ParameterDefinition ParameterDefinition
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [NotMapped]
+        public string Value
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool DatabaseInsert()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DatabaseUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DatabaseDelete()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

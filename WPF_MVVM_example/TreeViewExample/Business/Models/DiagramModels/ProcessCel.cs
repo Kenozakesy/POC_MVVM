@@ -262,7 +262,6 @@ namespace TreeViewExample.Business.Models
             subroute.ProcessCel = this;
             OrderObservableList.AddSorted(SubrouteList, subroute);
         }
-
         public void AddGeneratedRoute()
         {
             List<int> RouteIds = new List<int>();
@@ -307,7 +306,6 @@ namespace TreeViewExample.Business.Models
             route.ProcesCell = this;
             OrderObservableList.AddSorted(RouteList, route);
         }
-
         private void BatchOptionsChange()
         {
             BatchOptions = "";
@@ -401,12 +399,10 @@ namespace TreeViewExample.Business.Models
             ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(pca_ProcCellPars);
             return parameterList;
         }
-
         public void RemoveParameter(Parameter paramdef)
         {
             throw new NotImplementedException();
         }
-
         public void Validate()
         {
             int newRan = ran.Next(0, 10);
@@ -419,7 +415,6 @@ namespace TreeViewExample.Business.Models
                 _Brush = Brushes.LightGreen;
             }
         }
-
         public ObservableCollection<ProcessCel> GetAllProcesCells()
         {
              return db.GetAllProcesCells();

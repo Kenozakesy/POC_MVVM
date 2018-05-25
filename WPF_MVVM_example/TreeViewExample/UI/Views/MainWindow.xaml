@@ -393,7 +393,6 @@
                             <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
                                 <MenuItem Header="Create ProcesCell" ItemsSource="{Binding Path=ProcesCellTypes}">
-                                    <!--dit moet eigenlijk gegeneert worden vanuit een enum in een template-->
 
                                     <MenuItem.ItemContainerStyle>
                                         <Style>
@@ -414,13 +413,13 @@
                     <Border BorderBrush="Gray" BorderThickness="0 1 0 1" Width="230" Height="4" HorizontalAlignment="Center" />
 
                     <TreeViewItem Header="Customer Parameters" ItemsSource="{Binding Path=CustomerParameterList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                        <TreeViewItem.ContextMenu>
+                        <!--<TreeViewItem.ContextMenu>
                             <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
                                 <MenuItem Header="Create new parameter" Command="{Binding Tag.DataContext.OpenCreateParameterWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
 
                             </ContextMenu>
-                        </TreeViewItem.ContextMenu>
+                        </TreeViewItem.ContextMenu>-->
                     </TreeViewItem>
 
                 </TreeViewItem>

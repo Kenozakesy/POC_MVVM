@@ -53,7 +53,7 @@ namespace TreeViewExample.UI.ViewModels
             this._ICreateParameterView = view;
             InitializeCommand();
 
-            _CustomerParameterList = ListGodClass.Instance.CustomerParameterList;
+            _CustomerParameterList = ListGodClass.Instance.ParameterDefinitionList;
         }
 
         #region Properties
@@ -184,8 +184,8 @@ namespace TreeViewExample.UI.ViewModels
 
         private void AdjustFieldValidation()
         {
-            _CustomerParameter.ParName = ParName;
-            if (string.IsNullOrEmpty(ParName) || ParName.Contains(" ") || _CustomerParameter.CheckIfParNameExist())
+            _CustomerParameter.paf_ParNm = ParName;
+            if (string.IsNullOrEmpty(ParName) || ParName.Contains(" "))
             {
                 ParNameModel.IsValid = IsValidated.InValid;
             }
@@ -236,46 +236,6 @@ namespace TreeViewExample.UI.ViewModels
 
         #region ItemHandlers
 
-        /// <summary>
-        /// Creates new parameter definition in the database
-        /// </summary>
-        private void CreateCustomerParameter()
-        {
-            if (ParNameModel.CheckValidated() && DescriptionModel.CheckValidated() && BeforeSepModel.CheckValidated() && AfterSepModel.CheckValidated())
-            {
-                int beforeSep = Convert.ToInt32(BeforeSep);
-                int afterSep = Convert.ToInt32(AfterSep);
-
-                CustomerParameter.ParName = ParName;
-                CustomerParameter.Description = Description;
-                CustomerParameter.BeforeSep = beforeSep;
-                CustomerParameter.AfterSep = afterSep;
-                CustomerParameter.Type = ParameterType;
-                CustomerParameter.Alignm = Alignment;
-                CustomerParameter.DisplayToUser = DisplayToUser;
-                CustomerParameter.IsEditable = IsEditable;
-
-                //method to add other parameters (if valid)
-
-                //paramdef.insert
-                if (CustomerParameter.InsertParameterDefinition())
-                {
-                    OrderObservableList.AddSorted(CustomerParameterList, CustomerParameter);
-                    CustomerParameter = new ParameterDefinition();
-                    ClearFields();
-                    _ICreateParameterView.ShowMessage("Customer ParameterDefinition has been added");
-                }
-                else
-                {
-                    _ICreateParameterView.ShowMessage("Something in the database went wrong. Please check if everything is correctly filled in");
-                }                        
-            }
-            else
-            {
-                _ICreateParameterView.ShowMessage("Not all Parameters are valid. Creating has been canceled");
-            }
-        }
-
         private void DeleteCustomerParameter(ParameterDefinition paramdef)
         {
             if (!_ICreateParameterView.ConfirmMessage("Delete Parameter?!", "Are you sure you want to delete the parameterdefinition?" + Environment.NewLine + "(all parameters with this definition will be removed)"))
@@ -299,11 +259,9 @@ namespace TreeViewExample.UI.ViewModels
         #region Commandlogic
         private void InitializeCommand()
         {
-            CreateCustomerParameterCommand = new RelayCommand(CreateCustomerParameter);
             DeleteCustomerParameterCommand = new RelayCommandT1<ParameterDefinition>(DeleteCustomerParameter);
         }
 
-        public ICommand CreateCustomerParameterCommand { get; set; }
         public ICommand DeleteCustomerParameterCommand { get; set; }
 
 

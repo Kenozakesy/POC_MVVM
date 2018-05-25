@@ -9,6 +9,9 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 
     public partial class rop_RoutePars : IParameterObject
     {
+
+
+
         [Key]
         [Column(Order = 0)]
         [StringLength(50)]
@@ -39,5 +42,48 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         public string rop_DisplayToUser { get; set; }
 
         public virtual Route rot_Routes { get; set; }
+
+        [NotMapped]
+        public ParameterDefinition ParameterDefinition
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [NotMapped]
+        public string Value
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public bool DatabaseInsert()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DatabaseUpdate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DatabaseDelete()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

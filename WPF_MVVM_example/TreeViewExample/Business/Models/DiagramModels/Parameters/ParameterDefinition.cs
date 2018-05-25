@@ -1,10 +1,14 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
+using TreeViewExample.Business.Models.DiagramModels.Parameters;
+using TreeViewExample.Business.Singletons;
+using TreeViewExample.Business.Statics;
 using TreeViewExample.Dal.DatabaseConnection;
 using TreeViewExample.Dal.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
@@ -14,7 +18,10 @@ namespace TreeViewExample.Business.Models.DiagramModels
     [Table("paf_ParDefs")]
     public class ParameterDefinition : ViewModelBase, IComparable
     {
-        private ParameterDefinitionBusiness db = new ParameterDefinitionBusiness(new MSSQL_ParameterDefinitionRepository());
+        private static ParameterDefinitionBusiness db = new ParameterDefinitionBusiness(new MSSQL_ParameterDefinitionRepository());
+
+        private ObservableCollection<pca_ProcCellPars> _ProcesCellParametersList = new ObservableCollection<pca_ProcCellPars>();
+
 
         #region Fields
 
@@ -22,8 +29,11 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private bool _IsHighlighted = false;
         private Brush _Brush;
 
-        //Necessary variables
+        private List<string> _ValidvaluesCombobox = new List<string>();
+        private Tuple<int, int> _ValidValues;
 
+
+        //Necessary variables
         private string _ParName;
         private string _Description;
         private int _BeforeSep;
@@ -35,15 +45,13 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         //Optional variables
         private string _ParValueUOM;
-        private string _ValidValues;
+        private string _paf_ValidValues;
         private string _DefValue;
         private int? _DisplaySeqNr;
         private int? _DisPlayWidth;
         private string _ParUOM_TextId;
         private int? _Column;
         private bool _IsStandardParameter;
-
-
 
         #endregion
 
@@ -79,112 +87,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
         #region Constructors
 
         /// <summary>
-        /// This methods is to be used when getting Parameterdefinitions from the database or changing them
-        /// </summary>
-        /// <param name="parName"></param>
-        /// <param name="description"></param>
-        /// <param name="value"></param>
-        /// <param name="parValueUOM"></param>
-        /// <param name="displayToUser"></param>
-        /// <param name="usedForBG"></param>
-        /// <param name="usedForBL"></param>
-        /// <param name="usedForCL"></param>
-        /// <param name="usedForCS"></param>
-        /// <param name="usedForIL"></param>
-        /// <param name="usedForOL"></param>
-        /// <param name="usedForPL"></param>
-        /// <param name="usedForRL"></param>
-        /// <param name="usedForSL"></param>
-        /// <param name="usedForTL"></param>
-        /// <param name="usedForZG"></param>
-        /// <param name="mappedToSYP"></param>
-        /// <param name="mappedToPCA"></param>
-        /// <param name="mappedToROP"></param>
-        /// <param name="mappedToARP"></param>
-        /// <param name="mappedToNONE"></param>
-        /// <param name="mappedToPPP"></param>
-        /// <param name="mappedToPSR"></param>
-        /// <param name="mappedToRLP"></param>
-        /// <param name="mappedToSDL"></param>
-        /// <param name="mappedToSTA"></param>
-        /// <param name="mappedToPPR"></param>
-        /// <param name="mappedToBIN"></param>
-        /// <param name="sequencenumber"></param>
-        public ParameterDefinition(string parName, string description, string parValueUOM, int beforeSep, int afterSep, string validValues, string defaultValue, ParameterType type, Alignment alignm, int? sequenceNumber, IsEditable isEditable, bool displayToUser, int? displayWidth, string parUOM_TextId, int? column, bool isStandard)
-        {
-            _Brush = Brushes.LightGray;
-
-            _ParName = parName;
-            _Description = description;
-            _ParValueUOM = parValueUOM;
-            _BeforeSep = beforeSep;
-            _AfterSep = afterSep;
-            _ValidValues = validValues;
-            _DefValue = defaultValue;
-            _Type = type;
-            _Alignm = alignm;
-            _DisplaySeqNr = sequenceNumber;
-            _IsEditable = isEditable;
-            _DisplayToUser = displayToUser;
-            _DisPlayWidth = displayWidth;
-            _ParUOM_TextId = parUOM_TextId;
-            _Column = column;
-            _IsStandardParameter = isStandard;
-
-
-            //_UsedForBG = usedForBG;
-            //_UsedForBL = usedForBL;
-            //_UsedForCL = usedForCL;
-            //_UsedForCS = usedForCS;
-            //_UsedForIL = usedForIL;
-            //_UsedForOL = usedForOL;
-            //_UsedForPL = usedForPL;
-            //_UsedForRL = usedForRL;
-            //_UsedForSL = usedForSL;
-            //_UsedForTL = usedForTL;
-            //_UsedForZG = usedForZG;
-
-            //_MappedToSYP = mappedToSYP;
-            //_MappedToPCA = mappedToPCA;
-            //_MappedToROP = MappedToROP;
-            //_MappedToARP = mappedToARP;
-            //_MappedToNONE = mappedToNONE;
-            //_MappedToPPP = mappedToPPP;
-            //_MappedToPSR = mappedToPSR;
-            //_MappedToRLP = mappedToRLP;
-            //_MappedToSDL = mappedToSDL;
-            //_MappedToSTA = mappedToSTA;
-            //_MappedToPPR = mappedToPPR;
-            //_MappedToBIN = mappedToBIN;
-
-
-            _UsedForBG = false;
-            _UsedForBL = false;
-            _UsedForCL = false;
-            _UsedForCS = false;
-            _UsedForIL = false;
-            _UsedForOL = false;
-            _UsedForPL = false;
-            _UsedForRL = false;
-            _UsedForSL = false;
-            _UsedForTL = false;
-            _UsedForZG = false;
-
-            _MappedToSYP = false;
-            _MappedToPCA = false;
-            _MappedToROP = false;
-            _MappedToARP = false;
-            _MappedToNONE = false;
-            _MappedToPPP = false;
-            _MappedToPSR = false;
-            _MappedToRLP = false;
-            _MappedToSDL = false;
-            _MappedToSTA = false;
-            _MappedToPPR = false;
-            _MappedToBIN = false;
-        }
-
-        /// <summary>
         /// This Constructor is used for testing
         /// </summary>
         /// <param name="parName"></param>
@@ -201,7 +103,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _AfterSep = afterSep;
             _IsEditable = isEditable;
             _DisplayToUser = displayToUser;
-            _IsStandardParameter = IsStandardParameter;
+            _IsStandardParameter = isStandardParameter;
 
             _Brush = Brushes.LightGray;
 
@@ -232,12 +134,10 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _DisplaySeqNr = 0;
         }
 
-        /// <summary>
-        /// This constructor is used for creating a new customer parameter dynamically 
-        /// </summary>
         public ParameterDefinition()
         {
-            _IsStandardParameter = false;
+            OrderObservableList.AddSorted(ListGodClass.Instance.ParameterDefinitionList, this);
+
             _Brush = Brushes.LightGray;
 
             _UsedForBG = false;
@@ -264,65 +164,61 @@ namespace TreeViewExample.Business.Models.DiagramModels
             _MappedToSTA = false;
             _MappedToPPR = false;
             _MappedToBIN = false;
-            _DisplaySeqNr = 0;
         }
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// required variables
-        /// </summary>
+        public virtual ObservableCollection<pca_ProcCellPars> ProcesCellParametersList
+        {
+            get { return _ProcesCellParametersList; }
+            set { SetProperty(ref _ProcesCellParametersList, value); }
+        }
+
         [Key]
-        [Column("paf_ParNm")]
-        public string ParName
-        {
-            get { return _ParName; }
-            set { SetProperty(ref _ParName, value); }
-        }
+        [StringLength(50)]
+        public string paf_ParNm { get; set; }
 
-        [Column("paf_ParDesc")]
-        public string Description
-        {
-            get { return _Description; }
-            set { SetProperty(ref _Description, value); }
-        }
+        [Required]
+        [StringLength(50)]
+        public string paf_ParDesc { get; set; }
 
-        [Column("paf_BeforeSep")]
-        public int BeforeSep
-        {
-            get { return _BeforeSep; }
-            set { SetProperty(ref _BeforeSep, value); }
-        }
+        [StringLength(50)]
+        public string paf_ParValueUOM { get; set; }
 
-        [Column("paf_AfterSep")]
-        public int AfterSep
-        {
-            get { return _AfterSep; }
-            set { SetProperty(ref _AfterSep, value); }
-        }
+        public int paf_BeforeSep { get; set; }
 
-        [Column("paf_Type")]
-        public ParameterType Type
-        {
-            get { return _Type; }
-            set { SetProperty(ref _Type, value); }
-        }
+        public int paf_AfterSep { get; set; }
 
-        [Column("paf_Alignm")]
-        public Alignment Alignm
-        {
-            get { return _Alignm; }
-            set { SetProperty(ref _Alignm, value); }
-        }
+        [StringLength(1000)]
+        public string paf_ValidValues { get; set; }
 
-        [Column("paf_Editable")]
-        public IsEditable IsEditable
-        {
-            get { return _IsEditable; }
-            set { SetProperty(ref _IsEditable, value); }
-        }
+        [StringLength(100)]
+        public string paf_DefValue { get; set; }
+
+        public int paf_Type { get; set; }
+
+        public int paf_Alignm { get; set; }
+
+        public int paf_Editable { get; set; }
+
+        public int? paf_DisplaySeqNr { get; set; }
+
+        public int? paf_DisplayWidth { get; set; }
+
+        [StringLength(30)]
+        public string paf_ParUOM_TextId { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string paf_DisplayToUser { get; set; }
+
+        public bool? paf_IsRequired { get; set; }
+
+        public int? paf_Column { get; set; }
+
+        public bool paf_IsStandardPar { get; set; }
 
         [NotMapped]
         public bool DisplayToUser
@@ -331,85 +227,18 @@ namespace TreeViewExample.Business.Models.DiagramModels
             set { SetProperty(ref _DisplayToUser, value); }
         }
 
-        [Column("paf_DisplayToUser")]
-        public string DisplayToUserText
-        {
-            get
-            {
-                if (DisplayToUser)
-                {
-                    return "1";
-                }
-                else 
-                {
-                    return "0";
-                };
-            }
-            set
-            {
-                if (value.ToString() == "0")
-                {
-                    DisplayToUser = false;
-                }
-                else if (value.ToString() == "1")
-                {
-                    DisplayToUser = true;
-                };
-            }
-        }
-
-        /// <summary>
-        /// Optional Variables
-        /// </summary>
-        [Column("paf_ParValueUOM")]
-        public string ParValueUOM
-        {
-            get { return _ParValueUOM; }
-            set { SetProperty(ref _ParValueUOM, value); }
-        }
-        [Column("paf_ValidValues")]
-        public string ValidValues
+        [NotMapped]
+        public Tuple<int, int> Validvalues
         {
             get { return _ValidValues; }
             set { SetProperty(ref _ValidValues, value); }
         }
-        [Column("paf_DefValue")]
-        public string DefaultValue
+        [NotMapped]
+        public List<string> ValidValuesCombobox
         {
-            get { return _DefValue; }
-            set { SetProperty(ref _DefValue, value); }
+            get { return _ValidvaluesCombobox; }
+            set { SetProperty(ref _ValidvaluesCombobox, value); }
         }
-        [Column("paf_DisplaySeqNr")]
-        public int? DisplaySeqNr
-        {
-            get { return _DisplaySeqNr; }
-            set { SetProperty(ref _DisplaySeqNr, value); }
-        }
-        [Column("paf_DisplayWidth")]
-        public int? DisplayWidth
-        {
-            get { return _DisPlayWidth; }
-            set { SetProperty(ref _DisPlayWidth, value); }
-        }
-        [Column("paf_ParUOM_TextId")]
-        public string ParUOM_TextId
-        {
-            get { return _ParUOM_TextId; }
-            set { SetProperty(ref _ParUOM_TextId, value); }
-        }
-        [Column("paf_Column")]
-        public int? Column
-        {
-            get { return _Column; }
-            set { SetProperty(ref _Column, value); }
-        }
-        [Column("paf_IsStandardPar")]
-        public bool IsStandardParameter
-        {
-            get { return _IsStandardParameter; }
-            set { SetProperty(ref _IsStandardParameter, value); }
-        }
-
 
         [NotMapped]
         public bool IsVisible
@@ -578,115 +407,78 @@ namespace TreeViewExample.Business.Models.DiagramModels
 
         #region Methods
 
-        private bool? GetConversion(bool? isRequired)
+
+        public static ObservableCollection<ParameterDefinition> GetAllCustomerParameters()
         {
-            switch (isRequired)
-            {
-                case true:
-                    return null;
-                case false:
-                    return true;
-                case null:
-                    return false;
-                default:
-                    return null;
-            }
-        }
-        private bool? SetConversion(bool? isRequired)
-        {
-            switch (isRequired)
-            {
-                case true:
-                    return false;
-                case false:
-                    return null;
-                case null:
-                    return true;
-                default:
-                    return null;
-            }
-        }
-        public bool CheckIfParNameExist()
-        {
-            if (db.CheckIfParamNameExists(this))
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool InsertParameterDefinition()
-        {
-            if (db.InsertParameterDefinition(this))
-            {
-                InsertParameterConnections();
-                return true;
-            }
-            return false;
-        }
-        private void InsertParameterConnections()
-        {
-            //for TPM table
-            if (_MappedToARP == true)
-            {
-                db.InsertIntoTpm(this, "arp_ArtPars");
-            }
-            if (_MappedToBIN == true)
-            {
-                db.InsertIntoTpm(this, "bip_BinPars");
-            }
-            if (_MappedToNONE == true)
-            {
-                db.InsertIntoTpm(this, "NONE");
-            }
-            if (_MappedToPCA == true)
-            {
-                db.InsertIntoTpm(this, "pca_ProcCellPars");
-            }
-            if (_MappedToPPP == true)
-            {
-                db.InsertIntoTpm(this, "ppp_ProdPresPars");
-            }
-            if (_MappedToPSR == true)
-            {
-                db.InsertIntoTpm(this, "psr_ParSetPars");
-            }
-            if (_MappedToRLP == true)
-            {
-                db.InsertIntoTpm(this, "rlp_RelationPars");
-            }
-            if (_MappedToROP == true)
-            {
-                db.InsertIntoTpm(this, "rop_RoutePars");
-            }
-            if (_MappedToSDL == true)
-            {
-                db.InsertIntoTpm(this, "sdl_SupplyLnDetailLns");
-            }
-            if (_MappedToSTA == true)
-            {
-                db.InsertIntoTpm(this, "sta_SPTranspBatchPars");
-            }
-            if (_MappedToSYP == true)
-            {
-                db.InsertIntoTpm(this, "syp_SystemPars");
-            }
-        }
-        private void UpdateCellType()
-        {
-            //hier moet route en cell aangevinkt worden
-        }
-        public ObservableCollection<ParameterDefinition> GetAllCustomerParameters()
-        {
-            return db.GetAllCustomerParameterDefinitions();
+            return db.GetAllParameterDefinitions();
         }
 
         public int CompareTo(object obj)
         {
             ParameterDefinition paramdef = obj as ParameterDefinition;
-            return string.Compare(ParName, paramdef.ParName);
+            return string.Compare(paf_ParNm, paramdef.paf_ParNm);
         }
 
+        public void ConvertValidValues()
+        {
+            if (paf_ValidValues.Contains("<"))
+            {
+                ValidValuesFillLessThan();
+            }
+            else if (paf_ValidValues.Contains("-"))
+            {
+                ValidValuesFillRange();
+            }
+            else if (paf_ValidValues.Contains(":"))
+            {
+                ValidValuesFillRangeIncluding();
+            }
+            else if (paf_ValidValues.Contains(";"))
+            {
+                ValidValuesFillOr();
+            }
+        }
+        private void ValidValuesFillLessThan()
+        {
+            int index = paf_ValidValues.IndexOf("<") + 1;
+            int location = paf_ValidValues.Length - index;
+            string maximumValueText = paf_ValidValues.Substring(index, location);
+            int maximumValue = Convert.ToInt32(maximumValueText);
 
+            Validvalues = new Tuple<int, int>(0, maximumValue - 1);
+        }
+        private void ValidValuesFillRange()
+        {
+            int index = paf_ValidValues.IndexOf("-") + 1;
+            int location = paf_ValidValues.Length - index;
+
+            string minimumValueText = paf_ValidValues.Substring(0, location);
+            string maximumValueText = paf_ValidValues.Substring(index, location);
+            int minimumValue = Convert.ToInt32(minimumValueText);
+            int maximumValue = Convert.ToInt32(maximumValueText);
+
+            Validvalues = new Tuple<int, int>(minimumValue, maximumValue - 1);
+        }
+        private void ValidValuesFillRangeIncluding()
+        {
+            int index = paf_ValidValues.IndexOf(":") + 1;
+            int location = paf_ValidValues.Length - index;
+
+            string minimumValueText = paf_ValidValues.Substring(0, location);
+            string maximumValueText = paf_ValidValues.Substring(index, location);
+            int minimumValue = Convert.ToInt32(minimumValueText);
+            int maximumValue = Convert.ToInt32(maximumValueText);
+
+            Validvalues = new Tuple<int, int>(minimumValue, maximumValue);
+        }
+        private void ValidValuesFillOr()
+        {
+            string[] array = paf_ValidValues.Split(';');
+            for (int i = 0; i < array.Length; i++)
+            {
+                ValidValuesCombobox.Add(array[i]);
+            }
+        }
 
         #endregion
 

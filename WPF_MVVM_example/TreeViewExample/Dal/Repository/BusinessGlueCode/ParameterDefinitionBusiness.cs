@@ -21,45 +21,19 @@ namespace TreeViewExample.Dal.DatabaseConnection
 
         #region Methods
 
-        public bool CheckIfParamNameExists(ParameterDefinition ConfigurationParameter)
-        {
-           List<ParameterDefinition> paramDefinitions = _Repository.GetAllParameterDefinitions();
-
-            foreach (ParameterDefinition PD in paramDefinitions)
-            {
-                if (ConfigurationParameter.ParName == PD.ParName)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public ObservableCollection<ParameterDefinition> GetAllCustomerParameterDefinitions()
+        public ObservableCollection<ParameterDefinition> GetAllParameterDefinitions()
         {
             List<ParameterDefinition> paramDefinitions = _Repository.GetAllParameterDefinitions();
 
             var selected = from p in paramDefinitions
-                           where p.IsStandardParameter == false
+                           where p.paf_IsStandardPar == false
                            select p;
 
-            ObservableCollection<ParameterDefinition> paramDefinitionsForReturn = new ObservableCollection<ParameterDefinition>();
-            foreach (ParameterDefinition PD in selected.ToList())
-            {
-                OrderObservableList.AddSorted(paramDefinitionsForReturn, PD);
-            }
+            ObservableCollection<ParameterDefinition> paramDefinitionsForReturn = new ObservableCollection<ParameterDefinition>(selected.ToList());
             return paramDefinitionsForReturn;
         }
 
-        public bool InsertParameterDefinition(ParameterDefinition configurationParameter)
-        {
-            return _Repository.InsertNewParameterDefinition(configurationParameter);
-        }
 
-        public bool InsertIntoTpm(ParameterDefinition ConfigurationParameter, string tableId)
-        {
-            return _Repository.InsertIntoTpm(ConfigurationParameter, tableId);
-        }
 
         #endregion 
     }

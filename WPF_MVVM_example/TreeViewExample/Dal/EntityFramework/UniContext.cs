@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Dal.DatabaseConnection;
 
 namespace TreeViewExample.Dal.EntityFramework
 {
     public class UniContext : DbContext
     {
-        public UniContext() : base(nameOrConnectionString: DatabaseConnectionClass.GetConnectionString())
+        public UniContext() : base(nameOrConnectionString: "Server=172.21.5.120;Initial Catalog=STG_KWAR_PROMASST_MES_V7.3.0;Persist Security Info=True; User = sa; password=k00lZ@@D")
         {
             //this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
@@ -21,6 +22,7 @@ namespace TreeViewExample.Dal.EntityFramework
         #region DBsets
 
         public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
+        public DbSet<pca_ProcCellPars> ProcescellParameters { get; set; }
 
         public DbSet<ProcessCel> ProcesCells { get; set; }
         public DbSet<Route> Routes { get; set; }
@@ -138,8 +140,17 @@ namespace TreeViewExample.Dal.EntityFramework
                 .WithOptional(e => e.pru_Procedures)
                 .HasForeignKey(e => e.ProcedureId);
 
+            modelBuilder.Entity<pca_ProcCellPars>()
+                   .HasRequired(e => e.ParameterDefinition)
+                   .WithMany(e => e.ProcesCellParametersList)
+                   .HasForeignKey(e => e.pca_ParNm)
+                   .WillCascadeOnDelete(false);
 
-
+            //modelBuilder.Entity<ParameterDefinition>()
+            //       .HasMany(e => e.ProcesCellParametersList)
+            //       .WithRequired(e => e.ProcesCellParametersList)
+            //       .HasForeignKey(e => e.pca_ParNm)
+            //       .WillCascadeOnDelete(false);
         }
 
 

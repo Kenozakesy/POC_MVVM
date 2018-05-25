@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Dal.Repository.Interfaces;
 
 namespace TreeViewExample.Dal.Interfaces
 {
-    public interface IParameterDefinitionRepository 
+    public interface IParameterDefinitionRepository : IDatabaseActions
     {
-        bool InsertNewParameterDefinition(ParameterDefinition ConfigurationParameter);
         List<ParameterDefinition> GetAllParameterDefinitions();
-        bool InsertIntoTpm(ParameterDefinition ConfigurationParameter, string tableId);
-
     }
 }

@@ -25,6 +25,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                     var select = (from r in context.ProcesCells
                                   .Include(x => x.pca_ProcCellPars)
                                   .Include(x => x.pca_ProcCellPars.Select(z => z.prc_ProcCells))
+                                  .Include(x => x.pca_ProcCellPars.Select(z => z.ParameterDefinition))
+                                  .Include(x => x.pca_ProcCellPars.Select(z => z.ParameterDefinition.ProcesCellParametersList))
+
                                   .Include(x => x.opc_OAProcCellDefs)
                                   .Include(x => x.opc_OAProcCellDefs.Select(z => z.prc_ProcCells))
 

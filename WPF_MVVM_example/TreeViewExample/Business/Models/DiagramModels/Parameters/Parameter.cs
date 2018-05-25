@@ -25,7 +25,7 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         /// <summary>
         /// Converts the string ValidValues to a Combobox if this a applicable
         /// </summary>
-        
+
         //private void ConvertValidValues()
         //{
         //    if (ValidValuesText.Contains("<"))

@@ -20,82 +20,82 @@ namespace WPF_MVVM_TestProject
             Assert.IsTrue(DatabaseConnectionClass.OpenConnection());
         }
 
-        [TestMethod]
-        public void ChangeCheckFrameworkTest()
-        {
-            using (var context = new UniContext())
-            {
-                try
-                { 
-                    ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
-                    param.AfterSep = 9;
-                    param.Type = ParameterType.Date;
-                    param.Alignm = Alignment.Left;
+        //[TestMethod]
+        //public void ChangeCheckFrameworkTest()
+        //{
+        //    using (var context = new UniContext())
+        //    {
+        //        try
+        //        { 
+        //            ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
+        //            param.AfterSep = 9;
+        //            param.Type = ParameterType.Date;
+        //            param.Alignm = Alignment.Left;
 
-                    var parameter = context.ParameterDefinitions.Find(param.ParName);
-                    context.Entry(parameter).CurrentValues.SetValues(param);
+        //            var parameter = context.ParameterDefinitions.Find(param.ParName);
+        //            context.Entry(parameter).CurrentValues.SetValues(param);
 
-                    context.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    context.Dispose();
-                }
-            }
-        }
+        //            context.SaveChanges();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            context.Dispose();
+        //        }
+        //    }
+        //}
 
-        [TestMethod]
-        public void InsertCheckFrameworkTest()
-        {
-            using (var context = new UniContext())
-            {
-                try
-                {
-                    ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
-                    param.AfterSep = 9;
-                    param.Type = ParameterType.Date;
-                    param.Alignm = Alignment.Left;
+        //[TestMethod]
+        //public void InsertCheckFrameworkTest()
+        //{
+        //    using (var context = new UniContext())
+        //    {
+        //        try
+        //        {
+        //            ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
+        //            param.AfterSep = 9;
+        //            param.Type = ParameterType.Date;
+        //            param.Alignm = Alignment.Left;
 
-                    ParameterDefinition param2 = new ParameterDefinition("test90", "desc", 99, 99, IsEditable.Editable, true, true);
-                    param.AfterSep = 9;
-                    param.Type = ParameterType.Date;
-                    param.Alignm = Alignment.Left;
+        //            ParameterDefinition param2 = new ParameterDefinition("test90", "desc", 99, 99, IsEditable.Editable, true, true);
+        //            param.AfterSep = 9;
+        //            param.Type = ParameterType.Date;
+        //            param.Alignm = Alignment.Left;
 
-                    context.ParameterDefinitions.Add(param);
-                    context.ParameterDefinitions.Add(param2);
+        //            context.ParameterDefinitions.Add(param);
+        //            context.ParameterDefinitions.Add(param2);
 
-                    context.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    context.Dispose();
-                }
-            }
-        }
+        //            context.SaveChanges();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            context.Dispose();
+        //        }
+        //    }
+        //}
 
-        [TestMethod]
-        public void DeleteCheckFrameworkTest()
-        {
-            using (var context = new UniContext())
-            {
-                try
-                {
-                    ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
-                    param.AfterSep = 9;
-                    param.Type = ParameterType.Date;
-                    param.Alignm = Alignment.Left;
+        //[TestMethod]
+        //public void DeleteCheckFrameworkTest()
+        //{
+        //    using (var context = new UniContext())
+        //    {
+        //        try
+        //        {
+        //            ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
+        //            param.AfterSep = 9;
+        //            param.Type = ParameterType.Date;
+        //            param.Alignm = Alignment.Left;
 
-                    context.ParameterDefinitions.Attach(param);
-                    context.ParameterDefinitions.Add(param);
+        //            context.ParameterDefinitions.Attach(param);
+        //            context.ParameterDefinitions.Add(param);
 
-                    context.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    context.Dispose();
-                }
-            }
-        }
+        //            context.SaveChanges();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            context.Dispose();
+        //        }
+        //    }
+        //}
 
         [TestMethod]
         public void SelectCheckFrameworkTest()

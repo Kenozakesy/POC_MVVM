@@ -78,6 +78,7 @@
     <Compile Include="Business\Enums\ParameterType.cs" />
     <Compile Include="Business\Enums\ProcesCellType.cs" />
     <Compile Include="Business\Enums\SourceDest.cs" />
+    <Compile Include="Business\Interfaces\IDatabaseModelsActions.cs" />
     <Compile Include="Business\Interfaces\IObjectWithParameters.cs" />
     <Compile Include="Business\Interfaces\IParameterObject.cs" />
     <Compile Include="Business\Models\DatabaseModels\bib_BinBatches.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
     <Compile Include="Dal\DatabaseConnection\DatabaseConnectionClass.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ProcesCellBusiness.cs" />
+    <Compile Include="Dal\Repository\BusinessGlueCode\ProcescellParameterBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\RouteBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\SubrouteBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\SubrouteInRouteBusiness.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Dal\Repository\Interfaces\IBinRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\IDatabaseActions.cs" />
     <Compile Include="Dal\Repository\Interfaces\IParameterDefinitionRepository.cs" />
+    <Compile Include="Dal\Repository\Interfaces\IProcescellParameterRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\IProcesCellRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\IRouteRepository.cs" />
     <Compile Include="Dal\Repository\Interfaces\ISubRouteInRouteRepository.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_BinInSubrouteRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_BinRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs" />
+    <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ProcescellParameterRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_ProcesCellRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_RouteRepository.cs" />
     <Compile Include="Dal\Repository\SQLServerRepository\MSSQL_SubRouteInRouteRepository.cs" />

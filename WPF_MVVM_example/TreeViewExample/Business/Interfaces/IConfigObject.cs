@@ -8,7 +8,7 @@ using TreeViewExample.Business.Models.NonDiagramModels;
 
 namespace TreeViewExample.Business.Interfaces
 {
-    public interface IConfigObject : IComparable
+    public interface IConfigObject : IComparable, IDatabaseModelsActions
     {
         string GetName();
         void ChangeColor();
@@ -20,8 +20,6 @@ namespace TreeViewExample.Business.Interfaces
         //void SetColor();
         //void Validate();
 
-        bool DatabaseInsert();
-        bool DatabaseUpdate();
-        bool DatabaseDelete();
+
     }
 }

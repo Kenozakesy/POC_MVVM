@@ -43,6 +43,7 @@ namespace TreeViewExample.UI.ViewModels
             get { return _ParameterList; }
             set { SetProperty(ref _ParameterList, value); }
         }
+
         public string ViewHeader
         {
             get { return _ParameterObject.GetName() + " ParameterAddWindow"; }

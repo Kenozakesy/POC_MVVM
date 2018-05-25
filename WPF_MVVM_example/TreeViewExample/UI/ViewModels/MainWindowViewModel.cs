@@ -37,7 +37,7 @@ namespace TreeViewExample.UI.ViewModels
 
             ListGodClass.Instance.LoadDataFromDB();
 
-            _CustomerParameterList = ListGodClass.Instance.CustomerParameterList;
+            _CustomerParameterList = ListGodClass.Instance.ParameterDefinitionList;
             _ProcessCelList = ListGodClass.Instance.ProcessCelList;
             _BinList = ListGodClass.Instance.BinList;
         }
