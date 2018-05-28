@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TreeViewExample.Business.Models;
+using TreeViewExample.Business.Models.DiagramModels;
 
 namespace TreeViewExample.Dal.Repository.Interfaces
 {
@@ -11,5 +12,6 @@ namespace TreeViewExample.Dal.Repository.Interfaces
     {
         List<ProcessCel> GetAllProcesCells();
 
+        List<ParameterDefinition> GetAllParametersProcescell(ProcessCel cell);
     }
 }

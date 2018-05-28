@@ -249,7 +249,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type that:ParameterDefinition}">
-            <Label Content="{Binding Path=ParName}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
+            <Label Content="{Binding Path=paf_ParNm}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
 
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}" Visibility="Collapsed">
@@ -412,7 +412,7 @@
 
                     <Border BorderBrush="Gray" BorderThickness="0 1 0 1" Width="230" Height="4" HorizontalAlignment="Center" />
 
-                    <TreeViewItem Header="Customer Parameters" ItemsSource="{Binding Path=CustomerParameterList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    <TreeViewItem Header="All Parameter definitions" ItemsSource="{Binding Path=CustomerParameterList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                         <!--<TreeViewItem.ContextMenu>
                             <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 

@@ -394,11 +394,7 @@ namespace TreeViewExample.Business.Models
             return string.Compare(this.ProcesCellId, cell.ProcesCellId);        
         }
 
-        public ObservableCollection<IParameterObject> GetParameterList()
-        {
-            ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(pca_ProcCellPars);
-            return parameterList;
-        }
+       
         public void RemoveParameter(Parameter paramdef)
         {
             throw new NotImplementedException();
@@ -421,29 +417,50 @@ namespace TreeViewExample.Business.Models
         }
 
 
- 
+        public ObservableCollection<IParameterObject> GetParameterList()
+        {
+            ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(pca_ProcCellPars);
+            return parameterList;
+        }
+        public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters()
+        {
+            ObservableCollection<ParameterDefinition> ParameterDefinitionList = new ObservableCollection<ParameterDefinition>();
+            ParameterDefinitionList = db.GetAddAbleStandardParameters(this);
+            return ParameterDefinitionList;
+        }
+
+        public bool AddParameter(ParameterDefinition paramdefinition)
+        {
+            pca_ProcCellPars procescellparameter = new pca_ProcCellPars(this, paramdefinition);
+            if (procescellparameter.DatabaseInsert())
+            {
+                procescellparameter.prc_ProcCells = this;
+                procescellparameter.ParameterDefinition = paramdefinition;
+
+                pca_ProcCellPars.Add(procescellparameter);
+                return true;
+            }
+            return false;
+        }
+
         public string GetName()
         {
             return ProcesCellId;
         }
-
         public bool DatabaseInsert()
         {
             return db.DatabaseInsert(this);
         }
-
         public bool DatabaseUpdate()
         {
             return db.DatabaseUpdate(this);
         }
-
         public bool DatabaseDelete()
         {
             return db.DatabaseDelete(this);
         }
 
-
-
+  
 
         #endregion
 

@@ -18,7 +18,21 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseInsert(object obj)
         {
-            throw new NotImplementedException();
+            pca_ProcCellPars cellparameter = obj as pca_ProcCellPars;
+            using (var context = new UniContext())
+            {
+                try
+                {
+                    context.ProcescellParameters.Add(cellparameter);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    context.Dispose();
+                    return false;
+                }
+            }
         }
 
         public bool DatabaseUpdate(object obj)
@@ -30,6 +44,8 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 {
                     var entry = context.ProcescellParameters.Find(procescellParameter.pca_ProcCellId, procescellParameter.pca_ParNm);
                     context.Entry(entry).CurrentValues.SetValues(procescellParameter);
+
+                    context.SaveChanges();
 
                     return true;
                 }

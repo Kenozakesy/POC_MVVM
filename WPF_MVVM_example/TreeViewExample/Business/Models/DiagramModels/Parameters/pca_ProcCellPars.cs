@@ -24,6 +24,16 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 
         }
 
+        public pca_ProcCellPars(ProcessCel cell, ParameterDefinition param)
+        {
+            pca_ProcCellId = cell.ProcesCellId;
+            pca_ParNm = param.paf_ParNm;
+            pca_ParDesc = param.paf_ParDesc;
+            Value = param.paf_ParDesc;
+            pca_ParValueUOM = param.paf_ParValueUOM;
+            pca_DisplayToUser = param.paf_DisplayToUser;
+        }
+
         [Key]
         [Column(Order = 0)]
         [StringLength(50)]
@@ -39,6 +49,7 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         public string pca_ParDesc { get; set; }
 
 
+        private static bool check = true;
         [StringLength(100)]
         [Column("pca_ParValue")]
         public string Value
@@ -47,9 +58,11 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
             set
             {
                 SetProperty(ref _Value, value);
-                if (ParameterDefinition != null)
+                if (check)
                 {
+                    check = false;
                     DatabaseUpdate();
+                    check = true;
                 }
             }
         }
@@ -62,9 +75,10 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         public string pca_DisplayToUser { get; set; }
 
         public virtual ProcessCel prc_ProcCells { get; set; }
-
         public virtual ParameterDefinition ParameterDefinition { get; set; }
 
+
+        #region Methods
 
         public bool DatabaseInsert()
         {
@@ -80,5 +94,7 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         {
             return db.DatabaseDelete(this);
         }
+
+        #endregion
     }
 }

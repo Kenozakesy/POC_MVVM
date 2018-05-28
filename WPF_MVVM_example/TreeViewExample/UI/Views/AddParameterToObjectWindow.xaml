@@ -6,6 +6,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:TreeViewExample.Business.UI_Models"
         xmlns:this="clr-namespace:TreeViewExample.Business.Models"
+        xmlns:dia="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
         xmlns:that="clr-namespace:TreeViewExample.Business.Interfaces" 
         mc:Ignorable="d"
         Title="{Binding Path=ViewHeader}" MinHeight="400" MinWidth="800" Width="1000" WindowState="Maximized">
@@ -28,11 +29,11 @@
         </Style>
         <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
             <Setter Property="IsEnabled" Value="True"></Setter>
-            <!--<Style.Triggers>
-                <DataTrigger Binding="{Binding Path=}" Value="0">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=AvailableStandardParameters.Count}" Value="0">
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
-            </Style.Triggers>-->
+            </Style.Triggers>
         </Style>
         <Style x:Key="ListItemStyle" TargetType="{x:Type ListViewItem}">
             <Setter Property="BorderBrush" Value="LightGray" />
@@ -64,6 +65,10 @@
             <TextBox Text="{Binding Path=Value}" Width="50"/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type dia:ParameterDefinition}">
+            <TextBlock Text="{Binding Path=paf_ParNm}"></TextBlock>
+        </DataTemplate>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -71,7 +76,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" ></ColumnDefinition>
-            <ColumnDefinition Width="180"></ColumnDefinition>
+            <ColumnDefinition Width="3" ></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource BorderStyle}">
@@ -120,7 +126,9 @@
             </ListView>
         </Border>
 
-        <Border Grid.Column="1" Style="{StaticResource BorderStyle}">
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="3" BorderBrush="Black" BorderThickness="0.5 0" ></GridSplitter>
+
+        <Border Grid.Column="2" Style="{StaticResource BorderStyle}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -132,8 +140,8 @@
 
                 <StackPanel Grid.Row="0" Margin="8" Orientation="Vertical">
                     <Label>Parameters</Label>
-                    <ComboBox Style="{StaticResource ComboBoxStyle}"></ComboBox>
-                    <Button Style="{StaticResource TextboxStyle}" Margin="0 5 0 20">Add</Button>
+                    <ComboBox Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Path=AvailableStandardParameters}" SelectedItem="{Binding Path=SelectedStandardParameter}"></ComboBox>
+                    <Button Style="{StaticResource TextboxStyle}" Margin="0 5 0 20" Command="{Binding Path=AddParameterToObjectCommand}">Add</Button>
 
                     <Label>Customer Parameters</Label>
                     <ComboBox></ComboBox>

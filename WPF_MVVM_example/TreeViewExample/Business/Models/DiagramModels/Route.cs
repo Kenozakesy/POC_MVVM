@@ -16,6 +16,7 @@ using TreeViewExample.Dal.Repository.BusinessGlueCode;
 using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
 using System.Data.Entity;
+using TreeViewExample.Business.Models.DiagramModels;
 
 namespace TreeViewExample.Business.Models
 {
@@ -183,7 +184,6 @@ namespace TreeViewExample.Business.Models
 
             return notInRoute;
         }
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -216,13 +216,11 @@ namespace TreeViewExample.Business.Models
         {
             throw new NotImplementedException();
         }
-
         public int CompareTo(object obj)
         {
             Route route = obj as Route;
             return string.Compare(this.RouteName, route.RouteName);
         }
-
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
@@ -267,20 +265,27 @@ namespace TreeViewExample.Business.Models
         {
             return "Route " + RouteId;
         }
-
         public bool DatabaseInsert()
         {
             return db.DatabaseInsert(this);
         }
-
         public bool DatabaseUpdate()
         {
             return db.DatabaseUpdate(this);
         }
-
         public bool DatabaseDelete()
         {
             return db.DatabaseDelete(this);
+        }
+
+        public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddParameter(ParameterDefinition paramdefinition)
+        {
+            throw new NotImplementedException();
         }
 
 

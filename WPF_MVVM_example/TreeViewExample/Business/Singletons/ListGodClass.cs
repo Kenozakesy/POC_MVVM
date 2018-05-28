@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Statics;
+using TreeViewExample.UI.ViewModels;
 
 namespace TreeViewExample.Business.Singletons
 {
     /// <summary>
     /// This class is used to keep the most important 3 lists in one place without having to request them another time during run time
     /// </summary>
-    public class ListGodClass
+    public class ListGodClass : ViewModelBase
     {
         private static ListGodClass _Instance;
 
@@ -29,15 +30,12 @@ namespace TreeViewExample.Business.Singletons
         public void LoadDataFromDB()
         {
             AddProcesCells();
-            //GetAllParameterDefinitions();
+            GetAllParameterDefinitions();
             GetBinsFromDatabase();
 
             //validateAll()
 
-            foreach (ParameterDefinition paf in ParameterDefinitionList)
-            {
-                paf.ConvertValidValues();
-            }
+ 
         }
 
         public static ListGodClass Instance
@@ -67,7 +65,10 @@ namespace TreeViewExample.Business.Singletons
         public ObservableCollection<ParameterDefinition> ParameterDefinitionList
         {
             get { return _ParameterDefinitionList; }
-            set { _ParameterDefinitionList = value; }
+            set
+            {
+                SetProperty(ref _ParameterDefinitionList, value);
+            }
         }
 
         #endregion
@@ -76,11 +77,18 @@ namespace TreeViewExample.Business.Singletons
 
         private void GetAllParameterDefinitions()
         {
-            ParameterDefinitionList = ParameterDefinition.GetAllCustomerParameters();
+            ParameterDefinition.GetAllParametersDefinitions();
+
+            foreach (ParameterDefinition paf in ParameterDefinitionList)
+            {
+                paf.ConvertValidValues();
+            }
         }
-        /// <summary>
-        /// Gets all ProcesCells
-        /// </summary>
+
+
+
+
+        //these need to go away in their own classes
         private void AddProcesCells()
         {
             ProcessCel procCell = new ProcessCel();
@@ -96,7 +104,7 @@ namespace TreeViewExample.Business.Singletons
         }
         private void GetBinsFromDatabase()
         {
-            List<Bin> bins = Bin.GetAllBins();
+            Bin.GetAllBins();
         }
         public int? GetFirstAvailableProccellId(ProcessCel cell)
         {

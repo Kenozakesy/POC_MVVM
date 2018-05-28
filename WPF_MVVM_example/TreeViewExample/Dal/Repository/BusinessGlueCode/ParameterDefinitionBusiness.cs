@@ -26,7 +26,6 @@ namespace TreeViewExample.Dal.DatabaseConnection
             List<ParameterDefinition> paramDefinitions = _Repository.GetAllParameterDefinitions();
 
             var selected = from p in paramDefinitions
-                           where p.paf_IsStandardPar == false
                            select p;
 
             ObservableCollection<ParameterDefinition> paramDefinitionsForReturn = new ObservableCollection<ParameterDefinition>(selected.ToList());

@@ -85,9 +85,13 @@
     <Compile Include="Business\Models\DatabaseModels\bir_BinsInSubRoutes.cs" />
     <Compile Include="Business\Models\DatabaseModels\bis_BinStocks.cs" />
     <Compile Include="Business\Models\DatabaseModels\opc_OAProcCellDefs.cs" />
+    <Compile Include="Business\Models\DatabaseModels\pac_ParDefsProcCellTypes.cs" />
+    <Compile Include="Business\Models\DatabaseModels\pat_ParTables.cs" />
+    <Compile Include="Business\Models\DatabaseModels\pct_ProcCellTypes.cs" />
     <Compile Include="Business\Models\DatabaseModels\pri_PropIns.cs" />
     <Compile Include="Business\Models\DatabaseModels\sri_SubRoutesInRoutes.cs" />
     <Compile Include="Business\Models\DatabaseModels\tbb_TempBinBatches.cs" />
+    <Compile Include="Business\Models\DatabaseModels\tpm_TableParMaps.cs" />
     <Compile Include="Business\Models\DatabaseModels\uis_UnitsInSubRoutes.cs" />
     <Compile Include="Business\Models\DiagramModels\oar_OARcps.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\bip_BinPars.cs" />

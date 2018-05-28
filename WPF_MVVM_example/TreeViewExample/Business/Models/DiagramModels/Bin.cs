@@ -11,6 +11,7 @@ using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DatabaseModels;
+using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Singletons;
@@ -348,6 +349,16 @@ namespace TreeViewExample.Business.Models
         public bool DatabaseInsert()
         {
            return db.DatabaseInsert(this);
+        }
+
+        public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddParameter(ParameterDefinition paramdefinition)
+        {
+            throw new NotImplementedException();
         }
 
 

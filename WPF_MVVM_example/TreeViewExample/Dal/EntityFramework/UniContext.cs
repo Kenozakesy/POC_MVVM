@@ -23,6 +23,14 @@ namespace TreeViewExample.Dal.EntityFramework
 
         public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
         public DbSet<pca_ProcCellPars> ProcescellParameters { get; set; }
+        public DbSet<tpm_TableParMaps> tpm_TableParMaps { get; set; }
+        public DbSet<pat_ParTables> pat_ParTables { get; set; }
+        public DbSet<pac_ParDefsProcCellTypes> pac_ParDefsProcCellTypes { get; set; }
+        public DbSet<pct_ProcCellTypes> pct_ProcCellTypes { get; set; }
+
+
+
+
 
         public DbSet<ProcessCel> ProcesCells { get; set; }
         public DbSet<Route> Routes { get; set; }

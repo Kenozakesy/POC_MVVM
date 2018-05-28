@@ -23,6 +23,9 @@ namespace TreeViewExample.UI.ViewModels
         private IObjectWithParameters _ParameterObject;
         private ObservableCollection<IParameterObject> _ParameterList = new ObservableCollection<IParameterObject>();
 
+        private ParameterDefinition _SelectedStandardParameter;
+        private ObservableCollection<ParameterDefinition> _AvailableStandardParameters = new ObservableCollection<ParameterDefinition>();
+
         private IAddParameterToObjectView _IAddParameterToObjectView;
         public AddParameterToObjectViewModel(IAddParameterToObjectView view) : base(view)
         {
@@ -37,11 +40,22 @@ namespace TreeViewExample.UI.ViewModels
             get { return _ParameterObject; }
             set { SetProperty(ref _ParameterObject, value); }
         }
-
+        //Hier kan waarschijnlijk meteen een referentie naar het object worden gezonden
         public ObservableCollection<IParameterObject> ParameterList
         {
             get { return _ParameterList; }
             set { SetProperty(ref _ParameterList, value); }
+        }
+
+        public ParameterDefinition SelectedStandardParameter
+        {
+            get { return _SelectedStandardParameter; }
+            set { SetProperty(ref _SelectedStandardParameter, value); }
+        }
+        public ObservableCollection<ParameterDefinition> AvailableStandardParameters
+        {
+            get { return _AvailableStandardParameters; }
+            set { SetProperty(ref _AvailableStandardParameters, value); }
         }
 
         public string ViewHeader
@@ -59,6 +73,7 @@ namespace TreeViewExample.UI.ViewModels
         public void InitializeParameters()
         {
             ParameterList = ParameterObject.GetParameterList();
+            AvailableStandardParameters = ParameterObject.GetAddAbleStandardParameters();
         }
 
 
@@ -79,6 +94,11 @@ namespace TreeViewExample.UI.ViewModels
         {
             _IAddParameterToObjectView.OpenCreateParameterWindow();
         }
+        private void AddParameterToObject()
+        {
+            ParameterObject.AddParameter(SelectedStandardParameter);
+            InitializeParameters();
+        }
 
         #endregion
 
@@ -89,11 +109,13 @@ namespace TreeViewExample.UI.ViewModels
             RemoveParameterCommand = new RelayCommandT1<IParameterObject>(RemoveParameter);
             FinishEditingCommand = new RelayCommand(FinishEditing);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
+            AddParameterToObjectCommand = new RelayCommand(AddParameterToObject);
         }
 
         public ICommand RemoveParameterCommand { get; set; }
         public ICommand FinishEditingCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }
+        public ICommand AddParameterToObjectCommand { get; set; }
 
         #endregion
 

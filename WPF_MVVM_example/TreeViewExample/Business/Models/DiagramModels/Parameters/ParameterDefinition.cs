@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
+using TreeViewExample.Business.Models.DatabaseModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
@@ -16,7 +17,7 @@ using TreeViewExample.UI.ViewModels;
 namespace TreeViewExample.Business.Models.DiagramModels
 {
     [Table("paf_ParDefs")]
-    public class ParameterDefinition : ViewModelBase, IComparable
+    public class ParameterDefinition : ViewModelBase, IComparable, IEquatable<ParameterDefinition>
     {
         private static ParameterDefinitionBusiness db = new ParameterDefinitionBusiness(new MSSQL_ParameterDefinitionRepository());
 
@@ -175,6 +176,10 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _ProcesCellParametersList; }
             set { SetProperty(ref _ProcesCellParametersList, value); }
         }
+
+        public virtual ObservableCollection<tpm_TableParMaps> tpm_TableParMaps { get; set; }
+        public virtual ObservableCollection<pat_ParTables> pat_ParTables { get; set; }
+
 
         [Key]
         [StringLength(50)]
@@ -408,7 +413,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         #region Methods
 
 
-        public static ObservableCollection<ParameterDefinition> GetAllCustomerParameters()
+        public static ObservableCollection<ParameterDefinition> GetAllParametersDefinitions()
         {
             return db.GetAllParameterDefinitions();
         }
@@ -416,36 +421,86 @@ namespace TreeViewExample.Business.Models.DiagramModels
         public int CompareTo(object obj)
         {
             ParameterDefinition paramdef = obj as ParameterDefinition;
-            return string.Compare(paf_ParNm, paramdef.paf_ParNm);
+            return string.Compare(paramdef.paf_ParNm, paf_ParNm);
+            //return string.Compare(paf_ParNm, paramdef.paf_ParNm );
+        }
+
+        public bool Equals(ParameterDefinition obj)
+        {
+            if (this == obj)
+            {
+                return true;
+            }
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj.GetType() == typeof(ParameterDefinition)))
+            {
+                return false;
+            }
+
+            ParameterDefinition other = (ParameterDefinition)obj;
+
+            if (other.paf_ParNm != paf_ParNm)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public void ConvertValidValues()
         {
-            if (paf_ValidValues.Contains("<"))
+            if (paf_ValidValues == null || paf_ValidValues == "")
             {
-                ValidValuesFillLessThan();
+                return;
             }
-            else if (paf_ValidValues.Contains("-"))
+
+            try
             {
-                ValidValuesFillRange();
+                if (paf_ValidValues.Contains("<") || paf_ValidValues.Contains(">"))
+                {
+                    ValidValuesFillLessThan();
+                }
+                else if (paf_ValidValues.Contains(";"))
+                {
+                    ValidValuesFillOr();
+                }
+                else if (paf_ValidValues.Contains("-"))
+                {
+                    ValidValuesFillRange();
+                }
+                else if (paf_ValidValues.Contains(":"))
+                {
+                    ValidValuesFillRangeIncluding();
+                }
             }
-            else if (paf_ValidValues.Contains(":"))
+            catch (Exception e)
             {
-                ValidValuesFillRangeIncluding();
+                //Incorrect parameter exception for value (paf_validvalues)
             }
-            else if (paf_ValidValues.Contains(";"))
-            {
-                ValidValuesFillOr();
-            }
+   
         }
         private void ValidValuesFillLessThan()
         {
-            int index = paf_ValidValues.IndexOf("<") + 1;
-            int location = paf_ValidValues.Length - index;
-            string maximumValueText = paf_ValidValues.Substring(index, location);
-            int maximumValue = Convert.ToInt32(maximumValueText);
-
-            Validvalues = new Tuple<int, int>(0, maximumValue - 1);
+            if (paf_ValidValues.Contains("<"))
+            {
+                int index = paf_ValidValues.IndexOf("<") + 1;
+                int location = paf_ValidValues.Length - index;
+                string maximumValueText = paf_ValidValues.Substring(index, location);
+                int maximumValue = Convert.ToInt32(maximumValueText);
+                Validvalues = new Tuple<int, int>(0, maximumValue - 1);
+            }
+            else if (paf_ValidValues.Contains(">"))
+            {
+                //needs to be worked on later
+            }
         }
         private void ValidValuesFillRange()
         {
@@ -462,9 +517,10 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private void ValidValuesFillRangeIncluding()
         {
             int index = paf_ValidValues.IndexOf(":") + 1;
+
             int location = paf_ValidValues.Length - index;
 
-            string minimumValueText = paf_ValidValues.Substring(0, location);
+            string minimumValueText = paf_ValidValues.Substring(0, index - 1);
             string maximumValueText = paf_ValidValues.Substring(index, location);
             int minimumValue = Convert.ToInt32(minimumValueText);
             int maximumValue = Convert.ToInt32(maximumValueText);
