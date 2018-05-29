@@ -1,15 +1,33 @@
 namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 {
+    using Dal.Repository.BusinessGlueCode;
+    using Dal.Repository.SQLServerRepository;
     using Interfaces;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using UI.ViewModels;
 
-    public partial class rop_RoutePars : IParameterObject
+    public partial class rop_RoutePars : ViewModelBase, IParameterObject
     {
+        private static RouteParameterBusiness db = new RouteParameterBusiness(new MSSQL_RouteParameterRepository());
+        private string _Value;
 
+        public rop_RoutePars()
+        { }
+
+        public rop_RoutePars(Route route, ParameterDefinition paramdef)
+        {
+            rop_ProcCellId = route.ProcesCell.ProcesCellId;
+            rop_RouteId = route.RouteId;
+            rop_ParNm = paramdef.paf_ParNm;
+            rop_ParDesc = paramdef.paf_ParDesc;
+            Value = paramdef.paf_DefValue;
+            rop_ParValueUOM = paramdef.paf_ParValueUOM;
+            rop_DisplayToUser = paramdef.paf_DisplayToUser;
+        }
 
 
         [Key]
@@ -31,8 +49,23 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         [StringLength(50)]
         public string rop_ParDesc { get; set; }
 
+        private static bool check = true;
         [StringLength(100)]
-        public string rop_ParValue { get; set; }
+        [Column("rop_ParValue")]
+        public string Value
+        {
+            get { return _Value; }
+            set
+            {
+                SetProperty(ref _Value, value);
+                if (check)
+                {
+                    check = false;
+                    DatabaseUpdate();
+                    check = true;
+                }
+            }
+        }
 
         [StringLength(50)]
         public string rop_ParValueUOM { get; set; }
@@ -42,48 +75,22 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         public string rop_DisplayToUser { get; set; }
 
         public virtual Route rot_Routes { get; set; }
+        public virtual ParameterDefinition ParameterDefinition { get; set; }
 
-        [NotMapped]
-        public ParameterDefinition ParameterDefinition
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        [NotMapped]
-        public string Value
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         public bool DatabaseInsert()
         {
-            throw new NotImplementedException();
+            return db.DatabaseInsert(this);
         }
 
         public bool DatabaseUpdate()
         {
-            throw new NotImplementedException();
+            return db.DatabaseUpdate(this);
         }
 
         public bool DatabaseDelete()
         {
-            throw new NotImplementedException();
+            return db.DatabaseDelete(this);
         }
     }
 }

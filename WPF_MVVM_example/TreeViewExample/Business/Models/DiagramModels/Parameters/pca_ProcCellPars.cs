@@ -92,6 +92,8 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 
         public bool DatabaseDelete()
         {
+            //sur_SubRoutes.sri_SubRoutesInRoutes.Remove(this);
+            //rot_Routes.SubrouteInRouteList.Remove(this);
             return db.DatabaseDelete(this);
         }
 

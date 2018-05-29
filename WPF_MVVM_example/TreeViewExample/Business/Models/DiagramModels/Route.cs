@@ -280,12 +280,23 @@ namespace TreeViewExample.Business.Models
 
         public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters()
         {
-            throw new NotImplementedException();
+            ObservableCollection<ParameterDefinition> ParameterDefinitionList = new ObservableCollection<ParameterDefinition>();
+            ParameterDefinitionList = db.GetAddAbleStandardParameters(this);
+            return ParameterDefinitionList;
         }
 
         public bool AddParameter(ParameterDefinition paramdefinition)
         {
-            throw new NotImplementedException();
+            rop_RoutePars procescellparameter = new rop_RoutePars(this, paramdefinition);
+            if (procescellparameter.DatabaseInsert())
+            {
+                procescellparameter.rot_Routes = this;
+                procescellparameter.ParameterDefinition = paramdefinition;
+
+                rop_RoutePars.Add(procescellparameter);
+                return true;
+            }
+            return false;
         }
 
 

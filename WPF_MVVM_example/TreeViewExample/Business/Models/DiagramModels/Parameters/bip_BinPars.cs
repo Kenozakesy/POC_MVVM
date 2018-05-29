@@ -6,13 +6,29 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System;
+    using Dal.Repository.BusinessGlueCode;
+    using Dal.Repository.SQLServerRepository;
+    using UI.ViewModels;
+    using Singletons;
 
-    public partial class bip_BinPars : IParameterObject
+    public partial class bip_BinPars : ViewModelBase, IParameterObject
     {
+        private static BinParameterBusiness db = new BinParameterBusiness(new MSSQL_BinParameterRepository());
+        private string _Value;
 
         public bip_BinPars()
         {
 
+        }
+
+        public bip_BinPars(Bin bin, ParameterDefinition paramdef)
+        {
+            bip_BinId = bin.bin_BinId;
+            bip_ParNm = paramdef.paf_ParNm;
+            bip_ParDesc = paramdef.paf_ParDesc;
+            Value = paramdef.paf_DefValue;
+            bip_ParValueUOM = paramdef.paf_ParValueUOM;
+            bip_DisplayToUser = paramdef.paf_DisplayToUser;
         }
 
         [Key]
@@ -29,8 +45,24 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         [StringLength(50)]
         public string bip_ParDesc { get; set; }
 
+
+        private static bool check = true;
         [StringLength(100)]
-        public string bip_ParValue { get; set; }
+        [Column("bip_ParValue")]
+        public string Value
+        {
+            get { return _Value; }
+            set
+            {
+                SetProperty(ref _Value, value);
+                if (check)
+                {
+                    check = false;
+                    DatabaseUpdate();
+                    check = true;
+                }
+            }
+        }
 
         [StringLength(50)]
         public string bip_ParValueUOM { get; set; }
@@ -40,48 +72,22 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         public string bip_DisplayToUser { get; set; }
 
         public virtual Bin bin_Bins { get; set; }
+        public virtual ParameterDefinition ParameterDefinition { get; set; }
 
-        [NotMapped]
-        public ParameterDefinition ParameterDefinition
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        [NotMapped]
-        public string Value
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         public bool DatabaseInsert()
         {
-            throw new NotImplementedException();
+            return db.DatabaseInsert(this);
         }
 
         public bool DatabaseUpdate()
         {
-            throw new NotImplementedException();
+            return db.DatabaseUpdate(this);
         }
 
         public bool DatabaseDelete()
         {
-            throw new NotImplementedException();
+            return db.DatabaseDelete(this);
         }
     }
 }

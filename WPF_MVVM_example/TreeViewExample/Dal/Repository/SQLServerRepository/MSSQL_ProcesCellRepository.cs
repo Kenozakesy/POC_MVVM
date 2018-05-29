@@ -14,7 +14,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
     public class MSSQL_ProcesCellRepository : IProcesCellRepository
     {
-    
         public bool DatabaseDelete(object obj)
         {
             ProcessCel cell = obj as ProcessCel;
@@ -87,6 +86,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             }
         }
 
+
+
+
         public List<ProcessCel> GetAllProcesCells()
         {
             List<ProcessCel> procescells = new List<ProcessCel>();
@@ -94,8 +96,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
-
-
                     var select = (from r in context.ProcesCells
                                   .Include(x => x.pca_ProcCellPars)
                                   .Include(x => x.pca_ProcCellPars.Select(z => z.prc_ProcCells))
@@ -108,6 +108,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.RouteList)
                                   .Include(x => x.RouteList.Select(z => z.rop_RoutePars))
                                   .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.rot_Routes)))
+                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition)))
+                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList)))
+
                                   .Include(x => x.RouteList.Select(z => z.pru_Procedures))
                                   .Include(x => x.RouteList.Select(z => z.pru_Procedures.rot_Routes))
 
@@ -121,9 +124,12 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes))
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins)))
+     
+                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars)))
+                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.bin_Bins))))
+                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition))))
+                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition.BinParametersList))))
 
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars)))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.bin_Bins))))
                                   //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks)))
                                   //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks.bin_Bins)))
                                   //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bib_BinBatches)))
@@ -149,7 +155,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             }
             return procescells;
         }
-
         public List<ParameterDefinition> GetAllParametersProcescell(ProcessCel cell)
         {
             List<ParameterDefinition> paramdefs = new List<ParameterDefinition>();

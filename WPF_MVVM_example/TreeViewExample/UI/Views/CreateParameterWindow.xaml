@@ -81,7 +81,7 @@
         </Style>
         
         <DataTemplate DataType="{x:Type that:ParameterDefinition}">
-            <Label Content="{Binding Path=ParName}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
+            <Label Content="{Binding Path=paf_ParNm}" BorderBrush="{Binding Path=Brush}" BorderThickness="5 0 0 0" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}"  Style="{StaticResource MyLabelStyle}">
 
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">

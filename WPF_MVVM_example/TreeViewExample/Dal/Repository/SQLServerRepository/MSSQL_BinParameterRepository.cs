@@ -9,17 +9,17 @@ using TreeViewExample.Dal.Repository.Interfaces;
 
 namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
-    class MSSQL_ProcescellParameterRepository : IProcescellParameterRepository
+    public class MSSQL_BinParameterRepository : IBinParameterRepository
     {
         public bool DatabaseDelete(object obj)
         {
-            pca_ProcCellPars cellparameter = obj as pca_ProcCellPars;
+            bip_BinPars binparameter = obj as bip_BinPars;
             using (var context = new UniContext())
             {
                 try
                 {
-                    context.ProcescellParameters.Attach(cellparameter);
-                    context.ProcescellParameters.Remove(cellparameter);
+                    context.BinParameters.Attach(binparameter);
+                    context.BinParameters.Remove(binparameter);
 
                     context.SaveChanges();
                     return true;
@@ -34,12 +34,12 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseInsert(object obj)
         {
-            pca_ProcCellPars cellparameter = obj as pca_ProcCellPars;
+            bip_BinPars binparameter = obj as bip_BinPars;
             using (var context = new UniContext())
             {
                 try
                 {
-                    context.ProcescellParameters.Add(cellparameter);
+                    context.BinParameters.Add(binparameter);
                     context.SaveChanges();
                     return true;
                 }
@@ -53,13 +53,13 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseUpdate(object obj)
         {
-            pca_ProcCellPars procescellParameter = obj as pca_ProcCellPars;
+            bip_BinPars binparameter = obj as bip_BinPars;
             using (var context = new UniContext())
             {
                 try
                 {
-                    var entry = context.ProcescellParameters.Find(procescellParameter.pca_ProcCellId, procescellParameter.pca_ParNm);
-                    context.Entry(entry).CurrentValues.SetValues(procescellParameter);
+                    var entry = context.BinParameters.Find(binparameter.bip_BinId, binparameter.bip_ParNm);
+                    context.Entry(entry).CurrentValues.SetValues(binparameter);
 
                     context.SaveChanges();
 

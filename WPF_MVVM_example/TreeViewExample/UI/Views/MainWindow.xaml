@@ -36,25 +36,6 @@
                     <Setter Property="Foreground" Value="Black"/>
                 </Trigger>
 
-                <!--#region Colour triggers-->
-
-                <!--is usefull is you want to edit all colours directly on screen. but it has the least amount of functionality-->
-
-                <!--<DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.Valid}" >
-                    <Setter Property="BorderBrush" Value="LightGreen"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.InValid}" >
-                    <Setter Property="BorderBrush" Value="Red"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.NotConnected}" >
-                    <Setter Property="BorderBrush" Value="Bisque"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=IsValid}" Value="{x:Static enums:IsValidated.InValidChildren}" >
-                    <Setter Property="BorderBrush" Value="Orange"/>
-                </DataTrigger>-->
-
-                <!--#endregion-->
-
                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem,AncestorLevel=1}, Path=IsMouseOver}" Value="True" >
                     <Setter Property="Background" Value="{Binding Path=Brush,  Converter={x:Static local:MyCloneConverter.Instance}}"/>
 

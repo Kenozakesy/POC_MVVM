@@ -21,6 +21,16 @@
             <Setter Property="MinHeight" Value="20" />
             <Setter Property="Margin" Value="0 5 0 0" />
         </Style>
+        <Style x:Key="ButtonAddStyle" TargetType="Button">
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="Margin" Value="0 5 0 0" />
+            <Setter Property="IsEnabled" Value="true" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SelectedStandardParameter}" Value="{x:Null}" >
+                    <Setter Property="IsEnabled" Value="False" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="GridViewColumnHeader" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
@@ -44,8 +54,7 @@
             <Setter Property="ContextMenu">
                 <Setter.Value>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="Delete" Command="{Binding Tag.DataContext.RemoveParameterCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
-                        <MenuItem Header="Not implemented" />
+                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.RemoveParameterFromObjectCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
                     </ContextMenu>
                 </Setter.Value>
             </Setter>
@@ -57,12 +66,12 @@
 
         <DataTemplate x:Key="NumericTemplate" DataType="{x:Type that:IParameterObject}">
             <Grid>
-                <TextBox Text="{Binding Path=Value}" Width="50" IsEnabled="False"/>
+                <TextBox Text="{Binding Path=Value}" />
             </Grid>
         </DataTemplate>
 
         <DataTemplate x:Key="TextTemplate" DataType="{x:Type that:IParameterObject}">
-            <TextBox Text="{Binding Path=Value}" Width="50"/>
+            <TextBox Text="{Binding Path=Value}" MinWidth="50"/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type dia:ParameterDefinition}">
@@ -141,7 +150,7 @@
                 <StackPanel Grid.Row="0" Margin="8" Orientation="Vertical">
                     <Label>Parameters</Label>
                     <ComboBox Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Path=AvailableStandardParameters}" SelectedItem="{Binding Path=SelectedStandardParameter}"></ComboBox>
-                    <Button Style="{StaticResource TextboxStyle}" Margin="0 5 0 20" Command="{Binding Path=AddParameterToObjectCommand}">Add</Button>
+                    <Button Style="{StaticResource ButtonAddStyle}" Margin="0 5 0 20" Command="{Binding Path=AddParameterToObjectCommand}">Add</Button>
 
                     <Label>Customer Parameters</Label>
                     <ComboBox></ComboBox>

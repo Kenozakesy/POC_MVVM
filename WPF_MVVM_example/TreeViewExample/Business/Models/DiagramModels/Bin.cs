@@ -353,12 +353,23 @@ namespace TreeViewExample.Business.Models
 
         public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters()
         {
-            throw new NotImplementedException();
+            ObservableCollection<ParameterDefinition> ParameterDefinitionList = new ObservableCollection<ParameterDefinition>();
+            ParameterDefinitionList = db.GetAddAbleStandardParameters(this);
+            return ParameterDefinitionList;
         }
 
         public bool AddParameter(ParameterDefinition paramdefinition)
         {
-            throw new NotImplementedException();
+            bip_BinPars binparameter = new bip_BinPars(this, paramdefinition);
+            if (binparameter.DatabaseInsert())
+            {
+                binparameter.bin_Bins = this;
+                binparameter.ParameterDefinition = paramdefinition;
+
+                bip_BinPars.Add(binparameter);
+                return true;
+            }
+            return false;
         }
 
 

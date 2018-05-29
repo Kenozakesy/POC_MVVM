@@ -22,6 +22,8 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private static ParameterDefinitionBusiness db = new ParameterDefinitionBusiness(new MSSQL_ParameterDefinitionRepository());
 
         private ObservableCollection<pca_ProcCellPars> _ProcesCellParametersList = new ObservableCollection<pca_ProcCellPars>();
+        private ObservableCollection<rop_RoutePars> _RouteParametersList = new ObservableCollection<rop_RoutePars>();
+        private ObservableCollection<bip_BinPars> _BinParametersList = new ObservableCollection<bip_BinPars>();
 
 
         #region Fields
@@ -33,7 +35,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
         private List<string> _ValidvaluesCombobox = new List<string>();
         private Tuple<int, int> _ValidValues;
 
-
+        //these fields might be useless
         //Necessary variables
         private string _ParName;
         private string _Description;
@@ -177,9 +179,20 @@ namespace TreeViewExample.Business.Models.DiagramModels
             set { SetProperty(ref _ProcesCellParametersList, value); }
         }
 
+        public virtual ObservableCollection<rop_RoutePars> RouteParametersList
+        {
+            get { return _RouteParametersList; }
+            set { SetProperty(ref _RouteParametersList, value); }
+        }
+        public virtual ObservableCollection<bip_BinPars> BinParametersList
+        {
+            get { return _BinParametersList; }
+            set { SetProperty(ref _BinParametersList, value); }
+        }
+
         public virtual ObservableCollection<tpm_TableParMaps> tpm_TableParMaps { get; set; }
         public virtual ObservableCollection<pat_ParTables> pat_ParTables { get; set; }
-
+     
 
         [Key]
         [StringLength(50)]

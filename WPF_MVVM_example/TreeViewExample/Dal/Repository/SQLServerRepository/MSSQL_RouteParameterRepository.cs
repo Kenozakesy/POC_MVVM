@@ -9,17 +9,17 @@ using TreeViewExample.Dal.Repository.Interfaces;
 
 namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
-    class MSSQL_ProcescellParameterRepository : IProcescellParameterRepository
+    public class MSSQL_RouteParameterRepository : IRouteParameterRepository
     {
         public bool DatabaseDelete(object obj)
         {
-            pca_ProcCellPars cellparameter = obj as pca_ProcCellPars;
+            rop_RoutePars routeparameter = obj as rop_RoutePars;
             using (var context = new UniContext())
             {
                 try
                 {
-                    context.ProcescellParameters.Attach(cellparameter);
-                    context.ProcescellParameters.Remove(cellparameter);
+                    context.RouteParameters.Attach(routeparameter);
+                    context.RouteParameters.Remove(routeparameter);
 
                     context.SaveChanges();
                     return true;
@@ -34,12 +34,12 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseInsert(object obj)
         {
-            pca_ProcCellPars cellparameter = obj as pca_ProcCellPars;
+            rop_RoutePars routeparameter = obj as rop_RoutePars;
             using (var context = new UniContext())
             {
                 try
                 {
-                    context.ProcescellParameters.Add(cellparameter);
+                    context.RouteParameters.Add(routeparameter);
                     context.SaveChanges();
                     return true;
                 }
@@ -53,13 +53,13 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseUpdate(object obj)
         {
-            pca_ProcCellPars procescellParameter = obj as pca_ProcCellPars;
+            rop_RoutePars routeparameter = obj as rop_RoutePars;
             using (var context = new UniContext())
             {
                 try
                 {
-                    var entry = context.ProcescellParameters.Find(procescellParameter.pca_ProcCellId, procescellParameter.pca_ParNm);
-                    context.Entry(entry).CurrentValues.SetValues(procescellParameter);
+                    var entry = context.RouteParameters.Find(routeparameter.rop_ProcCellId, routeparameter.rop_RouteId, routeparameter.rop_ParNm);
+                    context.Entry(entry).CurrentValues.SetValues(routeparameter);
 
                     context.SaveChanges();
 

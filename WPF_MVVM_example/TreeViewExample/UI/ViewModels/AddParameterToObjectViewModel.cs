@@ -81,10 +81,10 @@ namespace TreeViewExample.UI.ViewModels
 
         #region ItemHandlers
 
-        private void RemoveParameter(IParameterObject parameter)
+        private void RemoveParameterFromObject(IParameterObject parameter)
         {
-            ParameterList.Remove(parameter);
-            //ParameterObject.RemoveParameter(parameter);
+            parameter.DatabaseDelete();
+            InitializeParameters();
         }
         private void FinishEditing()
         {
@@ -93,6 +93,7 @@ namespace TreeViewExample.UI.ViewModels
         private void OpenCreateParameterWindow()
         {
             _IAddParameterToObjectView.OpenCreateParameterWindow();
+            InitializeParameters();
         }
         private void AddParameterToObject()
         {
@@ -106,16 +107,17 @@ namespace TreeViewExample.UI.ViewModels
 
         private void InitializeCommand()
         {
-            RemoveParameterCommand = new RelayCommandT1<IParameterObject>(RemoveParameter);
             FinishEditingCommand = new RelayCommand(FinishEditing);
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
             AddParameterToObjectCommand = new RelayCommand(AddParameterToObject);
+            RemoveParameterFromObjectCommand = new RelayCommandT1<IParameterObject>(RemoveParameterFromObject);
         }
 
         public ICommand RemoveParameterCommand { get; set; }
         public ICommand FinishEditingCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }
         public ICommand AddParameterToObjectCommand { get; set; }
+        public ICommand RemoveParameterFromObjectCommand { get; set; }
 
         #endregion
 

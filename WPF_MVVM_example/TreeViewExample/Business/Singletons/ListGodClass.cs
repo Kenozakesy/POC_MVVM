@@ -34,8 +34,6 @@ namespace TreeViewExample.Business.Singletons
             GetBinsFromDatabase();
 
             //validateAll()
-
- 
         }
 
         public static ListGodClass Instance

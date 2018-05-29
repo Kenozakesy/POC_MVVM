@@ -8,6 +8,7 @@ using TreeViewExample.Dal.EntityFramework;
 using TreeViewExample.Dal.Repository.Interfaces;
 using System.Data.Entity;
 using TreeViewExample.Business.Singletons;
+using TreeViewExample.Business.Models.DiagramModels;
 
 namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
@@ -61,6 +62,29 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             }
         }
 
+        public List<ParameterDefinition> GetAddAbleStandardParameters()
+        {
+            List<ParameterDefinition> paramdefs = new List<ParameterDefinition>();
+            using (var context = new UniContext())
+            {
+                try
+                {
+                    var select = (from r in context.ParameterDefinitions
+                                  join x in context.tpm_TableParMaps on r.paf_ParNm equals x.tpm_ParNm
+                                  join p in context.pat_ParTables on x.tpm_TableId equals p.pat_TableId
+                                  where p.pat_TableId == "bip_BinPars"
+                                  && r.paf_IsStandardPar == true
+                                  select r);
+                    paramdefs = select.ToList();
+                }
+                catch (Exception)
+                {
+                    context.Dispose();
+                }
+            }
+            return paramdefs;
+        }
+
         public List<Bin> GetAllBins()
         {
             List<Bin> bins = new List<Bin>();
@@ -73,6 +97,12 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                     var select = (from r in context.Bins
                                   .Where(x => !binIds.Contains(x.bin_BinId))
                                   .Include(x => x.bir_BinsInSubRoutes)
+
+                                  .Include(x => x.bip_BinPars)
+                                  .Include(x => x.bip_BinPars.Select(y => y.bin_Bins))
+
+                                  //.Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition))
+                                  //.Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition.BinParametersList))
 
                                   .Include(x => x.bis_BinStocks)
                                   .Include(x => x.bis_BinStocks.bin_Bins)

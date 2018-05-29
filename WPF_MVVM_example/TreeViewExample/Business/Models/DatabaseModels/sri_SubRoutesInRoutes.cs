@@ -73,10 +73,6 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             sur_SubRoutes.ChangeColor();
         }
 
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
 
         public void DeleteChild(IConfigObject obj)
         {

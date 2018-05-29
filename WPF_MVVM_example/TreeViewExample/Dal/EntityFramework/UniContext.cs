@@ -23,6 +23,9 @@ namespace TreeViewExample.Dal.EntityFramework
 
         public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
         public DbSet<pca_ProcCellPars> ProcescellParameters { get; set; }
+        public DbSet<rop_RoutePars> RouteParameters { get; set; }
+        public DbSet<bip_BinPars> BinParameters { get; set; }
+
         public DbSet<tpm_TableParMaps> tpm_TableParMaps { get; set; }
         public DbSet<pat_ParTables> pat_ParTables { get; set; }
         public DbSet<pac_ParDefsProcCellTypes> pac_ParDefsProcCellTypes { get; set; }
@@ -131,12 +134,6 @@ namespace TreeViewExample.Dal.EntityFramework
                 .HasForeignKey(e => e.pca_ProcCellId)
                 .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<prt_ProcedureTypes>()
-            // .HasMany(e => e.pru_Procedures)
-            // .WithRequired(e => e.prt_ProcedureTypes)
-            // .HasForeignKey(e => e.pru_ProcedureTypeId)
-            // .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<pru_Procedures>()
                 .HasMany(e => e.oar_OARcps)
                 .WithRequired(e => e.pru_Procedures)
@@ -154,11 +151,18 @@ namespace TreeViewExample.Dal.EntityFramework
                    .HasForeignKey(e => e.pca_ParNm)
                    .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<ParameterDefinition>()
-            //       .HasMany(e => e.ProcesCellParametersList)
-            //       .WithRequired(e => e.ProcesCellParametersList)
-            //       .HasForeignKey(e => e.pca_ParNm)
-            //       .WillCascadeOnDelete(false);
+            modelBuilder.Entity<rop_RoutePars>()
+                .HasRequired(e => e.ParameterDefinition)
+                .WithMany(e => e.RouteParametersList)
+                .HasForeignKey(e => e.rop_ParNm)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<bip_BinPars>()
+                .HasRequired(e => e.ParameterDefinition)
+                .WithMany(e => e.BinParametersList)
+                .HasForeignKey(e => e.bip_ParNm)
+                .WillCascadeOnDelete(false);
+
         }
 
 
