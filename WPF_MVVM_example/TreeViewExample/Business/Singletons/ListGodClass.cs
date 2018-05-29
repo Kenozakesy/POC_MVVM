@@ -31,9 +31,12 @@ namespace TreeViewExample.Business.Singletons
         {
             AddProcesCells();
             GetAllParameterDefinitions();
-            GetBinsFromDatabase();
+
+            //GetBinsFromDatabase();
 
             //validateAll()
+
+            ReorderAllLists();
         }
 
         public static ListGodClass Instance
@@ -76,11 +79,16 @@ namespace TreeViewExample.Business.Singletons
         private void GetAllParameterDefinitions()
         {
             ParameterDefinition.GetAllParametersDefinitions();
-
             foreach (ParameterDefinition paf in ParameterDefinitionList)
             {
                 paf.ConvertValidValues();
             }
+        }
+
+        private void ReorderAllLists()
+        {
+            ParameterDefinitionList = new ObservableCollection<ParameterDefinition>(ParameterDefinitionList.OrderByDescending(i => i));
+            BinList = new ObservableCollection<Bin>(BinList.OrderByDescending(i => i));
         }
 
 

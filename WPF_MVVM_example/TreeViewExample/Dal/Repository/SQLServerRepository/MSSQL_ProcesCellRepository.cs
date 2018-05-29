@@ -9,6 +9,7 @@ using TreeViewExample.Dal.Repository.Interfaces;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using TreeViewExample.Business.Models.DiagramModels;
+using System.Windows.Media;
 
 namespace TreeViewExample.Dal.Repository.SQLServerRepository
 {
@@ -125,10 +126,10 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes))
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins)))
      
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars)))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.bin_Bins))))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition))))
-                                  .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition.BinParametersList))))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars)))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.bin_Bins))))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition))))
+                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition.BinParametersList))))
 
                                   //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks)))
                                   //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks.bin_Bins)))
@@ -144,9 +145,8 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes.Select(z => z.Unit)))
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes.Select(z => z.Unit.uis_UnitsInSubRoutes.Select(s => s.sur_SubRoutes))))
                                   select r);
-
-                    var sql = select.ToString();
                     procescells = select.ToList();
+
                 }
                 catch (Exception)
                 {

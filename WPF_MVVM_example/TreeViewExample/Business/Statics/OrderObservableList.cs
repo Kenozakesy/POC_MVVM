@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TreeViewExample.Business.Statics
 {
-    public static class OrderObservableList
+    public static class OrderObservableList 
     {
         public static void AddSorted<T>(this IList<T> list, T item, IComparer<T> comparer = null)
         {
@@ -21,5 +21,7 @@ namespace TreeViewExample.Business.Statics
             }
             list.Insert(i, item);
         }
+
+   
     }
 }
