@@ -98,8 +98,8 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Where(x => !binIds.Contains(x.bin_BinId))
                                   .Include(x => x.bir_BinsInSubRoutes)
 
-                                  //.Include(x => x.bip_BinPars)
-                                  //.Include(x => x.bip_BinPars.Select(y => y.bin_Bins))
+                                  .Include(x => x.bip_BinPars)
+                                  .Include(x => x.bip_BinPars.Select(y => y.bin_Bins))
 
                                   //.Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition))
                                   //.Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition.BinParametersList))

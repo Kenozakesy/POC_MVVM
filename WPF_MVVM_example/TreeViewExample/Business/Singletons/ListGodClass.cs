@@ -31,7 +31,6 @@ namespace TreeViewExample.Business.Singletons
         {
             AddProcesCells();
             GetAllParameterDefinitions();
-
             //GetBinsFromDatabase();
 
             //validateAll()

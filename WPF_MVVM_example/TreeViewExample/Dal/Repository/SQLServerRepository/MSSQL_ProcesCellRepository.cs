@@ -125,27 +125,33 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes))
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins)))
-     
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars)))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.bin_Bins))))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition))))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bip_BinPars.Select(s => s.ParameterDefinition.BinParametersList))))
-
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks)))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bis_BinStocks.bin_Bins)))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bib_BinBatches)))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bib_BinBatches.Select(s => s.bin_Bins))))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.tbb_TempBinBatches)))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.tbb_TempBinBatches.Select(s => s.bin_Bins))))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.pri_PropIns)))
-                                  //.Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.pri_PropIns.Select(s => s.bin_Bins))))
-
                                   .Include(x => x.SubrouteList.Select(y => y.bir_BinsInSubRoutes.Select(z => z.bin_Bins.bir_BinsInSubRoutes.Select(s => s.sur_SubRoutes))))
+
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes))
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes.Select(z => z.Unit)))
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes.Select(z => z.Unit.uis_UnitsInSubRoutes.Select(s => s.sur_SubRoutes))))
                                   select r);
                     procescells = select.ToList();
+
+                    var query = (from r in context.Bins
+                            .Include(x => x.bip_BinPars)
+                            .Include(x => x.bip_BinPars.Select(y => y.bin_Bins))
+                            .Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition))
+                            .Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition.BinParametersList))
+                            .Include(z => z.bis_BinStocks)
+                            .Include(z => z.bis_BinStocks.bin_Bins)
+                            .Include(z => z.bib_BinBatches)
+                            .Include(z => z.bib_BinBatches.Select(s => s.bin_Bins))
+                            .Include(z => z.tbb_TempBinBatches)
+                            .Include(z => z.tbb_TempBinBatches.Select(s => s.bin_Bins))
+                            .Include(z => z.pri_PropIns)
+                            .Include(z => z.pri_PropIns.Select(s => s.bin_Bins))
+
+                            .Include(z => z.bir_BinsInSubRoutes)
+                                 select r);
+                    List<Bin> bins = query.ToList();
+
+                    //hier moet nog iets komen voor de parameterdefinities
 
                 }
                 catch (Exception)

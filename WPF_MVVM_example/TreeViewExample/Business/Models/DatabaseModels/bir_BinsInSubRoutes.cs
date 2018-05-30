@@ -97,6 +97,8 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         public int CompareTo(object obj)
         {
             bir_BinsInSubRoutes binInSubroute = obj as bir_BinsInSubRoutes;
+
+
             return binInSubroute.bin_Bins.CompareTo(bin_Bins);
         }
 
