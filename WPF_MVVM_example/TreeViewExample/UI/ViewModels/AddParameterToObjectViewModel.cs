@@ -74,6 +74,7 @@ namespace TreeViewExample.UI.ViewModels
         {
             ParameterList = ParameterObject.GetParameterList();
             AvailableStandardParameters = ParameterObject.GetAddAbleStandardParameters();
+            ParameterObject.Validate();
         }
 
 

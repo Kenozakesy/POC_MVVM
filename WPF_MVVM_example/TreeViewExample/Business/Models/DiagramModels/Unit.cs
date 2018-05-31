@@ -114,45 +114,6 @@ namespace TreeViewExample.Business.Models
             }
         }
 
-        public void Delete()
-        {
-            //List<Bin> removableBins = new List<Bin>();
-            //foreach (Bin B in BinList)
-            //{
-            //    removableBins.Add(B);
-            //}
-            //foreach (Bin B in removableBins)
-            //{
-            //    B.SetSubroute();
-            //    BinList.Remove(B);
-            //}
-
-            //this._Subroute.DeleteChild(this);
-        }
-
-
-
-        public void DeleteBin(Bin bin)
-        {
-            foreach (Bin B in BinList)
-            {
-                if (B == bin)
-                {
-                    BinList.Remove(B);
-                    break;
-                }
-            }
-        }
-
-        public void DeleteChild(IConfigObject obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreateChild()
-        {
-            throw new NotImplementedException();
-        }
 
         public int CompareTo(object obj)
         {
@@ -178,7 +139,7 @@ namespace TreeViewExample.Business.Models
             return configList;
         }
 
-        public void Validate()
+        public List<string> Validate()
         {
             int newRan = ran.Next(0, 10);
             if (newRan >= 8)
@@ -189,6 +150,7 @@ namespace TreeViewExample.Business.Models
             {
                 _Brush = Brushes.LightGreen;
             }
+            return new List<string>();
         }
 
         public string GetName()

@@ -227,7 +227,7 @@ namespace TreeViewExample.Business.Models
             return configList;
         }
 
-        public void Validate()
+        public List<string> Validate()
         {
             int newRan = ran.Next(0, 10);
             if (newRan >= 8)
@@ -238,7 +238,8 @@ namespace TreeViewExample.Business.Models
             {
                 _Brush = Brushes.LightGreen;
             }
-
+            return new List<string>();
+            
         }
         public string GetName()
         {

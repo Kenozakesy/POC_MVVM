@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
@@ -113,6 +115,16 @@ namespace TreeViewExample
             ((SetBinsViewModel)window.DataContext).Subroute = subroute;
             ((SetBinsViewModel)window.DataContext).GetSourceDestinationLists();
             window.ShowDialog();
+        }
+
+        public void OpenValidationMessageBox(List<string> parameterList)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (string nm in parameterList)
+            {
+                builder.Append("-" + nm + Environment.NewLine);
+            }
+            MessageBox.Show("one or more parameters are missing" + Environment.NewLine + Environment.NewLine + builder.ToString());
         }
     }
 }

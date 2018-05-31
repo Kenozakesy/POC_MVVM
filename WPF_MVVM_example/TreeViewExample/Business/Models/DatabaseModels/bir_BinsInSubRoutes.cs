@@ -84,7 +84,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             throw new NotImplementedException();
         }
 
-        public void Validate()
+        public List<string> Validate()
         {
             throw new NotImplementedException();
         }

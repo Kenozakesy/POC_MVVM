@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models;
@@ -18,5 +19,7 @@ namespace WPF_MVVM_example.UI.Interfaces
         void OpenEditSubrouteWindow(Route route);
         void OpenCreateSubrouteWindow(ProcessCel processcel);
         void OpenSetBinsWindow(SubRoute subroute);
+
+        void OpenValidationMessageBox(List<string> parameterList);
     }
 }

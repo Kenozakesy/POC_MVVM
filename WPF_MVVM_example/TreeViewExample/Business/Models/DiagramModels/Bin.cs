@@ -23,7 +23,7 @@ using TreeViewExample.UI.ViewModels;
 namespace TreeViewExample.Business.Models
 {
     [Table("bin_Bins")]
-    public class Bin : ViewModelBase, IConfigObject, IObjectWithParameters, IEquatable<Bin>
+    public class Bin : ViewModelBase, IConfigObject, IEquatable<Bin>
     {
         private static BinBusiness db = new BinBusiness(new MSSQL_BinRepository());
 
@@ -214,17 +214,14 @@ namespace TreeViewExample.Business.Models
             }
             return false;
         }
-
-        public void Validate()
+        public void AddRequiredParameters()
         {
-            if (_BinInSubRouteList.Count == 0)
-            {
-                IsValid = IsValidated.NotConnected;
-            }
-            else
-            {
-                IsValid = IsValidated.Valid;
-            }
+           throw new NotImplementedException();
+        }
+
+        public List<string> Validate()
+        {
+            throw new NotImplementedException();
         }
         private void SetColor()
         {
@@ -343,10 +340,7 @@ namespace TreeViewExample.Business.Models
             return ParameterDefinitionList;
         }
 
-        public void AddRequiredParameters()
-        {
-            throw new NotImplementedException();
-        }
+
 
 
 

@@ -105,7 +105,8 @@
                         <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
                         <Separator />
                         <MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Validate"/>
+                        <MenuItem Header="Validate" Command="{Binding Tag.DataContext.ValidateObjectCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
+                        
 
 
                     </ContextMenu>
@@ -247,37 +248,6 @@
 
             </Label>
         </DataTemplate>
-
-        <!--<DataTemplate DataType="{x:Type proctype:ProcesCellType}">
-            
-            <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}" Visibility="Collapsed">
-                <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteCustomerParameterCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding }"/>
-                <MenuItem Header="Edit" CommandParameter="{Binding}" />
-            </ContextMenu>
-            
-        </DataTemplate>-->
-
-        <!-- these templates are probably useless-->
-        <!--<HierarchicalDataTemplate  ItemsSource="{Binding Path=BinList}" DataType="{x:Type this:SubRoute}">
-            <Label Content="{Binding Path=SubRouteName}" ContentStringFormat="Subroute: {0}"  Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyle}">
-                <Label.ContextMenu>
-                    <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
-
-                        <MenuItem Header="Create Unit"  Command="{Binding Tag.DataContext.CreateObjectClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Change Color" Command="{Binding Tag.DataContext.ChangeColorClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Remove" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
-
-                    </ContextMenu>
-                </Label.ContextMenu>
-
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown" >
-                        <i:InvokeCommandAction Command="{Binding Tag.DataContext.ShowPropInListCommand, RelativeSource={RelativeSource AncestorType=Label}}" CommandParameter="{Binding }"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Label>
-        </HierarchicalDataTemplate>-->
-    
 
 
     </Window.Resources>

@@ -9,7 +9,7 @@ using TreeViewExample.Business.Models.DiagramModels.Parameters;
 
 namespace TreeViewExample.Business.Interfaces
 {
-    public interface IObjectWithParameters
+    public interface IObjectWithParameters : IConfigObject
     {
         string GetName();
         ObservableCollection<IParameterObject> GetParameterList();

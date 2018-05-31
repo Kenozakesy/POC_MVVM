@@ -119,15 +119,6 @@ namespace TreeViewExample.UI.ViewModels
                 configObject.ChangeColor();
             }
         }
-        private void RemoveBinFromSubroute(Bin bin)
-        {
-            //string text = "Remove bin from " + bin.Unit.Name + "?";
-            //string title = "Remove bin?";
-            //if (_TreeView.ConfirmMessage(title, text))
-            //{
-            //    bin.SetSubroute();
-            //}
-        }
         private void ShowPropInList(IConfigObject obj)
         {
             //ListView.Clear();
@@ -137,6 +128,20 @@ namespace TreeViewExample.UI.ViewModels
             //    ListView.Add(ML);
             //}        
         }
+        private void ValidateObject(IConfigObject obj)
+        {
+            List<string> wrongParameterList = obj.Validate();
+            if (wrongParameterList.Count > 0)
+            {
+                _TreeView.OpenValidationMessageBox(wrongParameterList);
+            }
+            else
+            {
+                _TreeView.ShowMessage("Object is valid");
+            }
+        }
+
+
         private void OpenParameterSheetWindow()
         {
             _TreeView.OpenParameterSheetWindow();
@@ -181,6 +186,8 @@ namespace TreeViewExample.UI.ViewModels
             DeleteClickCommand = new RelayCommandT1<IConfigObject>(DeleteClick);
             ChangeColorClickCommand = new RelayCommandT1<IConfigObject>(ChangeColorClick);
             ShowPropInListCommand = new RelayCommandT1<IConfigObject>(ShowPropInList);
+            ValidateObjectCommand = new RelayCommandT1<IConfigObject>(ValidateObject);
+
             OpenParameterSheetWindowCommand = new RelayCommand(OpenParameterSheetWindow);
             OpenCreateProcesCellWindowCommand = new RelayCommandT1<ProcesCellType>(OpenCreateProcesCell);
             OpenCreateRouteWindowCommand = new RelayCommandT1<ProcessCel>(OpenCreateRouteWindow);
@@ -194,6 +201,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand DeleteClickCommand { get; set; }
         public ICommand ChangeColorClickCommand { get; set; }
         public ICommand ShowPropInListCommand { get; set; }
+        public ICommand ValidateObjectCommand { get; set; }
 
         public ICommand OpenParameterSheetWindowCommand { get; set; }
         public ICommand OpenCreateParameterWindowCommand { get; set; }

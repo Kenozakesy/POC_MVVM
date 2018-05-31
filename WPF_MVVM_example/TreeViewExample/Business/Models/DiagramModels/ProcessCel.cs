@@ -22,7 +22,7 @@ using TreeViewExample.UI.ViewModels;
 namespace TreeViewExample.Business.Models
 {
     [Table("prc_ProcCells")]
-    public class ProcessCel : ViewModelBase, IConfigObject, IObjectWithParameters
+    public class ProcessCel : ViewModelBase, IObjectWithParameters
     {
         private static ProcesCellBusiness db = new ProcesCellBusiness(new MSSQL_ProcesCellRepository());
 
@@ -107,6 +107,7 @@ namespace TreeViewExample.Business.Models
         public virtual ObservableCollection<pca_ProcCellPars> pca_ProcCellPars { get; set; }
         public virtual ObservableCollection<opc_OAProcCellDefs> opc_OAProcCellDefs { get; set; }
 
+        
         [NotMapped]
         public ProcesCellType ProcesCellType
         {
@@ -130,7 +131,11 @@ namespace TreeViewExample.Business.Models
         public IsValidated IsValid
         {
             get { return _Isvalid; }
-            set { SetProperty(ref _Isvalid, value); }
+            set
+            {
+                SetProperty(ref _Isvalid, value);
+                ChangeColor();
+            }
         }
         [NotMapped]
         public bool BatchOptionsP
@@ -274,13 +279,11 @@ namespace TreeViewExample.Business.Models
         {
             List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
             List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !pca_ProcCellPars.Any(x => x.ParameterDefinition == y)).ToList();
-
             foreach (ParameterDefinition PD in ParameterDefinitionsNotInObject)
             {
                 AddParameter(PD);
             }
         }
-
         public void AddNewSubroute()
         {
             List<int> subRouteIds = new List<int>();
@@ -358,35 +361,39 @@ namespace TreeViewExample.Business.Models
                 BatchOptions += "R";
             }
         }
+
         public void ChangeColor()
         {
-            if (_Brush == Brushes.Red)
+            switch (IsValid)
             {
-                Brush = Brushes.LightGreen;
+                case IsValidated.Valid:
+                    Brush = Brushes.LightGreen;
+                    break;
+                case IsValidated.InValid:
+                    Brush = Brushes.Red;
+                    break;
+                case IsValidated.InValidChildren:
+                    Brush = Brushes.Orange;
+                    break;
+            }
+        }
+        public List<string> Validate()
+        {
+            List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
+            List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !pca_ProcCellPars.Any(x => x.ParameterDefinition == y)).ToList();
+
+            if (ParameterDefinitionsNotInObject.Count > 0)
+            {
+                IsValid = IsValidated.InValid;
             }
             else
             {
-                Brush = Brushes.Red;
+                IsValid = IsValidated.Valid;
             }
+
+            return new List<string>(ParameterDefinitionsNotInObject.Select(x => x.paf_ParNm));
         }
 
-        public void DeleteChild(IConfigObject obj)
-        {
-            Route route = obj as Route;
-            foreach (Route U in RouteList)
-            {
-                if (U.Equals(route))
-                {
-                    RouteList.Remove(route);
-                    break;
-                }
-            }
-        }
-        public void CreateChild()
-        {
-            Route route = new Route("R" + 1, 1, 1, this);
-            RouteList.Add(route);
-        }
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
@@ -406,18 +413,7 @@ namespace TreeViewExample.Business.Models
             return configList;
         }
   
-        public void Validate()
-        {
-            int newRan = ran.Next(0, 10);
-            if (newRan >= 8)
-            {
-                _Brush = Brushes.Red;
-            }
-            else
-            {
-                _Brush = Brushes.LightGreen;
-            }
-        }
+
         public static ObservableCollection<ProcessCel> GetAllProcesCells()
         {
              return db.GetAllProcesCells();

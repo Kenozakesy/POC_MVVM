@@ -154,14 +154,9 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
-        /// <summary>
-        /// When creating a new parameter add the required parameters. but does not insert them in the database directly
-        /// </summary>
-        private void AddRequiredParameters()
+        private void AddRequiredParametersToNewRoute()
         {
-            List<string> requiredParamNames = db.GetAllRequiredParameterDefinitionNames(this);
-            List<ParameterDefinition> requiredParameters = ListGodClass.Instance.ParameterDefinitionList.Where(x => requiredParamNames.Any(y => y == x.paf_ParNm)).ToList();
-
+            List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
             foreach (ParameterDefinition PD in requiredParameters)
             {
                 rop_RoutePars procescellparameter = new rop_RoutePars(this, PD);
@@ -177,6 +172,16 @@ namespace TreeViewExample.Business.Models
                 return true;
             }
             return false;
+        }
+
+        public void AddRequiredParameters()
+        {
+            List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
+            List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !rop_RoutePars.Any(x => x.ParameterDefinition == y)).ToList();
+            foreach (ParameterDefinition PD in ParameterDefinitionsNotInObject)
+            {
+                AddParameter(PD);
+            }
         }
 
         public bool AddSubroute(SubRoute subroute)
@@ -224,27 +229,7 @@ namespace TreeViewExample.Business.Models
                 Brush = Brushes.Red;
             }
         }
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
-        public void DeleteChild(IConfigObject obj)
-        {
-            throw new NotImplementedException();
-            //SubRoute unit = obj as SubRoute;
-            //foreach (SubRoute U in SubRouteList)
-            //{
-            //    if (U.Equals(unit))
-            //    {
-            //        SubRouteList.Remove(unit);
-            //        break;
-            //    }
-            //}
-        }
-        public void CreateChild()
-        {
-            throw new NotImplementedException();
-        }
+
         public int CompareTo(object obj)
         {
             Route route = obj as Route;
@@ -273,7 +258,7 @@ namespace TreeViewExample.Business.Models
         }
 
 
-        public void Validate()
+        public List<string> Validate()
         {
             int newRan = ran.Next(0, 10);
             if (newRan >= 8)
@@ -284,6 +269,8 @@ namespace TreeViewExample.Business.Models
             {
                 _Brush = Brushes.LightGreen;
             }
+
+            return new List<string>();
         }
 
 
@@ -311,10 +298,9 @@ namespace TreeViewExample.Business.Models
             return ParameterDefinitionList;
         }
 
-        void IObjectWithParameters.AddRequiredParameters()
-        {
-            throw new NotImplementedException();
-        }
+
+
+
 
 
 
