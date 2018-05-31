@@ -39,9 +39,10 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
             return ProcesCellList;
         }
 
-        public List<string> GetAllRequiredParameterDefinitionNames(ProcessCel cell)
+        public List<ParameterDefinition> GetAllRequiredParameterDefinition(ProcessCel cell)
         {
-            return _Repository.GetAllRequiredParameterDefinitionNames(cell);
+            List<string> RequiredParameterNames = _Repository.GetAllRequiredParameterDefinitionNames(cell);
+            return ListGodClass.Instance.ParameterDefinitionList.Where(x => RequiredParameterNames.Any(y => y == x.paf_ParNm)).ToList();
         }
 
         //hier moet een betere manier voor bedacht worden

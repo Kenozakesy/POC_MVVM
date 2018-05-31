@@ -103,7 +103,8 @@ namespace TreeViewExample.UI.ViewModels
 
         private void AddRequiredParameters()
         {
-            _IAddParameterToObjectView.ShowMessage("button clicked");
+            ParameterObject.AddRequiredParameters();
+            InitializeParameters();
         }
 
         #endregion

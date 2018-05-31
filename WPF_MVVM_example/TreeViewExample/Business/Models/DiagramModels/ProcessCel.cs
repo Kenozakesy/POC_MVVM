@@ -86,7 +86,7 @@ namespace TreeViewExample.Business.Models
 
             pca_ProcCellPars = new ObservableCollection<pca_ProcCellPars>();
 
-            AddRequiredParameters();
+            AddRequiredParametersToNewProcescell();
 
             AddDefaultRoute();
             Validate();
@@ -251,26 +251,15 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
-        /// <summary>
-        /// When creating a new parameter add the required parameters. but does not insert them in the database directly
-        /// </summary>
-        private void AddRequiredParameters()
+        private void AddRequiredParametersToNewProcescell()
         {
-            List<string> requiredParamNames = db.GetAllRequiredParameterDefinitionNames(this);
-            List<ParameterDefinition> requiredParameters = ListGodClass.Instance.ParameterDefinitionList.Where(x => requiredParamNames.Any(y => y == x.paf_ParNm)).ToList();
-
+            List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
             foreach (ParameterDefinition PD in requiredParameters)
             {
                 pca_ProcCellPars procescellparameter = new pca_ProcCellPars(this, PD);
                 pca_ProcCellPars.Add(procescellparameter);
             }
         }
-
-        /// <summary>
-        /// Adds a single new parameter to the database
-        /// </summary>
-        /// <param name="paramdefinition"></param>
-        /// <returns></returns>
         public bool AddParameter(ParameterDefinition paramdefinition)
         {
             pca_ProcCellPars procescellparameter = new pca_ProcCellPars(this, paramdefinition);
@@ -279,6 +268,17 @@ namespace TreeViewExample.Business.Models
                 return true;
             }
             return false;
+        }
+
+        public void AddRequiredParameters()
+        {
+            List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
+            List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !pca_ProcCellPars.Any(x => x.ParameterDefinition == y)).ToList();
+
+            foreach (ParameterDefinition PD in ParameterDefinitionsNotInObject)
+            {
+                AddParameter(PD);
+            }
         }
 
         public void AddNewSubroute()
@@ -334,7 +334,6 @@ namespace TreeViewExample.Business.Models
                 RouteList.RemoveAt(RouteList.Count - 1);
             }
         }
-
         private void BatchOptionsChange()
         {
             BatchOptions = "";
@@ -370,18 +369,7 @@ namespace TreeViewExample.Business.Models
                 Brush = Brushes.Red;
             }
         }
-        public void Delete()
-        {
-            List<Route> removableRoutes = new List<Route>();
-            foreach (Route R in RouteList)
-            {
-                removableRoutes.Add(R);
-            }
-            foreach (Route R in removableRoutes)
-            {
-                R.Delete();
-            }  
-        }
+
         public void DeleteChild(IConfigObject obj)
         {
             Route route = obj as Route;
@@ -417,11 +405,7 @@ namespace TreeViewExample.Business.Models
 
             return configList;
         }
-        public int CompareTo(object obj)
-        {
-            ProcessCel cell = obj as ProcessCel;
-            return string.Compare(this.ProcesCellId, cell.ProcesCellId);        
-        }     
+  
         public void Validate()
         {
             int newRan = ran.Next(0, 10);
@@ -467,7 +451,11 @@ namespace TreeViewExample.Business.Models
             return db.DatabaseDelete(this);
         }
 
-  
+        public int CompareTo(object obj)
+        {
+            ProcessCel cell = obj as ProcessCel;
+            return string.Compare(this.ProcesCellId, cell.ProcesCellId);
+        }
 
         #endregion
 

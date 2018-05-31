@@ -311,6 +311,11 @@ namespace TreeViewExample.Business.Models
             return ParameterDefinitionList;
         }
 
+        void IObjectWithParameters.AddRequiredParameters()
+        {
+            throw new NotImplementedException();
+        }
+
 
 
 

@@ -309,14 +309,15 @@
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
-                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                           
 
-                                <Button Grid.Row="0" Grid.Column="0" Margin="10">Maximize tree</Button>
-                                <Button Grid.Row="0" Grid.Column="1" Margin="10">Minimize tree</Button>
+
+                                <Button Grid.Row="0" Grid.Column="0" Margin="10">Check procescells parameters</Button>
+                                <Button Grid.Row="0" Grid.Column="1" Margin="10">Check route parameters</Button>
+                                <Button Grid.Row="0" Grid.Column="2" Margin="10">Check bin parameters</Button>
                             </Grid>
                         </StackPanel>
                     </TabItem>
@@ -342,22 +343,7 @@
                             </Grid>
                         </StackPanel>
                     </TabItem>
-
-                    <TabItem Header="Parameters" >
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"></ColumnDefinition>
-                                <ColumnDefinition Width="150"></ColumnDefinition>
-                                <ColumnDefinition Width="150"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-
-                            <Button Height="60" Width="100" Command="{Binding OpenParameterSheetWindowCommand}">Parameter screen</Button>
-                        </Grid>
-                    </TabItem>
-                                                         
+                                             
                 </TabControl>
             </StackPanel>
         </Border>

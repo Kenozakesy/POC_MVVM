@@ -15,5 +15,6 @@ namespace TreeViewExample.Business.Interfaces
         ObservableCollection<IParameterObject> GetParameterList();
         ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters();
         bool AddParameter(ParameterDefinition paramdefinition);
+        void AddRequiredParameters();
     }
 }

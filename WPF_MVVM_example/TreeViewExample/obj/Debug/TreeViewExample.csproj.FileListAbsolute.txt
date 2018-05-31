@@ -168,3 +168,4 @@ C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\CreateRouteWindow.baml
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\SetBinsWindow.g.cs
 C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\UI\Views\SetBinsWindow.baml
+C:\Users\stg-kwar\Documents\Github\POC_MVVM\WPF_MVVM_example\TreeViewExample\obj\Debug\TreeViewExample.csprojResolveAssemblyReference.cache
