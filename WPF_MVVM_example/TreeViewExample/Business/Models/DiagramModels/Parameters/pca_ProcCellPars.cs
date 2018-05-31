@@ -29,9 +29,12 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
             pca_ProcCellId = cell.ProcesCellId;
             pca_ParNm = param.paf_ParNm;
             pca_ParDesc = param.paf_ParDesc;
-            Value = param.paf_ParDesc;
+            Value = param.paf_DefValue;
             pca_ParValueUOM = param.paf_ParValueUOM;
             pca_DisplayToUser = param.paf_DisplayToUser;
+
+            prc_ProcCells = cell;
+            ParameterDefinition = param;
         }
 
         [Key]
@@ -74,7 +77,10 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         [StringLength(50)]
         public string pca_DisplayToUser { get; set; }
 
+        [ForeignKey("pca_ProcCellId")]
         public virtual ProcessCel prc_ProcCells { get; set; }
+
+        [ForeignKey("pca_ParNm")]
         public virtual ParameterDefinition ParameterDefinition { get; set; }
 
 
@@ -92,8 +98,6 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
 
         public bool DatabaseDelete()
         {
-            //sur_SubRoutes.sri_SubRoutesInRoutes.Remove(this);
-            //rot_Routes.SubrouteInRouteList.Remove(this);
             return db.DatabaseDelete(this);
         }
 

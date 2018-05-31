@@ -14,12 +14,6 @@ namespace WPF_MVVM_TestProject
     public class ParameterDefinitionTest
     {
 
-        [TestMethod]
-        public void DatabaseConnectiontest()
-        {
-            Assert.IsTrue(DatabaseConnectionClass.OpenConnection());
-        }
-
         //[TestMethod]
         //public void ChangeCheckFrameworkTest()
         //{
@@ -111,6 +105,7 @@ namespace WPF_MVVM_TestProject
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                 }
             }
 

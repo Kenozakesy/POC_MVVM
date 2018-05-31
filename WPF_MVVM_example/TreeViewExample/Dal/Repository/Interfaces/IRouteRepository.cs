@@ -11,5 +11,6 @@ namespace TreeViewExample.Dal.Repository.Interfaces
     public interface IRouteRepository : IDatabaseActions
     {
         List<ParameterDefinition> GetAllParametersProcescell(Route cell);
+        List<string> GetAllRequiredParameterDefinitionNames(Route route);
     }
 }

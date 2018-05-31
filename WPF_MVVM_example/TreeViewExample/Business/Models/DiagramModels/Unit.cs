@@ -130,16 +130,7 @@ namespace TreeViewExample.Business.Models
             //this._Subroute.DeleteChild(this);
         }
 
-        public bool AddBinToSubroute(Bin bin)
-        {
-            if (!_BinList.Contains(bin))
-            {
-                bin.SetSubroute(this);
-                OrderObservableList.AddSorted(BinList, bin);
-                return true;
-            }
-            return false;
-        }
+
 
         public void DeleteBin(Bin bin)
         {

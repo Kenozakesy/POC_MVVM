@@ -15,6 +15,7 @@ using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Business.Models.NonDiagramModels;
 using TreeViewExample.Business.Singletons;
+using TreeViewExample.Business.Statics;
 using TreeViewExample.Dal.Repository.BusinessGlueCode;
 using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
@@ -34,7 +35,7 @@ namespace TreeViewExample.Business.Models
         public Bin()
         {
             _Brush = Brushes.Orange;
-            ListGodClass.Instance.AddBin(this);
+            OrderObservableList.AddSorted(ListGodClass.Instance.BinList, this);
         }
 
         #region Properties
@@ -198,21 +199,22 @@ namespace TreeViewExample.Business.Models
 
         #endregion
 
-      
+
 
         #endregion
 
         #region Methods
 
-
-        public void SetSubroute(Unit unit = null)
+        public bool AddParameter(ParameterDefinition paramdefinition)
         {
-            //if (this.Unit != null)
-            //{
-            //    this.Unit.DeleteBin(this);
-            //}
-            //Unit = unit;            
+            bip_BinPars binparameter = new bip_BinPars(this, paramdefinition);
+            if (binparameter.DatabaseInsert())
+            {
+                return true;
+            }
+            return false;
         }
+
         public void Validate()
         {
             if (_BinInSubRouteList.Count == 0)
@@ -249,13 +251,7 @@ namespace TreeViewExample.Business.Models
                 Brush = Brushes.Orange;
             }
         }
-        public void Delete()
-        {
-            if (db.DatabaseDelete(this))
-            {
-                ListGodClass.Instance.DeleteBin(this);
-            } 
-        }
+
         public void DeleteChild(IConfigObject obj)
         {
             throw new NotImplementedException();
@@ -286,21 +282,10 @@ namespace TreeViewExample.Business.Models
             return string.Compare(bin.bin_BinId ,this.bin_BinId);
         }
 
-        public void RemoveParameter(Parameter paramdef)
-        {
-            throw new NotImplementedException();
-        }
         public string GetName()
         {
             return "Bin: " + bin_BinId;
         }
-
-        public static List<Bin> GetAllBins()
-        {
-            List<Bin> BinList = new List<Bin>();
-            return db.GetAllBins();
-        }
-
 
         public bool Equals(Bin obj)
         {
@@ -341,7 +326,7 @@ namespace TreeViewExample.Business.Models
         {
             if (db.DatabaseDelete(this))
             {
-                ListGodClass.Instance.DeleteBin(this);
+                ListGodClass.Instance.BinList.Remove(this);
                 return true;
             }
             return false; 
@@ -358,19 +343,7 @@ namespace TreeViewExample.Business.Models
             return ParameterDefinitionList;
         }
 
-        public bool AddParameter(ParameterDefinition paramdefinition)
-        {
-            bip_BinPars binparameter = new bip_BinPars(this, paramdefinition);
-            if (binparameter.DatabaseInsert())
-            {
-                binparameter.bin_Bins = this;
-                binparameter.ParameterDefinition = paramdefinition;
 
-                bip_BinPars.Add(binparameter);
-                return true;
-            }
-            return false;
-        }
 
 
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 using TreeViewExample.Dal.EntityFramework;
 using TreeViewExample.Dal.Repository.Interfaces;
@@ -27,6 +28,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }
@@ -39,6 +41,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
+                    context.ParameterDefinitions.Attach(cellparameter.ParameterDefinition);
+                    context.ProcesCells.Attach(cellparameter.prc_ProcCells);
+
                     context.ProcescellParameters.Add(cellparameter);
                     context.SaveChanges();
                     return true;
@@ -46,6 +51,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }

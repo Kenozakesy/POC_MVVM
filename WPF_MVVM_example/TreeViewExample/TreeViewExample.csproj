@@ -101,9 +101,7 @@
     <Compile Include="Business\Singletons\ListGodClass.cs" />
     <Compile Include="Business\Statics\Enumerations.cs" />
     <Compile Include="Business\UI_Models\EnumToArrayConverter.cs" />
-    <Compile Include="Business\Models\DiagramModels\Parameters\Parameter.cs" />
     <Compile Include="Business\Models\DiagramModels\Parameters\ParameterDefinition.cs" />
-    <Compile Include="Business\Models\DiagramModels\Parameters\RouteParameter.cs" />
     <Compile Include="Business\Models\NonDiagramModels\MainListViewModel.cs" />
     <Compile Include="Business\UI_Models\DragBehavior.cs" />
     <Compile Include="Business\UI_Models\DragListViewItemBehavior.cs" />
@@ -118,7 +116,6 @@
     <Compile Include="Dal\Repository\BusinessGlueCode\BinInSubrouteBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\BinParameterBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs" />
-    <Compile Include="Dal\DatabaseConnection\DatabaseConnectionClass.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ProcesCellBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\ProcescellParameterBusiness.cs" />
     <Compile Include="Dal\Repository\BusinessGlueCode\RouteBusiness.cs" />

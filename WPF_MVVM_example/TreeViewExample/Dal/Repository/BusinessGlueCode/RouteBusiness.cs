@@ -39,6 +39,11 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
             return _Repository.DatabaseUpdate(obj);
         }
 
+        public List<string> GetAllRequiredParameterDefinitionNames(Route route)
+        {
+            return _Repository.GetAllRequiredParameterDefinitionNames(route);
+        }
+
         //hier moet een betere manier voor bedacht worden
         public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters(Route route)
         {

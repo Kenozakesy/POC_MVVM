@@ -60,7 +60,6 @@ namespace TreeViewExample.UI.ViewModels
         private void SaveRoute()
         {
             Route.DatabaseInsert();
-            ProcesCell.AddRouteToList(Route);
             _View.CloseWindow();
         }
 

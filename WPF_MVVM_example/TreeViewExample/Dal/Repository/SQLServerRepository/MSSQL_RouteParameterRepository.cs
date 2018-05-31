@@ -27,6 +27,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }
@@ -39,6 +40,10 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
+                    context.ParameterDefinitions.Attach(routeparameter.ParameterDefinition);
+                    context.Routes.Attach(routeparameter.rot_Routes);
+                    context.ProcesCells.Attach(routeparameter.rot_Routes.ProcesCell);
+
                     context.RouteParameters.Add(routeparameter);
                     context.SaveChanges();
                     return true;
@@ -46,6 +51,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }

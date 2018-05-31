@@ -156,7 +156,10 @@
                     <ComboBox></ComboBox>
                     <Button Style="{StaticResource TextboxStyle}" >Add</Button>
 
-                    <Button Style="{StaticResource TextboxStyle}" Command="{Binding OpenCreateParameterWindowCommand}">Create parameter</Button>
+                    <Button Style="{StaticResource TextboxStyle}" Margin="0 5 0 20" Command="{Binding OpenCreateParameterWindowCommand}">Create parameter</Button>
+
+                    <Label>Add required Parameters</Label>
+                    <Button Style="{StaticResource TextboxStyle}" Command="{Binding AddRequiredParametersCommand}">Add</Button>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Margin="8" VerticalAlignment="Bottom">
                     <Button Style="{StaticResource TextboxStyle}" Command="{Binding FinishEditingCommand}">Finish</Button>

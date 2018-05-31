@@ -101,6 +101,11 @@ namespace TreeViewExample.UI.ViewModels
             InitializeParameters();
         }
 
+        private void AddRequiredParameters()
+        {
+            _IAddParameterToObjectView.ShowMessage("button clicked");
+        }
+
         #endregion
 
         #region Commandlogic
@@ -111,6 +116,7 @@ namespace TreeViewExample.UI.ViewModels
             OpenCreateParameterWindowCommand = new RelayCommand(OpenCreateParameterWindow);
             AddParameterToObjectCommand = new RelayCommand(AddParameterToObject);
             RemoveParameterFromObjectCommand = new RelayCommandT1<IParameterObject>(RemoveParameterFromObject);
+            AddRequiredParametersCommand = new RelayCommand(AddRequiredParameters);
         }
 
         public ICommand RemoveParameterCommand { get; set; }
@@ -118,6 +124,7 @@ namespace TreeViewExample.UI.ViewModels
         public ICommand OpenCreateParameterWindowCommand { get; set; }
         public ICommand AddParameterToObjectCommand { get; set; }
         public ICommand RemoveParameterFromObjectCommand { get; set; }
+        public ICommand AddRequiredParametersCommand { get; set; }
 
         #endregion
 

@@ -27,6 +27,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }
@@ -39,6 +40,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
+                    context.ParameterDefinitions.Attach(binparameter.ParameterDefinition);
+                    context.Bins.Attach(binparameter.bin_Bins);
+
                     context.BinParameters.Add(binparameter);
                     context.SaveChanges();
                     return true;
@@ -46,6 +50,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }

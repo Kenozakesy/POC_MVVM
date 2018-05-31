@@ -24,8 +24,7 @@ namespace TreeViewExample.Business.Models
     [Table("prc_ProcCells")]
     public class ProcessCel : ViewModelBase, IConfigObject, IObjectWithParameters
     {
-        private ProcesCellBusiness db = new ProcesCellBusiness(new MSSQL_ProcesCellRepository());
-
+        private static ProcesCellBusiness db = new ProcesCellBusiness(new MSSQL_ProcesCellRepository());
 
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<SubRoute> _SubrouteList = new ObservableCollection<SubRoute>();
@@ -62,7 +61,9 @@ namespace TreeViewExample.Business.Models
         /// </summary>
         public ProcessCel()
         {
+            pca_ProcCellPars = new ObservableCollection<pca_ProcCellPars>();
             Validate();
+
         }
 
         public ProcessCel(ProcesCellType type)
@@ -82,6 +83,10 @@ namespace TreeViewExample.Business.Models
             _BatchStartTypeId = "Scheduled";
             BatchOptions = "";
             Display = "1";
+
+            pca_ProcCellPars = new ObservableCollection<pca_ProcCellPars>();
+
+            AddRequiredParameters();
 
             AddDefaultRoute();
             Validate();
@@ -244,8 +249,37 @@ namespace TreeViewExample.Business.Models
         #endregion
 
 
-
         #region Methods
+
+        /// <summary>
+        /// When creating a new parameter add the required parameters. but does not insert them in the database directly
+        /// </summary>
+        private void AddRequiredParameters()
+        {
+            List<string> requiredParamNames = db.GetAllRequiredParameterDefinitionNames(this);
+            List<ParameterDefinition> requiredParameters = ListGodClass.Instance.ParameterDefinitionList.Where(x => requiredParamNames.Any(y => y == x.paf_ParNm)).ToList();
+
+            foreach (ParameterDefinition PD in requiredParameters)
+            {
+                pca_ProcCellPars procescellparameter = new pca_ProcCellPars(this, PD);
+                pca_ProcCellPars.Add(procescellparameter);
+            }
+        }
+
+        /// <summary>
+        /// Adds a single new parameter to the database
+        /// </summary>
+        /// <param name="paramdefinition"></param>
+        /// <returns></returns>
+        public bool AddParameter(ParameterDefinition paramdefinition)
+        {
+            pca_ProcCellPars procescellparameter = new pca_ProcCellPars(this, paramdefinition);
+            if (procescellparameter.DatabaseInsert())
+            {
+                return true;
+            }
+            return false;
+        }
 
         public void AddNewSubroute()
         {
@@ -265,13 +299,12 @@ namespace TreeViewExample.Business.Models
         public void AddGeneratedRoute()
         {
             List<int> RouteIds = new List<int>();
-            RouteIds.Add(0);
             foreach (Route r in RouteList)
             {
                 string routeid = new String(r.RouteId.Where(Char.IsDigit).ToArray());
                 RouteIds.Add(Convert.ToInt32(routeid));
             }
-            int? firstAvailable = Enumerable.Range(0, int.MaxValue).Except(RouteIds).FirstOrDefault();
+            int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(RouteIds).FirstOrDefault();
 
             Route route = new Route("R" + firstAvailable, 1, 1, this);       
             RouteList.Add(route);
@@ -301,11 +334,7 @@ namespace TreeViewExample.Business.Models
                 RouteList.RemoveAt(RouteList.Count - 1);
             }
         }
-        public void AddRouteToList(Route route)
-        {
-            route.ProcesCell = this;
-            OrderObservableList.AddSorted(RouteList, route);
-        }
+
         private void BatchOptionsChange()
         {
             BatchOptions = "";
@@ -392,13 +421,7 @@ namespace TreeViewExample.Business.Models
         {
             ProcessCel cell = obj as ProcessCel;
             return string.Compare(this.ProcesCellId, cell.ProcesCellId);        
-        }
-
-       
-        public void RemoveParameter(Parameter paramdef)
-        {
-            throw new NotImplementedException();
-        }
+        }     
         public void Validate()
         {
             int newRan = ran.Next(0, 10);
@@ -411,12 +434,10 @@ namespace TreeViewExample.Business.Models
                 _Brush = Brushes.LightGreen;
             }
         }
-        public ObservableCollection<ProcessCel> GetAllProcesCells()
+        public static ObservableCollection<ProcessCel> GetAllProcesCells()
         {
              return db.GetAllProcesCells();
         }
-
-
         public ObservableCollection<IParameterObject> GetParameterList()
         {
             ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(pca_ProcCellPars);
@@ -428,21 +449,7 @@ namespace TreeViewExample.Business.Models
             ParameterDefinitionList = db.GetAddAbleStandardParameters(this);
             return ParameterDefinitionList;
         }
-
-        public bool AddParameter(ParameterDefinition paramdefinition)
-        {
-            pca_ProcCellPars procescellparameter = new pca_ProcCellPars(this, paramdefinition);
-            if (procescellparameter.DatabaseInsert())
-            {
-                procescellparameter.prc_ProcCells = this;
-                procescellparameter.ParameterDefinition = paramdefinition;
-
-                pca_ProcCellPars.Add(procescellparameter);
-                return true;
-            }
-            return false;
-        }
-
+    
         public string GetName()
         {
             return ProcesCellId;

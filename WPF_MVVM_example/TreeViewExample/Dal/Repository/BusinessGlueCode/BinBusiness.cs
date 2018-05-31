@@ -24,12 +24,7 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
 
         #region Methods
 
-        public List<Bin> GetAllBins()
-        {
-            List<Bin> bins = _Repository.GetAllBins();
 
-            return bins;
-        }
 
         public bool DatabaseDelete(object obj)
         {

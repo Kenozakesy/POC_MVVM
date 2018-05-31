@@ -27,6 +27,9 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
             Value = paramdef.paf_DefValue;
             rop_ParValueUOM = paramdef.paf_ParValueUOM;
             rop_DisplayToUser = paramdef.paf_DisplayToUser;
+
+            rot_Routes = route;
+            ParameterDefinition = paramdef;
         }
 
 

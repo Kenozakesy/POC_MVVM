@@ -29,6 +29,9 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
             Value = paramdef.paf_DefValue;
             bip_ParValueUOM = paramdef.paf_ParValueUOM;
             bip_DisplayToUser = paramdef.paf_DisplayToUser;
+
+            bin_Bins = bin;
+            ParameterDefinition = paramdef;
         }
 
         [Key]
@@ -71,7 +74,9 @@ namespace TreeViewExample.Business.Models.DiagramModels.Parameters
         [StringLength(50)]
         public string bip_DisplayToUser { get; set; }
 
+        [ForeignKey("bip_BinId")]
         public virtual Bin bin_Bins { get; set; }
+        [ForeignKey("bip_ParNm")]
         public virtual ParameterDefinition ParameterDefinition { get; set; }
 
 

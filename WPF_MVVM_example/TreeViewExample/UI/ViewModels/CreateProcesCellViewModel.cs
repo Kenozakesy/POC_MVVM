@@ -67,7 +67,7 @@ namespace TreeViewExample.UI.ViewModels
         
         }
 
-        private void SaveProcesCelld()
+        private void SaveProcesCell()
         {
             ProcesCell.DatabaseInsert();
             OrderObservableList.AddSorted(procesCellList, ProcesCell);
@@ -84,7 +84,7 @@ namespace TreeViewExample.UI.ViewModels
             RemoveRouteCommand = new RelayCommand(RemoveRoute);
             AddBatchCommand = new RelayCommand(AddBatch);
             RemoveBatchCommand = new RelayCommand(RemoveBatch);
-            SaveProcesCellCommand = new RelayCommand(SaveProcesCelld);
+            SaveProcesCellCommand = new RelayCommand(SaveProcesCell);
         }
 
         public ICommand AddRouteCommand { get; set; }

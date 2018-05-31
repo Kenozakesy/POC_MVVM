@@ -178,7 +178,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _ProcesCellParametersList; }
             set { SetProperty(ref _ProcesCellParametersList, value); }
         }
-
         public virtual ObservableCollection<rop_RoutePars> RouteParametersList
         {
             get { return _RouteParametersList; }
@@ -189,7 +188,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _BinParametersList; }
             set { SetProperty(ref _BinParametersList, value); }
         }
-
         public virtual ObservableCollection<tpm_TableParMaps> tpm_TableParMaps { get; set; }
         public virtual ObservableCollection<pat_ParTables> pat_ParTables { get; set; }
      
@@ -244,7 +242,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _DisplayToUser; }
             set { SetProperty(ref _DisplayToUser, value); }
         }
-
         [NotMapped]
         public Tuple<int, int> Validvalues
         {
@@ -257,7 +254,6 @@ namespace TreeViewExample.Business.Models.DiagramModels
             get { return _ValidvaluesCombobox; }
             set { SetProperty(ref _ValidvaluesCombobox, value); }
         }
-
         [NotMapped]
         public bool IsVisible
         {
@@ -494,7 +490,7 @@ namespace TreeViewExample.Business.Models.DiagramModels
                     ValidValuesFillRangeIncluding();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //Incorrect parameter exception for value (paf_validvalues)
             }

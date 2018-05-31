@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TreeViewExample.Business.Models;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Statics;
 using TreeViewExample.Dal.Repository.Interfaces;
 using System.Data;
-using TreeViewExample.Dal.EntityFramework;
-using System.Linq;
-using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Models.DiagramModels.Parameters;
 
 namespace TreeViewExample.Dal.Repository.BusinessGlueCode
@@ -45,6 +39,10 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
             return ProcesCellList;
         }
 
+        public List<string> GetAllRequiredParameterDefinitionNames(ProcessCel cell)
+        {
+            return _Repository.GetAllRequiredParameterDefinitionNames(cell);
+        }
 
         //hier moet een betere manier voor bedacht worden
         public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters(ProcessCel cell)

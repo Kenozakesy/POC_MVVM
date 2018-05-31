@@ -158,7 +158,6 @@ namespace TreeViewExample.Business.Models
             }
             return false;
         }
-
         public void ChangeColor()
         {
             if (_Brush == Brushes.Red)
@@ -241,7 +240,6 @@ namespace TreeViewExample.Business.Models
             }
 
         }
-
         public string GetName()
         {
             return "Subroute " + this.SubRouteName;

@@ -9,6 +9,6 @@ namespace TreeViewExample.UI.Interfaces
 {
     public interface ISelectBinView : IView
     {
-        void CloseWindow();
+        new void CloseWindow();
     }
 }

@@ -31,7 +31,6 @@ namespace TreeViewExample.Business.Singletons
         {
             AddProcesCells();
             GetAllParameterDefinitions();
-            //GetBinsFromDatabase();
 
             //validateAll()
 
@@ -91,40 +90,25 @@ namespace TreeViewExample.Business.Singletons
         }
 
 
-
-
         //these need to go away in their own classes
         private void AddProcesCells()
         {
-            ProcessCel procCell = new ProcessCel();
-            ProcessCelList = procCell.GetAllProcesCells();
+            ProcessCelList = ProcessCel.GetAllProcesCells();
         }
-        public void AddBin(Bin bin)
-        {
-            OrderObservableList.AddSorted(BinList, bin);
-        }
-        public void DeleteBin(Bin bin)
-        {
-            BinList.Remove(bin);
-        }
-        private void GetBinsFromDatabase()
-        {
-            Bin.GetAllBins();
-        }
+
         public int? GetFirstAvailableProccellId(ProcessCel cell)
         {
             List<int> procIds = new List<int>();
-            procIds.Add(0);
 
             foreach (ProcessCel r in ProcessCelList)
             {
                 if (cell.ProcesCellTypeId == r.ProcesCellTypeId)
                 {
-                    string routeid = new String(r.ProcesCellId.Where(Char.IsDigit).ToArray());
+                    string routeid = new string(r.ProcesCellId.Where(char.IsDigit).ToArray());
                     procIds.Add(Convert.ToInt32(routeid));
                 }
             }
-            int? firstAvailable = Enumerable.Range(0, int.MaxValue).Except(procIds).FirstOrDefault();
+            int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(procIds).FirstOrDefault();
 
             return firstAvailable;
         }

@@ -17,6 +17,7 @@ using TreeViewExample.Dal.Repository.SQLServerRepository;
 using TreeViewExample.UI.ViewModels;
 using System.Data.Entity;
 using TreeViewExample.Business.Models.DiagramModels;
+using TreeViewExample.Business.Singletons;
 
 namespace TreeViewExample.Business.Models
 {
@@ -27,7 +28,6 @@ namespace TreeViewExample.Business.Models
 
         #region Fields
 
-        private ObservableCollection<RouteParameter> _RouteParameterList = new ObservableCollection<RouteParameter>();
         private ProcessCel _ProcessCel;
         private ObservableCollection<sri_SubRoutesInRoutes> _SubrouteInRouteList = new ObservableCollection<sri_SubRoutesInRoutes>();
         private ObservableCollection<SubRoute> _SubRouteList = new ObservableCollection<SubRoute>();
@@ -49,12 +49,15 @@ namespace TreeViewExample.Business.Models
         /// Used with entity framework
         /// </summary>
         public Route()
-        {            
+        {
+            rop_RoutePars = new ObservableCollection<rop_RoutePars>();
             Validate();
         }
 
         public Route(string routeid, int available, int selectpriority, ProcessCel processCel)
         {
+            rop_RoutePars = new ObservableCollection<rop_RoutePars>();
+
             this.RouteId = routeid;
             this.RouteName = processCel.ProcesCellId +":"+ routeid +":";
             this.ShortRouteName = routeid;
@@ -68,6 +71,7 @@ namespace TreeViewExample.Business.Models
             pru_Procedures procedure = new pru_Procedures(this);
             pru_Procedures = procedure;
 
+            AddRequiredParameters();
             Validate();
         }
 
@@ -149,6 +153,31 @@ namespace TreeViewExample.Business.Models
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// When creating a new parameter add the required parameters. but does not insert them in the database directly
+        /// </summary>
+        private void AddRequiredParameters()
+        {
+            List<string> requiredParamNames = db.GetAllRequiredParameterDefinitionNames(this);
+            List<ParameterDefinition> requiredParameters = ListGodClass.Instance.ParameterDefinitionList.Where(x => requiredParamNames.Any(y => y == x.paf_ParNm)).ToList();
+
+            foreach (ParameterDefinition PD in requiredParameters)
+            {
+                rop_RoutePars procescellparameter = new rop_RoutePars(this, PD);
+                rop_RoutePars.Add(procescellparameter);
+            }
+        }
+
+        public bool AddParameter(ParameterDefinition paramdefinition)
+        {
+            rop_RoutePars procescellparameter = new rop_RoutePars(this, paramdefinition);
+            if (procescellparameter.DatabaseInsert())
+            {
+                return true;
+            }
+            return false;
+        }
 
         public bool AddSubroute(SubRoute subroute)
         {
@@ -242,10 +271,7 @@ namespace TreeViewExample.Business.Models
             ObservableCollection<IParameterObject> parameterList = new ObservableCollection<IParameterObject>(rop_RoutePars);
             return parameterList;
         }
-        public void RemoveParameter(Parameter paramdef)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void Validate()
         {
@@ -285,19 +311,7 @@ namespace TreeViewExample.Business.Models
             return ParameterDefinitionList;
         }
 
-        public bool AddParameter(ParameterDefinition paramdefinition)
-        {
-            rop_RoutePars procescellparameter = new rop_RoutePars(this, paramdefinition);
-            if (procescellparameter.DatabaseInsert())
-            {
-                procescellparameter.rot_Routes = this;
-                procescellparameter.ParameterDefinition = paramdefinition;
 
-                rop_RoutePars.Add(procescellparameter);
-                return true;
-            }
-            return false;
-        }
 
 
         #endregion

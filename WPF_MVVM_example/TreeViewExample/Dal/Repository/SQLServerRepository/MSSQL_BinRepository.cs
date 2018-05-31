@@ -30,6 +30,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }
@@ -57,6 +58,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
+                    e.ToString();
                     return false;
                 }
             }
@@ -84,49 +86,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             }
             return paramdefs;
         }
-
-        public List<Bin> GetAllBins()
-        {
-            List<Bin> bins = new List<Bin>();
-            using (var context = new UniContext())
-            {
-                try
-                {
-                    var binIds = ListGodClass.Instance.BinList.Select(x => x.bin_BinId).ToArray();
-
-                    var select = (from r in context.Bins
-                                  .Where(x => !binIds.Contains(x.bin_BinId))
-                                  .Include(x => x.bir_BinsInSubRoutes)
-
-                                  .Include(x => x.bip_BinPars)
-                                  .Include(x => x.bip_BinPars.Select(y => y.bin_Bins))
-
-                                  //.Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition))
-                                  //.Include(x => x.bip_BinPars.Select(y => y.ParameterDefinition.BinParametersList))
-
-                                  .Include(x => x.bis_BinStocks)
-                                  .Include(x => x.bis_BinStocks.bin_Bins)
-                                  .Include(x => x.bip_BinPars)
-                                  .Include(x => x.bip_BinPars.Select(z => z.bin_Bins))
-                                  .Include(x => x.bib_BinBatches)
-                                  .Include(x => x.bib_BinBatches.Select(z => z.bin_Bins))
-                                  .Include(x => x.tbb_TempBinBatches)
-                                  .Include(x => x.tbb_TempBinBatches.Select(z => z.bin_Bins))
-                                  .Include(x => x.pri_PropIns)
-                                  .Include(x => x.pri_PropIns.Select(z => z.bin_Bins))
-
-                                  select r);
-
-                    bins = select.ToList();
-                }
-                catch (Exception)
-                {
-                    context.Dispose();
-                }
-            }
-            return bins;
-        }
-
     
     }
 }
