@@ -23,7 +23,7 @@ using TreeViewExample.UI.ViewModels;
 namespace TreeViewExample.Business.Models
 {
     [Table("bin_Bins")]
-    public class Bin : ViewModelBase, IConfigObject, IEquatable<Bin>
+    public class Bin : ViewModelBase, IObjectWithParameters, IEquatable<Bin>
     {
         private static BinBusiness db = new BinBusiness(new MSSQL_BinRepository());
 
@@ -221,7 +221,7 @@ namespace TreeViewExample.Business.Models
 
         public List<string> Validate()
         {
-            throw new NotImplementedException();
+            return new List<string>(); //NIY
         }
         private void SetColor()
         {

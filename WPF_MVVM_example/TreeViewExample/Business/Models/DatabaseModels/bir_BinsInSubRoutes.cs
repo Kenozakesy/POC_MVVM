@@ -117,8 +117,8 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         }
         public bool DatabaseDelete()
         {
-            sur_SubRoutes.bir_BinsInSubRoutes.Remove(this);
-            bin_Bins.bir_BinsInSubRoutes.Remove(this);
+            //sur_SubRoutes.bir_BinsInSubRoutes.Remove(this);
+            //bin_Bins.bir_BinsInSubRoutes.Remove(this);
             return db.DatabaseDelete(this);
         }
     }

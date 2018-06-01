@@ -71,7 +71,7 @@ namespace TreeViewExample.Business.Models
             pru_Procedures procedure = new pru_Procedures(this);
             pru_Procedures = procedure;
 
-            AddRequiredParameters();
+            AddRequiredParametersToNewRoute();
             Validate();
         }
 

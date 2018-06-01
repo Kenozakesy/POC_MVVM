@@ -20,6 +20,5 @@ namespace WPF_MVVM_example.UI.Interfaces
         void OpenCreateSubrouteWindow(ProcessCel processcel);
         void OpenSetBinsWindow(SubRoute subroute);
 
-        void OpenValidationMessageBox(List<string> parameterList);
     }
 }

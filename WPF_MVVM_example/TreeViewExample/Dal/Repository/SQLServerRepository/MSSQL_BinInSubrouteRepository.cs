@@ -18,8 +18,8 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
-                    bininSubroute.sur_SubRoutes = null;
-                    bininSubroute.bin_Bins = null;
+                    context.SubRoutes.Attach(bininSubroute.sur_SubRoutes);
+                    context.Bins.Attach(bininSubroute.bin_Bins);
 
                     context.BinsInSubroutes.Attach(bininSubroute);
                     context.BinsInSubroutes.Remove(bininSubroute);

@@ -117,14 +117,6 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
-        public void OpenValidationMessageBox(List<string> parameterList)
-        {
-            StringBuilder builder = new StringBuilder();
-            foreach (string nm in parameterList)
-            {
-                builder.Append("-" + nm + Environment.NewLine);
-            }
-            MessageBox.Show("one or more parameters are missing" + Environment.NewLine + Environment.NewLine + builder.ToString());
-        }
+
     }
 }

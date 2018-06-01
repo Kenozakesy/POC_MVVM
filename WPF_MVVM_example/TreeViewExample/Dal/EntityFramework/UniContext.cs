@@ -14,9 +14,10 @@ namespace TreeViewExample.Dal.EntityFramework
 {
     public class UniContext : DbContext
     {
-        public UniContext() : base(nameOrConnectionString: "Server=172.21.5.120;Initial Catalog=STG_KWAR_PROMASST_MES_V7.3.0;Persist Security Info=True; User = sa; password=k00lZ@@D")
+        public UniContext() : base(nameOrConnectionString: "Server=172.21.5.120;Initial Catalog=STG-KWAR_TestDatabase_PROMASST_MES_V7.4.0;Persist Security Info=True; User = sa; password=k00lZ@@D")
         {
-            //this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            //STG_KWAR_PROMASST_MES_V7.3.0
+            //PROMASST_MES_V7.4.0
         }
 
         #region DBsets
@@ -26,12 +27,12 @@ namespace TreeViewExample.Dal.EntityFramework
         public DbSet<rop_RoutePars> RouteParameters { get; set; }
         public DbSet<bip_BinPars> BinParameters { get; set; }
 
+
+
         public DbSet<tpm_TableParMaps> tpm_TableParMaps { get; set; }
         public DbSet<pat_ParTables> pat_ParTables { get; set; }
         public DbSet<pac_ParDefsProcCellTypes> pac_ParDefsProcCellTypes { get; set; }
         public DbSet<pct_ProcCellTypes> pct_ProcCellTypes { get; set; }
-
-
 
 
 

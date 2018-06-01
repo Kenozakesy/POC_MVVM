@@ -83,7 +83,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="rot_RouteNm"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Path=Route.RouteName}" IsEnabled="False"></TextBox>
+                    <TextBox Grid.Column="1" Text="{Binding Path=Route.RouteName}" ></TextBox>
                 </Grid>
 
                 <Grid Style="{StaticResource GridStyle}">
@@ -96,7 +96,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="rot_ShortRouteNm"></TextBlock>
-                    <TextBox Grid.Column="1" Text="{Binding Path=Route.ShortRouteName}" IsEnabled="False"></TextBox>
+                    <TextBox Grid.Column="1" Text="{Binding Path=Route.ShortRouteName}" ></TextBox>
                 </Grid>
 
                 <Grid Style="{StaticResource GridStyle}">

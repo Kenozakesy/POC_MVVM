@@ -131,9 +131,16 @@ namespace TreeViewExample.UI.ViewModels
         private void ValidateObject(IConfigObject obj)
         {
             List<string> wrongParameterList = obj.Validate();
+
+            StringBuilder builder = new StringBuilder();
+            foreach (string nm in wrongParameterList)
+            {
+                builder.Append("-" + nm + Environment.NewLine);
+            }
+
             if (wrongParameterList.Count > 0)
             {
-                _TreeView.OpenValidationMessageBox(wrongParameterList);
+                _TreeView.ShowMessage("These parameter are missing " + Environment.NewLine + Environment.NewLine + builder);
             }
             else
             {

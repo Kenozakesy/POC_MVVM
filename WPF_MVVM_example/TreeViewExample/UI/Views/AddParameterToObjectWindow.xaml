@@ -48,7 +48,7 @@
         <Style x:Key="ListItemStyle" TargetType="{x:Type ListViewItem}">
             <Setter Property="BorderBrush" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0 0 0 1" />
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
 
             <Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}}"></Setter>
             <Setter Property="ContextMenu">
@@ -90,7 +90,7 @@
         </Grid.ColumnDefinitions>
 
         <Border Style="{StaticResource BorderStyle}">
-            <ListView ItemContainerStyle="{StaticResource ListItemStyle}" ItemsSource="{Binding Path=ParameterList}">
+            <ListView ItemContainerStyle="{StaticResource ListItemStyle}" HorizontalContentAlignment="Stretch" ItemsSource="{Binding Path=ParameterList}">
                 <ListView.View>
                     <GridView>
 
