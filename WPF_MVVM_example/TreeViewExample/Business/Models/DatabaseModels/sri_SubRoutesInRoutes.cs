@@ -84,7 +84,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             throw new NotImplementedException();
         }
 
-        public List<string> Validate()
+        public bool Validate()
         {
             throw new NotImplementedException();
         }
@@ -123,6 +123,11 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             sur_SubRoutes.sri_SubRoutesInRoutes.Remove(this);
             rot_Routes.SubrouteInRouteList.Remove(this);
             return db.DatabaseDelete(this);
+        }
+
+        public string GetValidationMessage()
+        {
+            throw new NotImplementedException();
         }
     }
 }

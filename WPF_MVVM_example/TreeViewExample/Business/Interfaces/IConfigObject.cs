@@ -12,7 +12,8 @@ namespace TreeViewExample.Business.Interfaces
     {
         string GetName();
         void ChangeColor();
-        List<string> Validate();
+        bool Validate();
+        string GetValidationMessage();
         List<MainListViewModel> GenerateListViewList();
 
     }

@@ -11,7 +11,7 @@
         xmlns:that="clr-namespace:TreeViewExample.Business.Models.DiagramModels"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="TreeviewExample" Height="800" Width="1200"  WindowState="Maximized">
+        Title="TreeViewExample" Height="800" Width="1200"  WindowState="Maximized">
 
     <Window.Resources>
         <Style x:Key="ListItemStyle" TargetType="{x:Type ListViewItem}" >
@@ -130,7 +130,7 @@
                         <MenuItem Header="Delete" Command="{Binding Tag.DataContext.DeleteClickCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}" />
                         <Separator />
                         <MenuItem Header="Set Parameters"  Command="{Binding Tag.DataContext.OpenAddParameterToObjectWindowCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Validate"/>
+                        <MenuItem Header="Validate" Command="{Binding Tag.DataContext.ValidateObjectCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}" CommandParameter="{Binding}"/>
 
                     </ContextMenu>
                 </Label.ContextMenu>

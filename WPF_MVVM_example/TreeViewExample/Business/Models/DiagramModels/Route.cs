@@ -18,6 +18,7 @@ using TreeViewExample.UI.ViewModels;
 using System.Data.Entity;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Singletons;
+using TreeViewExample.Business.Enums;
 
 namespace TreeViewExample.Business.Models
 {
@@ -34,6 +35,7 @@ namespace TreeViewExample.Business.Models
 
         private Brush _Brush;
         private static Random ran = new Random();
+        private IsValidated _Isvalid;
 
         private string _ProcesCellId;
         private string _RouteId;
@@ -83,7 +85,16 @@ namespace TreeViewExample.Business.Models
             get { return _Brush; }
             set { SetProperty(ref _Brush, value); }
         }
-
+        [NotMapped]
+        public IsValidated IsValid
+        {
+            get { return _Isvalid; }
+            set
+            {
+                SetProperty(ref _Isvalid, value);
+                ChangeColor();
+            }
+        }
         public virtual ObservableCollection<sri_SubRoutesInRoutes> SubrouteInRouteList
         {
             get { return _SubrouteInRouteList; }
@@ -94,7 +105,6 @@ namespace TreeViewExample.Business.Models
         }
         public virtual ObservableCollection<rop_RoutePars> rop_RoutePars { get; set; }
         public virtual pru_Procedures pru_Procedures { get; set; }
-
         public virtual ProcessCel ProcesCell
         {
             get { return _ProcessCel; }
@@ -163,7 +173,6 @@ namespace TreeViewExample.Business.Models
                 rop_RoutePars.Add(procescellparameter);
             }
         }
-
         public bool AddParameter(ParameterDefinition paramdefinition)
         {
             rop_RoutePars procescellparameter = new rop_RoutePars(this, paramdefinition);
@@ -173,7 +182,6 @@ namespace TreeViewExample.Business.Models
             }
             return false;
         }
-
         public void AddRequiredParameters()
         {
             List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
@@ -218,17 +226,7 @@ namespace TreeViewExample.Business.Models
 
             return notInRoute;
         }
-        public void ChangeColor()
-        {
-            if (_Brush == Brushes.Red)
-            {
-                Brush = Brushes.LightGreen;
-            }
-            else
-            {
-                Brush = Brushes.Red;
-            }
-        }
+     
 
         public int CompareTo(object obj)
         {
@@ -257,26 +255,87 @@ namespace TreeViewExample.Business.Models
             return parameterList;
         }
 
-
-        public List<string> Validate()
+        public void ChangeColor()
         {
-            int newRan = ran.Next(0, 10);
-            if (newRan >= 8)
+            switch (IsValid)
             {
-                _Brush = Brushes.Red;
+                case IsValidated.Valid:
+                    Brush = Brushes.LightGreen;
+                    break;
+                case IsValidated.InValid:
+                    Brush = Brushes.Red;
+                    break;
+                case IsValidated.InValidChildren:
+                    Brush = Brushes.Orange;
+                    break;
+            }
+        }
+        private static bool antiLimboStatic = true;
+        public bool Validate()
+        {
+            bool checkIfValid = true;
+
+            List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
+            List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !rop_RoutePars.Any(x => x.ParameterDefinition == y)).ToList();
+
+            if (ParameterDefinitionsNotInObject.Count > 0)
+            {
+                IsValid = IsValidated.InValid;
+                checkIfValid = false;
             }
             else
             {
-                _Brush = Brushes.LightGreen;
+                //foreach (sri_SubRoutesInRoutes sri in SubrouteInRouteList)
+                //{
+                //    if (!route.Validate())
+                //    {
+                //        IsValid = IsValidated.InValidChildren;
+                //        return false;
+                //    }
+                //}
+
+                IsValid = IsValidated.Valid;
+                checkIfValid = true;
             }
 
-            return new List<string>();
+            if (ProcesCell != null && antiLimboStatic)
+            {
+                antiLimboStatic = false;
+                ProcesCell.Validate();
+                antiLimboStatic = true;
+            }
+            return checkIfValid;
+        }
+
+        public string GetValidationMessage()
+        {
+            switch (IsValid)
+            {
+                case IsValidated.Valid:
+                    return "Object is valid.";
+
+                case IsValidated.InValid:
+                    List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
+                    List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !rop_RoutePars.Any(x => x.ParameterDefinition == y)).ToList();
+
+                    StringBuilder builder = new StringBuilder();
+                    foreach (ParameterDefinition nm in ParameterDefinitionsNotInObject)
+                    {
+                        builder.Append("-" + nm.paf_ParNm + Environment.NewLine);
+                    }
+                    return "Missing Parameter(s)" + Environment.NewLine + Environment.NewLine + builder.ToString();
+
+                case IsValidated.InValidChildren:
+                    return "Object is valid." + Environment.NewLine + "But one or more of the branches is not.";
+                default:
+                    return "Validation not found.";
+            }
         }
 
 
         public string GetName()
         {
-            return "Route " + RouteId;
+            return "Route: " + RouteName;
         }
         public bool DatabaseInsert()
         {
@@ -297,6 +356,8 @@ namespace TreeViewExample.Business.Models
             ParameterDefinitionList = db.GetAddAbleStandardParameters(this);
             return ParameterDefinitionList;
         }
+
+  
 
 
 

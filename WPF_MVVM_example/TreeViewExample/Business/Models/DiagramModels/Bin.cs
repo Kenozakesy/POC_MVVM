@@ -46,13 +46,11 @@ namespace TreeViewExample.Business.Models
         {
             get
             {
-                //Validate();
                 return _Brush;
             }
             set
             {
                 SetProperty(ref _Brush, value);
-
                 foreach (bir_BinsInSubRoutes bir in _BinInSubRouteList)
                 {
                     bir.Brush = Brush;
@@ -219,9 +217,9 @@ namespace TreeViewExample.Business.Models
            throw new NotImplementedException();
         }
 
-        public List<string> Validate()
+        public bool Validate()
         {
-            return new List<string>(); //NIY
+            throw new NotImplementedException();
         }
         private void SetColor()
         {
@@ -338,6 +336,11 @@ namespace TreeViewExample.Business.Models
             ObservableCollection<ParameterDefinition> ParameterDefinitionList = new ObservableCollection<ParameterDefinition>();
             ParameterDefinitionList = db.GetAddAbleStandardParameters(this);
             return ParameterDefinitionList;
+        }
+
+        public string GetValidationMessage()
+        {
+            throw new NotImplementedException();
         }
 
 

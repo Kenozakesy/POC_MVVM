@@ -74,17 +74,8 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         }
 
 
-        public void DeleteChild(IConfigObject obj)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void CreateChild()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<string> Validate()
+        public bool Validate()
         {
             throw new NotImplementedException();
         }
@@ -120,6 +111,11 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             //sur_SubRoutes.bir_BinsInSubRoutes.Remove(this);
             //bin_Bins.bir_BinsInSubRoutes.Remove(this);
             return db.DatabaseDelete(this);
+        }
+
+        public string GetValidationMessage()
+        {
+            throw new NotImplementedException();
         }
     }
 }

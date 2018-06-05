@@ -227,18 +227,10 @@ namespace TreeViewExample.Business.Models
             return configList;
         }
 
-        public List<string> Validate()
+        public bool Validate()
         {
-            int newRan = ran.Next(0, 10);
-            if (newRan >= 8)
-            {
-                _Brush = Brushes.Red;
-            }
-            else
-            {
-                _Brush = Brushes.LightGreen;
-            }
-            return new List<string>();
+            _Brush = Brushes.LightGreen;
+            return true;
             
         }
         public string GetName()
@@ -286,6 +278,11 @@ namespace TreeViewExample.Business.Models
         public bool DatabaseDelete()
         {
             return db.DatabaseDelete(this);
+        }
+
+        public string GetValidationMessage()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

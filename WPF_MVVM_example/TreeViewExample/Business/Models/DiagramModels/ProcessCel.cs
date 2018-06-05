@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text;
 using System.Windows.Media;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
@@ -274,7 +275,6 @@ namespace TreeViewExample.Business.Models
             }
             return false;
         }
-
         public void AddRequiredParameters()
         {
             List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
@@ -284,6 +284,7 @@ namespace TreeViewExample.Business.Models
                 AddParameter(PD);
             }
         }
+
         public void AddNewSubroute()
         {
             List<int> subRouteIds = new List<int>();
@@ -377,21 +378,63 @@ namespace TreeViewExample.Business.Models
                     break;
             }
         }
-        public List<string> Validate()
+
+        public bool Validate()
         {
             List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
             List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !pca_ProcCellPars.Any(x => x.ParameterDefinition == y)).ToList();
 
+            bool allRoutesAreValid = true;
+            foreach (Route route in RouteList)
+            {
+                if (!route.Validate())
+                {
+                    allRoutesAreValid = false;
+                }
+            }
+
             if (ParameterDefinitionsNotInObject.Count > 0)
             {
                 IsValid = IsValidated.InValid;
+                return false;
             }
             else
             {
-                IsValid = IsValidated.Valid;
+                if (allRoutesAreValid)
+                {
+                    IsValid = IsValidated.Valid;
+                    return true;
+                }
+                else
+                {
+                    IsValid = IsValidated.InValidChildren;
+                    return false;
+                }
             }
+        }
+        public string GetValidationMessage()
+        {
+            switch (IsValid)
+            {
+                case IsValidated.Valid:
+                    return "Object is valid.";
 
-            return new List<string>(ParameterDefinitionsNotInObject.Select(x => x.paf_ParNm));
+                case IsValidated.InValid:
+                    List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
+                    List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !pca_ProcCellPars.Any(x => x.ParameterDefinition == y)).ToList();
+
+                    StringBuilder builder = new StringBuilder();
+                    foreach (ParameterDefinition nm in ParameterDefinitionsNotInObject)
+                    {
+                        builder.Append("-" + nm.paf_ParNm + Environment.NewLine);
+                    }
+                    return "Missing Parameter(s)" + Environment.NewLine + Environment.NewLine + builder.ToString();
+
+                case IsValidated.InValidChildren:
+                    return "Object is valid." + Environment.NewLine + "But one or more of the branches is not.";
+                default:
+                    return "Validation not found.";
+            }
         }
 
         public List<MainListViewModel> GenerateListViewList()
@@ -412,8 +455,6 @@ namespace TreeViewExample.Business.Models
 
             return configList;
         }
-  
-
         public static ObservableCollection<ProcessCel> GetAllProcesCells()
         {
              return db.GetAllProcesCells();
@@ -452,6 +493,8 @@ namespace TreeViewExample.Business.Models
             ProcessCel cell = obj as ProcessCel;
             return string.Compare(this.ProcesCellId, cell.ProcesCellId);
         }
+
+
 
         #endregion
 
