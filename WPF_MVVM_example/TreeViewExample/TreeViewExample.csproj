@@ -151,7 +151,6 @@
     <Compile Include="UI\Interfaces\IDragDropView.cs" />
     <Compile Include="UI\Interfaces\IEditSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
-    <Compile Include="UI\Interfaces\ISelectBinView.cs" />
     <Compile Include="UI\Interfaces\ISetBinsView.cs" />
     <Compile Include="UI\ViewModels\AddParameterToObjectViewModel.cs" />
     <Compile Include="UI\ViewModels\CreateParameterViewModel.cs" />
