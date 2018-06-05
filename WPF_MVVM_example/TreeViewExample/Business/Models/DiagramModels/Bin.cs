@@ -34,7 +34,6 @@ namespace TreeViewExample.Business.Models
 
         public Bin()
         {
-            _Brush = Brushes.Orange;
             OrderObservableList.AddSorted(ListGodClass.Instance.BinList, this);
         }
 
@@ -63,7 +62,7 @@ namespace TreeViewExample.Business.Models
             get { return _IsValid; }
             set {
                 SetProperty(ref _IsValid, value);
-                SetColor();
+                ChangeColor();
             }
         }
 
@@ -219,31 +218,34 @@ namespace TreeViewExample.Business.Models
 
         public bool Validate()
         {
-            throw new NotImplementedException();
+            if (bir_BinsInSubRoutes.Count > 0)
+            {
+                IsValid = IsValidated.Connected;
+                return true;
+            }
+            else
+            {
+                IsValid = IsValidated.Valid;
+                return true;
+            }
         }
-        private void SetColor()
+
+        public void ChangeColor()
         {
             switch (IsValid)
             {
                 case IsValidated.Valid:
-                    _Brush = Brushes.LightGreen;
+                    Brush = Brushes.LightGreen;
                     break;
-                case IsValidated.NotConnected:
-                    _Brush = Brushes.Orange;
+                case IsValidated.InValid:
+                    Brush = Brushes.Red;
                     break;
-                default:
+                case IsValidated.InValidChildren:
+                    Brush = Brushes.Orange;
                     break;
-            }
-        }
-        public void ChangeColor()
-        {
-            if (_Brush == Brushes.Orange)
-            {
-                Brush = Brushes.LightGreen;
-            }
-            else
-            {
-                Brush = Brushes.Orange;
+                case IsValidated.Connected:
+                    Brush = Brushes.LightBlue;
+                    break;
             }
         }
 

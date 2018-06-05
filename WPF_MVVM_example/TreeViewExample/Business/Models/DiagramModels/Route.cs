@@ -278,6 +278,15 @@ namespace TreeViewExample.Business.Models
             List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
             List<ParameterDefinition> ParameterDefinitionsNotInObject = requiredParameters.Where(y => !rop_RoutePars.Any(x => x.ParameterDefinition == y)).ToList();
 
+            //foreach (sri_SubRoutesInRoutes sri in SubrouteInRouteList)
+            //{
+            //    if (!route.Validate())
+            //    {
+            //        IsValid = IsValidated.InValidChildren;
+            //        return false;
+            //    }
+            //}
+
             if (ParameterDefinitionsNotInObject.Count > 0)
             {
                 IsValid = IsValidated.InValid;
@@ -285,15 +294,6 @@ namespace TreeViewExample.Business.Models
             }
             else
             {
-                //foreach (sri_SubRoutesInRoutes sri in SubrouteInRouteList)
-                //{
-                //    if (!route.Validate())
-                //    {
-                //        IsValid = IsValidated.InValidChildren;
-                //        return false;
-                //    }
-                //}
-
                 IsValid = IsValidated.Valid;
                 checkIfValid = true;
             }

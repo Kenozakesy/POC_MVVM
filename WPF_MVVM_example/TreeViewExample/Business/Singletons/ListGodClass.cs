@@ -94,9 +94,14 @@ namespace TreeViewExample.Business.Singletons
         private void AddProcesCells()
         {
             ProcessCelList = ProcessCel.GetAllProcesCells();
+
             foreach (ProcessCel P in ProcessCelList)
             {
                 P.Validate();
+            }
+            foreach (Bin B in BinList)
+            {
+                B.Validate();
             }
         }
 

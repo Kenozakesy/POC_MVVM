@@ -20,6 +20,7 @@ namespace TreeViewExample.UI.ViewModels
         #region Fields
 
         private ProcessCel _ProcesCell;
+        private string _SubrouteName;
 
         #endregion
 
@@ -38,6 +39,12 @@ namespace TreeViewExample.UI.ViewModels
             set { SetProperty(ref _ProcesCell, value); }
         }
 
+        public string SubrouteName
+        {
+            get { return _SubrouteName; }
+            set { SetProperty(ref _SubrouteName, value); }
+        }
+
         #endregion
 
         #region Methods
@@ -48,7 +55,14 @@ namespace TreeViewExample.UI.ViewModels
 
         private void CreateNewSubroute()
         {
-            ProcesCell.AddNewSubroute();
+            if (string.IsNullOrEmpty(SubrouteName))
+            {
+                _View.ShowMessage("Please choose a name.");
+            }
+            else
+            {
+                ProcesCell.AddNewSubroute(SubrouteName);
+            }
         }
 
         private void DeleteClick(IConfigObject obj)

@@ -74,6 +74,11 @@ namespace TreeViewExample.UI.ViewModels
         {
             DestinationBinList = Subroute.GetAllDestinationBins();
             SourceBinList = Subroute.GetAllSourceBins();
+
+            foreach (Bin B in BinList)
+            {
+                B.Validate();
+            }
         }
 
         #endregion

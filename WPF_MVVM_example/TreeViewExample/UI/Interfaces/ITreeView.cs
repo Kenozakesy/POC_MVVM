@@ -9,8 +9,6 @@ namespace WPF_MVVM_example.UI.Interfaces
 {
     public interface ITreeView : IView
     {
-        int Refresh();
-        Bin OpenSelectBinWindow(ObservableCollection<Bin> binList);
         void OpenParameterSheetWindow();
         void OpenAddParameterToObjectWindow(IObjectWithParameters obj);
         void OpenCreateParameterWindow();

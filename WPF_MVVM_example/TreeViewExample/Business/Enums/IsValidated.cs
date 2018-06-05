@@ -11,6 +11,6 @@ namespace TreeViewExample.Business.Enums
         Valid,
         InValid,
         InValidChildren,
-        NotConnected
+        Connected
     }
 }

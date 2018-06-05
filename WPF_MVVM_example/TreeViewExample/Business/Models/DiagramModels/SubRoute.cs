@@ -41,11 +41,11 @@ namespace TreeViewExample.Business.Models
             Validate();
         }
 
-        public SubRoute(ProcessCel procescell, string id)
+        public SubRoute(ProcessCel procescell, string id, string name)
         {
             this.ProcesCellId = procescell.ProcesCellId;
             this.SubRouteId = id;
-            this.SubRouteName = procescell.ProcesCellId + " " + id;
+            this.SubRouteName = name;
 
 
             Validate();

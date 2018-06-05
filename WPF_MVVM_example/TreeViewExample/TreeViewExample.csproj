@@ -161,7 +161,6 @@
     <Compile Include="UI\ViewModels\EditSubrouteViewModel.cs" />
     <Compile Include="UI\ViewModels\ParameterSheetViewModel.cs" />
     <Compile Include="UI\ViewModels\SetBinsViewModel.cs" />
-    <Compile Include="UI\ViewModels\SelectBinWindowViewModel.cs" />
     <Compile Include="UI\Views\AddParameterToObjectWindow.xaml.cs">
       <DependentUpon>AddParameterToObjectWindow.xaml</DependentUpon>
     </Compile>
@@ -182,9 +181,6 @@
     </Compile>
     <Compile Include="UI\Views\ParameterSheetWindow.xaml.cs">
       <DependentUpon>ParameterSheetWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Views\SelectBinWindow.xaml.cs">
-      <DependentUpon>SelectBinWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Views\SetBinsWindow.xaml.cs">
       <DependentUpon>SetBinsWindow.xaml</DependentUpon>
@@ -240,10 +236,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UI\Views\ParameterSheetWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Views\SelectBinWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

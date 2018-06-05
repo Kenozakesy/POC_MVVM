@@ -62,21 +62,6 @@ namespace TreeViewExample
             window.ShowDialog();
         }
 
-        public Bin OpenSelectBinWindow(ObservableCollection<Bin> binList)
-        {
-            SelectBinWindow window = new SelectBinWindow();
-            ((SelectBinWindowViewModel)window.DataContext).BinList = binList;
-            window.ShowDialog();
-
-            Bin bin = ((SelectBinWindowViewModel)window.DataContext).Bin;
-            return bin;
-        }
-
-        public int Refresh()
-        {
-            throw new NotImplementedException();
-        }
-  
         public void ShowMessage(string text)
         {
             MessageBox.Show(text);

@@ -285,17 +285,17 @@ namespace TreeViewExample.Business.Models
             }
         }
 
-        public void AddNewSubroute()
+        public void AddNewSubroute(string name)
         {
             List<int> subRouteIds = new List<int>();
             foreach (SubRoute sr in SubrouteList)
             {
-                string routeid = new String(sr.SubRouteId.Where(Char.IsDigit).ToArray());
+                string routeid = new string(sr.SubRouteId.Where(char.IsDigit).ToArray());
                 subRouteIds.Add(Convert.ToInt32(routeid));
             }
             int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(subRouteIds).FirstOrDefault();
 
-            SubRoute subroute = new SubRoute(this, "SR" + firstAvailable);
+            SubRoute subroute = new SubRoute(this, "SR" + firstAvailable, name);
             subroute.DatabaseInsert();
             subroute.ProcessCel = this;
             OrderObservableList.AddSorted(SubrouteList, subroute);
