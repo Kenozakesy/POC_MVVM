@@ -1,0 +1,852 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TreeViewExample.App" Collapsed="true">
+    <Position X="35.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIAAAgAMgQAAAAgAAAAAAAAAAAACBAABAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.bib_BinBatches" Collapsed="true">
+    <Position X="37" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIQMAAAgAAEAgAAAAAAAAAAAGGAAAAoAAABAAAAAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\bib_BinBatches.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.bir_BinsInSubRoutes" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAADQAgYAABAAAAAAAAAAIAAECICAAAIAFAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\bir_BinsInSubRoutes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.bis_BinStocks" Collapsed="true">
+    <Position X="44" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\bis_BinStocks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.pac_ParDefsProcCellTypes" Collapsed="true">
+    <Position X="38.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABCAAAAACAAAAAAAAAAAAAAAAAAAAAAEAAAQA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\pac_ParDefsProcCellTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.pat_ParTables" Collapsed="true">
+    <Position X="44" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAgAAgAAAAAAAAAAAAAgAAAAAAAEAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\pat_ParTables.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.pct_ProcCellTypes" Collapsed="true">
+    <Position X="45.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAgEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\pct_ProcCellTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.pri_PropIns" Collapsed="true">
+    <Position X="33.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACgQIAQARKEggAAAAQhQgEgMAEAAIQgSAhAAEAAQgQ=</HashCode>
+      <FileName>Business\Models\DatabaseModels\pri_PropIns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.sri_SubRoutesInRoutes" Collapsed="true">
+    <Position X="26.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAADQIkYAABgAQAgAAAAAIAAECIBAAAIABAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\sri_SubRoutesInRoutes.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.tbb_TempBinBatches" Collapsed="true">
+    <Position X="42.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAAgAAAAAAAAEAAAEAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\tbb_TempBinBatches.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.tpm_TableParMaps" Collapsed="true">
+    <Position X="44" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAACAAAAAAIAAAAAABAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\tpm_TableParMaps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModels.uis_UnitsInSubRoutes" Collapsed="true">
+    <Position X="45.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAABAAAAAIAAAAAAAAAAEAAAAAgAAAAAAAEA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\uis_UnitsInSubRoutes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DatabaseModelsF.opc_OAProcCellDefs" Collapsed="true">
+    <Position X="35.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAEAAAAAAAAAAAAAAAQAQAAAABACAAABA=</HashCode>
+      <FileName>Business\Models\DatabaseModels\opc_OAProcCellDefs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.Bin" Collapsed="true">
+    <Position X="10.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BghBjIzFChCTIgYAgRgIBSsaoBAAIIxEyIAigQIghIA=</HashCode>
+      <FileName>Business\Models\DiagramModels\Bin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.oar_OARcps" Collapsed="true">
+    <Position X="33.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEAAAAAAAAAQAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\Models\DiagramModels\oar_OARcps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.ProcessCel" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEwMABA4DgyXygYgIRiBAQGKQQQAIBANioAKDI4GBAA=</HashCode>
+      <FileName>Business\Models\DiagramModels\ProcessCel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.pru_Procedures" Collapsed="true">
+    <Position X="38.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEGAEAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Business\Models\DiagramModels\pru_Procedures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.Route" Collapsed="true">
+    <Position X="22" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>REoQEAIIBACSSgYEgFgEAIBCABACIAGESJBCAAIABAA=</HashCode>
+      <FileName>Business\Models\DiagramModels\Route.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.SubRoute" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABIAAAIABCQKwYggBAAAAgAABAAIMUFCYAAACIABAA=</HashCode>
+      <FileName>Business\Models\DiagramModels\SubRoute.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.Unit" Collapsed="true">
+    <Position X="28.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAJAAAIUAGAAgYCRBAACAAIAAAIIFAECIIQAAKABIA=</HashCode>
+      <FileName>Business\Models\DiagramModels\Unit.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DiagramModels.Parameters.bip_BinPars" Collapsed="true">
+    <Position X="31" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAYABAAABAAIAEAABAAAAAgCAAgAAIAAEA=</HashCode>
+      <FileName>Business\Models\DiagramModels\Parameters\bip_BinPars.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DiagramModels.Parameters.pca_ProcCellPars" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAIEAAAAAYABAAAFAAAAAAAAAAAAEgCAAgACIAAAA=</HashCode>
+      <FileName>Business\Models\DiagramModels\Parameters\pca_ProcCellPars.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DiagramModels.Parameters.rop_RoutePars" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAEAYAFAQABAAAEAAAAABAAAgCAAgAAIAAQA=</HashCode>
+      <FileName>Business\Models\DiagramModels\Parameters\rop_RoutePars.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DiagramModels.Parameters.EnumToArrayConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\UI_Models\EnumToArrayConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.DiagramModels.ParameterDefinition" Collapsed="true">
+    <Position X="12.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>A2y0Cii5AiseO2esoAEEiMIJQAYVIIMMKAAAuESIRjI=</HashCode>
+      <FileName>Business\Models\DiagramModels\Parameters\ParameterDefinition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.NonDiagramModels.MainListViewModel" Collapsed="true">
+    <Position X="15.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAABAAAAAAIAQAAQAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Business\Models\NonDiagramModels\MainListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Singletons.ListGodClass" Collapsed="true">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAAAABAGAACAABBAEAQgAAAAAAAAAQAAAAIAAAAA=</HashCode>
+      <FileName>Business\Singletons\ListGodClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Statics.Enumerations" Collapsed="true">
+    <Position X="44" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Business\Statics\Enumerations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Statics.OrderObservableList" Collapsed="true">
+    <Position X="37" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\Statics\OrderObservableList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.UI_Models.DragBehavior" Collapsed="true">
+    <Position X="38.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAQAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\UI_Models\DragBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.UI_Models.DragListViewItemBehavior" Collapsed="true">
+    <Position X="40.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\UI_Models\DragListViewItemBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.UI_Models.GreaterThan" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Business\UI_Models\GreaterThan.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Business.UI_Models.InformationFieldModel" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAIAAAgAAAAAAAAAIAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Business\UI_Models\InformationFieldModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.UI_Models.MouseBehaviour" Collapsed="true">
+    <Position X="38.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQFAAAAAAAQAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\UI_Models\MouseBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.UI_Models.MultiSelectionBehavior" Collapsed="true">
+    <Position X="44" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAEAgAgAAAAAAABAAAABAAgAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Business\UI_Models\MultiSelectionBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.UI_Models.MyCloneConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Business\UI_Models\MyCloneConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Business.Statics.UI_Models.EnumToStringConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\UI_Models\EnumToStringConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.EntityFramework.UniContext" Collapsed="true">
+    <Position X="33.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACgAAAgAQEAQAAoAkAAEAAAEAAAAEAgAAQAAAAgAQA=</HashCode>
+      <FileName>Dal\EntityFramework\UniContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.BinBusiness" Collapsed="true">
+    <Position X="38.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAACAACAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\BinBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.BinInSubrouteBusiness" Collapsed="true">
+    <Position X="40.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\BinInSubrouteBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.BinParameterBusiness" Collapsed="true">
+    <Position X="42.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\BinParameterBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.ProcesCellBusiness" Collapsed="true">
+    <Position X="35.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAAAAAAAAAAABAAAAEAAAAAAAAACAACAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\ProcesCellBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.ProcescellParameterBusiness" Collapsed="true">
+    <Position X="37" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\ProcescellParameterBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.RouteBusiness" Collapsed="true">
+    <Position X="45.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAAAAAAAAAAABAAAAAAAAAAAAAACAACAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\RouteBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.RouteParameterBusiness" Collapsed="true">
+    <Position X="33.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\RouteParameterBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.SubrouteBusiness" Collapsed="true">
+    <Position X="38.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\SubrouteBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.SubrouteInRouteBusiness" Collapsed="true">
+    <Position X="40.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\SubrouteInRouteBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.DatabaseConnection.ParameterDefinitionBusiness" Collapsed="true">
+    <Position X="40.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\BusinessGlueCode\ParameterDefinitionBusiness.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_BinInSubrouteRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_BinInSubrouteRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_BinParameterRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="42.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_BinParameterRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_BinRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="44" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAACAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_BinRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_ProcescellParameterRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_ProcescellParameterRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_ProcesCellRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAEAAEABAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_ProcesCellRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_RouteParameterRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_RouteParameterRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_RouteRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEABAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_RouteRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_SubRouteInRouteRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_SubRouteInRouteRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.Repository.SQLServerRepository.MSSQL_SubrouteRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="42.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_SubrouteRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Dal.SQLServerRepository.MSSQL_ParameterDefinitionRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\SQLServerRepository\MSSQL_ParameterDefinitionRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.Properties.Resources" Collapsed="true">
+    <Position X="44" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Properties.Settings" Collapsed="true">
+    <Position X="37" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_MVVM_example.UI.Commands.RelayCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="40.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAESAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>UI\Commands\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_MVVM_example.UI.Commands.RelayCommandT1&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="42.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEACAAQAAESAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>UI\Commands\RelayCommandT1.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.AddParameterToObjectViewModel" Collapsed="true">
+    <Position X="12.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAEAAAgAAgIACAEADSgAkAAAAAAAjCAIIgQAA=</HashCode>
+      <FileName>UI\ViewModels\AddParameterToObjectViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.CreateParameterViewModel" Collapsed="true">
+    <Position X="14.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIAAAAAAlhgAaMBICAEIQBDiIEBI5AEAAAABQACgCg=</HashCode>
+      <FileName>UI\ViewModels\CreateParameterViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.CreateProcesCellViewModel" Collapsed="true">
+    <Position X="17" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgQAAAAAAgAAEAAKCAAQgECgAEAACAAABAAAAAQCAA=</HashCode>
+      <FileName>UI\ViewModels\CreateProcesCellViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.CreateRouteViewModel" Collapsed="true">
+    <Position X="19.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAQAAAAAAAAAAIGAAAAACgEEAAAAAAAABAAAAACA=</HashCode>
+      <FileName>UI\ViewModels\CreateRouteViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.CreateSubrouteViewModel" Collapsed="true">
+    <Position X="1.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQBAAAAAAAAAAQICAACAACgAMAEAACAAAAAAAAACA=</HashCode>
+      <FileName>UI\ViewModels\CreateSubrouteViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.EditSubrouteViewModel" Collapsed="true">
+    <Position X="3.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAQAAAAAAIMAAYAAKgEEAAAAEAAAAIAQAAAA=</HashCode>
+      <FileName>UI\ViewModels\EditSubrouteViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.MainWindowViewModel" Collapsed="true">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kJYAFCgCJEWAAAAhJBAAAABKoAEACDAAhAAAEAAAACA=</HashCode>
+      <FileName>UI\ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.ParameterSheetViewModel" Collapsed="true">
+    <Position X="8" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACJABAEAAAAQAAIAAAAAACgAEAQAAAACAAAgAAQIA=</HashCode>
+      <FileName>UI\ViewModels\ParameterSheetViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.SetBinsViewModel" Collapsed="true">
+    <Position X="10.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAIABAMEEAAAAAICAAgCISwAECACAAAAAAAAABCUA=</HashCode>
+      <FileName>UI\ViewModels\SetBinsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.ViewModelBase" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WPF_MVVM_example.UI.ViewModels.ViewModel" Collapsed="true">
+    <Position X="10.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\ViewModels\ViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.AddParameterToObjectWindow" BaseTypeListCollapsed="true">
+    <Position X="30.5" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAgAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\AddParameterToObjectWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.CreateParameterWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="45.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\CreateParameterWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.CreateProcesCellWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\CreateProcesCellWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.CreateRouteWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\CreateRouteWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.CreateSubrouteWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="37" Y="1.5" Width="1.5" />
+    <Members>
+      <Method Name="CloseWindow" Hidden="true" />
+      <Method Name="ConfirmMessage" Hidden="true" />
+      <Method Name="CreateSubrouteWindow" Hidden="true" />
+      <Method Name="ShowMessage" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\CreateSubrouteWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.EditSubrouteWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="42.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\EditSubrouteWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.ParameterSheetWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="42.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\ParameterSheetWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TreeViewExample.UI.Views.SetBinsWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Views\SetBinsWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="TreeViewExample.Business.Interfaces.IConfigObject" Collapsed="true">
+    <Position X="2.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAgAAAAAAAAAAAAAAAAAEAIAAAAAABAA=</HashCode>
+      <FileName>Business\Interfaces\IConfigObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Business.Interfaces.IDatabaseModelsActions" Collapsed="true">
+    <Position X="1.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Business\Interfaces\IDatabaseModelsActions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Business.Interfaces.IObjectWithParameters" Collapsed="true">
+    <Position X="2.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAACAAAAAAAAAAACAAAAAAAAAAACAAAABAA=</HashCode>
+      <FileName>Business\Interfaces\IObjectWithParameters.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Business.Interfaces.IParameterObject" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAgAAAAAAA=</HashCode>
+      <FileName>Business\Interfaces\IParameterObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IBinInSubrouteRepository" Collapsed="true">
+    <Position X="12.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IBinInSubrouteRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IBinParameterRepository" Collapsed="true">
+    <Position X="15" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IBinParameterRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IBinRepository" Collapsed="true">
+    <Position X="17.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IBinRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IDatabaseActions" Collapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IDatabaseActions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IProcescellParameterRepository" Collapsed="true">
+    <Position X="19.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IProcescellParameterRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IProcesCellRepository" Collapsed="true">
+    <Position X="21.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAEABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IProcesCellRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IRouteParameterRepository" Collapsed="true">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IRouteParameterRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.IRouteRepository" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IRouteRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.ISubRouteInRouteRepository" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\ISubRouteInRouteRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Repository.Interfaces.ISubrouteRepository" Collapsed="true">
+    <Position X="8.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\ISubrouteRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.Dal.Interfaces.IParameterDefinitionRepository" Collapsed="true">
+    <Position X="10.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Dal\Repository\Interfaces\IParameterDefinitionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.IAddParameterToObjectView" Collapsed="true">
+    <Position X="14.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\IAddParameterToObjectView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.ICreateParameterView" Collapsed="true">
+    <Position X="17" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\ICreateParameterView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.ICreateProcesCellView" Collapsed="true">
+    <Position X="19.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\ICreateProcesCellView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.ICreateRouteView" Collapsed="true">
+    <Position X="1.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\ICreateRouteView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.ICreateSubrouteView" Collapsed="true">
+    <Position X="3.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\ICreateSubrouteView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.IEditSubrouteView" Collapsed="true">
+    <Position X="5.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\IEditSubrouteView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.IParameterSheetView" Collapsed="true">
+    <Position X="8" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\IParameterSheetView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TreeViewExample.UI.Interfaces.ISetBinsView" Collapsed="true">
+    <Position X="10.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\ISetBinsView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WPF_MVVM_example.UI.Interfaces.ITreeView" Collapsed="true">
+    <Position X="12.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAMAQAAAAgAAAAAAAAAAAACBAABAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\ITreeView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WPF_MVVM_example.UI.Interfaces.IView" Collapsed="true">
+    <Position X="10.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\Interfaces\IView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TreeViewExample.Business.Enums.Alignment">
+    <Position X="33.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAIAAA=</HashCode>
+      <FileName>Business\Enums\Alignment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TreeViewExample.Business.Enums.IsEditable">
+    <Position X="35.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAAAAAAA=</HashCode>
+      <FileName>Business\Enums\IsEditable.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TreeViewExample.Business.Enums.IsRequired">
+    <Position X="37" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\Enums\IsRequired.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TreeViewExample.Business.Enums.IsValidated">
+    <Position X="38.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAQAAAAAAAAAAgAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Business\Enums\IsValidated.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TreeViewExample.Business.Enums.ParameterType">
+    <Position X="40.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAEAAQAAgAAAQAAAAgAAAAgCAAwBAAAAAAAAAQA=</HashCode>
+      <FileName>Business\Enums\ParameterType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TreeViewExample.Business.Enums.ProcesCellType">
+    <Position X="42.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAcIQSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Business\Enums\ProcesCellType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TreeViewExample.Business.Enums.SourceDest">
+    <Position X="44" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAAAA=</HashCode>
+      <FileName>Business\Enums\SourceDest.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

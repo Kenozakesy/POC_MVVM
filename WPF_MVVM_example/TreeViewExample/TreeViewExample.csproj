@@ -148,7 +148,6 @@
     <Compile Include="UI\Interfaces\ICreateProcesCellView.cs" />
     <Compile Include="UI\Interfaces\ICreateRouteView.cs" />
     <Compile Include="UI\Interfaces\ICreateSubrouteView.cs" />
-    <Compile Include="UI\Interfaces\IDragDropView.cs" />
     <Compile Include="UI\Interfaces\IEditSubrouteView.cs" />
     <Compile Include="UI\Interfaces\IParameterSheetView.cs" />
     <Compile Include="UI\Interfaces\ISetBinsView.cs" />
@@ -261,6 +260,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

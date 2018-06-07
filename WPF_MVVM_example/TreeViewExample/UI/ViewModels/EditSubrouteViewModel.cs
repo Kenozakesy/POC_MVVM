@@ -53,6 +53,9 @@ namespace TreeViewExample.UI.ViewModels
         public void ManageLists()
         {
             SubRouteList = Route.GetSubrouteNotInRoute();
+
+            //tijdelijke sorteer oplossing
+            Route.SubrouteInRouteList = new ObservableCollection<sri_SubRoutesInRoutes>(Route.SubrouteInRouteList.OrderBy(i => i.sri_SeqNr));
         }
 
         #endregion

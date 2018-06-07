@@ -69,7 +69,11 @@ namespace TreeViewExample.Business.Models
         public virtual ObservableCollection<bir_BinsInSubRoutes> bir_BinsInSubRoutes
         {
             get { return _BinInSubRouteList; }
-            set { SetProperty(ref _BinInSubRouteList, value); }
+            set
+            {
+                SetProperty(ref _BinInSubRouteList, value);
+
+            }
         }
         public virtual ObservableCollection<bip_BinPars> bip_BinPars { get; set; }
         public virtual ObservableCollection<bib_BinBatches> bib_BinBatches { get; set; }

@@ -23,7 +23,7 @@ using TreeViewExample.Business.Enums;
 namespace TreeViewExample.Business.Models
 {
     [Table("rot_Routes")]
-    public class Route : ViewModelBase, IConfigObject, IObjectWithParameters
+    public class Route : ViewModelBase, IObjectWithParameters
     {
         RouteBusiness db = new RouteBusiness(new MSSQL_RouteRepository());
 

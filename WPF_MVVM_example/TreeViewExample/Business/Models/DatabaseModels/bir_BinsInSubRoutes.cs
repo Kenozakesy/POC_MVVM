@@ -12,6 +12,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
     using Enums;
     using Dal.Repository.BusinessGlueCode;
     using Dal.Repository.SQLServerRepository;
+    using Singletons;
 
     public partial class bir_BinsInSubRoutes : ViewModelBase, IConfigObject
     {
@@ -95,7 +96,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public string GetName()
         {
-            throw new NotImplementedException();
+            return "the connection with Bin: " + this.bir_BinId;
         }
 
         public bool DatabaseInsert()
@@ -108,9 +109,16 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         }
         public bool DatabaseDelete()
         {
-            //sur_SubRoutes.bir_BinsInSubRoutes.Remove(this);
-            //bin_Bins.bir_BinsInSubRoutes.Remove(this);
-            return db.DatabaseDelete(this);
+            bool check = db.DatabaseDelete(this);
+
+            //tijdelijke oplossing----
+            foreach (Bin B in ListGodClass.Instance.BinList)
+            {
+                B.Validate();
+            }
+            //------------------------
+
+            return check;
         }
 
         public string GetValidationMessage()

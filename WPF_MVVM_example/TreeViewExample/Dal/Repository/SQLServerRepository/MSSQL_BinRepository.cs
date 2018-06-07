@@ -29,7 +29,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 }
                 catch (Exception e)
                 {
-                    context.Dispose();
                     e.ToString();
                     return false;
                 }
@@ -38,7 +37,21 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
         public bool DatabaseInsert(object obj)
         {
-            throw new NotImplementedException();
+            Bin bin = obj as Bin;
+            using (var context = new UniContext())
+            {
+                try
+                {
+                    context.Bins.Add(bin);
+                    context.SaveChanges();
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                    return false;
+                }
+            }
         }
 
         public bool DatabaseUpdate(object obj)
@@ -57,7 +70,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 }
                 catch (Exception e)
                 {
-                    context.Dispose();
                     e.ToString();
                     return false;
                 }
