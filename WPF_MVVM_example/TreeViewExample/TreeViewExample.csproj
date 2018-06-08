@@ -71,9 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\Attributes\DatabaseProperty.cs" />
     <Compile Include="Business\Enums\Alignment.cs" />
     <Compile Include="Business\Enums\IsEditable.cs" />
-    <Compile Include="Business\Enums\IsRequired.cs" />
     <Compile Include="Business\Enums\IsValidated.cs" />
     <Compile Include="Business\Enums\ParameterType.cs" />
     <Compile Include="Business\Enums\ProcesCellType.cs" />

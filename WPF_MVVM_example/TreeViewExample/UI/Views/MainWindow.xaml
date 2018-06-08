@@ -18,8 +18,12 @@
             <Setter Property="BorderBrush" Value="LightGray" />
             <Setter Property="BorderThickness" Value="0 0 0 1" />
         </Style>
-        <Style x:Key="TreeViewItemStyle" TargetType="TreeViewItem">
+        <Style x:Key="ItemContainerStyle" TargetType="{x:Type TreeViewItem}" >
+            <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded}" />
+        </Style>
+        <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}">
             <Setter Property="Margin" Value="12 0 0 0" />
+            <Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}" />
         </Style>
         <Style x:Key="HeaderStyle" TargetType="TreeViewItem">
             <Setter Property="FontSize" Value="20" />
@@ -94,7 +98,8 @@
             <Setter Property="FontWeight" Value="Bold"></Setter>
         </Style>
 
-        <HierarchicalDataTemplate ItemsSource="{Binding Path=RouteList}" DataType="{x:Type this:ProcessCel}" >
+        <HierarchicalDataTemplate ItemsSource="{Binding Path=RouteList}" DataType="{x:Type this:ProcessCel}">
+
             <Label Content="{Binding Path=ProcesCellId}" ContentStringFormat="ProcesCell: {0}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MyLabelStyleProc}">
                 <Label.ContextMenu>
                     <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
@@ -239,8 +244,6 @@
 
             </Label>
         </DataTemplate>
-
-
     </Window.Resources>
        
     <Grid>
@@ -310,13 +313,13 @@
         </Border>
 
         <Border Grid.Column="0" Grid.Row="1" Style="{StaticResource BorderStyle}">
-            <TreeView BorderThickness="0" > 
-                       
-                <TreeViewItem Header="Configuration tree" IsExpanded="True" FontSize="30" FontWeight="Bold" >
+            <TreeView BorderThickness="0">
 
+                <TreeViewItem Header="Configuration tree" IsExpanded="True" FontSize="30" FontWeight="Bold">
                     <Border BorderBrush="Gray" BorderThickness="0 1 0 1" Width="230" Height="4" HorizontalAlignment="Center" />
 
                     <TreeViewItem Header="ProcessCells" IsExpanded="True" ItemsSource="{Binding Path=ProcessCelList}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" Style="{StaticResource HeaderStyle}" Tag="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+
                         <TreeViewItem.ContextMenu>
                             <ContextMenu Tag="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
 
@@ -358,22 +361,18 @@
         <GridSplitter Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Width="3" BorderBrush="Black" BorderThickness="0.5 0" ></GridSplitter>
 
         <Border Style="{StaticResource BorderStyle}" Grid.Column="2" Grid.Row="1">
-            <StackPanel>
+            <ListView Margin="0" ItemsSource="{Binding Path=ListView}" ItemContainerStyle="{StaticResource ListItemStyle}">
+                <ListView.View>
+                    <GridView>
 
-                <ListView Margin="0" ItemsSource="{Binding Path=ListView}" ItemContainerStyle="{StaticResource ListItemStyle}">
- 
-                    <ListView.View>
-                        <GridView>
-
-                            <GridViewColumn Header="Name" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Name}" />
-                            <GridViewColumn Header="Value" Width="250" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Value}"/>
-                            <GridViewColumn Header="Original object" Width="180" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=OrginalObject}"/>
+                        <GridViewColumn Header="Name" Width="120" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Name}" />
+                        <GridViewColumn Header="Value" Width="250" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=Value}"/>
+                        <GridViewColumn Header="Original object" Width="180" HeaderContainerStyle="{StaticResource GridViewColumnHeader}" DisplayMemberBinding="{Binding Path=OrginalObject}"/>
                             
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
                 
-            </StackPanel>
         </Border>
 
     </Grid>

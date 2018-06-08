@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Windows.Media;
+using TreeViewExample.Business.Attributes;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DatabaseModels;
@@ -22,7 +23,7 @@ namespace TreeViewExample.Business.Models
     {
         private SubrouteBusiness db = new SubrouteBusiness(new MSSQL_SubrouteRepository());
 
-
+        private bool _IsExpanded;
         private Brush _Brush;
         private static Random ran = new Random();
 
@@ -53,6 +54,12 @@ namespace TreeViewExample.Business.Models
 
         #region Properties
 
+        [NotMapped]
+        public bool IsExpanded
+        {
+            get { return _IsExpanded; }
+            set { SetProperty(ref _IsExpanded, value); }
+        }
         [NotMapped]
         public Brush Brush
         {
@@ -92,6 +99,7 @@ namespace TreeViewExample.Business.Models
         }
 
         [Key]
+        [DatabaseProperty]
         [Column("sur_ProcCellId", Order = 0)]
         public string ProcesCellId
         {
@@ -99,12 +107,14 @@ namespace TreeViewExample.Business.Models
             set { SetProperty(ref _ProcesCellId, value); }
         }
         [Key]
+        [DatabaseProperty]
         [Column("sur_SubRouteId", Order = 1)]
         public string SubRouteId
         {
             get { return _SubRouteId; }
             set { SetProperty(ref _SubRouteId, value); }
         }
+        [DatabaseProperty]
         [Column("sur_SubRouteNm")]
         public string SubRouteName
         {
@@ -213,17 +223,32 @@ namespace TreeViewExample.Business.Models
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
-            //foreach (var prop in this.GetType().GetProperties())
-            //{
-            //    if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
-            //    {
-            //        continue;
-            //    }
-            //    string name = prop.Name;
-            //    string value = prop.GetValue(this, null).ToString();
-            //    MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
-            //    configList.Add(mainListViewModel);
-            //}
+
+            foreach (var prop in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(DatabaseProperty))))
+            {
+                string name = prop.Name;
+                var varValue = prop.GetValue(this, null);
+                string value = "";
+
+                if (varValue == null)
+                    value = "Null";
+                else
+                    value = varValue.ToString();
+
+                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.SubRouteName);
+                configList.Add(mainListViewModel);
+            }
+
+            if (IsExpanded)
+            {
+                foreach (bir_BinsInSubRoutes bir in bir_BinsInSubRoutes)
+                {
+                    configList.Add(new MainListViewModel("", "", ""));
+                    List<MainListViewModel> routeConfigList = bir.GenerateListViewList();
+                    configList.AddRange(routeConfigList);
+                }
+            }
+
             return configList;
         }
 

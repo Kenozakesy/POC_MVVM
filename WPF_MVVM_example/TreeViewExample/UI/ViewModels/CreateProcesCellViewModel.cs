@@ -69,8 +69,10 @@ namespace TreeViewExample.UI.ViewModels
 
         private void SaveProcesCell()
         {
-            ProcesCell.DatabaseInsert();
-            OrderObservableList.AddSorted(procesCellList, ProcesCell);
+            if (ProcesCell.DatabaseInsert())
+            {
+                OrderObservableList.AddSorted(procesCellList, ProcesCell);
+            }
             _View.CloseWindow();
         }
 

@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Media;
+using TreeViewExample.Business.Attributes;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DatabaseModelsF;
@@ -30,6 +32,7 @@ namespace TreeViewExample.Business.Models
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<SubRoute> _SubrouteList = new ObservableCollection<SubRoute>();
 
+        private bool _IsExpanded;
         private Brush _Brush;
         private static Random ran = new Random();
         private IsValidated _Isvalid;
@@ -64,6 +67,7 @@ namespace TreeViewExample.Business.Models
         {
             pca_ProcCellPars = new ObservableCollection<pca_ProcCellPars>();
             Validate();
+
 
         }
 
@@ -108,7 +112,12 @@ namespace TreeViewExample.Business.Models
         public virtual ObservableCollection<pca_ProcCellPars> pca_ProcCellPars { get; set; }
         public virtual ObservableCollection<opc_OAProcCellDefs> opc_OAProcCellDefs { get; set; }
 
-        
+        [NotMapped]
+        public bool IsExpanded
+        {
+            get { return _IsExpanded; }
+            set { SetProperty(ref _IsExpanded, value); }
+        }
         [NotMapped]
         public ProcesCellType ProcesCellType
         {
@@ -183,66 +192,77 @@ namespace TreeViewExample.Business.Models
         #region prc_columns properties
 
         [Key]
+        [DatabaseProperty]
         [Column("prc_ProcCellId")]
         public string ProcesCellId
         {
             get { return _ProcesCellId; }
             set { SetProperty(ref _ProcesCellId, value); }
         }
+        [DatabaseProperty]
         [Column("prc_ProcCellNm")]
         public string ProcesCellName
         {
             get { return _ProcesCellName; }
             set { SetProperty(ref _ProcesCellName, value); }
         }
+        [DatabaseProperty]
         [Column("prc_ShortProcCellNm")]
         public string ShortProcesCellName
         {
             get { return _ShortProcesCellName; }
             set { SetProperty(ref _ShortProcesCellName, value); }
         }
+        [DatabaseProperty]
         [Column("prc_ProdLocked")]
         public bool ProdLocked
         {
             get { return _ProdLocked; }
             set { SetProperty(ref _ProdLocked, value); }
         }
+        [DatabaseProperty]
         [Column("prc_ProcCellTypeId")]
         public string ProcesCellTypeId
         {
             get { return _ProcesCellTypeId; }
             set { SetProperty(ref _ProcesCellTypeId, value); }
         }
+        [DatabaseProperty]
         [Column("prc_OAProcCellId")]
         public string OAProcesCellId
         {
             get { return _OAProcesCellId; }
             set { SetProperty(ref _OAProcesCellId, value); }
         }
+        [DatabaseProperty]
         [Column("prc_OABatchReqObjectNm")]
         public string OABatchReqObjectName
         {
             get { return _OABatchReqObjectName; }
             set { SetProperty(ref _OABatchReqObjectName, value); }
         }
+        [DatabaseProperty]
         [Column("prc_BatchRegTypeId")]
         public string BatchRegTypeId
         {
             get { return _BatchRegTypeId; }
             set { SetProperty(ref _BatchRegTypeId, value); }
         }
+        [DatabaseProperty]
         [Column("prc_BatchStartTypeId")]
         public string BatchStartTypeId
         {
             get { return _BatchStartTypeId; }
             set { SetProperty(ref _BatchStartTypeId, value); }
         }
+        [DatabaseProperty]
         [Column("prc_BatchOptions")]
         public string BatchOptions
         {
             get { return _BatchOptions; }
             set { SetProperty(ref _BatchOptions, value); }
         }
+        [DatabaseProperty]
         [Column("prc_Display")]
         public string Display
         {
@@ -284,7 +304,6 @@ namespace TreeViewExample.Business.Models
                 AddParameter(PD);
             }
         }
-
         public void AddNewSubroute(string name)
         {
             List<int> subRouteIds = new List<int>();
@@ -362,7 +381,6 @@ namespace TreeViewExample.Business.Models
                 BatchOptions += "R";
             }
         }
-
         public void ChangeColor()
         {
             switch (IsValid)
@@ -378,7 +396,6 @@ namespace TreeViewExample.Business.Models
                     break;
             }
         }
-
         public bool Validate()
         {
             List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
@@ -441,17 +458,30 @@ namespace TreeViewExample.Business.Models
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
 
-            //foreach (var prop in this.GetType().GetProperties())
-            //{
-            //    if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
-            //    {
-            //        continue;
-            //    }
-            //    string name = prop.Name;
-            //    string value = prop.GetValue(this, null).ToString();
-            //    MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.ProcesCellId);
-            //    configList.Add(mainListViewModel);
-            //}
+            foreach (var prop in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(DatabaseProperty))))
+            {
+                string name = prop.Name;
+                var varValue = prop.GetValue(this, null);
+                string value = "";
+
+                if (varValue == null)
+                    value = "Null";
+                else
+                    value = varValue.ToString();
+                
+                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.ProcesCellId);
+                configList.Add(mainListViewModel);
+            }
+
+            if (IsExpanded)
+            {
+                foreach (Route R in RouteList)
+                {
+                    configList.Add(new MainListViewModel("", "", ""));
+                    List<MainListViewModel> routeConfigList = R.GenerateListViewList();
+                    configList.AddRange(routeConfigList);
+                }
+            }
 
             return configList;
         }

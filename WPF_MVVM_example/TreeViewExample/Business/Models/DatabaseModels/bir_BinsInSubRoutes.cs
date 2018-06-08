@@ -16,10 +16,11 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
     public partial class bir_BinsInSubRoutes : ViewModelBase, IConfigObject
     {
+        private static BinInSubrouteBusiness db = new BinInSubrouteBusiness(new MSSQL_BinInSubrouteRepository());
 
         #region Fields
 
-        BinInSubrouteBusiness db = new BinInSubrouteBusiness(new MSSQL_BinInSubrouteRepository());
+        private bool _IsExpanded;
         private Brush _Brush;
 
         #endregion
@@ -63,6 +64,12 @@ namespace TreeViewExample.Business.Models.DatabaseModels
         public virtual SubRoute sur_SubRoutes { get; set; }
 
         [NotMapped]
+        public bool IsExpanded
+        {
+            get { return _IsExpanded; }
+            set { SetProperty(ref _IsExpanded, value); }
+        }
+        [NotMapped]
         public Brush Brush
         {
             get { return bin_Bins.Brush; }
@@ -83,14 +90,14 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public List<MainListViewModel> GenerateListViewList()
         {
-            throw new NotImplementedException();
+            List<MainListViewModel> configList = new List<MainListViewModel>();
+            configList.AddRange(bin_Bins.GenerateListViewList());
+            return configList;
         }
 
         public int CompareTo(object obj)
         {
             bir_BinsInSubRoutes binInSubroute = obj as bir_BinsInSubRoutes;
-
-
             return binInSubroute.bin_Bins.CompareTo(bin_Bins);
         }
 

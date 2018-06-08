@@ -20,6 +20,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
     {
         #region Fields
 
+        private bool _IsExpanded;
         private Brush _Brush;
         SubrouteInRouteBusiness db = new SubrouteInRouteBusiness(new MSSQL_SubRouteInRouteRepository());
 
@@ -60,6 +61,12 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
 
         [NotMapped]
+        public bool IsExpanded
+        {
+            get { return _IsExpanded; }
+            set { SetProperty(ref _IsExpanded, value); }
+        }
+        [NotMapped]
         public Brush Brush
         {
             get { return sur_SubRoutes.Brush; }
@@ -73,17 +80,6 @@ namespace TreeViewExample.Business.Models.DatabaseModels
             sur_SubRoutes.ChangeColor();
         }
 
-
-        public void DeleteChild(IConfigObject obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreateChild()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Validate()
         {
             throw new NotImplementedException();
@@ -91,8 +87,19 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public List<MainListViewModel> GenerateListViewList()
         {
-            // throw new NotImplementedException();
-            return null;
+            List<MainListViewModel> configList = new List<MainListViewModel>();
+            configList.AddRange(sur_SubRoutes.GenerateListViewList());
+
+            if (IsExpanded)
+            {
+                foreach (bir_BinsInSubRoutes bir in sur_SubRoutes.bir_BinsInSubRoutes)
+                {
+                    configList.Add(new MainListViewModel("", "", ""));
+                    List<MainListViewModel> routeConfigList = bir.GenerateListViewList();
+                    configList.AddRange(routeConfigList);
+                }
+            }
+            return configList;
         }
 
         public int CompareTo(object obj)
@@ -103,7 +110,7 @@ namespace TreeViewExample.Business.Models.DatabaseModels
 
         public string GetName()
         {
-            return sur_SubRoutes.GetName(); 
+            return "the connection with subroute: " + this.sri_SubRouteId;
         }
 
         #endregion

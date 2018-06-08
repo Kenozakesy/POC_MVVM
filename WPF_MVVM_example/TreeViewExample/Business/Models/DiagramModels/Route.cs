@@ -19,6 +19,7 @@ using System.Data.Entity;
 using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Enums;
+using TreeViewExample.Business.Attributes;
 
 namespace TreeViewExample.Business.Models
 {
@@ -33,6 +34,7 @@ namespace TreeViewExample.Business.Models
         private ObservableCollection<sri_SubRoutesInRoutes> _SubrouteInRouteList = new ObservableCollection<sri_SubRoutesInRoutes>();
         private ObservableCollection<SubRoute> _SubRouteList = new ObservableCollection<SubRoute>();
 
+        private bool _IsExpanded;
         private Brush _Brush;
         private static Random ran = new Random();
         private IsValidated _Isvalid;
@@ -80,6 +82,12 @@ namespace TreeViewExample.Business.Models
         #region Properties
 
         [NotMapped]
+        public bool IsExpanded
+        {
+            get { return _IsExpanded; }
+            set { SetProperty(ref _IsExpanded, value); }
+        }
+        [NotMapped]
         public Brush Brush
         {
             get { return _Brush; }
@@ -114,6 +122,7 @@ namespace TreeViewExample.Business.Models
         #region rot_Routes Columns
 
         [Key]
+        [DatabaseProperty]
         [Column("rot_ProcCellId", Order = 0)]
         public string ProcesCellId
         {
@@ -121,36 +130,42 @@ namespace TreeViewExample.Business.Models
             set { SetProperty(ref _ProcesCellId, value); }
         }
         [Key]
+        [DatabaseProperty]
         [Column("rot_RouteId", Order = 1)]
         public string RouteId
         {
             get { return _RouteId; }
             set { SetProperty(ref _RouteId, value); }
         }
+        [DatabaseProperty]
         [Column("rot_RouteNm")]
         public string RouteName
         {
             get { return _RouteName; }
             set { SetProperty(ref _RouteName, value); }
         }
+        [DatabaseProperty]
         [Column("rot_ShortRouteNm")]
         public string ShortRouteName
         {
             get { return _ShortRouteName; }
             set { SetProperty(ref _ShortRouteName, value); }
         }
+        [DatabaseProperty]
         [Column("rot_ProcedureId")]
         public string ProcedureId
         {
             get { return _ProcedureId; }
             set { SetProperty(ref _ProcedureId, value); }
         }
+        [DatabaseProperty]
         [Column("rot_Available")]
         public int Available
         {
             get { return _Available; }
             set { SetProperty(ref _Available, value); }
         }
+        [DatabaseProperty]
         [Column("rot_SelectPriority")]
         public int SelectPriority
         {
@@ -236,17 +251,32 @@ namespace TreeViewExample.Business.Models
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
-            //foreach (var prop in this.GetType().GetProperties())
-            //{
-            //    if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
-            //    {
-            //        continue;
-            //    }
-            //    string name = prop.Name;
-            //    string value = prop.GetValue(this, null).ToString();
-            //    MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
-            //    configList.Add(mainListViewModel);
-            //}
+
+            foreach (var prop in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(DatabaseProperty))))
+            {
+                string name = prop.Name;
+                var varValue = prop.GetValue(this, null);
+                string value = "";
+
+                if (varValue == null)
+                    value = "Null";
+                else
+                    value = varValue.ToString();
+
+                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.RouteName);
+                configList.Add(mainListViewModel);
+            }
+
+            if (IsExpanded)
+            {
+                foreach (sri_SubRoutesInRoutes SR in SubrouteInRouteList)
+                {
+                    configList.Add(new MainListViewModel("", "", ""));
+                    List<MainListViewModel> routeConfigList = SR.GenerateListViewList();
+                    configList.AddRange(routeConfigList);
+                }
+            }
+
             return configList;
         }
         public ObservableCollection<IParameterObject> GetParameterList()

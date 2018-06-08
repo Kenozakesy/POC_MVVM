@@ -121,12 +121,12 @@ namespace TreeViewExample.UI.ViewModels
         }
         private void ShowPropInList(IConfigObject obj)
         {
-            //ListView.Clear();
-            //List<MainListViewModel> listView = obj.GenerateListViewList();
-            //foreach (MainListViewModel ML in listView)
-            //{
-            //    ListView.Add(ML);
-            //}        
+            ListView.Clear();
+            List<MainListViewModel> listView = obj.GenerateListViewList();
+            foreach (MainListViewModel ML in listView)
+            {
+                ListView.Add(ML);
+            }
         }
         private void ValidateObject(IConfigObject obj)
         {

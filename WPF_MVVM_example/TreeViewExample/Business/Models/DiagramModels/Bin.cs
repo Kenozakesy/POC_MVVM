@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using TreeViewExample.Business.Attributes;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Interfaces;
 using TreeViewExample.Business.Models.DatabaseModels;
@@ -84,117 +85,125 @@ namespace TreeViewExample.Business.Models
         #region BIN columns
 
         [Key]
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_BinId { get; set; }
 
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_BinNm { get; set; }
 
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_ArtId { get; set; }
-
+        [DatabaseProperty]
         public double? bin_Cap { get; set; }
-
+        [DatabaseProperty]
         public double bin_Stock { get; set; }
 
         [Required]
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_StatusFill { get; set; }
 
         [Required]
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_StatusDisc { get; set; }
-
+        [DatabaseProperty]
         public int bin_PropPrioNr { get; set; }
-
+        [DatabaseProperty]
         public DateTime? bin_DateEmpty { get; set; }
-
+        [DatabaseProperty]
         public DateTime? bin_TimeEmpty { get; set; }
-
+        [DatabaseProperty]
         public DateTime? bin_DateCleaned { get; set; }
-
+        [DatabaseProperty]
         public DateTime? bin_TimeCleaned { get; set; }
-
+        [DatabaseProperty]
         public DateTime? bin_DateFilledUp { get; set; }
-
+        [DatabaseProperty]
         public DateTime? bin_TimeFilledUp { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_ProdOrderId { get; set; }
-
+        [DatabaseProperty]
         public int bin_PropPosSeqNr { get; set; }
-
+        [DatabaseProperty]
         public int? bin_NoFlowDetected { get; set; }
 
         [Required]
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_LocTypeId { get; set; }
-
+        [DatabaseProperty]
         public double? bin_MaxLevel { get; set; }
-
+        [DatabaseProperty]
         public double? bin_CallLevel { get; set; }
-
+        [DatabaseProperty]
         public double? bin_MinLevel { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_LevelUOM { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_OccupControler { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_StockControler { get; set; }
-
+        [DatabaseProperty]
         public int? bin_DefViewSequence { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_OptRcp { get; set; }
-
+        [DatabaseProperty]
         [StringLength(256)]
         public string bin_OAObjectNm { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_DeclaredEmpty { get; set; }
-
+        [DatabaseProperty]
         public int? bin_IsFGBin { get; set; }
-
+        [DatabaseProperty]
         public int? bin_IsSemiFinishedBin { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_Options { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_LocBatchId { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_BinDivideCode { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_LocTypeFeedtrac { get; set; }
-
+        [DatabaseProperty]
         public int bin_EmptyInterval { get; set; }
-
+        [DatabaseProperty]
         public int bin_EmptyControl { get; set; }
 
         [Required]
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_BinBlocked { get; set; }
 
         [Required]
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_BinGroupId { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_WareHouseId { get; set; }
-
+        [DatabaseProperty]
         public double? bin_DimLStraight { get; set; }
-
+        [DatabaseProperty]
         public double? bin_DimLAngled { get; set; }
-
+        [DatabaseProperty]
         public double? bin_DimAMax { get; set; }
-
+        [DatabaseProperty]
         public double? bin_DimAMin { get; set; }
-
+        [DatabaseProperty]
         [StringLength(50)]
         public string bin_WareHousePositionId { get; set; }
 
@@ -264,17 +273,22 @@ namespace TreeViewExample.Business.Models
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();
-            //foreach (var prop in this.GetType().GetProperties())
-            //{
-            //    if (!prop.PropertyType.FullName.StartsWith("System.") || prop.Name == "Brush")
-            //    {
-            //        continue;
-            //    }
-            //    string name = prop.Name;
-            //    string value = prop.GetValue(this, null).ToString();
-            //    MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.Name);
-            //    configList.Add(mainListViewModel);
-            //}
+
+            foreach (var prop in this.GetType().GetProperties().Where(prop => Attribute.IsDefined(prop, typeof(DatabaseProperty))))
+            {
+                string name = prop.Name;
+                var varValue = prop.GetValue(this, null);
+                string value = "";
+
+                if (varValue == null)
+                    value = "Null";
+                else
+                    value = varValue.ToString();
+
+                MainListViewModel mainListViewModel = new MainListViewModel(name, value, this.bin_BinNm);
+                configList.Add(mainListViewModel);
+            }
+
             return configList;
         }
         public int CompareTo(object obj)
