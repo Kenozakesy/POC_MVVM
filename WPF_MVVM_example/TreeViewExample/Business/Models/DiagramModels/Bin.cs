@@ -226,7 +226,7 @@ namespace TreeViewExample.Business.Models
         }
         public void AddRequiredParameters()
         {
-           throw new NotImplementedException();
+            //this method is implemented yet
         }
 
         public bool Validate()
@@ -360,7 +360,7 @@ namespace TreeViewExample.Business.Models
 
         public string GetValidationMessage()
         {
-            throw new NotImplementedException();
+            return "Object is valid.";
         }
 
 

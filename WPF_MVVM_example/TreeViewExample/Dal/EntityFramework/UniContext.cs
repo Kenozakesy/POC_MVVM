@@ -18,33 +18,37 @@ namespace TreeViewExample.Dal.EntityFramework
         {
             //STG_KWAR_PROMASST_MES_V7.3.0
             //PROMASST_MES_V7.4.0
+
+            this.Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+            Database.Log = s => { };
         }
 
         #region DBsets
 
-        public DbSet<ParameterDefinition> ParameterDefinitions { get; set; }
-        public DbSet<pca_ProcCellPars> ProcescellParameters { get; set; }
-        public DbSet<rop_RoutePars> RouteParameters { get; set; }
-        public DbSet<bip_BinPars> BinParameters { get; set; }
+        public IDbSet<ParameterDefinition> ParameterDefinitions { get; set; }
+        public IDbSet<pca_ProcCellPars> ProcescellParameters { get; set; }
+        public IDbSet<rop_RoutePars> RouteParameters { get; set; }
+        public IDbSet<bip_BinPars> BinParameters { get; set; }
 
 
 
-        public DbSet<tpm_TableParMaps> tpm_TableParMaps { get; set; }
-        public DbSet<pat_ParTables> pat_ParTables { get; set; }
-        public DbSet<pac_ParDefsProcCellTypes> pac_ParDefsProcCellTypes { get; set; }
-        public DbSet<pct_ProcCellTypes> pct_ProcCellTypes { get; set; }
+        public IDbSet<tpm_TableParMaps> tpm_TableParMaps { get; set; }
+        public IDbSet<pat_ParTables> pat_ParTables { get; set; }
+        public IDbSet<pac_ParDefsProcCellTypes> pac_ParDefsProcCellTypes { get; set; }
+        public IDbSet<pct_ProcCellTypes> pct_ProcCellTypes { get; set; }
 
 
 
-        public DbSet<ProcessCel> ProcesCells { get; set; }
-        public DbSet<Route> Routes { get; set; }
-        public DbSet<SubRoute> SubRoutes { get; set; }
-        public DbSet<Bin> Bins { get; set; }
-        public DbSet<bis_BinStocks> BinStock { get; set; }
-        public DbSet<pru_Procedures> Procedures { get; set; }
-        public DbSet<oar_OARcps> OARrecipes { get; set; }
-        public DbSet<sri_SubRoutesInRoutes> SubRoutesInRoutes { get; set; }
-        public DbSet<bir_BinsInSubRoutes> BinsInSubroutes { get; set; }
+        public IDbSet<ProcessCel> ProcesCells { get; set; }
+        public IDbSet<Route> Routes { get; set; }
+        public IDbSet<SubRoute> SubRoutes { get; set; }
+        public IDbSet<Bin> Bins { get; set; }
+        public IDbSet<bis_BinStocks> BinStock { get; set; }
+        public IDbSet<pru_Procedures> Procedures { get; set; }
+        public IDbSet<oar_OARcps> OARrecipes { get; set; }
+        public IDbSet<sri_SubRoutesInRoutes> SubRoutesInRoutes { get; set; }
+        public IDbSet<bir_BinsInSubRoutes> BinsInSubroutes { get; set; }
 
 
         #endregion

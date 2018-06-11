@@ -39,7 +39,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 }
                 catch (Exception e)
                 {
-                    context.Dispose();
                     e.ToString();
                     return false;
                 }
@@ -49,9 +48,10 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
         public bool DatabaseInsert(object obj)
         {
             ProcessCel cell = obj as ProcessCel;
-            using (var context = new UniContext())
+         
+            try
             {
-                try
+                using (var context = new UniContext())
                 {
                     foreach (pca_ProcCellPars pca in cell.pca_ProcCellPars)
                     {
@@ -59,16 +59,16 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                     }
 
                     context.ProcesCells.Add(cell);
-                    context.SaveChanges();
-                    return true;
+                    context.SaveChanges();                  
                 }
-                catch (Exception e)
-                {
-                    context.Dispose();
-                    e.ToString();
-                    return false;
-                }
+                return true;
             }
+            catch (Exception e)
+            {
+                e.ToString();                   
+                return false;
+            }
+            
         }
 
         public bool DatabaseUpdate(object obj)
@@ -111,20 +111,20 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
                                   .Include(x => x.opc_OAProcCellDefs)
                                   .Include(x => x.opc_OAProcCellDefs.Select(z => z.prc_ProcCells))
+    
+                                  //.Include(x => x.RouteList)
+                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars))
+                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.rot_Routes)))
+                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition)))
+                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList)))
 
-                                  .Include(x => x.RouteList)
-                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars))
-                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.rot_Routes)))
-                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition)))
-                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList)))
+                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures))
+                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures.rot_Routes))
 
-                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures))
-                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.rot_Routes))
+                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps))
+                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures)))
 
-                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps))
-                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures)))
-
-                                  .Include(x => x.RouteList.Select(y => y.SubrouteInRouteList))
+                                  //.Include(x => x.RouteList.Select(y => y.SubrouteInRouteList))
 
                                   .Include(x => x.SubrouteList)
                                   .Include(x => x.SubrouteList.Select(y => y.sri_SubRoutesInRoutes))
@@ -138,6 +138,23 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   .Include(x => x.SubrouteList.Select(y => y.uis_UnitsInSubRoutes.Select(z => z.Unit.uis_UnitsInSubRoutes.Select(s => s.sur_SubRoutes))))
                                   select r);
                     procescells = select.ToList();
+
+                    var selectRoutes = (from r in context.Routes
+                            .Include(z => z.rop_RoutePars)
+                            .Include(z => z.rop_RoutePars.Select(y => y.rot_Routes))
+                            .Include(z => z.rop_RoutePars.Select(y => y.ParameterDefinition))
+                            .Include(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList))
+
+                            .Include(z => z.pru_Procedures)
+                            .Include(z => z.pru_Procedures.rot_Routes)
+
+                            .Include(z => z.pru_Procedures.oar_OARcps)
+                            .Include(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures))
+
+                            .Include(y => y.SubrouteInRouteList)
+
+                            select r);
+                    List<Route> routes = selectRoutes.ToList();
 
                     var query = (from r in context.Bins
                             .Include(x => x.bip_BinPars)
@@ -160,9 +177,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                     //hier moet nog iets komen voor de parameterdefinities
 
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    context.Dispose();
+                    e.ToString();
                 }
             }
             return procescells;
@@ -188,7 +205,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 }
                 catch (Exception)
                 {
-                    context.Dispose();
                 }
             }
             return paramdefs;

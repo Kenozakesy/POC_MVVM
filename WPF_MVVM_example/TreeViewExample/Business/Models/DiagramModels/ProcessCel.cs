@@ -27,7 +27,7 @@ namespace TreeViewExample.Business.Models
     [Table("prc_ProcCells")]
     public class ProcessCel : ViewModelBase, IObjectWithParameters
     {
-        private static ProcesCellBusiness db = new ProcesCellBusiness(new MSSQL_ProcesCellRepository());
+        private  ProcesCellBusiness db = new ProcesCellBusiness(new MSSQL_ProcesCellRepository());
 
         private ObservableCollection<Route> _RouteList = new ObservableCollection<Route>();
         private ObservableCollection<SubRoute> _SubrouteList = new ObservableCollection<SubRoute>();
@@ -324,7 +324,7 @@ namespace TreeViewExample.Business.Models
             List<int> RouteIds = new List<int>();
             foreach (Route r in RouteList)
             {
-                string routeid = new String(r.RouteId.Where(Char.IsDigit).ToArray());
+                string routeid = new string(r.RouteId.Where(char.IsDigit).ToArray());
                 RouteIds.Add(Convert.ToInt32(routeid));
             }
             int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(RouteIds).FirstOrDefault();
@@ -485,7 +485,7 @@ namespace TreeViewExample.Business.Models
 
             return configList;
         }
-        public static ObservableCollection<ProcessCel> GetAllProcesCells()
+        public ObservableCollection<ProcessCel> GetAllProcesCells()
         {
              return db.GetAllProcesCells();
         }

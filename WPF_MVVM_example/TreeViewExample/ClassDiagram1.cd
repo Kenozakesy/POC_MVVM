@@ -109,13 +109,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="TreeViewExample.Business.Models.oar_OARcps" Collapsed="true">
-    <Position X="33.5" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAEAAAAAAAAAQAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Business\Models\DiagramModels\oar_OARcps.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="TreeViewExample.Business.Models.ProcessCel" Collapsed="true">
     <Position X="17.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
@@ -158,18 +151,16 @@
   <Class Name="TreeViewExample.Business.Models.DiagramModels.Parameters.bip_BinPars" Collapsed="true">
     <Position X="31" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAYABAAABAAIAEAABAAAAAgCAAgAAIAAEA=</HashCode>
+      <HashCode>AAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Business\Models\DiagramModels\Parameters\bip_BinPars.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="TreeViewExample.Business.Models.DiagramModels.Parameters.pca_ProcCellPars" Collapsed="true">
     <Position X="1.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAIEAAAAAYABAAAFAAAAAAAAAAAAEgCAAgACIAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Business\Models\DiagramModels\Parameters\pca_ProcCellPars.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Class Name="TreeViewExample.Business.Models.DiagramModels.Parameters.rop_RoutePars" Collapsed="true">
     <Position X="6.25" Y="1.75" Width="1.5" />
@@ -306,7 +297,7 @@
   <Class Name="TreeViewExample.Dal.Repository.BusinessGlueCode.ProcesCellBusiness" Collapsed="true">
     <Position X="35.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIAABAAAAAAAAAAAABAAAAEAAAAAAAAACAACAAIAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Dal\Repository\BusinessGlueCode\ProcesCellBusiness.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -532,14 +523,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="TreeViewExample.UI.ViewModels.ViewModelBase" Collapsed="true">
-    <Position X="16.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>UI\ViewModels\ViewModelBase.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="WPF_MVVM_example.UI.ViewModels.ViewModel" Collapsed="true">
     <Position X="10.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
@@ -617,6 +600,21 @@
       <HashCode>AACgAAAgAQEAQAAoAkAAEAAAEAAAAEAgAAQAAAAgAQA=</HashCode>
       <FileName>Dal\EntityFramework\UniContext.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.Business.Models.oar_OARcps" Collapsed="true">
+    <Position X="33.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAEAAAAAAAAAQAAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business\Models\DiagramModels\oar_OARcps.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TreeViewExample.UI.ViewModels.ViewModelBase" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Interface Name="TreeViewExample.Business.Interfaces.IConfigObject" Collapsed="true">
     <Position X="2.75" Y="13.75" Width="1.5" />

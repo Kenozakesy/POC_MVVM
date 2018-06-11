@@ -11,6 +11,11 @@
         mc:Ignorable="d"
         Title="CreateProcesCellWindow" Height="600" Width="1200" WindowState="Maximized">
     <Window.Resources>
+        <Style x:Key="GroupboxStyle" TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
         <Style x:Key="BorderStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="Black" />
             <Setter Property="BorderThickness" Value="1" />
@@ -33,8 +38,8 @@
             <Setter Property="Margin" Value="2" />
         </Style>
 
-        <DataTemplate DataType="{x:Type this:Route}">
-            <Border Style="{StaticResource BorderStyle}">
+        <DataTemplate DataType="{x:Type this:Route}" >
+            <GroupBox Style="{StaticResource GroupboxStyle}" Header="{Binding Path=RouteId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <StackPanel Orientation="Vertical" Margin="5">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -58,9 +63,9 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Text="RouteId"></TextBlock>
-                        <TextBox Grid.Column="1" Text="{Binding RouteId}" Style="{StaticResource TextboxStyle}"></TextBox>
+                        <TextBox Grid.Column="1" Text="{Binding Path=RouteId, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource TextboxStyle}"></TextBox>
                     </Grid>
-                    <Grid>
+                    <!--<Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -91,9 +96,9 @@
                             <ComboBoxItem Content="2"></ComboBoxItem>
                             <ComboBoxItem Content="3"></ComboBoxItem>
                         </ComboBox>
-                    </Grid>
+                    </Grid>-->
                 </StackPanel>
-            </Border>
+            </GroupBox>
         </DataTemplate>
         
     </Window.Resources>

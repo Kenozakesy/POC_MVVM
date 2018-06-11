@@ -28,6 +28,7 @@ namespace TreeViewExample.UI.ViewModels
         {
             _View = view;
             InitializeCommand();
+            ProcesCell = new ProcessCel();
         }
 
         public ProcessCel ProcesCell { get; set; }
@@ -72,6 +73,10 @@ namespace TreeViewExample.UI.ViewModels
             if (ProcesCell.DatabaseInsert())
             {
                 OrderObservableList.AddSorted(procesCellList, ProcesCell);
+            }
+            else
+            {
+                _View.ShowMessage("An error occurred. Procescell cannot be made.");
             }
             _View.CloseWindow();
         }

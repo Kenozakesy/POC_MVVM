@@ -45,7 +45,6 @@ namespace TreeViewExample.Dal.SQLServerRepository
                 }
                 catch (Exception)
                 {
-                    context.Dispose();
                 }
             }
             return parameterDefinitionList;

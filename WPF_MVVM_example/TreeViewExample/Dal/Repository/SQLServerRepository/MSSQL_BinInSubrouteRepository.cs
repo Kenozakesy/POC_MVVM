@@ -29,7 +29,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 }
                 catch (Exception e)
                 {
-                    context.Dispose();
+ 
                     e.ToString();
                     return false;
                 }
@@ -49,7 +49,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 }
                 catch (Exception e)
                 {
-                    context.Dispose();
+                  
                     e.ToString();
                     return false;
                 }

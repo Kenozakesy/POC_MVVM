@@ -93,7 +93,8 @@ namespace TreeViewExample.Business.Singletons
         //these need to go away in their own classes
         private void AddProcesCells()
         {
-            ProcessCelList = ProcessCel.GetAllProcesCells();
+            var cel = new ProcessCel();
+            ProcessCelList = cel.GetAllProcesCells();
 
             foreach (ProcessCel P in ProcessCelList)
             {

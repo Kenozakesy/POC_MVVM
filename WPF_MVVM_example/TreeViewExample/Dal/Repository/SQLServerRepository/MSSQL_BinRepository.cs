@@ -93,7 +93,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 }
                 catch (Exception)
                 {
-                    context.Dispose();
+
                 }
             }
             return paramdefs;
