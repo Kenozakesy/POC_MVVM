@@ -48,25 +48,27 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
         public bool DatabaseInsert(object obj)
         {
             ProcessCel cell = obj as ProcessCel;
-         
-            try
+            using (var context = new UniContext())
             {
-                using (var context = new UniContext())
+                try
                 {
+
                     foreach (pca_ProcCellPars pca in cell.pca_ProcCellPars)
                     {
                         context.ParameterDefinitions.Attach(pca.ParameterDefinition);
                     }
 
                     context.ProcesCells.Add(cell);
-                    context.SaveChanges();                  
+                    context.SaveChanges();
+
+                    return true;
                 }
-                return true;
-            }
-            catch (Exception e)
-            {
-                e.ToString();                   
-                return false;
+                catch (Exception e)
+                {
+
+                    e.ToString();
+                    return false;
+                }
             }
             
         }

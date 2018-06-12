@@ -150,6 +150,7 @@ namespace TreeViewExample.Dal.EntityFramework
                 .WithOptional(e => e.pru_Procedures)
                 .HasForeignKey(e => e.ProcedureId);
 
+
             modelBuilder.Entity<pca_ProcCellPars>()
                    .HasRequired(e => e.ParameterDefinition)
                    .WithMany(e => e.ProcesCellParametersList)

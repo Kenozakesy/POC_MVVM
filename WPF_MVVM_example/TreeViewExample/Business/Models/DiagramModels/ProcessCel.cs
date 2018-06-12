@@ -67,8 +67,6 @@ namespace TreeViewExample.Business.Models
         {
             pca_ProcCellPars = new ObservableCollection<pca_ProcCellPars>();
             Validate();
-
-
         }
 
         public ProcessCel(ProcesCellType type)

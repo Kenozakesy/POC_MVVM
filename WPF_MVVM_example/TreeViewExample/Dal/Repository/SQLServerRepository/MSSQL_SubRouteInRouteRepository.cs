@@ -18,8 +18,8 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
-                    subrouteInRoute.sur_SubRoutes = null;
-                    subrouteInRoute.rot_Routes = null;
+                    context.SubRoutes.Attach(subrouteInRoute.sur_SubRoutes);
+                    context.Routes.Attach(subrouteInRoute.rot_Routes);
 
                     context.SubRoutesInRoutes.Attach(subrouteInRoute);
                     context.SubRoutesInRoutes.Remove(subrouteInRoute);

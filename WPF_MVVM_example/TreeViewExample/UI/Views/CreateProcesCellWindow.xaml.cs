@@ -39,7 +39,7 @@ namespace TreeViewExample.UI.Views
 
         public void ShowMessage(string text)
         {
-            throw new NotImplementedException();
+            MessageBox.Show(text);
         }
     }
 }
