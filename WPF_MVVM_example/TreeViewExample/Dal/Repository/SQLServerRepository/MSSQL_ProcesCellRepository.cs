@@ -66,7 +66,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception e)
                 {
                     context.Dispose();
-
+                    
                     e.ToString();
                     return false;
                 }
@@ -114,20 +114,20 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
 
                                   .Include(x => x.opc_OAProcCellDefs)
                                   .Include(x => x.opc_OAProcCellDefs.Select(z => z.prc_ProcCells))
-    
-                                  //.Include(x => x.RouteList)
-                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars))
-                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.rot_Routes)))
-                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition)))
-                                  //.Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList)))
 
-                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures))
-                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures.rot_Routes))
+                                  .Include(x => x.RouteList)
+                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars))
+                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.rot_Routes)))
+                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition)))
+                                  .Include(x => x.RouteList.Select(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList)))
 
-                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps))
-                                  //.Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures)))
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures))
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.rot_Routes))
 
-                                  //.Include(x => x.RouteList.Select(y => y.SubrouteInRouteList))
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps))
+                                  .Include(x => x.RouteList.Select(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures)))
+
+                                  .Include(x => x.RouteList.Select(y => y.SubrouteInRouteList))
 
                                   .Include(x => x.SubrouteList)
                                   .Include(x => x.SubrouteList.Select(y => y.sri_SubRoutesInRoutes))
@@ -142,22 +142,22 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   select r);
                     procescells = select.ToList();
 
-                    var selectRoutes = (from r in context.Routes
-                            .Include(z => z.rop_RoutePars)
-                            .Include(z => z.rop_RoutePars.Select(y => y.rot_Routes))
-                            .Include(z => z.rop_RoutePars.Select(y => y.ParameterDefinition))
-                            .Include(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList))
+                    //var selectRoutes = (from r in context.Routes
+                    //        .Include(z => z.rop_RoutePars)
+                    //        .Include(z => z.rop_RoutePars.Select(y => y.rot_Routes))
+                    //        .Include(z => z.rop_RoutePars.Select(y => y.ParameterDefinition))
+                    //        .Include(z => z.rop_RoutePars.Select(y => y.ParameterDefinition.RouteParametersList))
 
-                            .Include(z => z.pru_Procedures)
-                            .Include(z => z.pru_Procedures.rot_Routes)
+                    //        .Include(z => z.pru_Procedures)
+                    //        .Include(z => z.pru_Procedures.rot_Routes)
 
-                            .Include(z => z.pru_Procedures.oar_OARcps)
-                            .Include(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures))
+                    //        .Include(z => z.pru_Procedures.oar_OARcps)
+                    //        .Include(z => z.pru_Procedures.oar_OARcps.Select(y => y.pru_Procedures))
 
-                            .Include(y => y.SubrouteInRouteList)
+                    //        .Include(y => y.SubrouteInRouteList)
 
-                            select r);
-                    List<Route> routes = selectRoutes.ToList();
+                    //        select r);
+                    //List<Route> routes = selectRoutes.ToList();
 
                     var query = (from r in context.Bins
                             .Include(x => x.bip_BinPars)
@@ -187,31 +187,6 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             }
             return procescells;
         }
-        public List<ParameterDefinition> GetAllParametersProcescell(ProcessCel cell)
-        {
-            List<ParameterDefinition> paramdefs = new List<ParameterDefinition>();
-            using (var context = new UniContext())
-            {
-   
-                try
-                {
-                    var select = (from r in context.ParameterDefinitions
-                                    join x in context.tpm_TableParMaps on r.paf_ParNm equals x.tpm_ParNm
-                                    join p in context.pat_ParTables on x.tpm_TableId equals p.pat_TableId
-                                    join a in context.pac_ParDefsProcCellTypes on r.paf_ParNm equals a.pac_ParNm
-                                    join t in context.pct_ProcCellTypes on a.pac_ProcCellTypeId equals t.pct_ProcCellTypeId
-                                    where t.pct_ProcCellTypeId == cell.ProcesCellTypeId
-                                    && p.pat_TableId == "pca_ProcCellPars"
-                                    && r.paf_IsStandardPar == true
-                                  select r);
-                    paramdefs = select.ToList();
-                }
-                catch (Exception)
-                {
-                }
-            }
-            return paramdefs;
-        }
 
         public List<string> GetAllRequiredParameterDefinitionNames(ProcessCel cell)
         {
@@ -234,6 +209,32 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                 catch (Exception)
                 {
                     context.Dispose();
+                }
+            }
+            return paramdefsnames;
+        }
+
+        public List<string> GetAllParameterDefinitionNames(ProcessCel cell)
+        {
+            List<string> paramdefsnames = new List<string>();
+            using (var context = new UniContext())
+            {
+
+                try
+                {
+                    var select = (from r in context.ParameterDefinitions
+                                  join x in context.tpm_TableParMaps on r.paf_ParNm equals x.tpm_ParNm
+                                  join p in context.pat_ParTables on x.tpm_TableId equals p.pat_TableId
+                                  join a in context.pac_ParDefsProcCellTypes on r.paf_ParNm equals a.pac_ParNm
+                                  join t in context.pct_ProcCellTypes on a.pac_ProcCellTypeId equals t.pct_ProcCellTypeId
+                                  where t.pct_ProcCellTypeId == cell.ProcesCellTypeId
+                                  && p.pat_TableId == "pca_ProcCellPars"
+                                  && r.paf_IsStandardPar == true
+                                  select r.paf_ParNm);
+                    paramdefsnames = select.ToList();
+                }
+                catch (Exception)
+                {
                 }
             }
             return paramdefsnames;

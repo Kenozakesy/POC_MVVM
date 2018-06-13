@@ -76,9 +76,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             }
         }
 
-        public List<ParameterDefinition> GetAddAbleStandardParameters()
+        public List<string> GetAllParameterDefinitionNames()
         {
-            List<ParameterDefinition> paramdefs = new List<ParameterDefinition>();
+            List<string> paramdefs = new List<string>();
             using (var context = new UniContext())
             {
                 try
@@ -88,7 +88,7 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
                                   join p in context.pat_ParTables on x.tpm_TableId equals p.pat_TableId
                                   where p.pat_TableId == "bip_BinPars"
                                   && r.paf_IsStandardPar == true
-                                  select r);
+                                  select r.paf_ParNm);
                     paramdefs = select.ToList();
                 }
                 catch (Exception)
@@ -98,6 +98,5 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             }
             return paramdefs;
         }
-    
     }
 }

@@ -11,8 +11,6 @@ namespace TreeViewExample.Dal.Repository.Interfaces
 {
     public interface IBinRepository : IDatabaseActions
     {
-
-
-        List<ParameterDefinition> GetAddAbleStandardParameters();
+        List<string> GetAllParameterDefinitionNames();
     }
 }

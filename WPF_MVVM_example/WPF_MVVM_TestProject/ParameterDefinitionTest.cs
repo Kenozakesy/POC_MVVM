@@ -7,6 +7,8 @@ using TreeViewExample.Dal.EntityFramework;
 using TreeViewExample.Business.Enums;
 using System.Linq;
 using System.Collections.Generic;
+using TreeViewExample.Dal.Repository.BusinessGlueCode;
+using TreeViewExample.Dal.Repository.SQLServerRepository;
 
 namespace WPF_MVVM_TestProject
 {
@@ -67,29 +69,14 @@ namespace WPF_MVVM_TestProject
         //    }
         //}
 
-        //[TestMethod]
-        //public void DeleteCheckFrameworkTest()
-        //{
-        //    using (var context = new UniContext())
-        //    {
-        //        try
-        //        {
-        //            ParameterDefinition param = new ParameterDefinition("test", "de", 10, 10, IsEditable.Editable, true, true);
-        //            param.AfterSep = 9;
-        //            param.Type = ParameterType.Date;
-        //            param.Alignm = Alignment.Left;
+        [TestMethod]
+        public void Ophaaltest()
+        {
+            ProcessCel cell = new ProcessCel(ProcesCellType.IL);
 
-        //            context.ParameterDefinitions.Attach(param);
-        //            context.ParameterDefinitions.Add(param);
-
-        //            context.SaveChanges();
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            context.Dispose();
-        //        }
-        //    }
-        //}
+            ProcesCellBusiness db = new ProcesCellBusiness(new MSSQL_ProcesCellRepository());
+            db.GetAddAbleStandardParameters(cell);
+        }
 
         [TestMethod]
         public void SelectCheckFrameworkTest()

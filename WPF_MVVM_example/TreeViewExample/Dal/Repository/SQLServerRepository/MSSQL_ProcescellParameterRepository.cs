@@ -40,8 +40,9 @@ namespace TreeViewExample.Dal.Repository.SQLServerRepository
             {
                 try
                 {
-                    context.ParameterDefinitions.Attach(cellparameter.ParameterDefinition);
                     context.ProcesCells.Attach(cellparameter.prc_ProcCells);
+                    context.ParameterDefinitions.Attach(cellparameter.ParameterDefinition);
+       
 
                     context.ProcescellParameters.Add(cellparameter);
                     context.SaveChanges();

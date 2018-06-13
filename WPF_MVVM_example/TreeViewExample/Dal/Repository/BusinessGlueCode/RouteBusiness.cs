@@ -45,38 +45,15 @@ namespace TreeViewExample.Dal.Repository.BusinessGlueCode
             return ListGodClass.Instance.ParameterDefinitionList.Where(x => RequiredParameterNames.Any(y => y == x.paf_ParNm)).ToList();
         }
 
-        //hier moet een betere manier voor bedacht worden
+
         public ObservableCollection<ParameterDefinition> GetAddAbleStandardParameters(Route route)
         {
-            ObservableCollection<ParameterDefinition> toRemove = new ObservableCollection<ParameterDefinition>();
-            foreach (rop_RoutePars pca in route.rop_RoutePars)
-            {
-                OrderObservableList.AddSorted(toRemove, pca.ParameterDefinition);
-            }
-            ObservableCollection<ParameterDefinition> ToHave = new ObservableCollection<ParameterDefinition>();
-            foreach (ParameterDefinition PD in ListGodClass.Instance.ParameterDefinitionList)
-            {
-                ToHave.Add(PD);
-            }
+            List<string> paramDefNames = _Repository.GetAllParameterDefinitionNames(route);
+            List<ParameterDefinition> paramDef = ListGodClass.Instance.ParameterDefinitionList.Where(x => paramDefNames.Any(y => y == x.paf_ParNm)).ToList();
 
-            var result = ToHave.Except(toRemove);
+            List<ParameterDefinition> addAbleParametersList = paramDef.Where(x => !route.rop_RoutePars.Any(y => y.ParameterDefinition == x)).ToList();
 
-            ObservableCollection<ParameterDefinition> addAbleParameters = new ObservableCollection<ParameterDefinition>();
-            foreach (ParameterDefinition PD in result.ToList())
-            {
-                addAbleParameters.Add(PD);
-            }
-
-            List<ParameterDefinition> AllowedDefs = _Repository.GetAllParametersProcescell(route); //repository method causes a weird bug that cannot be traced back
-            //this loop counters out the bug. It removes the objects that the bug adds. It is not clear what is causing it.
-            foreach (ParameterDefinition PD in AllowedDefs)
-            {
-                ListGodClass.Instance.ParameterDefinitionList.Remove(PD);
-            }
-
-            List<ParameterDefinition> intersect = addAbleParameters.Where(x => AllowedDefs.Any(y => y.paf_ParNm == x.paf_ParNm)).ToList();
-
-            addAbleParameters = new ObservableCollection<ParameterDefinition>(intersect);
+            ObservableCollection<ParameterDefinition> addAbleParameters = new ObservableCollection<ParameterDefinition>(addAbleParametersList);
 
             return addAbleParameters;
         }

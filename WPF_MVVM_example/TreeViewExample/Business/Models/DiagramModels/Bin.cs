@@ -262,14 +262,6 @@ namespace TreeViewExample.Business.Models
             }
         }
 
-        public void DeleteChild(IConfigObject obj)
-        {
-            throw new NotImplementedException();
-        }
-        public void CreateChild()
-        {
-            throw new NotImplementedException();
-        }
         public List<MainListViewModel> GenerateListViewList()
         {
             List<MainListViewModel> configList = new List<MainListViewModel>();

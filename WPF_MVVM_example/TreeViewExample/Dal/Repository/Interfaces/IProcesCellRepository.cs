@@ -12,7 +12,7 @@ namespace TreeViewExample.Dal.Repository.Interfaces
     {
         List<ProcessCel> GetAllProcesCells();
 
-        List<ParameterDefinition> GetAllParametersProcescell(ProcessCel cell);
+        List<string> GetAllParameterDefinitionNames(ProcessCel cell);
 
         List<string> GetAllRequiredParameterDefinitionNames(ProcessCel cell);
         
