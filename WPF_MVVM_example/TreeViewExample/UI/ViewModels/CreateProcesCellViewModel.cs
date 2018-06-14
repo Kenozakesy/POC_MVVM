@@ -22,6 +22,7 @@ namespace TreeViewExample.UI.ViewModels
     public class CreateProcesCellViewModel : ViewModel, INotifyPropertyChanged
     {
         private ObservableCollection<ProcessCel> procesCellList = ListGodClass.Instance.ProcessCelList;
+        private int _NumberOfRoutes;
 
         private ICreateProcesCellView _View;
         public CreateProcesCellViewModel(ICreateProcesCellView view) : base(view)
@@ -32,7 +33,6 @@ namespace TreeViewExample.UI.ViewModels
         }
 
         public ProcessCel ProcesCell { get; set; }
-
         public List<ProcesCellType> ProcCellTypeList
         {
             get
@@ -40,6 +40,17 @@ namespace TreeViewExample.UI.ViewModels
                 return Enum.GetValues(typeof(ProcesCellType)).Cast<ProcesCellType>().ToList(); ;
             }
         }
+
+        public int NumberOfRoutes
+        {
+            get { return ProcesCell.RouteList.Count; }
+            set
+            {
+                SetProperty(ref _NumberOfRoutes, value);
+                ProcesCell.GenerateRoutes(value);
+            }
+        }
+
 
         #region Methods
 
@@ -52,15 +63,15 @@ namespace TreeViewExample.UI.ViewModels
         /// </summary>
         private void AddRoute()
         {
-            ProcesCell.AddGeneratedRoute();
+            NumberOfRoutes += 1;
         }
         private void RemoveRoute()
         {
-            ProcesCell.RemoveGeneratedRoute();
+            NumberOfRoutes -= 1;
         }
         private void AddBatch()
         {
- 
+         
         }
 
         private void RemoveBatch()

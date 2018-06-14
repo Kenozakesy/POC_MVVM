@@ -20,6 +20,8 @@ using TreeViewExample.Business.Models.DiagramModels;
 using TreeViewExample.Business.Singletons;
 using TreeViewExample.Business.Enums;
 using TreeViewExample.Business.Attributes;
+using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace TreeViewExample.Business.Models
 {
@@ -55,7 +57,7 @@ namespace TreeViewExample.Business.Models
         public Route()
         {
             rop_RoutePars = new ObservableCollection<rop_RoutePars>();
-            Validate();
+            //Validate();
         }
 
         public Route(string routeid, int available, int selectpriority, ProcessCel processCel)
@@ -75,8 +77,14 @@ namespace TreeViewExample.Business.Models
             pru_Procedures procedure = new pru_Procedures(this);
             pru_Procedures = procedure;
 
-            AddRequiredParametersToNewRoute();
-            Validate();
+            //deze twee methodes vetragen de hele boel
+   
+            new Thread(() =>
+            {
+                AddRequiredParametersToNewRoute();      
+            }).Start();
+
+            IsValid = IsValidated.Valid;
         }
 
         #region Properties
@@ -179,13 +187,14 @@ namespace TreeViewExample.Business.Models
 
         #region Methods
 
-        private void AddRequiredParametersToNewRoute()
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private  void AddRequiredParametersToNewRoute()
         {
             List<ParameterDefinition> requiredParameters = db.GetAllRequiredParameterDefinition(this);
             foreach (ParameterDefinition PD in requiredParameters)
             {
-                rop_RoutePars procescellparameter = new rop_RoutePars(this, PD);
-                rop_RoutePars.Add(procescellparameter);
+                rop_RoutePars routeParameter = new rop_RoutePars(this, PD);
+                rop_RoutePars.Add(routeParameter);
             }
         }
         public bool AddParameter(ParameterDefinition paramdefinition)

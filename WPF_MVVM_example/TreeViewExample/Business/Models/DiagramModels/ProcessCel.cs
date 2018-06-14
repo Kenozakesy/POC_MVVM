@@ -66,7 +66,7 @@ namespace TreeViewExample.Business.Models
         public ProcessCel()
         {
             pca_ProcCellPars = new ObservableCollection<pca_ProcCellPars>();
-            Validate();
+            //Validate();
         }
 
         public ProcessCel(ProcesCellType type)
@@ -91,8 +91,8 @@ namespace TreeViewExample.Business.Models
 
             AddRequiredParametersToNewProcescell();
 
-            AddDefaultRoute();
-            Validate();
+            GenerateRoutes(1);
+            IsValid = IsValidated.Valid;
         }
 
         #region Properties
@@ -319,17 +319,53 @@ namespace TreeViewExample.Business.Models
         }
         public void AddGeneratedRoute()
         {
-            List<int> RouteIds = new List<int>();
-            foreach (Route r in RouteList)
+            if (RouteList.Count == 0)
             {
-                string routeid = new string(r.RouteId.Where(char.IsDigit).ToArray());
-                RouteIds.Add(Convert.ToInt32(routeid));
+                Route newroute = new Route("R" + 1, 1, 1, this);
+                RouteList.Add(newroute);
             }
-            int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(RouteIds).FirstOrDefault();
-
-            Route route = new Route("R" + firstAvailable, 1, 1, this);       
-            RouteList.Add(route);
+            else
+            {
+                List<int> RouteIds = new List<int>();
+                foreach (Route r in RouteList)
+                {
+                    string routeid = new string(r.RouteId.Where(char.IsDigit).ToArray());
+                    RouteIds.Add(Convert.ToInt32(routeid));
+                }
+                int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(RouteIds).FirstOrDefault();
+                Route route = new Route("R" + firstAvailable, 1, 1, this);
+                RouteList.Add(route);
+            }
         }
+
+        public void GenerateRoutes(int numberOfRoutes)
+        {
+            if (numberOfRoutes >= RouteList.Count)
+            {
+                numberOfRoutes -= RouteList.Count;
+                for (int i = 0; i < numberOfRoutes; i++)
+                {
+                    List<int> RouteIds = new List<int>();
+                    foreach (Route r in RouteList)
+                    {
+                        string routeid = new string(r.RouteId.Where(char.IsDigit).ToArray());
+                        RouteIds.Add(Convert.ToInt32(routeid));
+                    }
+                    int? firstAvailable = Enumerable.Range(1, int.MaxValue).Except(RouteIds).FirstOrDefault();
+                    Route route = new Route("R" + firstAvailable, 1, 1, this);
+                    RouteList.Add(route);
+                }
+            }
+            else
+            {
+                numberOfRoutes = RouteList.Count - numberOfRoutes;
+                for (int i = 0; i < numberOfRoutes; i++)
+                {
+                    RouteList.RemoveAt(RouteList.Count - 1);
+                }
+            }              
+        }
+
         public Route GetGeneratedRoute()
         {
             List<int> RouteIds = new List<int>();
@@ -342,11 +378,6 @@ namespace TreeViewExample.Business.Models
 
             Route route = new Route("R" + firstAvailable, 1, 1, this);
             return route;
-        }
-        private void AddDefaultRoute()
-        {
-            Route route = new Route("R" + 1, 1, 1, this);
-            RouteList.Add(route);
         }
         public void RemoveGeneratedRoute()
         {
